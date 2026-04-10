@@ -2,13 +2,60 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const events = [
-  { date: '2025年6月29日（日）', title: '川越・狭山平地林観察会', location: '掘兼・上赤坂公園', done: true },
-  { date: '2025年7月21日（月・祝日）', title: '小川げんきプラザ周辺観察会', location: '小川げんきプラザ バンガロー下駐車場', done: true },
-  { date: '2025年9月15日（月・祝日）', title: '群馬の森公園観察会', location: '群馬の森公園', done: true },
-  { date: '2025年10月12日（日）', title: '美の山公園観察会', location: '美の山公園第二駐車場', done: true },
-  { date: '2025年11月3日（月・祝日）', title: '秋ヶ瀬公園観察会', location: '秋ヶ瀬公園', done: true },
-  { date: '2025年12月7日（日）', title: 'きのこ発表・勉強会', location: '上尾市文化センター', done: true },
-  { date: '2026年3月15日（日）', title: 'きのこ栽培勉強会', location: '橋本啓一さんの「あすわの」', done: true },
+  {
+    date: '2025年5月18日（日）', title: '定期総会',
+    area: '', meeting: '上尾市コミュニティーセンター',
+    schedule: '14:00〜', organizer: '福島隆一',  done: true,
+  },
+  {
+    date: '2025年6月29日（日）', title: '川越・狭山平地林観察会',
+    area: '川越市南文化会館ジョイフル周辺、森のさんぽ道（仮、川越森林園）、掘兼・上赤坂公園周辺',
+    meeting: '掘兼・上赤坂公園 〒350-1312 狭山市掘兼2484番地3',
+    schedule: '9:30集合　受付出席確認・概要説明後観察地へ。昼食12:00〜13:00、同定会13:00〜14:50',
+    organizer: '大舘一夫（代表）', done: true,
+  },
+  {
+    date: '2025年7月21日（月・祝日）', title: '小川げんきプラザ周辺観察会',
+    area: '小川げんきプラザ周辺',
+    meeting: '小川げんきプラザ バンガロー下駐車場（比企郡小川町木呂子561）',
+    schedule: '9:30集合　受付出席確認・概要説明後公園・周辺地域を観察。昼食12:00〜13:00、同定会13:00〜',
+    organizer: '福島隆一（代表）', done: true,
+  },
+  {
+    date: '2025年9月15日（月・祝日）', title: '群馬の森公園観察会',
+    area: '群馬県立群馬の森公園内（高崎市綿貫町992-1）',
+    meeting: '公園北口駐車場',
+    schedule: '9:30受付出席確認　外の納屋で鑑定、勉強会',
+    organizer: '福島隆一（代表）', done: true,
+  },
+  {
+    date: '2025年10月12日（日）', title: '美の山公園観察会',
+    area: '埼玉県立美の山公園内',
+    meeting: '秩父市黒谷 美の山公園第２駐車場（いこいの村を過ぎて右手）',
+    schedule: '9:30集合　受付出席確認・概要説明後公園内を観察。昼食12:00〜13:00、同定会13:00〜',
+    organizer: '近藤芳明（代表）', done: true,
+  },
+  {
+    date: '2025年11月3日（月・祝日）', title: '秋ヶ瀬公園観察会',
+    area: '秋ケ瀬公園（さいたま市桜区道場4-17）',
+    meeting: 'ピクニックの森・炊飯場（No.1〜20, No.31〜52）の一郭',
+    schedule: '9:30集合　受付出席確認・概要説明後公園内を観察。集合時に釜土番号をお知らせ',
+    organizer: '栗原晴夫（代表）', done: true,
+  },
+  {
+    date: '2025年12月7日（日）', title: 'きのこ発表・勉強会',
+    area: '',
+    meeting: '上尾市文化センター（上尾市二ツ宮750番地）高崎線上尾駅東口徒歩15分',
+    schedule: '10:00開場　受付出席確認。発表時間は一人20〜30分程度',
+    organizer: '栗原晴夫（代表）', done: true,
+  },
+  {
+    date: '2026年3月15日（日）', title: 'きのこ栽培勉強会',
+    area: '',
+    meeting: '橋本啓一さんの「あすわの」（熊谷市箕輪779）',
+    schedule: '午前：サンドイッチ法による短木接種　午後：コナラ原木接種',
+    organizer: '福島隆一', done: true,
+  },
 ];
 ---
 <BaseLayout title="行事予定" description="埼玉きのこ研究会の2025年度行事予定。観察会・勉強会のスケジュール。">
@@ -22,26 +69,51 @@ const events = [
 
   <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 mb-8">
     <h3 class="text-lg font-bold text-bark mb-4">会員各位へのお願い</h3>
-    <ul class="text-sm space-y-2 text-text-light">
+    <ul class="text-sm space-y-2 text-text-light list-disc ml-4">
       <li>各行事には積極的に参加するようお願いいたします。</li>
-      <li>住所・電話番号など変更がありましたら事務局までお知らせ下さい。</li>
-      <li>野外観察会に参加する場合はできるだけ肌を露出してない服装でお願いいたします。</li>
-      <li>観察会では、鑑定に必要数以上は採取しないようお願いいたします。</li>
-      <li>自然災害等で行事の開催が危険と判断されるとき、中止する場合があります。連絡はホームページにて行います。</li>
+      <li>住所・電話番号など、資料送付・連絡手段の変更がありましたら事務局までお知らせ下さい。</li>
+      <li>各行事に参加した場合は参加者名簿の氏名、フリガナ、住所、電話番号などを確認し、○印をつけてください。参加の記録が無いと保険の被補償者の対象となりません。</li>
+      <li>野外観察会に参加する場合はできるだけ肌を露出してない服装でお願いいたします。植物の棘、毛虫、マダニなどからの害を避けるためです。</li>
+      <li>中学生以下の参加者には、保護者または監督者が同行をお願いします。</li>
+      <li>観察会では、鑑定に必要数以上は採取しないようお願いいたします。また、他の動植物を捕獲・採取しないようお願いいたします。</li>
+      <li>キノコ栽培勉強会は予約が必要です。原木や種菌の準備の都合があります。</li>
+      <li>自然災害、伝染病、騒乱等で行事の開催が危険と判断されるとき、その行事を中止する場合があります。連絡はホームページにて行います。</li>
+      <li>2025年度会費３千円を同封の振り込み用紙で近くの郵便局から６月末までに払い込むようお願いいたします。</li>
     </ul>
   </div>
 
-  <div class="space-y-4">
+  <div class="space-y-6">
     {events.map(ev => (
-      <div class={`bg-white rounded-xl shadow-sm p-5 flex flex-col sm:flex-row sm:items-center gap-3 ${ev.done ? 'opacity-75' : 'border-l-4 border-mushroom'}`}>
-        <div class="sm:w-56">
-          <time class="text-sm font-bold text-bark">{ev.date}</time>
+      <div class={`bg-white rounded-xl shadow-sm p-6 ${ev.done ? 'opacity-80' : 'border-l-4 border-mushroom'}`}>
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <time class="text-sm font-bold text-bark">{ev.date}</time>
+            <h4 class="text-lg font-bold text-forest">{ev.title}</h4>
+          </div>
+          {ev.done && <span class="text-xs bg-gray-200 text-text-light px-2 py-1 rounded">終了</span>}
         </div>
-        <div class="flex-1">
-          <h4 class="font-bold text-forest">{ev.title}</h4>
-          <p class="text-sm text-text-light">{ev.location}</p>
-        </div>
-        {ev.done && <span class="text-xs bg-gray-200 text-text-light px-2 py-1 rounded self-start">終了</span>}
+        <table class="text-sm w-full">
+          <tbody>
+            {ev.area && (
+              <tr class="border-t border-paper-dark">
+                <td class="py-2 pr-3 font-bold text-text-light whitespace-nowrap align-top w-24">観察地域</td>
+                <td class="py-2">{ev.area}</td>
+              </tr>
+            )}
+            <tr class="border-t border-paper-dark">
+              <td class="py-2 pr-3 font-bold text-text-light whitespace-nowrap align-top">集合場所</td>
+              <td class="py-2">{ev.meeting}</td>
+            </tr>
+            <tr class="border-t border-paper-dark">
+              <td class="py-2 pr-3 font-bold text-text-light whitespace-nowrap align-top">日程</td>
+              <td class="py-2">{ev.schedule}</td>
+            </tr>
+            <tr class="border-t border-paper-dark">
+              <td class="py-2 pr-3 font-bold text-text-light whitespace-nowrap align-top">世話人</td>
+              <td class="py-2">{ev.organizer}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     ))}
   </div>
