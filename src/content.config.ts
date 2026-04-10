@@ -11,7 +11,7 @@ const reikai = defineCollection({
     meetingPoint: z.string().optional(),
     participants: z.number().optional(),
     organizer: z.string().optional(),
-    reporter: z.string(),
+    reporter: z.string().optional(),
     photographer: z.string().optional(),
   }),
 });

@@ -20,8 +20,9 @@ const siteTitle = title === 'HOME' ? '埼玉きのこ研究会' : `${title} | �
   <meta property="og:title" content={siteTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/images/hotei.jpg" />
+  <meta property="og:image" content={new URL('/images/hotei.jpg', Astro.site).href} />
   <link rel="icon" href="/images/hotei.jpg" />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />

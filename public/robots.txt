@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saitama-kinoko.pages.dev/sitemap-index.xml
