@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { title, description = '埼玉きのこ研究会 - きのこ愛好家の集い。1984年設立。' } = Astro.props;
-const siteTitle = `${title} | 埼玉きのこ研究会`;
+const siteTitle = title === 'HOME' ? '埼玉きのこ研究会' : `${title} | 埼玉きのこ研究会`;
 ---
 <!DOCTYPE html>
 <html lang="ja">
@@ -20,6 +20,8 @@ const siteTitle = `${title} | 埼玉きのこ研究会`;
   <meta property="og:title" content={siteTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/hotei.jpg" />
+  <link rel="icon" href="/images/hotei.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />

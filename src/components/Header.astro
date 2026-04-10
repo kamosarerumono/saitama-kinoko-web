@@ -16,22 +16,22 @@ const navItems = [
     <!-- Logo area -->
     <div class="flex items-center justify-between py-4">
       <a href="/" class="flex items-center gap-3 hover:opacity-90 transition">
-        <img src="/images/hotei.jpg" alt="きのこ" class="w-12 h-12 rounded-full object-cover border-2 border-bark" />
+        <img src="/images/hotei.jpg" alt="埼玉きのこ研究会" class="w-12 h-12 rounded-full object-cover border-2 border-bark" />
         <div>
           <h1 class="text-lg font-bold leading-tight">埼玉きのこ研究会</h1>
           <p class="text-xs text-teal-200 leading-tight">Saitama Mushroom Club / Since 1984</p>
         </div>
       </a>
       <!-- Mobile menu button -->
-      <button id="menu-toggle" class="md:hidden p-2 rounded hover:bg-forest-light transition" aria-label="メニュー">
+      <button id="menu-toggle" class="md:hidden p-2 rounded hover:bg-forest-light transition" aria-label="メニュー" aria-expanded="false" aria-controls="main-nav">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
     </div>
     <!-- Navigation -->
-    <nav id="main-nav" class="hidden md:block border-t border-green-700 pb-2">
-      <ul class="flex flex-wrap gap-1 pt-2">
+    <nav id="main-nav" class="hidden md:block border-t border-green-700 pb-2" aria-label="メインメニュー">
+      <ul class="flex flex-col md:flex-row flex-wrap gap-1 pt-2">
         {navItems.map(item => (
           <li>
             <a href={item.href}
@@ -50,5 +50,7 @@ const navItems = [
   const nav = document.getElementById('main-nav');
   toggle?.addEventListener('click', () => {
     nav?.classList.toggle('hidden');
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
   });
 </script>
