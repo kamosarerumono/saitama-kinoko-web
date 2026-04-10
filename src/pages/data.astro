@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="きのこ関連データ" description="きのこの学名辞書、学名の読み方などの関連データ。">
+
+  <nav class="text-sm text-text-light mb-4">
+    <a href="/" class="hover:text-forest">HOME</a> &gt;
+    <span>きのこ関連データ</span>
+  </nav>
+
+  <h2 class="text-2xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-6">きのこ関連データ</h2>
+
+  <div class="space-y-6">
+
+    <a href="https://www.ippon.sakura.ne.jp/kanren_data/kaihou_sanken/fr_sanken.htm" target="_blank" rel="noopener"
+       class="block bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition group">
+      <h3 class="text-lg font-bold text-forest group-hover:text-forest-light mb-2">各地のきのこ愛好団体の会報紹介</h3>
+      <p class="text-sm text-text-light">全国のきのこ愛好団体の会報を紹介しています。</p>
+      <p class="text-xs text-text-light mt-2">※ 旧サイトへのリンクです（移行作業中）</p>
+    </a>
+
+    <a href="https://www.ippon.sakura.ne.jp/kanren_data/fungi_dic.htm" target="_blank" rel="noopener"
+       class="block bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition group">
+      <h3 class="text-lg font-bold text-forest group-hover:text-forest-light mb-2">学名登録用辞書</h3>
+      <p class="text-sm text-text-light">日本語変換システムにきのこの学名を一括登録するための辞書ファイル。MS-IME、ATOKに対応。</p>
+    </a>
+
+    <a href="https://www.ippon.sakura.ne.jp/kanren_data/gakumei_yomi.htm" target="_blank" rel="noopener"
+       class="block bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition group">
+      <h3 class="text-lg font-bold text-forest group-hover:text-forest-light mb-2">学名の読み方の例示</h3>
+      <p class="text-sm text-text-light">きのこの学名のラテン語読み・英語読みの対照表。会誌「いっぽん」No.13（1999年）より。</p>
+    </a>
+
+  </div>
+
+</BaseLayout>

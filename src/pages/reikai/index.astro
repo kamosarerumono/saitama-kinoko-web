@@ -1,41 +1,74 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-const years = [2025, 2024, 2023, 2022, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000];
+const allReikai = await getCollection('reikai');
+const sorted = allReikai.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-// Sample data for 2025 (will be replaced by Content Collections)
-const reports2025 = [
-  { date: '2026-03-15', title: 'きのこ栽培勉強会', slug: '260315-saibai' },
-  { date: '2025-10-12', title: '美の山公園観察会', slug: '251012-minoyama' },
-  { date: '2025-09-15', title: '群馬の森公園観察会', slug: '250915-gunma' },
-  { date: '2025-07-21', title: '小川げんきプラザ周辺観察会', slug: '250721-ogawa' },
-  { date: '2025-06-29', title: '川越・狭山平地林観察会', slug: '250629-kawagoe' },
-  { date: '2025-05-18', title: '定期総会', slug: '250518-soukai' },
-];
+function fiscalYear(date: Date) {
+  return date.getMonth() < 3 ? date.getFullYear() - 1 : date.getFullYear();
+}
+
+const grouped = new Map<number, typeof sorted>();
+for (const entry of sorted) {
+  const fy = fiscalYear(entry.data.date);
+  if (!grouped.has(fy)) grouped.set(fy, []);
+  grouped.get(fy)!.push(entry);
+}
+
+const archiveYears = [2024,2023,2022,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000];
+
+function archiveUrl(y: number): string {
+  const base = 'https://www.ippon.sakura.ne.jp/reikai/';
+  if (y === 2010) return base + '2010.html';
+  if (y >= 2017) return base + y + 'reikaihoukoku.html';
+  if (y === 2016) return base + '2016/2016reikaihoukoku.html';
+  if (y >= 2011) return base + y + 'reikaihoukoku.html';
+  if (y === 2009) return base + '2009/09reikaihoukoku.html';
+  if (y === 2008) return base + '2008/08reikaihoukoku.html';
+  if (y === 2007) return base + '2007/2007.html';
+  if (y === 2006) return base + '2006/index_reikai2006html.html';
+  if (y === 2005) return base + '2005/index_reikai2005.html';
+  if (y === 2004) return base + '2004/index_reikai2004.htm';
+  if (y === 2003) return base + '2003/index_reikai2003.htm';
+  if (y <= 2002) return base + y + '/index_reikai.htm';
+  return base;
+}
+
+function formatDate(d: Date) {
+  return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+}
 ---
 <BaseLayout title="例会報告" description="埼玉きのこ研究会の例会（観察会・行事）の報告。2000年〜現在の25年分のアーカイブ。">
 
+  <nav class="text-sm text-text-light mb-4">
+    <a href="/" class="hover:text-forest">HOME</a> &gt;
+    <span>例会報告</span>
+  </nav>
+
   <h2 class="text-2xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-6">例会（行事）報告</h2>
 
-  <!-- 2025 reports (expanded) -->
-  <section class="mb-8">
-    <h3 class="text-lg font-bold text-bark mb-3">2025年度</h3>
-    <div class="bg-white rounded-xl shadow-sm divide-y">
-      {reports2025.map(r => (
-        <a href={`/reikai/${r.slug}`} class="flex items-center gap-4 px-5 py-4 hover:bg-paper transition">
-          <time class="text-sm text-text-light whitespace-nowrap w-24">{r.date}</time>
-          <span class="text-forest font-medium">{r.title}</span>
-        </a>
-      ))}
-    </div>
-  </section>
+  {Array.from(grouped.entries()).map(([fy, entries]) => (
+    <section class="mb-8">
+      <h3 class="text-lg font-bold text-bark mb-3">{fy}年度</h3>
+      <div class="bg-white rounded-xl shadow-sm divide-y">
+        {entries.map(r => (
+          <a href={`/reikai/${r.id}`} class="flex items-center gap-4 px-5 py-4 hover:bg-paper transition">
+            <time class="text-sm text-text-light whitespace-nowrap w-24">{formatDate(r.data.date)}</time>
+            <span class="text-forest font-medium">{r.data.title}</span>
+            {r.data.location && <span class="hidden sm:inline text-xs text-text-light ml-auto">({r.data.location})</span>}
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
 
-  <!-- Archive years -->
   <section>
-    <h3 class="text-lg font-bold text-bark mb-3">アーカイブ</h3>
+    <h3 class="text-lg font-bold text-bark mb-3">過去のアーカイブ（移行中）</h3>
+    <p class="text-sm text-text-light mb-4">以下の年度は旧サイトからの移行作業中です。<a href="https://www.ippon.sakura.ne.jp/reikai/houkoku_reikai.htm" class="text-forest underline" target="_blank" rel="noopener">旧サイト</a>でご覧いただけます。</p>
     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
-      {years.filter(y => y < 2025).map(y => (
-        <a href={`/reikai/${y}`}
+      {archiveYears.map(y => (
+        <a href={archiveUrl(y)} target="_blank" rel="noopener"
            class="bg-white rounded-lg shadow-sm text-center py-3 text-forest font-bold hover:bg-forest hover:text-white transition">
           {y}
         </a>

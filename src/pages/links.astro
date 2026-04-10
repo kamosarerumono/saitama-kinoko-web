@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const categories = [
+  {
+    name: 'きのこ関連団体',
+    links: [
+      { name: '日本菌学会関東支部', url: 'http://www.mycology-jp.org/~kb-msj/index.html' },
+      { name: '千葉菌類談話会', url: 'http://chibakin.la.coocan.jp/' },
+      { name: '兵庫きのこ研究会', url: 'https://hyogo-kinoko.jp/' },
+      { name: '関西菌類談話会', url: 'https://kmc-jp.net/' },
+      { name: '旭川キノコの会', url: 'http://asahikawa-kinoko.sakura.ne.jp/index.htm' },
+    ],
+  },
+  {
+    name: '会員のホームページ',
+    links: [
+      { name: 'Wild mushrooms from Tokyo', url: 'http://www.ne.jp/asahi/mushroom/tokyo/' },
+      { name: '今日もきのこ日和', url: 'http://tititake.sakura.ne.jp' },
+    ],
+  },
+  {
+    name: 'きのこ関連の個人ページ',
+    links: [
+      { name: 'きのこ雑記', url: 'https://fungi.sakura.ne.jp/' },
+      { name: '八王子のきのこ', url: 'http://park18.wakwak.com/~fungiman/urayama/' },
+    ],
+  },
+  {
+    name: '海外のきのこ関連サイト',
+    links: [
+      { name: 'MykoWeb', url: 'https://www.mykoweb.com/' },
+    ],
+  },
+];
+---
+<BaseLayout title="リンク集" description="きのこ関連の団体・個人サイトのリンク集。">
+
+  <nav class="text-sm text-text-light mb-4">
+    <a href="/" class="hover:text-forest">HOME</a> &gt;
+    <span>リンク集</span>
+  </nav>
+
+  <h2 class="text-2xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-6">きのこ関連リンク</h2>
+
+  <div class="space-y-8">
+    {categories.map(cat => (
+      <section>
+        <h3 class="text-lg font-bold text-bark mb-3">{cat.name}</h3>
+        <div class="bg-white rounded-xl shadow-sm divide-y">
+          {cat.links.map(link => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer"
+               class="flex items-center gap-3 px-5 py-4 hover:bg-paper transition">
+              <span class="text-forest">&#9632;</span>
+              <span class="text-forest font-medium hover:text-forest-light">{link.name}</span>
+              <span class="text-xs text-text-light ml-auto hidden sm:inline">{new URL(link.url).hostname}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+
+</BaseLayout>

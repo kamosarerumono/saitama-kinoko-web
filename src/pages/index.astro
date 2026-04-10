@@ -1,5 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = await getCollection('news');
+const news = allNews.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 5);
+
+const allReikai = await getCollection('reikai');
+const latestReikai = allReikai.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+
+const tagColors: Record<string, string> = {
+  NEW: 'bg-mushroom',
+  INFO: 'bg-gray-400',
+  EVENT: 'bg-forest',
+};
+
+function formatDate(d: Date) {
+  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+}
 ---
 <BaseLayout title="HOME" description="埼玉きのこ研究会の公式サイト。1984年設立、会員約64名。野外観察会や栽培勉強会を通じてきのこの魅力を探求しています。">
 
@@ -15,25 +32,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- News section -->
+  <!-- News section (from Content Collections) -->
   <section class="mb-10">
     <h2 class="text-xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-4">お知らせ・更新情報</h2>
     <div class="bg-white rounded-xl shadow-sm p-6 space-y-3">
-      <div class="flex gap-3 items-start">
-        <span class="text-xs bg-mushroom text-white px-2 py-0.5 rounded whitespace-nowrap mt-0.5">NEW</span>
-        <div>
-          <time class="text-sm text-text-light">2026.04.10</time>
-          <p>2025年度のきのこ栽培勉強会の報告を更新しました。</p>
+      {news.map(n => (
+        <div class="flex gap-3 items-start">
+          <span class={`text-xs text-white px-2 py-0.5 rounded whitespace-nowrap mt-0.5 ${tagColors[n.data.tag]}`}>{n.data.tag}</span>
+          <div>
+            <time class="text-sm text-text-light">{formatDate(n.data.date)}</time>
+            <p>{n.data.title}</p>
+          </div>
         </div>
-      </div>
-      <div class="flex gap-3 items-start">
-        <span class="text-xs bg-gray-400 text-white px-2 py-0.5 rounded whitespace-nowrap mt-0.5">INFO</span>
-        <div>
-          <time class="text-sm text-text-light">2026.03.01</time>
-          <p>次回の観察会は予定通り開催します。</p>
-        </div>
-      </div>
+      ))}
     </div>
+  </section>
+
+  <!-- Latest reports -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-4">最新の例会報告</h2>
+    <div class="bg-white rounded-xl shadow-sm divide-y">
+      {latestReikai.map(r => (
+        <a href={`/reikai/${r.id}`} class="flex items-center gap-4 px-5 py-4 hover:bg-paper transition">
+          <time class="text-sm text-text-light whitespace-nowrap">{formatDate(r.data.date)}</time>
+          <span class="text-forest font-medium">{r.data.title}</span>
+          {r.data.location && <span class="hidden sm:inline text-xs text-text-light">({r.data.location})</span>}
+        </a>
+      ))}
+    </div>
+    <p class="text-right mt-2"><a href="/reikai" class="text-forest hover:text-forest-light text-sm">全ての報告を見る &rarr;</a></p>
   </section>
 
   <!-- Content grid -->
