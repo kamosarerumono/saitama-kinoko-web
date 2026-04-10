@@ -35,4 +35,13 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { reikai, kaihou, news };
+const kaiinhassin = defineCollection({
+  loader: glob({ base: './src/content/kaiinhassin', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    author: z.string().optional(),
+  }),
+});
+
+export const collections = { reikai, kaihou, news, kaiinhassin };

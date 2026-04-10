@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('kaiinhassin');
+const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+function formatDate(d: Date) {
+  return `${d.getFullYear()}年${d.getMonth()+1}月`;
+}
+---
+<BaseLayout title="会員の発信" description="埼玉きのこ研究会会員による投稿。きのこの話題・写真・ニュース。">
+
+  <nav class="text-sm text-text-light mb-4">
+    <a href="/" class="hover:text-forest">HOME</a> &gt;
+    <span>会員の発信</span>
+  </nav>
+
+  <h2 class="text-2xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-2">会員発信ページ</h2>
+  <p class="text-text-light mb-6">会員諸氏の投稿によるキノコの話題を掲載しています。写真、ニュース、感想等キノコ関連のことなら何でも結構です。</p>
+
+  <div class="space-y-4">
+    {sorted.map(post => (
+      <a href={`/kaiinhassin/${post.id}`}
+         class="block bg-white rounded-xl shadow-sm p-5 hover:shadow-md transition group">
+        <div class="flex items-center gap-3 mb-1">
+          <time class="text-sm text-text-light">{formatDate(post.data.date)}</time>
+          {post.data.author && <span class="text-xs bg-forest/10 text-forest px-2 py-0.5 rounded">{post.data.author}</span>}
+        </div>
+        <h3 class="text-forest font-bold group-hover:text-forest-light transition line-clamp-2">{post.data.title}</h3>
+      </a>
+    ))}
+  </div>
+
+</BaseLayout>
