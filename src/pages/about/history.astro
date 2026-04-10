@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Extract full history from old HTML
+const years = [
+  { year: '1997年度 追補', events: [
+    '12月7日 県立松山女子高にてスライド勉強会を実施',
+    '1998年1月1日 会報「いっぽん12号」発刊',
+    '1月11日 蓮田高校において恒例の新年会料理教室を開催',
+    '2月22日 埼玉県民活動センターにて講演会実施（講師：小野新平氏「変形菌、分類とその生態」）',
+    '3月14日 熊谷農業高校にて植菌勉強会。参加75名と盛況',
+  ]},
+  { year: '1998年度', events: [
+    '5月10日 上尾市コミュニティセンターにて定期総会開催',
+    '6月27日 東松山方面にて野外観察会実施',
+    '7月26日 秩父ミューズパークで野外観察会実施',
+    '8月22〜23日 志賀高原一ノ瀬にて宿泊勉強会実施',
+    '9月26〜27日 奥利根の湯の小屋温泉郷にて宿泊勉強会実施',
+    '10月11日 秩父芦ケ久保の埼玉県民の森にて観察会実施',
+    '12月7日 県立松山女子高にてスライド勉強会実施',
+    '1999年1月10日 上尾コミュニティセンターにて新年会料理教室開催',
+    '1999年1月15日 会報「いっぽん13号」発刊',
+  ]},
+  { year: '1999年度', events: [
+    '5月23日 総会を上尾市コミュニティセンターにて開催',
+    '6月27日 川越水上公園にて野外観察会実施',
+    '7月25日 秩父美の山にて野外観察会実施',
+    '8月28〜29日 富士山の山梨県側にて宿泊勉強会を実施',
+    '9月26〜27日 福島県天栄村二岐温泉にて観察会実施',
+    '10月24日 浦和の秋が瀬公園にて野外観察会実施',
+    '11月7日 栃木県きのこ同好会との交流会（113名参加）',
+    '12月19日 県立松山女子高にてスライド勉強会実施',
+    '2000年1月9日 蓮田高校にて新年会料理講習会実施',
+    '2月13日 県民活動センターにて勉強会（講師：酒井修一氏）',
+    '3月12日 熊谷農業高校にて植菌研究会を実施',
+    '3月25日 会報「いっぽん14号」発刊',
+  ]},
+  { year: '2000年度', events: [
+    '5月21日 総会を上尾市コミュニティセンターにて開催',
+    '8月15日 ホームページ開設',
+  ]},
+];
+---
+<BaseLayout title="埼玉きのこ研究会のあゆみ 追補" description="埼玉きのこ研究会のあゆみ追補。1997年〜現在の活動記録。">
+
+  <nav class="text-sm text-text-light mb-4">
+    <a href="/" class="hover:text-forest">HOME</a> &gt;
+    <a href="/about" class="hover:text-forest">会について</a> &gt;
+    <span>あゆみ追補</span>
+  </nav>
+
+  <h2 class="text-2xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-6">埼玉きのこ研究会のあゆみ　追補</h2>
+  <p class="text-text-light mb-6">1997年〜現在の活動記録</p>
+
+  <div class="space-y-6">
+    {years.map(y => (
+      <section class="bg-white rounded-xl shadow-sm p-6">
+        <h3 class="text-lg font-bold text-bark mb-3">{y.year}</h3>
+        <ul class="space-y-2 text-sm">
+          {y.events.map(e => (
+            <li class="flex gap-2">
+              <span class="text-mushroom mt-0.5">&#9670;</span>
+              <span>{e}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <p class="text-sm text-text-light mt-6">※ 2001年以降の活動については<a href="/reikai" class="text-forest underline">例会報告</a>をご覧ください。</p>
+
+</BaseLayout>

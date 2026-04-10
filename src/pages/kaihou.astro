@@ -29,6 +29,12 @@ const issues = [
   { num: 10, date: '1995年12月20日' },
   { num: '8/9', date: '1994年9月28日', combined: true, note: '十周年記念合併号' },
   { num: 7, date: '1993年9月30日' },
+  { num: 6, date: '1992年9月30日' },
+  { num: 5, date: '1991年9月30日' },
+  { num: 4, date: '1990年9月30日' },
+  { num: 3, date: '1989年9月30日' },
+  { num: 2, date: '1988年9月30日' },
+  { num: 1, date: '1987年9月30日', note: '創刊号' },
 ];
 
 function issueUrl(num: number | string) {
@@ -36,7 +42,7 @@ function issueUrl(num: number | string) {
   return `https://www.ippon.sakura.ne.jp/kaihou_ippon/backnumber/ippon${n}g.${Number(String(num).split('/')[0]) >= 19 ? 'html' : 'htm'}`;
 }
 ---
-<BaseLayout title="会報「いっぽん」" description="埼玉きのこ研究会の会報「いっぽん」バックナンバー。1993年の第7号から現在まで。">
+<BaseLayout title="会報「いっぽん」" description="埼玉きのこ研究会の会報「いっぽん」バックナンバー。1987年の創刊号から現在まで。">
 
   <nav class="text-sm text-text-light mb-4">
     <a href="/" class="hover:text-forest">HOME</a> &gt;
