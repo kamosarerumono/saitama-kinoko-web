@@ -1,0 +1,55 @@
+---
+const navItems = [
+  { href: '/', label: 'HOME' },
+  { href: '/events', label: '行事予定' },
+  { href: '/reikai', label: '例会報告' },
+  { href: '/kaihou', label: '会報' },
+  { href: '/data', label: '関連データ' },
+  { href: '/links', label: 'リンク' },
+  { href: '/about', label: '会について' },
+  { href: '/about/join', label: '入会案内' },
+];
+---
+<header class="bg-forest text-white shadow-lg">
+  <div class="max-w-5xl mx-auto px-4">
+    <!-- Logo area -->
+    <div class="flex items-center justify-between py-4">
+      <a href="/" class="flex items-center gap-3 hover:opacity-90 transition">
+        <div class="w-10 h-10 bg-mushroom rounded-full flex items-center justify-center text-xl font-bold">
+          K
+        </div>
+        <div>
+          <h1 class="text-lg font-bold leading-tight">埼玉きのこ研究会</h1>
+          <p class="text-xs text-green-200 leading-tight">Saitama Mushroom Club / Since 1984</p>
+        </div>
+      </a>
+      <!-- Mobile menu button -->
+      <button id="menu-toggle" class="md:hidden p-2 rounded hover:bg-forest-light transition" aria-label="メニュー">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <!-- Navigation -->
+    <nav id="main-nav" class="hidden md:block border-t border-green-700 pb-2">
+      <ul class="flex flex-wrap gap-1 pt-2">
+        {navItems.map(item => (
+          <li>
+            <a href={item.href}
+               class="block px-3 py-1.5 text-sm rounded hover:bg-forest-light transition">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('main-nav');
+  toggle?.addEventListener('click', () => {
+    nav?.classList.toggle('hidden');
+  });
+</script>

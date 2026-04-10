@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const years = [2025, 2024, 2023, 2022, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000];
+
+// Sample data for 2025 (will be replaced by Content Collections)
+const reports2025 = [
+  { date: '2026-03-15', title: 'きのこ栽培勉強会', slug: '260315-saibai' },
+  { date: '2025-10-12', title: '美の山公園観察会', slug: '251012-minoyama' },
+  { date: '2025-09-15', title: '群馬の森公園観察会', slug: '250915-gunma' },
+  { date: '2025-07-21', title: '小川げんきプラザ周辺観察会', slug: '250721-ogawa' },
+  { date: '2025-06-29', title: '川越・狭山平地林観察会', slug: '250629-kawagoe' },
+  { date: '2025-05-18', title: '定期総会', slug: '250518-soukai' },
+];
+---
+<BaseLayout title="例会報告" description="埼玉きのこ研究会の例会（観察会・行事）の報告。2000年〜現在の25年分のアーカイブ。">
+
+  <h2 class="text-2xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-6">例会（行事）報告</h2>
+
+  <!-- 2025 reports (expanded) -->
+  <section class="mb-8">
+    <h3 class="text-lg font-bold text-bark mb-3">2025年度</h3>
+    <div class="bg-white rounded-xl shadow-sm divide-y">
+      {reports2025.map(r => (
+        <a href={`/reikai/${r.slug}`} class="flex items-center gap-4 px-5 py-4 hover:bg-paper transition">
+          <time class="text-sm text-text-light whitespace-nowrap w-24">{r.date}</time>
+          <span class="text-forest font-medium">{r.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Archive years -->
+  <section>
+    <h3 class="text-lg font-bold text-bark mb-3">アーカイブ</h3>
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+      {years.filter(y => y < 2025).map(y => (
+        <a href={`/reikai/${y}`}
+           class="bg-white rounded-lg shadow-sm text-center py-3 text-forest font-bold hover:bg-forest hover:text-white transition">
+          {y}
+        </a>
+      ))}
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="HOME" description="埼玉きのこ研究会の公式サイト。1984年設立、会員約64名。野外観察会や栽培勉強会を通じてきのこの魅力を探求しています。">
+
+  <!-- Hero section -->
+  <section class="bg-forest text-white rounded-2xl p-8 mb-10 relative overflow-hidden">
+    <div class="relative z-10">
+      <h2 class="text-3xl font-bold mb-3">埼玉きのこ研究会</h2>
+      <p class="text-green-100 text-lg mb-6">きのこ愛好者の集い。調査研究・観察会・勉強会を通じて<br class="hidden sm:inline" />きのこの魅力を探求しています。</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/about/join" class="bg-mushroom hover:bg-mushroom-light text-white px-5 py-2.5 rounded-lg font-bold transition">入会案内</a>
+        <a href="/events" class="bg-white/20 hover:bg-white/30 text-white px-5 py-2.5 rounded-lg font-bold transition">行事予定</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- News section -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-4">お知らせ・更新情報</h2>
+    <div class="bg-white rounded-xl shadow-sm p-6 space-y-3">
+      <div class="flex gap-3 items-start">
+        <span class="text-xs bg-mushroom text-white px-2 py-0.5 rounded whitespace-nowrap mt-0.5">NEW</span>
+        <div>
+          <time class="text-sm text-text-light">2026.04.10</time>
+          <p>2025年度のきのこ栽培勉強会の報告を更新しました。</p>
+        </div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <span class="text-xs bg-gray-400 text-white px-2 py-0.5 rounded whitespace-nowrap mt-0.5">INFO</span>
+        <div>
+          <time class="text-sm text-text-light">2026.03.01</time>
+          <p>次回の観察会は予定通り開催します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content grid -->
+  <section class="grid md:grid-cols-2 gap-6 mb-10">
+    <a href="/events" class="group bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 bg-forest/10 rounded-lg flex items-center justify-center text-forest text-lg">&#x1F4C5;</span>
+        <h3 class="text-lg font-bold text-forest group-hover:text-forest-light transition">行事予定</h3>
+      </div>
+      <p class="text-sm text-text-light">2025年度の観察会・勉強会のスケジュール</p>
+    </a>
+
+    <a href="/reikai" class="group bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 bg-forest/10 rounded-lg flex items-center justify-center text-forest text-lg">&#x1F344;</span>
+        <h3 class="text-lg font-bold text-forest group-hover:text-forest-light transition">例会報告</h3>
+      </div>
+      <p class="text-sm text-text-light">2000年〜現在の観察会・行事の記録</p>
+    </a>
+
+    <a href="/kaihou" class="group bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 bg-forest/10 rounded-lg flex items-center justify-center text-forest text-lg">&#x1F4D6;</span>
+        <h3 class="text-lg font-bold text-forest group-hover:text-forest-light transition">会報「いっぽん」</h3>
+      </div>
+      <p class="text-sm text-text-light">1993年〜現在のバックナンバー</p>
+    </a>
+
+    <a href="/data" class="group bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 bg-forest/10 rounded-lg flex items-center justify-center text-forest text-lg">&#x1F52C;</span>
+        <h3 class="text-lg font-bold text-forest group-hover:text-forest-light transition">きのこ関連データ</h3>
+      </div>
+      <p class="text-sm text-text-light">学名辞書・学名の読み方</p>
+    </a>
+
+    <a href="/links" class="group bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 bg-forest/10 rounded-lg flex items-center justify-center text-forest text-lg">&#x1F517;</span>
+        <h3 class="text-lg font-bold text-forest group-hover:text-forest-light transition">リンク集</h3>
+      </div>
+      <p class="text-sm text-text-light">きのこ関連の団体・個人サイト</p>
+    </a>
+
+    <a href="/about" class="group bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="w-10 h-10 bg-forest/10 rounded-lg flex items-center justify-center text-forest text-lg">&#x2139;</span>
+        <h3 class="text-lg font-bold text-forest group-hover:text-forest-light transition">会について</h3>
+      </div>
+      <p class="text-sm text-text-light">沿革・会則・入会案内</p>
+    </a>
+  </section>
+
+</BaseLayout>

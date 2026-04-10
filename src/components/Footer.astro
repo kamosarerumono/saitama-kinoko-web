@@ -1,0 +1,28 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="bg-forest text-green-100 mt-12">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <div class="grid md:grid-cols-3 gap-6 text-sm">
+      <div>
+        <h3 class="font-bold text-white mb-2">埼玉きのこ研究会</h3>
+        <p class="leading-relaxed">1984年設立。きのこ愛好者による調査研究・観察会・勉強会を行っています。</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-white mb-2">お問い合わせ</h3>
+        <p>E-mail: mashryum@poem.ocn.ne.jp</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-white mb-2">メニュー</h3>
+        <ul class="space-y-1">
+          <li><a href="/about/join" class="hover:text-white transition">入会案内</a></li>
+          <li><a href="/events" class="hover:text-white transition">行事予定</a></li>
+          <li><a href="/reikai" class="hover:text-white transition">例会報告</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-green-700 mt-6 pt-4 text-center text-xs text-green-300">
+      Copyright &copy; 2000-{year} Saitama Mushroom Club All Rights Reserved.
+    </div>
+  </div>
+</footer>

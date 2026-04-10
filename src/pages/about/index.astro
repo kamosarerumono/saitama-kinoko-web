@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="会について" description="埼玉きのこ研究会について。1984年発足、会員約64名。きのこの調査研究・観察会を行う愛好団体。">
+
+  <nav class="text-sm text-text-light mb-4">
+    <a href="/" class="hover:text-forest">HOME</a> &gt;
+    <span>会について</span>
+  </nav>
+
+  <h2 class="text-2xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-6">このサイトについて</h2>
+
+  <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 mb-8">
+    <p class="mb-4">きのこ愛好家でつくる「埼玉きのこ研究会」の公式サイトです。会員への情報提供と非会員への情宣媒体としてこのWEBサイトが作られました。例会報告をはじめとする最新の情報を速やかにアップしていく方針です。</p>
+  </div>
+
+  <h2 class="text-2xl font-bold text-forest border-l-4 border-mushroom pl-3 mb-6">埼玉きのこ研究会について</h2>
+
+  <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 mb-8">
+    <table class="w-full text-sm">
+      <tbody>
+        <tr class="border-b border-paper-dark">
+          <td class="py-3 pr-4 font-bold text-text-light w-32">発足</td>
+          <td class="py-3">1984年3月</td>
+        </tr>
+        <tr class="border-b border-paper-dark">
+          <td class="py-3 pr-4 font-bold text-text-light">会員数</td>
+          <td class="py-3">約64名（2023年3月現在）</td>
+        </tr>
+        <tr class="border-b border-paper-dark">
+          <td class="py-3 pr-4 font-bold text-text-light">会長</td>
+          <td class="py-3">福島隆一</td>
+        </tr>
+        <tr class="border-b border-paper-dark">
+          <td class="py-3 pr-4 font-bold text-text-light">沿革</td>
+          <td class="py-3">
+            <a href="/about/history" class="text-forest hover:text-forest-light underline">埼玉きのこ研究会のあゆみ</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="py-3 pr-4 font-bold text-text-light">連携</td>
+          <td class="py-3">埼玉県立自然の博物館に乾燥標本を寄贈</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <a href="/about/charter" class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition group">
+      <h3 class="text-lg font-bold text-forest group-hover:text-forest-light mb-2">会則</h3>
+      <p class="text-sm text-text-light">埼玉きのこ研究会の会則</p>
+    </a>
+    <a href="/about/join" class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition group">
+      <h3 class="text-lg font-bold text-forest group-hover:text-forest-light mb-2">入会案内</h3>
+      <p class="text-sm text-text-light">入会方法・会費のご案内</p>
+    </a>
+  </div>
+
+</BaseLayout>
