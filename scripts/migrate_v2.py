@@ -113,12 +113,86 @@ def extract_meta(soup, filename):
     return meta
 
 
+def deduplicate_table_cells(soup):
+    """Remove duplicate tables and duplicate columns.
+    Old site HTML often has the same table repeated 2-3 times, and layout tables
+    with 2 columns containing identical content."""
+    tables = soup.find_all('table')
+
+    # 1. Remove duplicate tables (same content)
+    seen_hashes = set()
+    for table in tables:
+        text = table.get_text(strip=True)[:500]
+        if text in seen_hashes:
+            table.decompose()
+            continue
+        seen_hashes.add(text)
+
+    # 2. Remove duplicate columns within remaining tables
+    for table in soup.find_all('table'):
+        for row in table.find_all('tr'):
+            cells = row.find_all('td')
+            if len(cells) == 2:
+                t1 = cells[0].get_text(strip=True)[:100]
+                t2 = cells[1].get_text(strip=True)[:100]
+                if t1 and t2 and (t1 == t2 or (len(t1) > 20 and t1 in t2)):
+                    cells[1].decompose()
+
+    # 3. For rows with many cells where adjacent cells have same content, keep only first
+    for table in soup.find_all('table'):
+        for row in table.find_all('tr'):
+            cells = row.find_all('td', recursive=False)
+            if len(cells) >= 2:
+                first_text = cells[0].get_text(strip=True)
+                if len(first_text) > 50:
+                    for cell in cells[1:]:
+                        cell_text = cell.get_text(strip=True)
+                        if cell_text and first_text[:50] in cell_text[:50]:
+                            cell.decompose()
+
+
+def extract_species_table_md(table, year_str):
+    """Convert a species identification table to markdown table format."""
+    rows = table.find_all('tr')
+    if len(rows) < 5:
+        return None
+
+    table_text = table.get_text()
+    is_species = any(kw in table_text for kw in ['科', 'ハラタケ', 'イグチ', 'ベニタケ', 'テングタケ', 'キクラゲ', '子嚢菌', '腹菌', 'ヒダナシタケ'])
+    if not is_species:
+        return None
+
+    md_lines = []
+    for row in rows:
+        cells = row.find_all(['td', 'th'])
+        vals = [c.get_text(strip=True) for c in cells]
+        vals = [v for v in vals if v and v != 'a']
+
+        if not vals:
+            continue
+        if len(vals) == 1:
+            # Category header
+            md_lines.append(f'\n**{vals[0]}**\n')
+            md_lines.append('| 科名 | 種名 |')
+            md_lines.append('|------|------|')
+        elif len(vals) >= 2:
+            if vals[0] in ('科名', '五分類群', '新目名', '新科名'):
+                continue
+            col1 = vals[0]
+            col2 = '、'.join(vals[1:])
+            md_lines.append(f'| {col1} | {col2} |')
+
+    return '\n'.join(md_lines) if len(md_lines) > 3 else None
+
+
 def soup_to_markdown(soup, year_str):
     """Convert BeautifulSoup body to clean markdown."""
-    # Get body content
     body = soup.find('body')
     if not body:
         return '', []
+
+    # CRITICAL: Remove duplicate table columns BEFORE any text extraction
+    deduplicate_table_cells(body)
 
     # Remove navigation
     nav_links = [a for a in body.find_all('a')
@@ -130,6 +204,15 @@ def soup_to_markdown(soup, year_str):
     for hr in body.find_all('hr'):
         hr.decompose()
 
+    # Remove style/script
+    for tag in body.find_all(['style', 'script']):
+        tag.decompose()
+
+    # Remove MSO conditional comments
+    from bs4 import Comment
+    for comment in body.find_all(string=lambda t: isinstance(t, Comment)):
+        comment.extract()
+
     # Collect images
     images = []
     for img in body.find_all('img'):
@@ -137,7 +220,29 @@ def soup_to_markdown(soup, year_str):
         if src:
             images.append(src)
 
-    # Convert to text
+    # Extract species tables separately
+    # Only decompose tables that are PURELY species data (no narrative text mixed in)
+    species_tables_md = []
+    for table in body.find_all('table'):
+        rows = table.find_all('tr')
+        if len(rows) < 5:
+            continue
+        # Check if this is a pure species table (first row has 科名/種名 or category headers)
+        first_row_cells = rows[0].find_all(['td', 'th'])
+        first_vals = [c.get_text(strip=True) for c in first_row_cells]
+        first_vals = [v for v in first_vals if v]
+        is_pure_species = (
+            len(first_vals) >= 2 and
+            (first_vals[0] in ('五分類群', '科名') or
+             any(kw in first_vals[0] for kw in ['ハラタケ類', 'ヒダナシタケ', '腹菌', 'キクラゲ', '子嚢菌']))
+        )
+        if is_pure_species:
+            table_md = extract_species_table_md(table, year_str)
+            if table_md:
+                species_tables_md.append(table_md)
+                table.decompose()  # Safe to remove: pure species table
+
+    # Convert remaining body to text
     parts = []
     for elem in body.descendants:
         if elem.name == 'img':
@@ -159,10 +264,8 @@ def soup_to_markdown(soup, year_str):
             text = elem.get_text(strip=True)
             if text:
                 parts.append(f'**{text}**')
-        elif elem.string and not elem.parent.name in ('script', 'style', 'b', 'strong', 'h1', 'h2', 'h3'):
-            text = elem.string
-            # Clean whitespace
-            text = text.replace('\r', '')
+        elif elem.string and elem.parent.name not in ('script', 'style', 'b', 'strong', 'h1', 'h2', 'h3'):
+            text = elem.string.replace('\r', '')
             if text.strip():
                 parts.append(text)
 
@@ -170,9 +273,11 @@ def soup_to_markdown(soup, year_str):
 
     # Clean up
     md = re.sub(r'\n{3,}', '\n\n', md)
-    md = re.sub(r'[ \t]+\n', '\n', md)  # trailing spaces
-    md = re.sub(r'^\s+', '', md, flags=re.MULTILINE)  # leading spaces (prevent code blocks)
-    md = re.sub(r'\*{3,}', '', md)  # leftover asterisks
+    md = re.sub(r'[ \t]+\n', '\n', md)
+    md = re.sub(r'^\s+', '', md, flags=re.MULTILINE)
+    md = re.sub(r'\*{3,}', '', md)
+    md = re.sub(r'\*\*\s*\*\*', '', md)  # empty bold
+    md = re.sub(r'\baaa\b', '', md)  # artifact
 
     # Grid layout for consecutive images
     def gridify(match):
@@ -186,6 +291,32 @@ def soup_to_markdown(soup, year_str):
         return '\n'.join(lines)
 
     md = re.sub(r'(!\[[^\]]*\]\([^)]+\)\s*\n\s*){2,}', gridify, md)
+
+    # Append species tables at the end
+    if species_tables_md:
+        md += '\n\n## 確認種一覧\n\n' + '\n\n'.join(species_tables_md)
+
+    # Fix double extensions
+    md = re.sub(r'\.jpg\.jpg', '.jpg', md, flags=re.IGNORECASE)
+
+    # Paragraph-level deduplication
+    paragraphs = re.split(r'\n\n+', md)
+    deduped = []
+    for p in paragraphs:
+        p = p.strip()
+        if not p:
+            continue
+        if deduped and p == deduped[-1]:
+            continue
+        # Also check for within-paragraph duplication (same text repeated inline)
+        if len(p) > 100 and not p.startswith('|') and not p.startswith('<div'):
+            half = len(p) // 2
+            first = p[:half].strip()
+            second = p[half:half+len(first)].strip()
+            if first and len(first) > 40 and first == second:
+                p = p[:half].strip()
+        deduped.append(p)
+    md = '\n\n'.join(deduped)
 
     return md.strip(), images
 
