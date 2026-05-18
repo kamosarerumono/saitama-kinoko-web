@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "BASH_DEFAULT_TIMEOUT_MS": "600000"
+  },
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "deny": [
+      "Bash(chmod 777 *)",
+      "Bash(sudo *)",
+      "Bash(gh repo delete *)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git config --global *)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -fr *)",
+      "Bash(mkfs *)",
+      "Bash(dd if= *)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/*secret*)",
+      "Read(**/*credential*)",
+      "Read(**/*password*)",
+      "Read(~/.ssh/**)",
+      "Read(**/id_rsa)",
+      "Read(**/id_ed25519)",
+      "Write(**/.env)",
+      "Write(**/.env.*)",
+      "Write(**/*secret*)",
+      "Write(**/*credential*)",
+      "Write(**/*password*)",
+      "Write(**/id_rsa)",
+      "Write(**/id_ed25519)",
+      "Write(~/.bashrc)",
+      "Write(~/.zshrc)",
+      "Write(~/.profile)"
+    ],
+    "ask": [],
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(astro:*)",
+      "Bash(wrangler:*)"
+    ]
+  },
+  "language": "japanese",
+  "autoMemoryEnabled": true
+}
