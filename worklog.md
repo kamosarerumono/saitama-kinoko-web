@@ -2,8 +2,8 @@
 
 ## 2026-06-18 2026年度第42回定期総会の例会報告を作成
 - 2026総会.docx(写真4枚)から総会報告を作成。新サイト src/content/reikai/2026-05-24-260524_soukai.md を追加しビルド成功→commit 8dde03e→push済(Cloudflare自動デプロイ)。
-- 旧さくら用に docs/plans/reikai2026/ にドラフト一式作成(個別260524_soukai.html・年度一覧2026reikaihoukoku.html・入口houkoku_reikai.htm差分[Shift_JIS]・画像images/soukai1-4.jpg)。実アップロードは自動モード分類器がproduction書込として拒否→ユーザー明示OK待ち。
-- 要確認: docx表記が「第42回」だが2025年が第40回のため41が飛んでいる(誤記の可能性)。原文どおり42で作成済、修正ならファイル差替+再up。
+- 旧さくらにもアップ完了(ユーザーOK後)。個別 reikai/2026/260524_soukai.html・年度一覧 reikai/2026reikaihoukoku.html・入口 reikai/houkoku_reikai.htm(Shift_JIS,2026リンク追加)・画像 reikai/2026/images/soukai1-4.jpg。アップ後検証: 全7ファイルHTTP200、HTML3点は文字化けなし(houkoku=cp932/他2点=utf-8でclean decode)、画像サイズ一致。
+- 回数はユーザー確認で「第42回」確定(2025=40回だが42で正とのこと)。
 
 ## 2026-06-18 メール/ドメイン調査 + HP更新手順の定型化
 - 心配されていた「さくら×Cloudflareのドメイン問題でメール不達」は構造上起きないと実測確認: 両サイトとも各社サブドメイン(pages.dev / ippon.sakura.ne.jp)で独自ドメイン不在、ippon.sakura.ne.jpのMXはさくら自身で正常、会の連絡は個人ISPメール。
