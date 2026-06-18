@@ -1,5 +1,10 @@
 # worklog
 
+## 2026-06-18 さくらSSL証明書エラー(www)の診断とサイト内リンク点検
+- 症状 ERR_CERT_COMMON_NAME_INVALID は www.ippon.sakura.ne.jp のみ。原因確定: 証明書が `*.sakura.ne.jp` ワイルドカードでドット1個分のみ有効→ ippon.sakura.ne.jp はOK、www.ippon...は不一致。解決=wwwなしURL利用(恒久策は独自ドメイン取得=新Cloudflareサイト)。
+- サイト内リンク点検: 主要ナビ9ページに www付きリンク0件。唯一 index.htm の行事予定リンクが `http://ippon.sakura.ne.jp/...` 絶対httpだったため相対パスに統一→アップ済(cp932保持)、取得検証OK(残絶対0/HTTP200)。
+- 未実施: 全reikai旧報告ページ(数百)の深掘り全文grepは未走査(主要ナビは清浄)。必要なら別途。
+
 ## 2026-06-18 2026年度第42回定期総会の例会報告を作成
 - 2026総会.docx(写真4枚)から総会報告を作成。新サイト src/content/reikai/2026-05-24-260524_soukai.md を追加しビルド成功→commit 8dde03e→push済(Cloudflare自動デプロイ)。
 - 旧さくらにもアップ完了(ユーザーOK後)。個別 reikai/2026/260524_soukai.html・年度一覧 reikai/2026reikaihoukoku.html・入口 reikai/houkoku_reikai.htm(Shift_JIS,2026リンク追加)・画像 reikai/2026/images/soukai1-4.jpg。アップ後検証: 全7ファイルHTTP200、HTML3点は文字化けなし(houkoku=cp932/他2点=utf-8でclean decode)、画像サイズ一致。
