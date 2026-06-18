@@ -1,5 +1,10 @@
 # worklog
 
+## 2026-06-18 きのこアドバイザー研修(日本特用林産振興会)の会員お知らせ追加
+- 新サイト: news schemaに link/linkLabel(任意)を追加しトップお知らせで外部リンク描画。記事 src/content/news/2026-06-18-kinoko-advisor.md 追加(tag EVENT)。build成功+プレビューでリンク(target=_blank/rel=noopener noreferrer/正URL)確認。テスト基盤無のため直接編集+build検証で代替。
+- 旧さくら: index.htm お知らせ欄に申込リンク付き案内行を追加(cp932保持)→アップ済、取得検証OK(文字化け無/リンク有/HTTP200)。
+- 申込URL(nittokusin.jp)はHTTP200到達確認済。締切は原文で26日/28日が混在のため断定せず「申込ページ確認」と表記。
+
 ## 2026-06-18 さくらSSL証明書エラー(www)の診断とサイト内リンク点検
 - 症状 ERR_CERT_COMMON_NAME_INVALID は www.ippon.sakura.ne.jp のみ。原因確定: 証明書が `*.sakura.ne.jp` ワイルドカードでドット1個分のみ有効→ ippon.sakura.ne.jp はOK、www.ippon...は不一致。解決=wwwなしURL利用(恒久策は独自ドメイン取得=新Cloudflareサイト)。
 - サイト内リンク点検: 主要ナビ9ページに www付きリンク0件。唯一 index.htm の行事予定リンクが `http://ippon.sakura.ne.jp/...` 絶対httpだったため相対パスに統一→アップ済(cp932保持)、取得検証OK(残絶対0/HTTP200)。

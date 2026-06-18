@@ -42,6 +42,11 @@ function formatDate(d: Date) {
           <div>
             <time class="text-sm text-text-light">{formatDate(n.data.date)}</time>
             <p>{n.data.title}</p>
+            {n.data.link && (
+              <a href={n.data.link} target="_blank" rel="noopener noreferrer" class="text-forest hover:text-forest-light text-sm underline">
+                {n.data.linkLabel ?? '詳細はこちら'} &rarr;
+              </a>
+            )}
           </div>
         </div>
       ))}

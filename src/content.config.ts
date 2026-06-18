@@ -32,6 +32,8 @@ const news = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     tag: z.enum(['NEW', 'INFO', 'EVENT']).default('INFO'),
+    link: z.string().optional(),
+    linkLabel: z.string().optional(),
   }),
 });
 
