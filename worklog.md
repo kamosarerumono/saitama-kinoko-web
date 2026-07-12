@@ -30,3 +30,7 @@
 - 35号同様の表紙画像を生成（Word .docm から部品抽出→Pillowで合成）し、docs/plans/ippon36g.html・37g.html に組込。SCAN00053.jpg(36)/SCAN00054.jpg(37) を新規作成。
 - 発見: docs/plans のローカルドラフト2本は日本語が U+FFFD で破損していたため、本番sakuraの正常Shift_JIS版を土台に作り直した（構造BR数は本番と一致を確認）。
 - 残課題: 4ファイル(html2/jpg2)を sakura サーバ backnumber/ へアップロードするのはユーザー手作業。
+
+## 2026-07-12 バックログ整理(未commit解消)
+- やったこと: docs/plans 配下の作業資料(会報スキャン原稿 SCAN00053/54、会報HTML新旧、ippon36/37g、gyouji2026 行事予定HTML一式)と gyouji2026_preview.png を commit(a214b4a)。.playwright-mcp を gitignore 追加。origin master へ push 済み(17544ff)。
+- 残・保留: なし。ワーキングツリー clean・同期済み。
