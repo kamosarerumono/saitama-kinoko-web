@@ -25,3 +25,6 @@ __pycache__/
 
 # jetbrains setting folder
 .idea/
+
+# Playwright MCP temp artifacts
+.playwright-mcp/
