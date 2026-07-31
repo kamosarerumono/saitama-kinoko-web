@@ -28,3 +28,6 @@ __pycache__/
 
 # Playwright MCP temp artifacts
 .playwright-mcp/
+
+# 元データ(メール添付の原本)
+data/
