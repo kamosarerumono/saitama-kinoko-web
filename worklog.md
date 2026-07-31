@@ -34,3 +34,15 @@
 ## 2026-07-12 バックログ整理(未commit解消)
 - やったこと: docs/plans 配下の作業資料(会報スキャン原稿 SCAN00053/54、会報HTML新旧、ippon36/37g、gyouji2026 行事予定HTML一式)と gyouji2026_preview.png を commit(a214b4a)。.playwright-mcp を gitignore 追加。origin master へ push 済み(17544ff)。
 - 残・保留: なし。ワーキングツリー clean・同期済み。
+
+## 2026-07-31 川越・狭山平地林観察会(2026-06-28)の報告を新旧両サイトへ公開
+- 素材: data/川越_20260731/ (報告書docx + 写真19枚)。`Gmail`と`Gmail (1)`は全19枚md5一致の完全重複だったため片方のみ採用。ファイル名がmac由来NFDで濁点分離していたためNFC正規化して突合。
+- 目録の読み取り: docxの目録は「4列表 = (科,種名)ペア2組を縦読み」構造。単純な行順で読むと科と種が総崩れになるため、lxmlで列ペア(0,1)(2,3)を別々に縦走査して復元 → **66種/28科**。正規表現でのセル抽出は`<w:tcPr>`ノイズと閉じタグ喪失で誤爆するのでlxml必須。
+- 新サイト: src/content/reikai/2026-06-28-260628_kawagoe.md + public/reikai/2026/260628_*.jpg(19枚)。build成功(303ページ)、commit 833c682 → push済み。
+- 旧さくら: 前年 25629_kawagoe.html のギャラリーCSS/テンプレを踏襲して生成。SFTPで23ファイルをアップ。
+  - reikai/2026/260628_kawagoe.html (UTF-8) / reikai/2026/images_260628/*.jpg (19枚) / reikai/2026reikaihoukoku.html (UTF-8,リンク1行追加) / index.htm (**Shift_JIS**,お知らせ1行目差替)
+  - 検証: 画像19枚すべてHTTP200かつ**md5がローカルと完全一致**、HTML3点はclean decode(化けなし)、ブラウザ実測で画像破損0・種66行・TOP→入口→年度一覧→個別→画像の導線すべて200。
+  - 初回アップで1枚(yamadoritakemodoki.jpg)だけFAIL→再送で462,970バイト一致を確認。**curlの一括SFTPは稀に単発失敗するのでmd5照合が必須**。
+- 原稿の表記ゆれは歩さん判断で**原稿ママ**据え置き: 「アセハリタケケ」(ケ重複と思われる)、本文/目録=サトタマゴタケ vs 写真キャプション=サトヤマタマゴタケ。
+- 認証情報: SFTPパスワードがPC上のどこにも無く作業が中断したため、`.env`(gitignore:17で除外済み)に SAKURA_HOST/USER/PW を保存。実接続exit=0・git status非表示を実測確認。
+- **別件の未解決**: Cloudflare Pages の自動デプロイが停止中。3月記事=200だが**5月の総会・今回の川越はいずれも404**(pages.dev)。git pushは正常完了しておりトップは200なので、Cloudflare側のGitHub連携ビルドが5月以降走っていない疑い。旧サイトは影響なし。要調査。
