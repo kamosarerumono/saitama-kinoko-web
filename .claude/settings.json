@@ -4,7 +4,7 @@
     "BASH_DEFAULT_TIMEOUT_MS": "600000"
   },
   "permissions": {
-    "defaultMode": "bypassPermissions",
+    "defaultMode": "acceptEdits",
     "deny": [
       "Bash(chmod 777 *)",
       "Bash(sudo *)",
