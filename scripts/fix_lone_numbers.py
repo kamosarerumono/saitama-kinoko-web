@@ -9,7 +9,8 @@
   数字を前の行に結合する（スペースなし）
 - ただし数字がテーブル行・画像行・見出し行の隣にある場合はスキップ
 """
-import re, sys
+import re
+import sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -78,7 +79,7 @@ def fix_lone_numbers(text):
             next_s = lines[i + 1].strip()
             # 次行が文章の継続（句読点や括弧で始まらない日本語）
             if (next_s and
-                    not next_s[0] in '。、！？」』）】」…' and
+                    next_s[0] not in '。、！？」』）】」…' and
                     not re.match(r'^[①-⑩A-Za-z\d【《]', next_s)):
                 result.append(line.rstrip() + next_s)
                 changes += 1

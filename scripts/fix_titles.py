@@ -1,5 +1,7 @@
 """Fix report titles by re-reading original HTML files."""
-import os, re, sys
+import os
+import re
+import sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')

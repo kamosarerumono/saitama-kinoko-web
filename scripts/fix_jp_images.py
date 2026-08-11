@@ -8,7 +8,10 @@ For each HTML file:
 4. Copy actual images to public/reikai with ASCII names
 5. Update Markdown file: replace garbled paths with ASCII paths
 """
-import os, re, sys, shutil
+import os
+import re
+import sys
+import shutil
 from pathlib import Path
 from bs4 import BeautifulSoup
 
@@ -246,7 +249,7 @@ def main():
             grand_copied += c
             grand_updated += u
 
-    print(f'\n=== 完了 ===')
+    print('\n=== 完了 ===')
     print(f'コピー: {grand_copied}件')
     print(f'Markdown更新: {grand_updated}件')
 

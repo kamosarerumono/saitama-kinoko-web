@@ -7,7 +7,10 @@ Fix all Japanese-related issues:
    - Copy with unique ASCII names (md_stem_prefix_NNN.jpg)
    - Update Markdown references
 """
-import os, re, sys, shutil
+import os
+import re
+import sys
+import shutil
 from pathlib import Path
 from bs4 import BeautifulSoup
 

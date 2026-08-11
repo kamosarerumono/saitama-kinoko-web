@@ -2,7 +2,10 @@
 Pass 1: get_text() + line-level dedup for body text
 Pass 2: direct table extraction for species lists
 """
-import os, re, sys, shutil
+import os
+import re
+import sys
+import shutil
 from pathlib import Path
 from bs4 import BeautifulSoup, Comment
 
@@ -397,7 +400,7 @@ def main():
                             shutil.copy2(img, d)
                             total_img += 1
 
-    print(f'\n=== Complete ===')
+    print('\n=== Complete ===')
     print(f'Markdown: {total_md}')
     print(f'Images: {total_img}')
 

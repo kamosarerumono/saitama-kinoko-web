@@ -1,5 +1,7 @@
 """Fix all report markdown files: metadata, image layout, empty files, typos."""
-import os, re, sys
+import os
+import re
+import sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -186,7 +188,7 @@ def main():
                 f.write(new_content)
             stats['meta_fixed'] += 1
 
-    print(f"=== 完了 ===")
+    print("=== 完了 ===")
     for k, v in stats.items():
         print(f"  {k}: {v}")
     print(f"  remaining files: {len(list(CONTENT.glob('*.md')))}")

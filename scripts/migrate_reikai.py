@@ -314,7 +314,7 @@ def main():
                                 shutil.copy2(img, d)
                                 total_images += 1
 
-    print(f'\n=== 完了 ===')
+    print('\n=== 完了 ===')
     print(f'Markdown: {total_reports} files')
     print(f'Images: {total_images} files')
 

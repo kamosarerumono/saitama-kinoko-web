@@ -1,5 +1,7 @@
 """Fix species tables: extract HTML tables from original HTML and inject as markdown tables into existing md files."""
-import os, re, sys
+import os
+import re
+import sys
 from pathlib import Path
 from bs4 import BeautifulSoup
 

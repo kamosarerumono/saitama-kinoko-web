@@ -9,7 +9,8 @@ Astroテンプレートが開催日・場所・参加者・報告者をfrontmatt
   開催場所：、世話人：、担当 などで始まる行
 - 画像ファイルサイズ表記 （XX.XKB）
 """
-import re, sys
+import re
+import sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
