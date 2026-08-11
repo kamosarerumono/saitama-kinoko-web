@@ -1,5 +1,7 @@
 """Re-migrate kaiinhassin with proper content extraction."""
-import os, re, sys, shutil
+import os
+import re
+import sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')

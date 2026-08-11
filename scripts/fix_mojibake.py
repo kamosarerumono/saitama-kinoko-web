@@ -2,9 +2,9 @@
 mojibakeファイルを個別にバックアップHTMLから再変換するスクリプト。
 migrate_v4.pyのロジックを再利用し、対象ファイルのみ上書きする。
 """
-import sys, re, shutil
+import sys
+import re
 from pathlib import Path
-from bs4 import BeautifulSoup, Comment
 
 sys.stdout.reconfigure(encoding='utf-8')
 

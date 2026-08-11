@@ -3,7 +3,7 @@ Fix image filenames with spaces: rename to use underscores.
 Also update Markdown references to match renamed files.
 Also remove .jpg.jpg double extensions.
 """
-import os, re, shutil
+import re
 from pathlib import Path
 
 PUBLIC_REIKAI = Path(r'C:\tools\saitama-kinoko-web\public\reikai')

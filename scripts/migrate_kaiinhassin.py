@@ -121,7 +121,7 @@ def main():
             post_count += 1
             print(f'  [{year}] {slug}: {title_clean[:40]}... (images: {len(imgs)})')
 
-    print(f'\n=== 完了 ===')
+    print('\n=== 完了 ===')
     print(f'Posts: {post_count}')
     print(f'Images: {img_count}')
 

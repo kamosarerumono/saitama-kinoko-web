@@ -2,7 +2,7 @@
 cp932特殊文字の文字化けを修正するスクリプト。
 \ufffd + ASCII文字 のパターンを対応するcp932文字に置換する。
 """
-import sys, re
+import sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
