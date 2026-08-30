@@ -1,0 +1,4 @@
+# Linux 移行 (2026-08-30): Windows から持ち込んだ CRLF が shebang を壊し
+# `./script` が「そのようなファイルは無い」で落ちていたため、改行を LF に固定する。
+*.sh  text eol=lf
+*.py  text eol=lf
