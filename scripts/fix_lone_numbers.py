@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-CONTENT = Path(r'C:\tools\saitama-kinoko-web\src\content\reikai')
+CONTENT = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/reikai')
 
 PROTECTED = {
     '2025-04-06-250406syotukinbenkyo',

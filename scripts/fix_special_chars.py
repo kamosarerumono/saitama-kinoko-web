@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-CONTENT = Path(r'C:\tools\saitama-kinoko-web\src\content\reikai')
+CONTENT = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/reikai')
 
 # \ufffd + 次の文字 → cp932の本来の文字
 # 0x87 + 0x40〜 の範囲のcp932特殊文字

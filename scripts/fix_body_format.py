@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-CONTENT = Path(r'C:\tools\saitama-kinoko-web\src\content\reikai')
+CONTENT = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/reikai')
 
 # 保護ファイル（手動作成 - Phase 1 の段落修正は除外するが Phase 2 は適用）
 PROTECTED = {

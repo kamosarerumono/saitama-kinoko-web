@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-BACKUP = Path(r'C:\tools\ippon_backup\reikai')
-CONTENT = Path(r'C:\tools\saitama-kinoko-web\src\content\reikai')
+BACKUP = Path(r'/home/ayumi/tools/ippon_backup/reikai')
+CONTENT = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/reikai')
 
 
 def detect_encoding(filepath):

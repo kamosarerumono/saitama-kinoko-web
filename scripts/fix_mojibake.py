@@ -11,9 +11,9 @@ sys.stdout.reconfigure(encoding='utf-8')
 # migrate_v4.py をインポート（同じロジックを使う）
 sys.path.insert(0, str(Path(__file__).parent))
 
-BACKUP = Path(r'C:\tools\ippon_backup\reikai')
-OUT_CONTENT = Path(r'C:\tools\saitama-kinoko-web\src\content\reikai')
-OUT_IMAGES = Path(r'C:\tools\saitama-kinoko-web\public\reikai')
+BACKUP = Path(r'/home/ayumi/tools/ippon_backup/reikai')
+OUT_CONTENT = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/reikai')
+OUT_IMAGES = Path(r'/home/ayumi/tools/saitama-kinoko-web/public/reikai')
 
 
 def detect_encoding(fp):

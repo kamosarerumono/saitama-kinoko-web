@@ -6,8 +6,8 @@ Also remove .jpg.jpg double extensions.
 import re
 from pathlib import Path
 
-PUBLIC_REIKAI = Path(r'C:\tools\saitama-kinoko-web\public\reikai')
-CONTENT_REIKAI = Path(r'C:\tools\saitama-kinoko-web\src\content\reikai')
+PUBLIC_REIKAI = Path(r'/home/ayumi/tools/saitama-kinoko-web/public/reikai')
+CONTENT_REIKAI = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/reikai')
 
 rename_map = {}  # old_name -> new_name (per year dir)
 

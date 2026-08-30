@@ -15,9 +15,9 @@ from bs4 import BeautifulSoup, Comment
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-BACKUP = Path(r'C:\tools\ippon_backup\reikai')
-OUT_CONTENT = Path(r'C:\tools\saitama-kinoko-web\src\content\reikai')
-OUT_IMAGES = Path(r'C:\tools\saitama-kinoko-web\public\reikai')
+BACKUP = Path(r'/home/ayumi/tools/ippon_backup/reikai')
+OUT_CONTENT = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/reikai')
+OUT_IMAGES = Path(r'/home/ayumi/tools/saitama-kinoko-web/public/reikai')
 
 # Files to protect (not overwrite) — manually crafted 2025-2026 reports
 PROTECTED = {

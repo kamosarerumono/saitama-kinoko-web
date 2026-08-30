@@ -6,8 +6,8 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-BACKUP = Path(r'C:\tools\ippon_backup\kaiinhassin')
-OUT = Path(r'C:\tools\saitama-kinoko-web\src\content\kaiinhassin')
+BACKUP = Path(r'/home/ayumi/tools/ippon_backup/kaiinhassin')
+OUT = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/kaiinhassin')
 
 # Clear old output
 for f in OUT.glob('*.md'):

@@ -7,9 +7,9 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-BACKUP = Path(r'C:\tools\ippon_backup\kaiinhassin')
-OUT_CONTENT = Path(r'C:\tools\saitama-kinoko-web\src\content\kaiinhassin')
-OUT_IMAGES = Path(r'C:\tools\saitama-kinoko-web\public\kaiinhassin')
+BACKUP = Path(r'/home/ayumi/tools/ippon_backup/kaiinhassin')
+OUT_CONTENT = Path(r'/home/ayumi/tools/saitama-kinoko-web/src/content/kaiinhassin')
+OUT_IMAGES = Path(r'/home/ayumi/tools/saitama-kinoko-web/public/kaiinhassin')
 
 
 def read_html():
