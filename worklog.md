@@ -67,4 +67,3 @@
 - build305ページ、新旧desktop/390pxの18画像/破損0/横はみ出し0/画像hash・導線検証、FTPS合成40検証成功。
 - 群馬記事は旧/新とも404、FTPS login/upload0。安全な本人hidden入力1回の21ファイルpublisherをtask-11へ準備。公開確認・Discord送信は未完了で、親担当へ実行結果を返す。
 - 詳細と再開条件: `docs/gunma-publication-20261008.md`。共有repoと前回原本/WIPを保持し、群馬を別feature branchで納品。
-
