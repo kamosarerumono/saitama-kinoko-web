@@ -59,3 +59,12 @@
 - 旧さくら用個別HTML、写真17枚、現在の公開年度一覧(UTF-8)への1リンク追加、TOP(cp932)のお知らせ1件差替を docs/plans/ogawa2026 に準備。
 - npm ci --ignore-scripts(既存lock/公式registryのみ)、npm run build成功:304ページ。ローカル実ブラウザで17figure・目録47+12行・横はみ出しなしを確認。HTTPで画像全17 SHA256一致、TOP→一覧→個別200/文字化けなし。
 - 未公開: SFTP read-only preflightはSSHホスト鍵検証エラー(curl60)で停止。検証無効化・known_hosts変更なし。新Cloudflare既存川越記事404も再確認。公開完了とは扱わない。
+# 2026-10-08 群馬の森観察会の承認訂正と公開準備
+
+- 群馬原稿と18JPEG、前回40準備ファイルを現物照合。人物写真3枚のWeb掲載と写真説明の同定訂正を本人承認済みとして反映。
+- 新旧記事で「オオシロカラカサタケ」へcaption/altを訂正。原稿9段落・目録87行・12項目、写真画素と原本SHA256を保持。
+- 小川公開済みTOP/年間一覧をHTTPS読戻しし、群馬専用差分を再生成。小川20ファイルの再公開なし。
+- build305ページ、新旧desktop/390pxの18画像/破損0/横はみ出し0/画像hash・導線検証、FTPS合成40検証成功。
+- 群馬記事は旧/新とも404、FTPS login/upload0。安全な本人hidden入力1回の21ファイルpublisherをtask-11へ準備。公開確認・Discord送信は未完了で、親担当へ実行結果を返す。
+- 詳細と再開条件: `docs/gunma-publication-20261008.md`。共有repoと前回原本/WIPを保持し、群馬を別feature branchで納品。
+
