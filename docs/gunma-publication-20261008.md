@@ -1,3 +1,14 @@
+> 2026-10-09 接続復帰後の最新再開点: **本人の非表示入力1回で修正版を手動確認可能**。
+> 最新HTTPSでも群馬7JPEG一致、残り11JPEG＋記事/年間一覧/TOPの14件。公開完了は未確認。
+> task-11の `publish_gunma_once.py --publish` は合成59＋実curl loopback3試験済み修正版
+> （SHA256 `c7937e6225360bcd89372634920a8bb7c42cd749dcb7713404dc53e1c8d2bd78`）へ直接進む。
+> 一致済み7枚を飛ばし、再取得した9原本backup/ナビ差分を検証後に残対象だけを送信する。
+> 接続数50→39、安全な通信履歴を追加。8/30/600秒の期限・TLS検証・直前guardは保持。
+> 本番timeoutの細かな機序とcandidateの効果は未確定だが、その点だけで無期限保留にしない。
+> 今回は本人の手動1回で確認し、再停止なら新receiptを返して繰り返さない。
+> 根拠はprivate `incident-20261009/recurrence-124855/resume-readiness-20261009.json`、
+> `ftps-handoff/readbacks/20261009T044948Z.json`。以下の保留記録は当時の履歴。
+
 > 2026-10-09 12:48 JST再発の最新状態: **BLOCKED / 公開再開保留**。
 > 読取診断成功後の公開もtimeout。kondo-06/07を追加し合計7枚は独立HTTP SHA256一致、
 > 残り写真11枚と記事は404、年間一覧/TOPはbaseline不変。既存7backup・全21stageを照合。

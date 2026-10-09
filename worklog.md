@@ -79,3 +79,9 @@
 - 読取診断後の本人公開もtimeout、2枚追加して合計7枚HTTP一致。親directory NLSTの接続準備が8秒で停止、残14件・記事未公開。backup7/stage21を再照合、復元/再送なし。
 - 確認済み子directoryを直接検査する候補で残工程FTPS接続50→39、既存guard保持。安全なFTP動詞/応答code/TLShelloと通信履歴を追加。合成59＋実curl loopback3成功、データTLS停止は観測と整合する仮説。timeout延長なし、本番解決とは判定しない。
 - 現在BLOCKED・本人追加操作保留。原receipt/backup不変、agent本番FTPS/送信0。再発監査はtask-11 incident-20261009/recurrence-124855/。
+
+# 2026-10-09 修正版の手動再開点
+
+- 通常Git feature接続が復帰、未push文書e968256を通常pushし0/0・clean。最新HTTPでも7JPEG一致・残14件。
+- 本人実行パスのSHA256が62試験済みcandidate c7937e62と一致、--publishは修正後guardへ直接dispatch。原本hash/21scope/文字コードのCLI検査成功・通信0。
+- 本人の非表示入力1回で残14件を手動確認する手順を更新。一致7件の再送0、backup/差分/TLS/期限/停止条件を維持。本番効果は未確認、停止時は詳細receiptを返して繰り返さない。
