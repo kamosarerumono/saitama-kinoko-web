@@ -1,3 +1,12 @@
+> 2026-10-09 22:12 JST 最新状態: **本人SIZE省略GETで写真読取・内容一致成功。通常公開GETへ採用、本人公開1回待ち**。
+> receipt221234はsource9820b01a…039f54c/manifest一致、RETR→両TLS完了→226、kondo-01の3,009,949 bytes/SHA一致、送信0。
+> 通常対象GETへSIZE省略＋payload/承認済み原本の最大bytes上限を適用。取得後の完全一致、LIST/STOR/TLS証明書hostname・期限・owner共有lock・原本backup/diff・直前guardを維持。
+> 160試験PASS。通常公開入口の実localhost GET＋合成LIST/STOR/HTTPで7スキップ・9backup/diff・14送信順序・最終21HTTP証拠を確認。
+> 次は `publish_gunma_once.py --publish --use-local-credential` の本人実行1回だけ。別認証診断を挟まない。
+> 現行入口65ef3088…9c064be、manifest/payload不変。開始時に全対象を再照合し最新一致/残件を記録、送信直後/最終21HTTPと既存入口リンク確認まで同じscriptで行う。
+> 過去の7/21一致・14残は最新全件確認ではない。現在の全件状態・公開完了は未確認、agent秘密読取/認証送信/公開/Discord等0、小川再送なし。
+> 証拠: private task-11 `incident-20261009/publication-adoption-221234/REPORT.md`・`OWNER_PUBLISH.md`・160試験receipt。以下は当時の履歴。
+
 > 2026-10-09 21:21 JST 最新状態: **本人HEAD診断は制御SIZE213成功。写真取得・公開は未完**。
 > source5d216c7d…c3e73d9/manifest一致、PASS230、1接続・データTLS未開始・転送0。旧GETは受動接続後SIZE待ちで停止。
 > RFC4217とcurl8.18実装を照合。RETRまでTLS開始を待ちSIZEもデータ進行を待つ相互待ちを隔離fixtureで再現。

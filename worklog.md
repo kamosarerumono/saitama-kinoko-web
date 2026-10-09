@@ -119,3 +119,11 @@
 - RFC4217/curl8.18と照合し、SIZEがTLSを待ちTLSがRETRを待つ隔離条件で旧GET timeout、新SIZE省略GETは写真一致まで成功。本番原因は仮説。
 - 明示写真1枚NO_SIZE診断だけを追加、manifest byte上限/完全一致・両TLS証明書hostname・期限/owner共有lock保持。通常公開fetch/list/putや原本backup等はAST不変。155試験PASS。
 - 次は本人用新診断GET1回。旧GET/HEAD/公開の再実行なし。新mode本番未実行・公開7一致/残14、agent実秘密読取/保存/chmod・認証FTPS/upload・Discord等0。private task-11 `incident-20261009/head-success-212145/REPORT.md`・`OWNER_DIAGNOSTIC.md`、入口9820b01a…039f54c。
+
+## 2026-10-09 GT030 本人写真読取成功後の通常GET採用
+
+- 本人22:12のSIZE省略GETはRETR→両TLS完了→226、3,009,949 bytes/SHA一致、送信0。固定script/manifestをreceiptで照合。
+- 通常対象GETへSIZE省略と承認payload/original最大bytes上限を適用、内容一致・backup/diff・LIST/STOR/直前guard/TLS/期限/lockを保持。
+- 160試験PASS。実localhost GET＋合成publicationで7枚再送0・9backup/diff・残14順序・最終21HTTP/入口証拠を確認。
+- 次は本人保存認証の単一公開コマンド。開始時の最新一致/残件、送信直後と最終21HTTPを同scriptで記録。過去7/21・14残を現在状態とは扱わず、別診断を挟まない。
+- private task-11 `incident-20261009/publication-adoption-221234/OWNER_PUBLISH.md`・REPORT、入口65ef3088…9c064be。公開未実行、agent実秘密読取/認証FTPS/upload・Discord等0、小川対象外。
