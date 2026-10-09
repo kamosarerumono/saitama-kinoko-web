@@ -3,10 +3,10 @@
 > データTLS未完でもTYPE/SIZEを進めるcurl8.18実装と整合。隔離fixtureで同じ停止形を再現したが本番根因は未確定。
 > 次の差分は既存kondo-01への `--diagnose-control-size --use-local-credential` のFTPS HEAD1回。
 > 制御接続1本でMDTM/TYPE/SIZE/REST0だけを照会、EPSV/データ接続/RETR/LIST/STOR/HTTPなし。
-> 146試験PASS、暗号化・証明書検証・8/30/600秒・owner/lock・既存公開guard維持。現在入口5d216c7d…c3e73d9。
+> 143試験PASS、暗号化・証明書検証・8/30/600秒・owner/lock・既存公開guard維持。現在入口5d216c7d…c3e73d9。
 > この次操作は親担当判断待ち、本番未実行。agent実秘密読取/保存/chmod・認証FTPS/upload・Discord等0。
 > 最後の独立HTTP7一致/残14・記事404は保持、今回fresh HTTPなし。根因修正/Expected Effect gateはBLOCKED。
-> 証拠: private task-11 `incident-20261009/saved-auth-timeout-194609/REPORT.md`、`OWNER_DIAGNOSTIC.md`、146試験receipt・gate-verdict。
+> 証拠: private task-11 `incident-20261009/saved-auth-timeout-194609/REPORT.md`、`OWNER_DIAGNOSTIC.md`、143試験receipt・gate-verdict。
 > 以下は当時の履歴で、現在の再実行指示ではありません。
 
 > 2026-10-09 最新状態: **保存方式の本人承認反映済み。端末での保存入力待ち**。
