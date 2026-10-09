@@ -105,3 +105,10 @@
 - 本人端末の保存helperは入力1回、owner0700/0600、既存値を読まず入力前停止、O_EXCL/no overwrite、新規のみ読戻し、値/hashログなし。
 - 現行入口＋保存helper136試験PASS、実保存先はmetadata-only READY。Git/stage/backup/log除外は合成保存からoffline21公開で検証。OS/cloud全体backupは本人側で確認。
 - agent秘密読取/保存/chmod/実FTPS0。次は本人保存だけ、PASS530/timeout28と公開7一致/残14の目的は未完。
+
+## 2026-10-09 GT030 保存認証成功後の転送停止を切り分け
+
+- 本人19:25保存完了、19:46保存方式診断PASS230を非秘密receiptで確認。SIZE応答待ち＋データTLS未完で30秒timeout28、RETR/STOR・追加転送0。同じGET/公開は再試行しない。
+- curl8.18実装・公式FTPS資料と照合し、隔離fixtureで同じ停止段階を再現。本番根因は未確定。データ接続なしの制御SIZE HEAD診断を現行入口へ追加、146試験PASS。
+- 本番診断は親担当判断待ち。暗号化/証明書/期限/owner lock/manifest/公開guardを保持。最後の独立HTTP7/21、残14と記事404の公開目標未完。
+- private task-11 `incident-20261009/saved-auth-timeout-194609/REPORT.md`・`OWNER_DIAGNOSTIC.md`、現在入口5d216c7d…c3e73d9。秘密読取/保存/chmod・本番認証FTPS/upload・外部連絡0。
