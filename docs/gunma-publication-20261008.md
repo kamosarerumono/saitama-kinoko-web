@@ -1,4 +1,18 @@
-> 2026-10-09 最新の本人入力: **既存写真1枚だけの読取診断。公開は再実行しない**。
+> 2026-10-09 最新状態: **認証拒否で停止。保存認証は本人確認前の候補のみ**。
+> 17:53 JSTの写真1枚診断は現行hash `d396fdad…19fab6` と一致。制御TLS完了、
+> USER331→PASS530/curl67。RETR/STOR0、写真読取/送信0byte。前回timeout28とは別段階。
+> 生応答文は保存しておらず、入力誤りやアカウント制限は断定しない。
+> hidden入力/UTF-8/quote/backslash/STDINは群馬・小川の成功版と同じ。小川との全体期限差だけ。
+> 13種類の合成値が実curl/隔離TLSで同一bytes到達、制御文字は通信前に拒否。
+> 別の保存候補はGit外の固定1ファイルを明示optionだけで読み、本人所有0700/0600、
+> symlink/hardlink/unsafe祖先/欠損/改行を拒否。env/dotenv探索・fallback・retry・自動chmodなし。
+> 全111試験PASS。現行入口・manifest/payload・差分/backup/HTTP検証は不変。
+> 保存先と平文継続利用・OS/cloud backup除外の本人確認まで保存/有効化/実認証はしない。
+> 8/31通知は本サーバーのFTP用も対象という非秘密確認を反映。現在有効の証明ではない。
+> 証拠はprivate task-11 `incident-20261009/local-credential-proposal/review-receipt.json` と
+> `REVIEW_LOCAL_CREDENTIAL.md`。本人の次の操作は案の確認のみ。以下は当時の履歴。
+
+> 2026-10-09 当時の本人入力: **既存写真1枚だけの読取診断。公開は再実行しない**。
 > 13:57 JSTの本人実行は公開前のkondo-01取得で30秒timeout、追加送信0。
 > 最新HTTPSでも7JPEG一致、残14件・記事404、年間一覧/TOP baseline不変。
 > 既存publisherへ `--diagnose-one-photo` を追加。固定kondo-01のFTPS GET1回だけ、
