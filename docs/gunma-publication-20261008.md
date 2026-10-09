@@ -1,3 +1,15 @@
+> 2026-10-09 12:48 JST再発の最新状態: **BLOCKED / 公開再開保留**。
+> 読取診断成功後の公開もtimeout。kondo-06/07を追加し合計7枚は独立HTTP SHA256一致、
+> 残り写真11枚と記事は404、年間一覧/TOPはbaseline不変。既存7backup・全21stageを照合。
+> 8枚目送信前の親directory NLSTが8.002577秒で失敗。control TCP/TLS約0.08秒、
+> 新規接続2本・転送開始0であり、30秒転送期限/600秒全体期限の超過ではない。
+> データTLS停止と同じ計測形を実curlのloopback FTPSで再現したが本番原因は未確定。
+> 候補修正は確認済み画像directoryを直接検査し、残14件工程のFTPS接続50→39へ削減。
+> 直前対象出現/未知写真/一覧失敗の停止・backup・TLS検証を保持。timeout延長/再試行なし。
+> 合成59＋実curl loopback3試験PASS、candidateの本番効果は未受入。再公開コマンドは再案内しない。
+> private証拠はtask-11 `incident-20261009/recurrence-124855/incident-report.json` と
+> `ftps-handoff/readbacks/20261009T035240Z.json`。以下は初回停止時点と10/8の履歴。
+
 > 2026-10-09 最新状態: **BLOCKED / 写真5枚のみ送信済み、記事未公開**。本人実行は
 > `FTPS_STOP_EXIT_28`で停止。独立HTTPでkondo-01〜05が期待SHA256一致、残り13枚と記事は404、
 > 年間一覧/TOPはbaseline一致。6枚目の送信開始なし。認証は成立しておりパスワード誤りとは判定しない。

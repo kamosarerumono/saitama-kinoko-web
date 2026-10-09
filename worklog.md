@@ -73,3 +73,9 @@
 - 本人実行はcurl exit28 timeout。独立HTTPで写真5枚のみ一致、残り13枚・記事404、年間一覧/TOP baseline不変。6枚目の送信開始なし、再送/削除/rollbackなし。
 - 元receiptの詳細欠落を確認し、task-11の本人実行publisherへ秘密を含まない操作/数値timing記録と読取診断を追加。合成52試験PASS、実FTPS診断と公開の残り16ファイルは本人入力待ち。
 - 公開目的はBLOCKED。次は `--diagnose-ftps` のみ。記事/21対象の最終公開確認、Gmail intake自動化、Discord報告は未完了。詳細は公開checkpointの最新追記。
+
+# 2026-10-09 群馬FTPS再発の限定修正
+
+- 読取診断後の本人公開もtimeout、2枚追加して合計7枚HTTP一致。親directory NLSTの接続準備が8秒で停止、残14件・記事未公開。backup7/stage21を再照合、復元/再送なし。
+- 確認済み子directoryを直接検査する候補で残工程FTPS接続50→39、既存guard保持。安全なFTP動詞/応答code/TLShelloと通信履歴を追加。合成59＋実curl loopback3成功、データTLS停止は観測と整合する仮説。timeout延長なし、本番解決とは判定しない。
+- 現在BLOCKED・本人追加操作保留。原receipt/backup不変、agent本番FTPS/送信0。再発監査はtask-11 incident-20261009/recurrence-124855/。
