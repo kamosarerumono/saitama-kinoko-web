@@ -1,3 +1,18 @@
+> 2026-10-09 最新の本人入力: **既存写真1枚だけの読取診断。公開は再実行しない**。
+> 13:57 JSTの本人実行は公開前のkondo-01取得で30秒timeout、追加送信0。
+> 最新HTTPSでも7JPEG一致、残14件・記事404、年間一覧/TOP baseline不変。
+> 既存publisherへ `--diagnose-one-photo` を追加。固定kondo-01のFTPS GET1回だけ、
+> 一覧/他写真/HTML/HTTP/STOR/再試行なし。実行時script hash、SIZE等の動詞/応答code、
+> 制御/データTLSの固定段階・方向と順序を安全に記録。パスワード/引数/応答本文/raw stderrは保存しない。
+> 制御SIZE応答待ち、RETR150後のデータTLS待ち、双方の区別不能を分ける。
+> 合成71＋実curl loopback6試験PASS、8/30/600秒と証明書検証を保持。
+> script SHA256 `d396fdad3720c8186b56fa93678caa40b01039ce526f9d779a759cd37c19fab6`。
+> 本人通常端末で `python3 /home/ayumi/Documents/Codex/2026-10-08/task-11/ftps-handoff/publish_gunma_once.py --diagnose-one-photo`
+> を非表示入力で1回だけ実行し、diagnoses/<run>/receipt.jsonを親担当へ返す。
+> SINGLE_PHOTO_FTPS_READ_VERIFIEDは1枚読取成功であり公開完了ではない。本番診断未実行。
+> private証拠は `incident-20261009/single-photo-diagnostic/handoff-receipt.json` と2検証log。
+> 以下の公開再開案内は当時の履歴で、現在の実行指示ではない。
+
 > 2026-10-09 接続復帰後の最新再開点: **本人の非表示入力1回で修正版を手動確認可能**。
 > 最新HTTPSでも群馬7JPEG一致、残り11JPEG＋記事/年間一覧/TOPの14件。公開完了は未確認。
 > task-11の `publish_gunma_once.py --publish` は合成59＋実curl loopback3試験済み修正版

@@ -85,3 +85,9 @@
 - 通常Git feature接続が復帰、未push文書e968256を通常pushし0/0・clean。最新HTTPでも7JPEG一致・残14件。
 - 本人実行パスのSHA256が62試験済みcandidate c7937e62と一致、--publishは修正後guardへ直接dispatch。原本hash/21scope/文字コードのCLI検査成功・通信0。
 - 本人の非表示入力1回で残14件を手動確認する手順を更新。一致7件の再送0、backup/差分/TLS/期限/停止条件を維持。本番効果は未確認、停止時は詳細receiptを返して繰り返さない。
+
+# 2026-10-09 既存写真1枚の診断を追加
+
+- 本人13:57の公開は送信前kondo-01読取で30秒timeout、追加0・HTTP一致7・残14。SIZE/実行hashの記録不足を補う。
+- --diagnose-one-photo は固定photo FTPS GET1回のみ、送信・一覧・他対象・HTTPなし。実行時hashと安全なordered FTP/TLS段階を記録し制御応答待ち/データTLS待ち/区別不能を分離。
+- 合成71＋実curl loopback6成功、証明書検証と8/30/600秒維持。本番認証診断未実行、公開目標未完。次は本人hidden入力1回の読取のみ。
