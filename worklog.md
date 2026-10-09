@@ -98,3 +98,10 @@
 - hidden入力・UTF-8・quote/backslash・STDINは成功版と同じ。合成13値の実curl隔離TLS同一bytesを確認、継承を含め111試験PASS。
 - Git外固定1ファイルの限定読込を別候補へ準備。本人確認前のため秘密保存/有効化/実認証/権限変更0、現行入口は変更せず。保存先・平文継続利用・OS/cloud backup除外を確認してから進む。
 - 最新公開確認は群馬7写真一致/残14・記事404、公開目標未完。小川20再送なし、Discord等未送信。
+
+## 2026-10-09 GT030 承認済み認証保存方式の入口有効化
+
+- 本人OKを受け固定1ファイルの明示読込を現行入口へ反映。secret未保存、default hidden入力と既存安全処理保持。
+- 本人端末の保存helperは入力1回、owner0700/0600、既存値を読まず入力前停止、O_EXCL/no overwrite、新規のみ読戻し、値/hashログなし。
+- 現行入口＋保存helper136試験PASS、実保存先はmetadata-only READY。Git/stage/backup/log除外は合成保存からoffline21公開で検証。OS/cloud全体backupは本人側で確認。
+- agent秘密読取/保存/chmod/実FTPS0。次は本人保存だけ、PASS530/timeout28と公開7一致/残14の目的は未完。

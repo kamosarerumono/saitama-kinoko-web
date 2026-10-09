@@ -1,4 +1,17 @@
-> 2026-10-09 最新状態: **認証拒否で停止。保存認証は本人確認前の候補のみ**。
+> 2026-10-09 最新状態: **保存方式の本人承認反映済み。端末での保存入力待ち**。
+> 固定ファイルの明示読込を現行入口へ有効化。default hidden入力・既存scope/安全処理は保持。
+> `save_local_credential_once.py --save` は本人端末の非表示入力1回だけで、
+> 固定パスへ本人所有0700/0600の新規保存。既存値を読まず入力前停止、O_EXCLでraceも上書きせず、
+> symlink/unsafe権限/ownerを拒否。新規ファイルのみ読戻し照合、値/hashをログに出さない。
+> 現行入口＋保存helperの136試験PASS。実保存先はmetadata-only READY、secret作成/読取/chmod0。
+> userの次の操作はこの保存helper1回だけ。停止なら再実行せず非秘密receiptを返す。
+> agent実FTPS/送信0、記事未公開、最新独立証拠7写真一致/残14件。PASS530/timeout28は未解決。
+> Git/manifest stage/原本backup/logからの除外は合成保存→offline21公開で検証。
+> OS/cloud全体backupの除外設定は変更/確認していないため本人側で実行前確認。
+> 証拠はprivate task-11 `incident-20261009/credential-activation/activation-receipt.json`、
+> `OWNER_SAVE_INSTRUCTIONS.md`。保存成功を認証/公開成功としない。以下は当時の履歴。
+
+> 2026-10-09 当時の状態: **認証拒否で停止。保存認証は本人確認前の候補のみ**。
 > 17:53 JSTの写真1枚診断は現行hash `d396fdad…19fab6` と一致。制御TLS完了、
 > USER331→PASS530/curl67。RETR/STOR0、写真読取/送信0byte。前回timeout28とは別段階。
 > 生応答文は保存しておらず、入力誤りやアカウント制限は断定しない。
