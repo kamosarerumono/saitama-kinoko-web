@@ -59,3 +59,10 @@
 - 旧さくら用個別HTML、写真17枚、現在の公開年度一覧(UTF-8)への1リンク追加、TOP(cp932)のお知らせ1件差替を docs/plans/ogawa2026 に準備。
 - npm ci --ignore-scripts(既存lock/公式registryのみ)、npm run build成功:304ページ。ローカル実ブラウザで17figure・目録47+12行・横はみ出しなしを確認。HTTPで画像全17 SHA256一致、TOP→一覧→個別200/文字化けなし。
 - 未公開: SFTP read-only preflightはSSHホスト鍵検証エラー(curl60)で停止。検証無効化・known_hosts変更なし。新Cloudflare既存川越記事404も再確認。公開完了とは扱わない。
+# 2026-10-09 GT030 メール原稿受付（隔離実装）
+
+- 元サイト c45bd44 を隔離コピーし、offline受付CLIと私有SQLite台帳を追加。account/message、part/SHA256、イベント開催日、訂正元、公開hash履歴を保持する。
+- 合成テスト18件成功。CLIで別送本文・写真・訂正3受信を1イベントに統合し、再受付1件を重複と判定。私有候補設定は data/ 配下でGit対象外。
+- 元作業ツリー、Gmail認証・アクセス、scheduler、公開、外部送信、FTPS認証情報に変更なし。実入力・稼働cron確認・定期受付接続は未検証。詳細は docs/mail-intake.md と docs/plans/2026-10-09-mail-intake/。
+
+- 追記: 元リポジトリの独立ブランチ `feature/gt030-mail-intake` へ統合。ホスト読み取りでuser cron未登録・systemd100サービス起動先に専用受付/Gmail一致なしを確認。コネクターの取得済みfull/raw JSONとpart_id指定のローカル添付を接続し、合成テスト25件PASS。cloud schedule/実原本/自動運用は未検証。fetch/push・公開担当ファイル変更なし。

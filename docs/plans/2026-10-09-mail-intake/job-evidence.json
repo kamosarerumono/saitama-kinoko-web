@@ -1,0 +1,15 @@
+{
+  "checked_on": "2026-10-09",
+  "scope": "local host read-only; no provider calls or scheduler changes",
+  "user_cron": { "exit": 1, "reason": "no crontab for current user", "permission_denied": false },
+  "user_systemd_timers": { "exit": 0, "output_line_count": 18, "kinoko_matches": 0 },
+  "user_systemd_service_exec": { "exit": 0, "loaded_services_checked": 100, "kinoko_or_gmail_matches": 0 },
+  "host_processes": { "exit": 0, "kinoko_process_matches": 0 },
+  "definition_roots": {
+    "openclaw_cron": { "exists": false },
+    "codex_automations": { "exists": true, "kinoko_matching_definitions": 0 },
+    "claude_scheduled_tasks": { "exists": false }
+  },
+  "verdict": "no competing local job found in inspected sources",
+  "unverified": ["cloud automation schedules", "actual Gmail input", "end-to-end automatic operation"]
+}

@@ -1,0 +1,12 @@
+{
+  "source": "synthetic CLI fixtures only",
+  "event_count": 1,
+  "receipt_count": 3,
+  "duplicate_replay_count": 1,
+  "asset_count": 2,
+  "held_macro_assets": 1,
+  "publication_hash_history_count": 1,
+  "correction_edges": 1,
+  "auto_publish": false,
+  "status": "PASS"
+}
