@@ -127,3 +127,10 @@
 - 160試験PASS。実localhost GET＋合成publicationで7枚再送0・9backup/diff・残14順序・最終21HTTP/入口証拠を確認。
 - 次は本人保存認証の単一公開コマンド。開始時の最新一致/残件、送信直後と最終21HTTPを同scriptで記録。過去7/21・14残を現在状態とは扱わず、別診断を挟まない。
 - private task-11 `incident-20261009/publication-adoption-221234/OWNER_PUBLISH.md`・REPORT、入口65ef3088…9c064be。公開未実行、agent実秘密読取/認証FTPS/upload・Discord等0、小川対象外。
+
+## 2026-10-09 GT030 群馬公開サブタスク完了
+
+- 本人単一公開receipt PUBLICATION_VERIFIED・21件。source65ef3088…9c064be/manifest一致、7JPEGは再送せず14件だけ順序どおり転送、9backup/年間TOPdiff/stage21を実照合。
+- 本人最終HTTPと別プロセスの公開HTTPSで3HTML＋18JPEGの全body/SHA一致。ブラウザで18画像・訂正caption/alt・年間一覧/TOPを確認。群馬公開サブタスクDONE、小川20件再送0・agent追加FTPS/秘密読取0。
+- 公開: https://ippon.sakura.ne.jp/reikai/2026/260913_gunmanomori.html 。再公開/診断は不要。Gmail自動受付実運用は未確認、Discordは本担当未送信・宛先と全体送信履歴は親担当確認。GT030全体DONEにはしない。
+- private task-11 publication-verified-20261009/REPORT.md・receipt-audit.json・browser-readback.json、ftps-handoff/readbacks/20261009T213356Z.json。publisher/payload変更なし、同sourceの160試験PASSを維持。

@@ -1,3 +1,12 @@
+> 2026-10-09 最新状態: **群馬の森の記事公開・実ページ読戻し完了（公開サブタスクDONE）**。
+> 本人実行receipt `20261009T230234-7435618966` はPUBLICATION_VERIFIED・21/21。実行source65ef3088…9c064beと固定manifest一致。
+> 完全一致7JPEGは再送せず、残11JPEG→記事→年間一覧→TOPの14件だけ転送。9原本backup・年間/TOP差分・stage21を実bytes/SHAで再照合、全STOR成功・両TLS完了。
+> 別プロセスの未認証HTTPSでもHTML3件＋JPEG18件が200・全body/SHA一致。実ブラウザで18画像の表示、訂正caption/alt、年間一覧とTOPの導線を確認。
+> 公開URL: https://ippon.sakura.ne.jp/reikai/2026/260913_gunmanomori.html
+> 追加FTPS・小川20件再送・agent秘密読取・外部連絡0。再公開/保存helper/診断の再実行は不要。
+> Gmail原稿受入自動化の実運用は未確認。Discordは本担当未送信、既存宛先/他担当の送信履歴は今回未確認で親担当へ引継ぎ。GT030全体の完了や通知済みとはしない。
+> private task-11 `publication-verified-20261009/REPORT.md`・`receipt-audit.json`・`browser-readback.json`、`ftps-handoff/readbacks/20261009T213356Z.json`。以下は当時の履歴で、現在の実行指示ではありません。
+
 > 2026-10-09 22:12 JST 最新状態: **本人SIZE省略GETで写真読取・内容一致成功。通常公開GETへ採用、本人公開1回待ち**。
 > receipt221234はsource9820b01a…039f54c/manifest一致、RETR→両TLS完了→226、kondo-01の3,009,949 bytes/SHA一致、送信0。
 > 通常対象GETへSIZE省略＋payload/承認済み原本の最大bytes上限を適用。取得後の完全一致、LIST/STOR/TLS証明書hostname・期限・owner共有lock・原本backup/diff・直前guardを維持。
