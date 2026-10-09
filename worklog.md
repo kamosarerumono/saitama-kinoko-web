@@ -67,3 +67,9 @@
 - build305ページ、新旧desktop/390pxの18画像/破損0/横はみ出し0/画像hash・導線検証、FTPS合成40検証成功。
 - 群馬記事は旧/新とも404、FTPS login/upload0。安全な本人hidden入力1回の21ファイルpublisherをtask-11へ準備。公開確認・Discord送信は未完了で、親担当へ実行結果を返す。
 - 詳細と再開条件: `docs/gunma-publication-20261008.md`。共有repoと前回原本/WIPを保持し、群馬を別feature branchで納品。
+
+# 2026-10-09 群馬FTPSの途中停止確認
+
+- 本人実行はcurl exit28 timeout。独立HTTPで写真5枚のみ一致、残り13枚・記事404、年間一覧/TOP baseline不変。6枚目の送信開始なし、再送/削除/rollbackなし。
+- 元receiptの詳細欠落を確認し、task-11の本人実行publisherへ秘密を含まない操作/数値timing記録と読取診断を追加。合成52試験PASS、実FTPS診断と公開の残り16ファイルは本人入力待ち。
+- 公開目的はBLOCKED。次は `--diagnose-ftps` のみ。記事/21対象の最終公開確認、Gmail intake自動化、Discord報告は未完了。詳細は公開checkpointの最新追記。

@@ -1,3 +1,13 @@
+> 2026-10-09 最新状態: **BLOCKED / 写真5枚のみ送信済み、記事未公開**。本人実行は
+> `FTPS_STOP_EXIT_28`で停止。独立HTTPでkondo-01〜05が期待SHA256一致、残り13枚と記事は404、
+> 年間一覧/TOPはbaseline一致。6枚目の送信開始なし。認証は成立しておりパスワード誤りとは判定しない。
+> 自動再送・削除・復元なし。失敗は次の送信前のdirectory LIST確認中だが、元receiptに詳細がなく
+> 通信段階は未確定。本人の次の操作は `publish_gunma_once.py --diagnose-ftps` の読取診断のみ。
+> 診断receipt確認後に再開する場合、既存一致5枚を再送せず残り16ファイルへ限定する。
+> 秘密を出さない操作/数値timing記録と診断モードを追加し、合成52試験PASS。本番FTPSでの修正効果は未検証。
+> 根拠はtask-11の `incident-20261009/incident-report.json` と
+> `ftps-handoff/readbacks/20261009T030834Z.json`。以下の10/8記録は当時の履歴。
+
 # GT030 群馬の森観察会記事の公開checkpoint（2026-10-08）
 
 状態: **WAITING_OWNER_INPUT / 未公開**。原稿・18JPEGの準備と承認訂正は完了。
