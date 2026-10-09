@@ -1,3 +1,15 @@
+> 2026-10-09 21:21 JST 最新状態: **本人HEAD診断は制御SIZE213成功。写真取得・公開は未完**。
+> source5d216c7d…c3e73d9/manifest一致、PASS230、1接続・データTLS未開始・転送0。旧GETは受動接続後SIZE待ちで停止。
+> RFC4217とcurl8.18実装を照合。RETRまでTLS開始を待ちSIZEもデータ進行を待つ相互待ちを隔離fixtureで再現。
+> 同じfixtureでSIZE省略GETはRETR150→保護TLS完了→226→写真一致。これは本番根因の確定ではない。
+> 最小変更は明示 `--diagnose-one-photo-no-size --use-local-credential` の既存kondo-01 GET1回だけ。
+> RETR前SIZEを省略、manifest byte上限＋写真完全一致、暗号化/両接続証明書hostname/期限/owner共有lockを保持。
+> 155試験PASS。現行入口9820b01a…039f54c。通常公開fetch/list/put・21対象・原本backup/diff・HTTPは不変。
+> 次の本人1回でRETR/TLS/写真一致を確かめる。新mode本番未実行、同じ旧GET/HEAD/公開は繰り返さない。
+> 本番根因/Expected Effect gateはBLOCKED、最後の独立HTTP7一致/残14・記事404、今回fresh HTTPなし。
+> 証拠: private task-11 `incident-20261009/head-success-212145/REPORT.md`・`OWNER_DIAGNOSTIC.md`・155試験receipt。
+> agent実秘密読取/保存/chmod・認証FTPS/upload・Discord等0。以下は当時の履歴。
+
 > 2026-10-09 19:46 JST 最新状態: **保存認証PASS230を本人実行receiptで確認。SIZE待ち＋データTLS未完のtimeout28で公開未完**。
 > 保存helperの再実行・同じGET/公開は停止。RETR/STOR・転送0、実行hash/manifest一致、17:54診断と同じ停止段階。
 > データTLS未完でもTYPE/SIZEを進めるcurl8.18実装と整合。隔離fixtureで同じ停止形を再現したが本番根因は未確定。

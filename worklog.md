@@ -112,3 +112,10 @@
 - curl8.18実装・公式FTPS資料と照合し、隔離fixtureで同じ停止段階を再現。本番根因は未確定。データ接続なしの制御SIZE HEAD診断を現行入口へ追加、143試験PASS。
 - 本番診断は親担当判断待ち。暗号化/証明書/期限/owner lock/manifest/公開guardを保持。最後の独立HTTP7/21、残14と記事404の公開目標未完。
 - private task-11 `incident-20261009/saved-auth-timeout-194609/REPORT.md`・`OWNER_DIAGNOSTIC.md`、現在入口5d216c7d…c3e73d9。秘密読取/保存/chmod・本番認証FTPS/upload・外部連絡0。
+
+## 2026-10-09 GT030 制御HEAD成功後のSIZE相互待ち対策
+
+- 本人21:21 HEADはPASS230→SIZE213、制御接続1本・データTLS未開始・転送0。旧GETの受動接続後SIZE待ちと比較、認証や常時SIZE不能とは区別。
+- RFC4217/curl8.18と照合し、SIZEがTLSを待ちTLSがRETRを待つ隔離条件で旧GET timeout、新SIZE省略GETは写真一致まで成功。本番原因は仮説。
+- 明示写真1枚NO_SIZE診断だけを追加、manifest byte上限/完全一致・両TLS証明書hostname・期限/owner共有lock保持。通常公開fetch/list/putや原本backup等はAST不変。155試験PASS。
+- 次は本人用新診断GET1回。旧GET/HEAD/公開の再実行なし。新mode本番未実行・公開7一致/残14、agent実秘密読取/保存/chmod・認証FTPS/upload・Discord等0。private task-11 `incident-20261009/head-success-212145/REPORT.md`・`OWNER_DIAGNOSTIC.md`、入口9820b01a…039f54c。
