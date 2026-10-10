@@ -40,3 +40,13 @@ OK
 - CLIでA→B→添付なし→添付なし→Aを実行し、各再受付のduplicate=true、auto_publish=false、衝突保留の維持を確認。別プロセスsummaryとSQLite読戻しで初回原本、2添付原本、重複しない全source snapshotの一致を確認。
 - Sibling search: assignは既存holdsを保持。receive内の保存済みattachment_held消失と初回batch衝突も同じ修正・回帰テストで解消。別account/messageへの保留混入なし、後取得時のmissing_part_data解除も既存テストで確認。
 - Knowledge検索: この実行環境に専用Failure Knowledge検索はなく未実施。Gmail取得・scheduler・本番公開は未実施。
+
+2026-10-10 後続入口接続（PR4 merge a8891e1 基点、合成入力のみ）:
+- static wiring: receive(raw/full/local part) -> Intake -> prepare-draft -> private review.json + reikai Markdown/JPEG -> 隔離コピーの既存Astro collection/template。既存PR2/PR3/scriptsも照合し、Intakeのconsumerは未実装だった。
+- runtime: python3 -m unittest discover -s tests -v は36件PASS (3.322秒)。CLIでraw本文/full＋part_id添付を受入れ、summaryのsource_hashから選択、bundle 2件、verify、再実行冪等性を独立読戻し。
+- expected/actual: Markdown 1 + JPEG 1 = 2/2。保留・未確認/危険添付・訂正旧版は公開用0件とstatus=held。target hash変更、誤account/source/event/path、symlink、bundle改変、訂正枝分かれ、新着後のstale判定も確認。
+- consumer検証: 既存package-lockを隔離コピーでnpm ci --ignore-scripts --no-audit --no-fund。Astro build 305ページ成功 (3.56秒)。新合成記事HTML、画像bytes/SHA、TOP/一覧2導線を別parserで読戻し。
+- 実consumerで最初の数値文字参照案がsmart quotes/autolinksの影響を受けることを検出。固定HTMLブロック＋html.escapeへ修正し、原稿文字列一致、mail script/image/link不活性を確認。元checkoutの記事・写真・設定は変更なし。
+- freshness: bundle idは選択、対象現状hash、全イベント出典/snapshot/保留/訂正/公開hash、生成file hashから算出。verify-draftは現在台帳/対象/bytesとの一致のみを示し、公開承認ではない。
+- environment: Intake/CLIはWSL Python（POSIX私有DB）、既存consumerはWindows Nodeで実行。scheduler未接続。WSL copytreeのWindows metadata複製はOperation not permittedで停止し再試行せず、既にコピーされた全srcのbytes一致を照合して独立buildを実行。権限・原本・認証変更なし。
+- production evidence: 対象外。実Gmail取得/受信予約/FTPS/再公開/Discordは未実施。全体AC「Gmail原稿受領→HP更新→実ページ確認→本人Discord報告」は未達。今回のPASSはオフライン入口接続のみ。
