@@ -76,3 +76,15 @@ OK
 - python3 -m py_compile scripts/mail_source_adapter.py scripts/mail_intake.py: PASS.
 - python3 -m unittest discover -s tests -v: 49 tests PASS (5.398 seconds).
 - Existing retry/idempotency, original-byte/SHA preservation, holds, draft output and negative-path tests remain green. No real acquisition, transfer, publication, notification or authentication action. Original end-to-end AC remains incomplete; independent review pending.
+
+2026-10-10 reviewed Word body connection (after PR6 merge 3f850d4):
+- Existing draft consumed only the short mail cover note. New path: stored DOC bytes -> extract-word/antiword -> immutable source/text/extractor hashes -> review-word explicit approval -> body_source.extraction_id -> existing draft/verify -> Astro article.
+- Public Apache POI Word fixture (pinned upstream commit and SHA, LICENSE/NOTICE included) extracts successfully with antiword 0.37-17. No private manuscript is in Git.
+- Before adoption: 0 candidate files. After exact approval and explicit selection: 1 Word-body article; cover note excluded. Extraction/review/draft replay is idempotent; original message, attachments and snapshots unchanged.
+- Negative paths: unapproved text, wrong receipt/document/part/hash, source mutation/conflicting versions, extraction tamper, failed/empty/invalid converter output, review overwrite. Other held DOC assets and HTML holds remain blocking.
+- Publication regression: existing publication evidence rejects draft approval; already_published association produces 0 candidate files. Later publication invalidates an approved old bundle. No publication/notification operation is performed.
+- WSL Python syntax checks PASS. Pre-restart 58 tests PASS (6.109s). Restart preserved source/fixture; temporary converter was gone and was re-extracted from the same official package. Post-restart all 58 tests PASS (6.724s), including real antiword CLI integration; no skips.
+- Isolated Astro consumer: 306 pages built (4.04s). Final article contains extracted Word text, excludes the cover note, and existing listing links to the route (href has no trailing slash). Source site remains unchanged.
+- Private real-input check before restart: existing isolated DB only, prior-published source association, 0 candidates, HTML hold maintained, original message/8 assets/snapshots unchanged. This is association evidence, not approval to republish. Private temporary evidence was not added to Git.
+- Environment: ordinary sandbox launcher failed after reboot with E: filesystem error 1005; formally approved elevated commands were limited to this workspace and temporary converter. Initial Astro telemetry config write outside workspace was denied; process-local ASTRO_TELEMETRY_DISABLED=1 avoids that optional write. No filesystem/access settings changed.
+- Remaining: independent review; no production DB creation, scheduler, publication, notification or original end-to-end AC completion.
