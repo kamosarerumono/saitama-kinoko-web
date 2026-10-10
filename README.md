@@ -24,6 +24,7 @@
 - [工程表・タスク一覧](docs/plans/tasks.md)
 - [既存サイト調査レポート](docs/plans/site-audit.md)
 - [並行運用計画](docs/plans/parallel-operation.md)
+- [メール原稿受付（オフライン、公開権限なし）](docs/mail-intake.md)
 
 ## 開発
 

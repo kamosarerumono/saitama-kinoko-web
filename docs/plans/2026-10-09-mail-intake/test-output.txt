@@ -1,0 +1,42 @@
+
+> saitama-kinoko-web@0.0.1 test:intake
+> python3 -m unittest discover -s tests -v
+
+test_account_message_key_and_conflicting_source (test_mail_intake.IntakeTests.test_account_message_key_and_conflicting_source) ... ok
+test_attachment_classes_and_disguised_macros (test_mail_intake.IntakeTests.test_attachment_classes_and_disguised_macros) ... ok
+test_auth_conflict_and_explicit_excluded_sender_are_held (test_mail_intake.IntakeTests.test_auth_conflict_and_explicit_excluded_sender_are_held) ... ok
+test_cli_is_offline_and_id_checked (test_mail_intake.IntakeTests.test_cli_is_offline_and_id_checked) ... ok
+test_correction_assignment_cannot_create_cycle (test_mail_intake.IntakeTests.test_correction_assignment_cannot_create_cycle) ... ok
+test_correction_without_target_is_held (test_mail_intake.IntakeTests.test_correction_without_target_is_held) ... ok
+test_dates_name_and_unassigned (test_mail_intake.IntakeTests.test_dates_name_and_unassigned) ... ok
+test_external_instructions_never_execute_or_authorize (test_mail_intake.IntakeTests.test_external_instructions_never_execute_or_authorize) ... ok
+test_forward_outer_sender_separate_from_author (test_mail_intake.IntakeTests.test_forward_outer_sender_separate_from_author) ... ok
+test_jis_mime_body_is_preserved_and_bad_body_held (test_mail_intake.IntakeTests.test_jis_mime_body_is_preserved_and_bad_body_held) ... ok
+test_jis_success_failure_and_snippet_never_fulltext (test_mail_intake.IntakeTests.test_jis_success_failure_and_snippet_never_fulltext) ... ok
+test_metadata_retries_cannot_reassign (test_mail_intake.IntakeTests.test_metadata_retries_cannot_reassign) ... ok
+test_ml_auth_fail_different_from_direct_pass (test_mail_intake.IntakeTests.test_ml_auth_fail_different_from_direct_pass) ... ok
+test_notification_management_and_unknown_are_held (test_mail_intake.IntakeTests.test_notification_management_and_unknown_are_held) ... ok
+test_publication_and_correction_history (test_mail_intake.IntakeTests.test_publication_and_correction_history) ... ok
+test_split_body_photos_authors_and_repeat (test_mail_intake.IntakeTests.test_split_body_photos_authors_and_repeat) ... ok
+test_unassigned_can_be_reviewed_without_granting_publication (test_mail_intake.IntakeTests.test_unassigned_can_be_reviewed_without_granting_publication) ... ok
+test_volatile_attachment_id_hydration_and_hash (test_mail_intake.IntakeTests.test_volatile_attachment_id_hydration_and_hash) ... ok
+test_cli_connector_full_and_raw_entrypoints (test_mail_source_adapter.SourceAdapterTests.test_cli_connector_full_and_raw_entrypoints) ... ok
+test_documented_connector_content_and_binary_fields (test_mail_source_adapter.SourceAdapterTests.test_documented_connector_content_and_binary_fields) ... ok
+test_file_uri_and_extracted_preview_require_prior_download (test_mail_source_adapter.SourceAdapterTests.test_file_uri_and_extracted_preview_require_prior_download) ... ok
+test_hydration_does_not_duplicate_connector_receipt (test_mail_source_adapter.SourceAdapterTests.test_hydration_does_not_duplicate_connector_receipt) ... ok
+test_local_originals_use_part_id_and_are_path_bounded (test_mail_source_adapter.SourceAdapterTests.test_local_originals_use_part_id_and_are_path_bounded) ... ok
+test_mcp_text_structured_and_api_content_envelopes (test_mail_source_adapter.SourceAdapterTests.test_mcp_text_structured_and_api_content_envelopes) ... ok
+test_summary_preview_and_unknown_export_are_not_full_originals (test_mail_source_adapter.SourceAdapterTests.test_summary_preview_and_unknown_export_are_not_full_originals) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.489s
+
+OK
+
+2026-10-10 回帰検証（Windows checkout / WSL Python、合成入力のみ）:
+- 原因分類: Truth Drift。今回の添付だけから作ったholdsが保存済み添付の衝突・危険分類を落としていた。
+- 修正前: 添付A→同part別内容B→添付なし再受付、正常Aだけの再受付、初回同part複数hashで合計4 failureを再現。
+- 修正後: python3 -m unittest discover -s tests -v は28件PASS（2.343秒）。
+- CLIでA→B→添付なし→添付なし→Aを実行し、各再受付のduplicate=true、auto_publish=false、衝突保留の維持を確認。別プロセスsummaryとSQLite読戻しで初回原本、2添付原本、重複しない全source snapshotの一致を確認。
+- Sibling search: assignは既存holdsを保持。receive内の保存済みattachment_held消失と初回batch衝突も同じ修正・回帰テストで解消。別account/messageへの保留混入なし、後取得時のmissing_part_data解除も既存テストで確認。
+- Knowledge検索: この実行環境に専用Failure Knowledge検索はなく未実施。Gmail取得・scheduler・本番公開は未実施。
