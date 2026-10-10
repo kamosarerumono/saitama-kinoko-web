@@ -17,7 +17,7 @@ from email import policy
 from email.parser import BytesParser
 from email.utils import getaddresses
 from pathlib import Path
-from mail_source_adapter import connector_message, local_part_files
+from mail_source_adapter import connector_message, local_part_files, transferred_files_manifest
 
 MAX_MESSAGE = 40 * 1024 * 1024
 MAX_PART = 25 * 1024 * 1024
@@ -441,6 +441,7 @@ def main():
     receive.add_argument('--metadata',type=Path)
     receive.add_argument('--attachment-data',type=Path)
     receive.add_argument('--attachment-files',type=Path)
+    receive.add_argument('--transferred-files',type=Path, help='local original transfer receipts to match to full MIME')
     receive.add_argument('--asset-root',type=Path)
     assign = sub.add_parser('assign')
     assign.add_argument('--account',required=True)
@@ -458,13 +459,18 @@ def main():
     verify.add_argument('--bundle-id', required=True)
     verify.add_argument('--site-root', type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
+    if args.command == 'receive' and args.transferred_files and (args.attachment_data or args.attachment_files):
+        parser.error('--transferred-files cannot be combined with other attachment input options')
     read_json = lambda path: json.loads(path.read_text(encoding='utf-8')) if path else {}
     store = Intake(args.db,read_json(args.candidates))
     try:
         if args.command == 'receive':
             raw = args.input.read_bytes()
             identity_hash = None
+            manifest = None
             if args.format == 'eml':
+                if args.transferred_files:
+                    raise ValueError('transferred files require full MIME; EML is a separate original')
                 parsed = parse_eml(raw)
                 source = raw
             else:
@@ -474,7 +480,12 @@ def main():
                 if msg.get('id') != args.message_id:
                     raise ValueError('Gmail id does not match receipt message_id')
                 part_data = {}
-                if args.attachment_files:
+                if args.transferred_files:
+                    if not args.asset_root:
+                        raise ValueError('--asset-root required with --transferred-files')
+                    manifest = transferred_files_manifest(msg, read_json(args.transferred_files), args.account, args.message_id)
+                    part_data = local_part_files(manifest, args.asset_root, args.message_id, require_unique_paths=True)
+                elif args.attachment_files:
                     if not args.asset_root:
                         raise ValueError('--asset-root required with --attachment-files')
                     part_data = local_part_files(read_json(args.attachment_files),args.asset_root,args.message_id)
@@ -487,6 +498,8 @@ def main():
                     identity_hash = gmail_identity(msg)
                 source = raw
             result = store.receive(args.account,args.message_id,source,parsed,read_json(args.metadata),identity_hash)
+            if manifest is not None:
+                result['attachment_manifest'] = manifest
         elif args.command == 'assign':
             result = store.assign(args.account,args.message_id,read_json(args.metadata))
         elif args.command == 'record-publication':

@@ -90,6 +90,46 @@ python3 scripts/mail_intake.py receive --format gmail-connector \
 
 実入力に必要なのは、対象accountの取得済み単一メッセージ full/raw JSON、各添付のpart_id付きローカル原本、確認済みイベント名+開催日。新規Gmailアクセスを禁止した作業ではこれらを取得しない。実原本なしの合成テストだけでは自動運用完了にしない。
 
+### 正規転送済み原本からpart_idを照合して受付する
+
+`receive --transferred-files` は、取得済みfull MIMEと、別の許可済み転送工程が残したローカル原本の記録を照合する。MIMEからpart_idを決めてSHA付きmanifestを作り、同じCLI呼出しの `local_part_files` → `parse_gmail` → `Intake.receive` へ直接渡す。返却JSONの `attachment_manifest` は実際に消費したmanifest。独立した未使用ユーティリティではない。
+
+以下は**本repoのローカル転送記録の形式**であり、Gmail/Libraryの戻り値形式ではない。転送担当が、選択した親messageと原本の転送成功・SHAを確認してから作成する。SHAは今回読込み直前に都合よく計算し直さず、転送時に記録した値を使う。`source_kind=original` は原本を転送したという呼出側の記録であり、本adapterだけで外部転送の真正性まで証明しない。
+
+```json
+{
+  "account": "personal-account",
+  "message_id": "provider-message-id",
+  "files": [
+    {
+      "message_id": "provider-message-id",
+      "attachment_id": "取得済みMIMEと一致する完全なattachment_id",
+      "attachment_id_complete": true,
+      "filename": "photo.jpg",
+      "source_kind": "original",
+      "relative_path": "transferred-original.bin",
+      "sha256": "正規転送時に確認した原本の64文字SHA256"
+    }
+  ]
+}
+```
+
+```bash
+python3 scripts/mail_intake.py --db data/private/intake.sqlite3 receive \
+  --account personal-account --message-id provider-message-id --format gmail-connector \
+  --input data/private/full-message.json --metadata data/private/event.json \
+  --transferred-files data/private/transfers.json --asset-root data/private/originals
+```
+
+通常のGmail full API JSONは `--format gmail` でも使える。既存の `--attachment-data` / `--attachment-files` はそのまま利用可能だが、`--transferred-files` と同時には指定しない。
+
+- accountと親message_idを照合し、各転送記録にも同じmessage_idを要求する。完全なattachment_idがある場合は完全一致で選ぶ。省略・切断されたIDを渡さず、IDを確定できない場合はその項目を省いて正確なfilenameで照合する。同名添付が複数なら曖昧として拒否する。filenameからattachment_idを生成しない。
+- MIME上の実part_idを必須とし、重複を拒否。転送記録に任意の `part_id` があればその値も一致を要求する。添付集合に外部原本の欠損がある場合、誤message、抽出preview、二重指定、不正/欠損SHAを拒否する。inline原本がある場合はそのSHAとも照合する。
+- relative_pathはasset-root内の正規相対パス（区切りは `/`）。絶対パス、`..`、backslash、colon、root外symlinkを拒否する。ローカル読込み時にSHAを再確認し、転送後やmanifest作成後の改変も拒否する。受信・添付・source snapshotは従来のキーで冪等に保持する。
+- fullの復号済み本文に付く原本確認保留は維持する。raw/EMLは別の原本形式なのでこの新オプションを使わず、fullをrawと同一視して受付済み原本を置換しない。
+
+**実転送は未接続・未検証。** Gmail `read_attachment` が返す `file_uri` はこのadapterでは開かない。Libraryの正規materializeには、根拠のある `file_id/file_name` または `library_file_id` と既定の転送・メタデータ保持処理が必要。file_uriからLibrary IDを推測せず、抽出結果を原本として扱わない。今回の合成テストは転送済みローカルbytes以降だけの証拠であり、実Gmail取得・転送成功・全体AC完了の証拠ではない。
+
 ### 再受付時の保存添付の保留
 
 同じ受信の保存済み添付と今回の添付をまとめて判定する。同じpartに複数のSHA256があれば、今回添付なしでも `attachment_content_conflict` を保持する。保存済みの危険分類も `attachment_held:*` として保持する。原本・添付・source snapshotは追記のみで、同一内容の再受付は増殖しない。添付の後取得で解消する `missing_part_data` 等は今回入力から再計算する。
