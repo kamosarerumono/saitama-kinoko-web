@@ -283,6 +283,7 @@ class Intake:
     def __init__(self, database: Path, candidates: dict | None = None):
         self.candidates = candidates or {}
         database = Path(database)
+        self.database = database.resolve()
         database.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         if database.parent.stat().st_mode & 0o077:
             raise ValueError('database directory must be private (0700); use a dedicated private directory')
@@ -420,9 +421,9 @@ class Intake:
         events = []
         for event_id,name,held_on in self.db.execute('SELECT * FROM events ORDER BY event_date,event_id'):
             receipts = []
-            for account,message_id,body,context,author,holds in self.db.execute('SELECT account,message_id,body,context,author,holds FROM messages WHERE event_id=? ORDER BY account,message_id',(event_id,)):
+            for account,message_id,source_hash,body,context,author,holds in self.db.execute('SELECT account,message_id,source_hash,body,context,author,holds FROM messages WHERE event_id=? ORDER BY account,message_id',(event_id,)):
                 assets = [{'part_id':p,'sha256':h,'filename':f,'kind':k,'status':s} for p,h,f,k,s in self.db.execute('SELECT part_id,sha256,filename,kind,status FROM attachments WHERE account=? AND message_id=?',(account,message_id))]
-                receipts.append({'account':account,'message_id':message_id,'body':body,'context':json.loads(context),'author':author,'holds':json.loads(holds),'assets':assets,'corrects':[r[0] for r in self.db.execute('SELECT target_message_id FROM corrections WHERE account=? AND message_id=?',(account,message_id))]})
+                receipts.append({'account':account,'message_id':message_id,'source_hash':source_hash,'body':body,'context':json.loads(context),'author':author,'holds':json.loads(holds),'assets':assets,'corrects':[r[0] for r in self.db.execute('SELECT target_message_id FROM corrections WHERE account=? AND message_id=?',(account,message_id))]})
             events.append({'event_id':event_id,'event_name':name,'event_date':held_on,'receipts':receipts,'published':[{'sha256':h,'reference':r} for h,r in self.db.execute('SELECT content_hash,reference FROM publications WHERE event_id=?',(event_id,))],'auto_publish':False})
         return {'events':events,'unassigned':[{'account':a,'message_id':m,'holds':json.loads(h)} for a,m,h in self.db.execute('SELECT account,message_id,holds FROM messages WHERE event_id IS NULL')],'auto_publish':False}
 
@@ -450,8 +451,14 @@ def main():
     pub.add_argument('--event-id',required=True)
     pub.add_argument('--sha256',required=True)
     pub.add_argument('--reference',required=True)
+    prepare = sub.add_parser('prepare-draft', help='prepare a private review bundle; never publish')
+    prepare.add_argument('--selection', type=Path, required=True)
+    prepare.add_argument('--site-root', type=Path, default=Path(__file__).resolve().parents[1])
+    verify = sub.add_parser('verify-draft', help='reject stale or modified draft bundles')
+    verify.add_argument('--bundle-id', required=True)
+    verify.add_argument('--site-root', type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
-    read_json = lambda path: json.loads(path.read_text()) if path else {}
+    read_json = lambda path: json.loads(path.read_text(encoding='utf-8')) if path else {}
     store = Intake(args.db,read_json(args.candidates))
     try:
         if args.command == 'receive':
@@ -485,6 +492,12 @@ def main():
         elif args.command == 'record-publication':
             store.record_publication(args.event_id,args.sha256,args.reference)
             result = {'recorded':True,'auto_publish':False}
+        elif args.command == 'prepare-draft':
+            from mail_draft import prepare_draft
+            result = prepare_draft(store, read_json(args.selection), args.site_root)
+        elif args.command == 'verify-draft':
+            from mail_draft import verify_draft
+            result = verify_draft(store, args.bundle_id, args.site_root)
         else:
             result = store.summary()
         print(json.dumps(result,ensure_ascii=False,indent=2))

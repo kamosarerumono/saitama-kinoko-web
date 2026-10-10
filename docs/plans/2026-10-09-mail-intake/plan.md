@@ -15,3 +15,5 @@
 タスク: 受付と分類実装 → private候補登録 → negative pathを含む合成テスト → CLI再実行実測 → コード差分のみ引継ぎ。切り戻しは追加コードを外すだけで既存サイト生成を変えない。
 
 追記: 読み取り権限でホストのuser cron未登録、systemdサービス100件の起動先とタイマー一覧に専用受付・Gmail取得一致なしを実測。Codex自動化定義に一致なし。`job-evidence.json` を正本とする。クラウドのschedule・実入力は未検証。元リポジトリに `feature/gt030-mail-intake` の独立worktreeを作り、コネクター仕様のsnake_case MIMEと取得済みローカル添付を受付CLIへ接続。fetch/push・取得・scheduler設定変更は行わない。
+
+2026-10-10 後続工程: PR4 merge `a8891e1` を基点に、既存Intakeから公開準備ファイルへのconsumer不在を確認。`prepare-draft` / `verify-draft` で、選択済み本文と確認済みJPEG、更新対象、出典、保留、訂正、公開hash履歴を私有bundleへ接続する。既存受付adapterを再利用し、実サイトへの適用・外部送信は行わない。全体ACは引き続き「Gmail原稿受領→HP更新→実ページ確認→本人Discord報告」であり、bundle検証を全体完了に読み替えない。
