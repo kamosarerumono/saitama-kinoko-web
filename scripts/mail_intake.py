@@ -246,6 +246,10 @@ def sender_context(parsed: dict, candidates: dict) -> dict:
 
 
 SCHEMA = '''
+CREATE TABLE IF NOT EXISTS word_extractions (
+ extraction_id TEXT PRIMARY KEY, payload BLOB NOT NULL);
+CREATE TABLE IF NOT EXISTS word_reviews (
+ extraction_id TEXT PRIMARY KEY REFERENCES word_extractions(extraction_id), payload BLOB NOT NULL);
 CREATE TABLE IF NOT EXISTS messages (
  account TEXT NOT NULL, message_id TEXT NOT NULL, source_hash TEXT NOT NULL,
  source BLOB NOT NULL, body TEXT NOT NULL, context TEXT NOT NULL,
@@ -448,6 +452,11 @@ def main():
     assign.add_argument('--message-id',required=True)
     assign.add_argument('--metadata',type=Path,required=True)
     sub.add_parser('summary')
+    extract = sub.add_parser('extract-word', help='derive private review text from one stored DOC; never approve it')
+    extract.add_argument('--source', type=Path, required=True)
+    extract.add_argument('--antiword', default='antiword')
+    review = sub.add_parser('review-word', help='record explicit approval of one exact Word derivation')
+    review.add_argument('--review', type=Path, required=True)
     pub = sub.add_parser('record-publication')
     pub.add_argument('--event-id',required=True)
     pub.add_argument('--sha256',required=True)
@@ -502,6 +511,12 @@ def main():
                 result['attachment_manifest'] = manifest
         elif args.command == 'assign':
             result = store.assign(args.account,args.message_id,read_json(args.metadata))
+        elif args.command == 'extract-word':
+            from mail_word import extract_word
+            result = extract_word(store, read_json(args.source), args.antiword)
+        elif args.command == 'review-word':
+            from mail_word import review_word
+            result = review_word(store, read_json(args.review))
         elif args.command == 'record-publication':
             store.record_publication(args.event_id,args.sha256,args.reference)
             result = {'recorded':True,'auto_publish':False}

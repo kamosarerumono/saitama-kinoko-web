@@ -71,6 +71,12 @@ def draft_files(store, selection: dict, site_root: Path) -> dict[str, bytes]:
     if any(len(v) > 1 for v in successors.values()):
         holds.add('ambiguous_corrections')
 
+    derivation = None
+    body_selection = selection['body_source']
+    if 'extraction_id' in body_selection:
+        from mail_word import reviewed_body
+        body_text, derivation = reviewed_body(store, body_selection)
+
     def selected(record):
         key = (record['account'], record['message_id'])
         if key not in receipts:
@@ -78,13 +84,24 @@ def draft_files(store, selection: dict, site_root: Path) -> dict[str, bytes]:
         receipt = receipts[key]
         if record.get('source_hash') != receipt['source_hash']:
             raise ValueError('selected source hash mismatch')
-        holds.update(receipt['holds'])
+        effective_holds = set(receipt['holds'])
+        # Scope this exception to the reviewed source DOC. Other held assets,
+        # receipt holds (including HTML), and the original DB remain untouched.
+        if derivation and key == (body_selection['account'], body_selection['message_id']):
+            held_assets = [a for a in receipt['assets'] if a['status'] == 'held']
+            if len(held_assets) == 1 and held_assets[0] == {
+                    'part_id': body_selection['part_id'], 'sha256': body_selection['sha256'],
+                    'kind': 'legacy_doc', 'status': 'held'}:
+                effective_holds.discard('attachment_held:legacy_doc')
+        holds.update(effective_holds)
         if key in successors:
             holds.add('selected_source_superseded')
         return receipt
 
     body_receipt = selected(selection['body_source'])
-    if not body_receipt['body'].strip():
+    if not derivation:
+        body_text = body_receipt['body']
+    if not body_text.strip():
         holds.add('missing_selected_body')
     files = {}
     photos = []
@@ -117,11 +134,13 @@ def draft_files(store, selection: dict, site_root: Path) -> dict[str, bytes]:
 
     publications = [{'sha256': h, 'reference': ref} for h, ref in store.db.execute(
         'SELECT content_hash,reference FROM publications WHERE event_id=? ORDER BY content_hash', (event_id,))]
+    if derivation and (publications or derivation['review']['disposition'] == 'already_published'):
+        holds.add('selected_word_already_published')
     if not holds:
         front = f'---\ntitle: {json.dumps(title, ensure_ascii=False)}\ndate: {event[1]}\n'
         if body_receipt['author']:
             front += f'reporter: {json.dumps(body_receipt["author"], ensure_ascii=False)}\n'
-        content = front + '---\n\n' + literal(body_receipt['body']) + '\n'
+        content = front + '---\n\n' + literal(body_text) + '\n'
         for name, data in photos:
             files[name] = data
             content += f'\n![]({name.removeprefix("public")})\n'
@@ -135,6 +154,7 @@ def draft_files(store, selection: dict, site_root: Path) -> dict[str, bytes]:
         'operation': 'update' if current_hash else 'create',
         'sources': [{k: v for k, v in r.items() if k != 'body'} for r in receipts.values()],
         'publications': publications,
+        'body_derivation': derivation,
         'files': [{'path': name, 'sha256': sha(data)} for name, data in sorted(files.items())],
     }
     files['review.json'] = encoded(manifest)

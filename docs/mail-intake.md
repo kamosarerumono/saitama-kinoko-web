@@ -138,7 +138,7 @@ python3 scripts/mail_intake.py --db data/private/intake.sqlite3 receive \
 
 当初のゴールは **Gmail原稿受領 → HP更新 → 実ページ確認 → 本人Discord報告**。以下は受付とHP更新準備の間を接続する工程であり、全体の完了条件を置き換えない。実Gmail取得、受信予約、FTPS送信、実ページ読戻し、Discord送信は実行しない。
 
-`prepare-draft` は既存の `receive` / `assign` で確認済みイベントへ登録した原稿から、例会報告のMarkdown・確認済みJPEGと出典を私有bundleへ出す。`src/content/reikai` と `public/reikai` への書込みは行わない。現在の対応範囲は本文1通＋明示選択した写真。Word/PDF/TNEFの抽出、複数本文の編集、旧サイトHTMLや年間一覧・TOPの更新は、既存HP更新工程での作業を要する。
+`prepare-draft` は既存の `receive` / `assign` で確認済みイベントへ登録した原稿から、例会報告のMarkdown・確認済みJPEGと出典を私有bundleへ出す。`src/content/reikai` と `public/reikai` への書込みは行わない。対応範囲は本文1通または下記の明示承認済みWord抽出本文＋明示選択した写真。PDF/TNEFの抽出、複数本文の編集、旧サイトHTMLや年間一覧・TOPの更新は、既存HP更新工程での作業を要する。
 
 1. 従来どおり raw/full JSON またはEML、取得済み添付のpart_idを `receive` へ渡す。
 2. `summary` の event_id / account / message_id / source_hash / assetsから、担当者が採用する本文と写真を選ぶ。訂正元も従来どおり `corrects_message_id` として `receive` / `assign` で確認する。
@@ -189,3 +189,50 @@ python3 scripts/mail_intake.py --db data/private/intake.sqlite3 verify-draft \
 - 同一入力・台帳状態・対象hashの再実行は同じbundleを検証して再利用する。新しい受付・訂正・公開hash・選択や対象変更は別bundleとなり、旧bundleを上書きしない。`verify-draft` は現在の台帳/対象と保存bundleの内容を再比較し、古い・改変された出力を非zero終了で拒否する。`verified=true` は現在の証拠との一致だけを表す。
 
 公開工程へ渡す直前に `verify-draft`、`status`、`file_count`、`review.json` の保留と出典を確認する。レビュー後に既存HP更新手順で実際の適用・ビルド・公開・ページ確認・本人報告を行う必要があり、このモジュールはその外部操作を担わない。実原稿の採用・写真確認・更新対象が未指定なら、ここから先を自動的に埋めない。
+
+### Word添付本文の抽出・レビュー・明示採用
+
+旧 `.doc` の本文を使う場合は、保存済み原本から `extract-word` で抽出し、本文・表の欠落や順序を人が確認して `review-word` へ記録する。メールの短い送付文は抽出本文の代わりにならない。抽出だけでは承認にならず、レビューだけでも本文選択は変わらない。
+
+既存のantiword実行ファイルを使う（通常PATH、または `--antiword /absolute/path/to/antiword`）。PythonからOffice/マクロや添付自体を実行しない。antiwordがない環境では停止し、自動インストールしない。30秒timeoutと出力上限を設け、失敗・空本文・不正UTF-8は未登録のまま拒否する。抽出結果・診断・原本・レビューはDBと同じ私有領域に置く。コマンド出力には原稿全文が含まれるため公開ログへ流さない。
+
+`word-source.json` は既存の要約と添付からコピーした正確な値で作る。`source_hash` は受信原本の同一性、`sha256` はDOC bytesのSHA256であり別物。以下は項目例で、実値を推測しない。
+
+```json
+{
+  "account": "synthetic-account",
+  "message_id": "synthetic-message",
+  "source_hash": "受信source_hash",
+  "part_id": "0.1",
+  "sha256": "添付SHA256"
+}
+```
+
+```bash
+python3 scripts/mail_intake.py --db data/private/intake.sqlite3 extract-word \
+  --source data/private/word-source.json > data/private/word-extraction.json
+```
+
+原本は台帳から読取り、変換用の一時コピーだけを使用する。`word_extractions` は原本キー・本文・本文SHA・変換実行ファイルSHA・変換引数・診断のhashを一つの抽出IDに固定する。本文と表を原本と照合した後、返却された値をそのまま用いて `word-review.json` を作る。
+
+```json
+{
+  "extraction_id": "抽出ID",
+  "source": {"account": "synthetic-account", "message_id": "synthetic-message", "source_hash": "受信source_hash", "part_id": "0.1", "sha256": "添付SHA256"},
+  "text_sha256": "抽出本文SHA256",
+  "approved": true,
+  "review_reference": "本文・表と原本の照合記録",
+  "disposition": "draft"
+}
+```
+
+```bash
+python3 scripts/mail_intake.py --db data/private/intake.sqlite3 review-word \
+  --review data/private/word-review.json
+```
+
+承認記録は `word_reviews` に追加し、違う内容で同じ抽出IDを上書きしない。これらは既存私有DBへの追加テーブルで、原本・添付・receiptの保留は書き換えない。同じ抽出・同じ承認・同じ選択は冪等。承認JSONは信頼された運用者の入力であり、メール添付や本文から自動生成しない。
+
+最後に通常のselectionの `body_source` を `word-source.json` の全5項目＋ `extraction_id` にする。既存の `prepare-draft` / `verify-draft` が同じ原本・part・SHA・承認を再確認し、メール送付文の代わりに抽出本文をescapeして出す。`review.json` の `body_derivation` に採用出典を保持する。未承認、別文書、原本/抽出改変、同part衝突は拒否する。選択元のheld添付がそのDOC1件だけの場合に限り、draft判定上の `attachment_held:legacy_doc` を承認で充足する。元DBの保留は残す。他のheld添付、送信者、イベント、訂正、HTML等の保留は解除しない。
+
+**公開済みイベントは対応記録だけにする。** 既存 `publications` に証拠がある場合は `disposition=draft` の承認を拒否する。`already_published` を指定する場合は、同イベントに既存の `publication_sha256` と `publication_reference` の完全一致を要する。この選択の候補ファイルは0件となり、対応・レビュー記録だけを保存する。承認後に公開証拠が追加された場合も旧bundleはstaleとなり、新しいWord候補を作らない。公開済み記事の訂正再公開をこの機能で自動許可しない。既存公開の証拠登録は担当が確認した事実だけを使い、新しい公開処理を伴わない。
