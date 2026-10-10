@@ -89,3 +89,7 @@ python3 scripts/mail_intake.py receive --format gmail-connector \
 別プロジェクトの `reins-email-automation/src/gmail_receiver.py` はIMAP返信から復号本文だけを返し、原本、provider不変ID、添付partを返さない。そこへ本受付を接続すると証拠と重複キーが欠落するため、コード依存・認証・設定の流用をしない。
 
 実入力に必要なのは、対象accountの取得済み単一メッセージ full/raw JSON、各添付のpart_id付きローカル原本、確認済みイベント名+開催日。新規Gmailアクセスを禁止した作業ではこれらを取得しない。実原本なしの合成テストだけでは自動運用完了にしない。
+
+### 再受付時の保存添付の保留
+
+同じ受信の保存済み添付と今回の添付をまとめて判定する。同じpartに複数のSHA256があれば、今回添付なしでも `attachment_content_conflict` を保持する。保存済みの危険分類も `attachment_held:*` として保持する。原本・添付・source snapshotは追記のみで、同一内容の再受付は増殖しない。添付の後取得で解消する `missing_part_data` 等は今回入力から再計算する。

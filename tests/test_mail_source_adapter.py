@@ -1,5 +1,6 @@
 import base64
 import json
+import sqlite3
 import subprocess
 import sys
 import tempfile
@@ -123,6 +124,37 @@ class SourceAdapterTests(unittest.TestCase):
             result = json.loads(subprocess.check_output(command, text=True))
             self.assertNotIn('connector_decoded_text_requires_original', result['holds'])
             self.assertFalse(result['auto_publish'])
+
+
+    def test_cli_conflict_survives_unhydrated_replay(self):
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp)
+            db = p / 'private/db.sqlite'
+            source_path = p / 'source.json'
+            command = [sys.executable, str(root / 'scripts/mail_intake.py'), '--db', str(db)]
+            receive = command + ['receive', '--account', 'synthetic-account', '--message-id', 'synthetic-connector-1', '--format', 'gmail-connector', '--input', str(source_path)]
+            originals = [b'\xff\xd8\xffa\xff\xd9', b'\xff\xd8\xffb\xff\xd9']
+            snapshots = []
+            for index, data in enumerate([*originals, None, None, originals[0]]):
+                value = source()
+                if data is not None:
+                    value['payload']['parts'][1]['body']['base64_url_content'] = base64.urlsafe_b64encode(data).decode()
+                raw = json.dumps(value).encode()
+                snapshots.append(raw)
+                source_path.write_bytes(raw)
+                result = json.loads(subprocess.check_output(receive, text=True))
+                self.assertEqual(result['duplicate'], index > 0)
+                self.assertFalse(result['auto_publish'])
+                if index > 0:
+                    self.assertIn('attachment_content_conflict', result['holds'])
+                    summary = json.loads(subprocess.check_output(command + ['summary'], text=True))
+                    self.assertEqual(summary['unassigned'][0]['holds'], result['holds'])
+            with sqlite3.connect(db) as saved:
+                self.assertEqual(saved.execute('SELECT source FROM messages').fetchall(), [(snapshots[0],)])
+                self.assertEqual({r[0] for r in saved.execute('SELECT content FROM attachments')}, set(originals))
+                self.assertEqual({r[0] for r in saved.execute('SELECT source FROM source_snapshots')}, set(snapshots))
+                self.assertEqual(saved.execute('SELECT COUNT(*) FROM attachments').fetchone()[0], 2)
 
 
 if __name__ == '__main__':

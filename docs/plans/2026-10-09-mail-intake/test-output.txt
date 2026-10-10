@@ -32,3 +32,11 @@ test_summary_preview_and_unknown_export_are_not_full_originals (test_mail_source
 Ran 25 tests in 0.489s
 
 OK
+
+2026-10-10 回帰検証（Windows checkout / WSL Python、合成入力のみ）:
+- 原因分類: Truth Drift。今回の添付だけから作ったholdsが保存済み添付の衝突・危険分類を落としていた。
+- 修正前: 添付A→同part別内容B→添付なし再受付、正常Aだけの再受付、初回同part複数hashで合計4 failureを再現。
+- 修正後: python3 -m unittest discover -s tests -v は28件PASS（2.343秒）。
+- CLIでA→B→添付なし→添付なし→Aを実行し、各再受付のduplicate=true、auto_publish=false、衝突保留の維持を確認。別プロセスsummaryとSQLite読戻しで初回原本、2添付原本、重複しない全source snapshotの一致を確認。
+- Sibling search: assignは既存holdsを保持。receive内の保存済みattachment_held消失と初回batch衝突も同じ修正・回帰テストで解消。別account/messageへの保留混入なし、後取得時のmissing_part_data解除も既存テストで確認。
+- Knowledge検索: この実行環境に専用Failure Knowledge検索はなく未実施。Gmail取得・scheduler・本番公開は未実施。

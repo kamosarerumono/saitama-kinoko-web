@@ -318,10 +318,6 @@ class Intake:
         if context['forwarded']:
             holds.add('forwarded_author_requires_review')
         holds.update(context['excluded'])
-        for part in parsed['attachments']:
-            kind, status = classify(part['filename'],part['mime'],part['data'])
-            if status == 'held':
-                holds.add('attachment_held:' + kind)
         name, held_on = metadata.get('event_name'), metadata.get('event_date')
         event_id = None
         if name and held_on and metadata.get('event_verified') is True:
@@ -337,11 +333,6 @@ class Intake:
         if existing and existing[0] != source_hash:
             raise ValueError('same receipt key has different source; existing receipt preserved')
         with self.db:
-            if existing:
-                for part in parsed['attachments']:
-                    hashes = [r[0] for r in self.db.execute('SELECT sha256 FROM attachments WHERE account=? AND message_id=? AND part_id=?', (account,message_id,part['part_id']))]
-                    if hashes and any(value != digest(part['data']) for value in hashes):
-                        holds.add('attachment_content_conflict')
             if correction:
                 target = self.db.execute('SELECT event_id FROM messages WHERE account=? AND message_id=?', (account,correction)).fetchone()
                 if not target or not event_id or target[0] != event_id or correction == message_id:
@@ -357,10 +348,20 @@ class Intake:
                 if row != (event_id,author) or previous_targets != ([correction] if correction else []):
                     raise ValueError('receipt metadata changed; review existing receipt explicitly')
             self.db.execute('INSERT OR IGNORE INTO source_snapshots VALUES (?,?,?,?)', (account,message_id,digest(source),source))
-            self.db.execute('UPDATE messages SET holds=? WHERE account=? AND message_id=?', (json.dumps(sorted(holds)),account,message_id))
             for part in parsed['attachments']:
                 kind, status = classify(part['filename'],part['mime'],part['data'])
                 self.db.execute('INSERT OR IGNORE INTO attachments VALUES (?,?,?,?,?,?,?,?,?)', (account,message_id,part['part_id'],digest(part['data']),part['filename'],part['mime'],kind,status,part['data']))
+            # Derive durable asset holds from the complete receipt, including
+            # previously saved originals omitted by this retry. Do this after
+            # insertion so conflicts within one incoming batch are held too.
+            if self.db.execute('''SELECT 1 FROM attachments
+                    WHERE account=? AND message_id=? GROUP BY part_id
+                    HAVING COUNT(DISTINCT sha256)>1 LIMIT 1''', (account,message_id)).fetchone():
+                holds.add('attachment_content_conflict')
+            holds.update('attachment_held:' + kind for (kind,) in self.db.execute(
+                "SELECT DISTINCT kind FROM attachments WHERE account=? AND message_id=? AND status='held'",
+                (account,message_id)))
+            self.db.execute('UPDATE messages SET holds=? WHERE account=? AND message_id=?', (json.dumps(sorted(holds)),account,message_id))
             if correction:
                 self.db.execute('INSERT OR IGNORE INTO corrections VALUES (?,?,?)',(account,message_id,correction))
         return {'account':account,'message_id':message_id,'duplicate':bool(existing),'event_id':event_id,'auto_publish':False,'holds':sorted(holds)}

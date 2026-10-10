@@ -82,6 +82,52 @@ class IntakeTests(unittest.TestCase):
         self.assertNotIn('missing_part_data', self.store.summary()['events'][0]['receipts'][0]['holds'])
         self.assertIn('attachment_content_conflict', self.store.summary()['events'][0]['receipts'][0]['holds'])
 
+    def test_saved_attachment_holds_survive_empty_and_partial_retries(self):
+        msg = gmail()
+        raw = json.dumps(msg).encode()
+        identity = gmail_identity(msg)
+        a, b = b'\xff\xd8\xffa\xff\xd9', b'not-a-jpeg'
+
+        def receive(parts, account='one', mid='g1'):
+            return self.store.receive(account, mid, raw,
+                                      parse_gmail(msg, part_data=parts), META, identity)
+
+        self.assertFalse(receive({'1': a})['duplicate'])
+        result = receive({'1': b})
+        self.assertIn('attachment_content_conflict', result['holds'])
+        self.assertIn('attachment_held:signature_mismatch', result['holds'])
+        original = self.store.db.execute('SELECT source,body FROM messages').fetchone()
+        self.store.close()
+        self.store = Intake(self.path, CANDIDATES)
+        for parts in ({}, {}, {'1': a}, {'1': b}):
+            with self.subTest(parts=bool(parts)):
+                result = receive(parts)
+                self.assertTrue(result['duplicate'])
+                self.assertFalse(result['auto_publish'])
+                self.assertIn('attachment_content_conflict', result['holds'])
+                self.assertIn('attachment_held:signature_mismatch', result['holds'])
+                receipt = self.store.summary()['events'][0]['receipts'][0]
+                self.assertEqual(receipt['holds'], result['holds'])
+                self.assertEqual(len(receipt['assets']), 2)
+        self.assertEqual(self.store.db.execute('SELECT source,body FROM messages').fetchone(), original)
+        self.assertEqual(set(self.store.db.execute('SELECT sha256,content FROM attachments')), {(digest(a), a), (digest(b), b)})
+        self.assertEqual(self.store.db.execute('SELECT COUNT(*) FROM source_snapshots').fetchone()[0], 1)
+        for account, mid in [('two', 'g1'), ('one', 'g2')]:
+            result = receive({'1': a}, account, mid)
+            self.assertNotIn('attachment_content_conflict', result['holds'])
+            self.assertNotIn('attachment_held:signature_mismatch', result['holds'])
+
+    def test_same_batch_part_conflict_and_identical_duplicates(self):
+        parsed = parse_eml(eml())
+        part = {'part_id': '1', 'filename': 'a.jpg', 'mime': 'image/jpeg', 'data': b'\xff\xd8\xffa\xff\xd9'}
+        parsed['attachments'] = [part, dict(part)]
+        result = self.store.receive('one', 'identical', b'identical', parsed, META)
+        self.assertNotIn('attachment_content_conflict', result['holds'])
+        parsed['attachments'].append({**part, 'data': b'\xff\xd8\xffb\xff\xd9'})
+        result = self.store.receive('one', 'conflict', b'conflict', parsed, META)
+        self.assertIn('attachment_content_conflict', result['holds'])
+        self.assertEqual(self.store.db.execute('SELECT COUNT(*) FROM attachments').fetchone()[0], 3)
+
     def test_publication_and_correction_history(self):
         original = self.receive('original')
         self.store.record_publication(original['event_id'], digest(b'published-old'), 'local verified artifact')
