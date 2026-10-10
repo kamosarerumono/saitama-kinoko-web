@@ -52,3 +52,85 @@
 - 結果: ruff 43件 → 14件 (29件を `--fix` で自動修正)。テストが存在しないため `python -m compileall` (rc=0) で構文健全性のみ確認。PR #1 merge (本リポ初の PR)。
 - 残課題: 残る違反14件は自動修正不可。検証が compileall 止まりなので、スクリプトの**実行時**挙動は未確認 (元々テストが無く、いずれも過去の会報作成で一度使われた使い捨てスクリプト)。
 - 別件・未解決のまま: Cloudflare Pages の自動デプロイ停止 (2026-07-31 記載) は本タスク範囲外で未着手。
+
+## 2026-10-03 小川観察会(2026-07-20)掲載準備
+- 指定添付の報告書・写真のみから本文と目録(菌類47件/変形菌12件)、表示用17写真を追加。DOCXの回転・crop・比率、種名と撮影者を確認済みの画像を使用。原メール・DOCX・PDF・ページPNG・認証値はGit非収録。
+- 開催曜日のみ、公式2026年度行事予定を根拠に「日」から「月・祝日」へ訂正し本文に注記。その他の表記は原稿を保持。
+- 旧さくら用個別HTML、写真17枚、現在の公開年度一覧(UTF-8)への1リンク追加、TOP(cp932)のお知らせ1件差替を docs/plans/ogawa2026 に準備。
+- npm ci --ignore-scripts(既存lock/公式registryのみ)、npm run build成功:304ページ。ローカル実ブラウザで17figure・目録47+12行・横はみ出しなしを確認。HTTPで画像全17 SHA256一致、TOP→一覧→個別200/文字化けなし。
+- 未公開: SFTP read-only preflightはSSHホスト鍵検証エラー(curl60)で停止。検証無効化・known_hosts変更なし。新Cloudflare既存川越記事404も再確認。公開完了とは扱わない。
+# 2026-10-08 群馬の森観察会の承認訂正と公開準備
+
+- 群馬原稿と18JPEG、前回40準備ファイルを現物照合。人物写真3枚のWeb掲載と写真説明の同定訂正を本人承認済みとして反映。
+- 新旧記事で「オオシロカラカサタケ」へcaption/altを訂正。原稿9段落・目録87行・12項目、写真画素と原本SHA256を保持。
+- 小川公開済みTOP/年間一覧をHTTPS読戻しし、群馬専用差分を再生成。小川20ファイルの再公開なし。
+- build305ページ、新旧desktop/390pxの18画像/破損0/横はみ出し0/画像hash・導線検証、FTPS合成40検証成功。
+- 群馬記事は旧/新とも404、FTPS login/upload0。安全な本人hidden入力1回の21ファイルpublisherをtask-11へ準備。公開確認・Discord送信は未完了で、親担当へ実行結果を返す。
+- 詳細と再開条件: `docs/gunma-publication-20261008.md`。共有repoと前回原本/WIPを保持し、群馬を別feature branchで納品。
+
+# 2026-10-09 群馬FTPSの途中停止確認
+
+- 本人実行はcurl exit28 timeout。独立HTTPで写真5枚のみ一致、残り13枚・記事404、年間一覧/TOP baseline不変。6枚目の送信開始なし、再送/削除/rollbackなし。
+- 元receiptの詳細欠落を確認し、task-11の本人実行publisherへ秘密を含まない操作/数値timing記録と読取診断を追加。合成52試験PASS、実FTPS診断と公開の残り16ファイルは本人入力待ち。
+- 公開目的はBLOCKED。次は `--diagnose-ftps` のみ。記事/21対象の最終公開確認、Gmail intake自動化、Discord報告は未完了。詳細は公開checkpointの最新追記。
+
+# 2026-10-09 群馬FTPS再発の限定修正
+
+- 読取診断後の本人公開もtimeout、2枚追加して合計7枚HTTP一致。親directory NLSTの接続準備が8秒で停止、残14件・記事未公開。backup7/stage21を再照合、復元/再送なし。
+- 確認済み子directoryを直接検査する候補で残工程FTPS接続50→39、既存guard保持。安全なFTP動詞/応答code/TLShelloと通信履歴を追加。合成59＋実curl loopback3成功、データTLS停止は観測と整合する仮説。timeout延長なし、本番解決とは判定しない。
+- 現在BLOCKED・本人追加操作保留。原receipt/backup不変、agent本番FTPS/送信0。再発監査はtask-11 incident-20261009/recurrence-124855/。
+
+# 2026-10-09 修正版の手動再開点
+
+- 通常Git feature接続が復帰、未push文書e968256を通常pushし0/0・clean。最新HTTPでも7JPEG一致・残14件。
+- 本人実行パスのSHA256が62試験済みcandidate c7937e62と一致、--publishは修正後guardへ直接dispatch。原本hash/21scope/文字コードのCLI検査成功・通信0。
+- 本人の非表示入力1回で残14件を手動確認する手順を更新。一致7件の再送0、backup/差分/TLS/期限/停止条件を維持。本番効果は未確認、停止時は詳細receiptを返して繰り返さない。
+
+# 2026-10-09 既存写真1枚の診断を追加
+
+- 本人13:57の公開は送信前kondo-01読取で30秒timeout、追加0・HTTP一致7・残14。SIZE/実行hashの記録不足を補う。
+- --diagnose-one-photo は固定photo FTPS GET1回のみ、送信・一覧・他対象・HTTPなし。実行時hashと安全なordered FTP/TLS段階を記録し制御応答待ち/データTLS待ち/区別不能を分離。
+- 合成71＋実curl loopback6成功、証明書検証と8/30/600秒維持。本番認証診断未実行、公開目標未完。次は本人hidden入力1回の読取のみ。
+
+## 2026-10-09 GT030 入力監査と未有効化の保存認証候補
+
+- 本人の1枚診断は実行hash一致、制御TLS完了後USER331/PASS530/curl67。写真読取/STOR0、認証根因は未確定。
+- hidden入力・UTF-8・quote/backslash・STDINは成功版と同じ。合成13値の実curl隔離TLS同一bytesを確認、継承を含め111試験PASS。
+- Git外固定1ファイルの限定読込を別候補へ準備。本人確認前のため秘密保存/有効化/実認証/権限変更0、現行入口は変更せず。保存先・平文継続利用・OS/cloud backup除外を確認してから進む。
+- 最新公開確認は群馬7写真一致/残14・記事404、公開目標未完。小川20再送なし、Discord等未送信。
+
+## 2026-10-09 GT030 承認済み認証保存方式の入口有効化
+
+- 本人OKを受け固定1ファイルの明示読込を現行入口へ反映。secret未保存、default hidden入力と既存安全処理保持。
+- 本人端末の保存helperは入力1回、owner0700/0600、既存値を読まず入力前停止、O_EXCL/no overwrite、新規のみ読戻し、値/hashログなし。
+- 現行入口＋保存helper136試験PASS、実保存先はmetadata-only READY。Git/stage/backup/log除外は合成保存からoffline21公開で検証。OS/cloud全体backupは本人側で確認。
+- agent秘密読取/保存/chmod/実FTPS0。次は本人保存だけ、PASS530/timeout28と公開7一致/残14の目的は未完。
+
+## 2026-10-09 GT030 保存認証成功後の転送停止を切り分け
+
+- 本人19:25保存完了、19:46保存方式診断PASS230を非秘密receiptで確認。SIZE応答待ち＋データTLS未完で30秒timeout28、RETR/STOR・追加転送0。同じGET/公開は再試行しない。
+- curl8.18実装・公式FTPS資料と照合し、隔離fixtureで同じ停止段階を再現。本番根因は未確定。データ接続なしの制御SIZE HEAD診断を現行入口へ追加、143試験PASS。
+- 本番診断は親担当判断待ち。暗号化/証明書/期限/owner lock/manifest/公開guardを保持。最後の独立HTTP7/21、残14と記事404の公開目標未完。
+- private task-11 `incident-20261009/saved-auth-timeout-194609/REPORT.md`・`OWNER_DIAGNOSTIC.md`、現在入口5d216c7d…c3e73d9。秘密読取/保存/chmod・本番認証FTPS/upload・外部連絡0。
+
+## 2026-10-09 GT030 制御HEAD成功後のSIZE相互待ち対策
+
+- 本人21:21 HEADはPASS230→SIZE213、制御接続1本・データTLS未開始・転送0。旧GETの受動接続後SIZE待ちと比較、認証や常時SIZE不能とは区別。
+- RFC4217/curl8.18と照合し、SIZEがTLSを待ちTLSがRETRを待つ隔離条件で旧GET timeout、新SIZE省略GETは写真一致まで成功。本番原因は仮説。
+- 明示写真1枚NO_SIZE診断だけを追加、manifest byte上限/完全一致・両TLS証明書hostname・期限/owner共有lock保持。通常公開fetch/list/putや原本backup等はAST不変。155試験PASS。
+- 次は本人用新診断GET1回。旧GET/HEAD/公開の再実行なし。新mode本番未実行・公開7一致/残14、agent実秘密読取/保存/chmod・認証FTPS/upload・Discord等0。private task-11 `incident-20261009/head-success-212145/REPORT.md`・`OWNER_DIAGNOSTIC.md`、入口9820b01a…039f54c。
+
+## 2026-10-09 GT030 本人写真読取成功後の通常GET採用
+
+- 本人22:12のSIZE省略GETはRETR→両TLS完了→226、3,009,949 bytes/SHA一致、送信0。固定script/manifestをreceiptで照合。
+- 通常対象GETへSIZE省略と承認payload/original最大bytes上限を適用、内容一致・backup/diff・LIST/STOR/直前guard/TLS/期限/lockを保持。
+- 160試験PASS。実localhost GET＋合成publicationで7枚再送0・9backup/diff・残14順序・最終21HTTP/入口証拠を確認。
+- 次は本人保存認証の単一公開コマンド。開始時の最新一致/残件、送信直後と最終21HTTPを同scriptで記録。過去7/21・14残を現在状態とは扱わず、別診断を挟まない。
+- private task-11 `incident-20261009/publication-adoption-221234/OWNER_PUBLISH.md`・REPORT、入口65ef3088…9c064be。公開未実行、agent実秘密読取/認証FTPS/upload・Discord等0、小川対象外。
+
+## 2026-10-09 GT030 群馬公開サブタスク完了
+
+- 本人単一公開receipt PUBLICATION_VERIFIED・21件。source65ef3088…9c064be/manifest一致、7JPEGは再送せず14件だけ順序どおり転送、9backup/年間TOPdiff/stage21を実照合。
+- 本人最終HTTPと別プロセスの公開HTTPSで3HTML＋18JPEGの全body/SHA一致。ブラウザで18画像・訂正caption/alt・年間一覧/TOPを確認。群馬公開サブタスクDONE、小川20件再送0・agent追加FTPS/秘密読取0。
+- 公開: https://ippon.sakura.ne.jp/reikai/2026/260913_gunmanomori.html 。再公開/診断は不要。Gmail自動受付実運用は未確認、Discordは本担当未送信・宛先と全体送信履歴は親担当確認。GT030全体DONEにはしない。
+- private task-11 publication-verified-20261009/REPORT.md・receipt-audit.json・browser-readback.json、ftps-handoff/readbacks/20261009T213356Z.json。publisher/payload変更なし、同sourceの160試験PASSを維持。

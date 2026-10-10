@@ -1,0 +1,178 @@
+> 2026-10-09 最新状態: **群馬の森の記事公開・実ページ読戻し完了（公開サブタスクDONE）**。
+> 本人実行receipt `20261009T230234-7435618966` はPUBLICATION_VERIFIED・21/21。実行source65ef3088…9c064beと固定manifest一致。
+> 完全一致7JPEGは再送せず、残11JPEG→記事→年間一覧→TOPの14件だけ転送。9原本backup・年間/TOP差分・stage21を実bytes/SHAで再照合、全STOR成功・両TLS完了。
+> 別プロセスの未認証HTTPSでもHTML3件＋JPEG18件が200・全body/SHA一致。実ブラウザで18画像の表示、訂正caption/alt、年間一覧とTOPの導線を確認。
+> 公開URL: https://ippon.sakura.ne.jp/reikai/2026/260913_gunmanomori.html
+> 追加FTPS・小川20件再送・agent秘密読取・外部連絡0。再公開/保存helper/診断の再実行は不要。
+> Gmail原稿受入自動化の実運用は未確認。Discordは本担当未送信、既存宛先/他担当の送信履歴は今回未確認で親担当へ引継ぎ。GT030全体の完了や通知済みとはしない。
+> private task-11 `publication-verified-20261009/REPORT.md`・`receipt-audit.json`・`browser-readback.json`、`ftps-handoff/readbacks/20261009T213356Z.json`。以下は当時の履歴で、現在の実行指示ではありません。
+
+> 2026-10-09 22:12 JST 最新状態: **本人SIZE省略GETで写真読取・内容一致成功。通常公開GETへ採用、本人公開1回待ち**。
+> receipt221234はsource9820b01a…039f54c/manifest一致、RETR→両TLS完了→226、kondo-01の3,009,949 bytes/SHA一致、送信0。
+> 通常対象GETへSIZE省略＋payload/承認済み原本の最大bytes上限を適用。取得後の完全一致、LIST/STOR/TLS証明書hostname・期限・owner共有lock・原本backup/diff・直前guardを維持。
+> 160試験PASS。通常公開入口の実localhost GET＋合成LIST/STOR/HTTPで7スキップ・9backup/diff・14送信順序・最終21HTTP証拠を確認。
+> 次は `publish_gunma_once.py --publish --use-local-credential` の本人実行1回だけ。別認証診断を挟まない。
+> 現行入口65ef3088…9c064be、manifest/payload不変。開始時に全対象を再照合し最新一致/残件を記録、送信直後/最終21HTTPと既存入口リンク確認まで同じscriptで行う。
+> 過去の7/21一致・14残は最新全件確認ではない。現在の全件状態・公開完了は未確認、agent秘密読取/認証送信/公開/Discord等0、小川再送なし。
+> 証拠: private task-11 `incident-20261009/publication-adoption-221234/REPORT.md`・`OWNER_PUBLISH.md`・160試験receipt。以下は当時の履歴。
+
+> 2026-10-09 21:21 JST 最新状態: **本人HEAD診断は制御SIZE213成功。写真取得・公開は未完**。
+> source5d216c7d…c3e73d9/manifest一致、PASS230、1接続・データTLS未開始・転送0。旧GETは受動接続後SIZE待ちで停止。
+> RFC4217とcurl8.18実装を照合。RETRまでTLS開始を待ちSIZEもデータ進行を待つ相互待ちを隔離fixtureで再現。
+> 同じfixtureでSIZE省略GETはRETR150→保護TLS完了→226→写真一致。これは本番根因の確定ではない。
+> 最小変更は明示 `--diagnose-one-photo-no-size --use-local-credential` の既存kondo-01 GET1回だけ。
+> RETR前SIZEを省略、manifest byte上限＋写真完全一致、暗号化/両接続証明書hostname/期限/owner共有lockを保持。
+> 155試験PASS。現行入口9820b01a…039f54c。通常公開fetch/list/put・21対象・原本backup/diff・HTTPは不変。
+> 次の本人1回でRETR/TLS/写真一致を確かめる。新mode本番未実行、同じ旧GET/HEAD/公開は繰り返さない。
+> 本番根因/Expected Effect gateはBLOCKED、最後の独立HTTP7一致/残14・記事404、今回fresh HTTPなし。
+> 証拠: private task-11 `incident-20261009/head-success-212145/REPORT.md`・`OWNER_DIAGNOSTIC.md`・155試験receipt。
+> agent実秘密読取/保存/chmod・認証FTPS/upload・Discord等0。以下は当時の履歴。
+
+> 2026-10-09 19:46 JST 最新状態: **保存認証PASS230を本人実行receiptで確認。SIZE待ち＋データTLS未完のtimeout28で公開未完**。
+> 保存helperの再実行・同じGET/公開は停止。RETR/STOR・転送0、実行hash/manifest一致、17:54診断と同じ停止段階。
+> データTLS未完でもTYPE/SIZEを進めるcurl8.18実装と整合。隔離fixtureで同じ停止形を再現したが本番根因は未確定。
+> 次の差分は既存kondo-01への `--diagnose-control-size --use-local-credential` のFTPS HEAD1回。
+> 制御接続1本でMDTM/TYPE/SIZE/REST0だけを照会、EPSV/データ接続/RETR/LIST/STOR/HTTPなし。
+> 143試験PASS、暗号化・証明書検証・8/30/600秒・owner/lock・既存公開guard維持。現在入口5d216c7d…c3e73d9。
+> この次操作は親担当判断待ち、本番未実行。agent実秘密読取/保存/chmod・認証FTPS/upload・Discord等0。
+> 最後の独立HTTP7一致/残14・記事404は保持、今回fresh HTTPなし。根因修正/Expected Effect gateはBLOCKED。
+> 証拠: private task-11 `incident-20261009/saved-auth-timeout-194609/REPORT.md`、`OWNER_DIAGNOSTIC.md`、143試験receipt・gate-verdict。
+> 以下は当時の履歴で、現在の再実行指示ではありません。
+
+> 2026-10-09 最新状態: **保存方式の本人承認反映済み。端末での保存入力待ち**。
+> 固定ファイルの明示読込を現行入口へ有効化。default hidden入力・既存scope/安全処理は保持。
+> `save_local_credential_once.py --save` は本人端末の非表示入力1回だけで、
+> 固定パスへ本人所有0700/0600の新規保存。既存値を読まず入力前停止、O_EXCLでraceも上書きせず、
+> symlink/unsafe権限/ownerを拒否。新規ファイルのみ読戻し照合、値/hashをログに出さない。
+> 現行入口＋保存helperの136試験PASS。実保存先はmetadata-only READY、secret作成/読取/chmod0。
+> userの次の操作はこの保存helper1回だけ。停止なら再実行せず非秘密receiptを返す。
+> agent実FTPS/送信0、記事未公開、最新独立証拠7写真一致/残14件。PASS530/timeout28は未解決。
+> Git/manifest stage/原本backup/logからの除外は合成保存→offline21公開で検証。
+> OS/cloud全体backupの除外設定は変更/確認していないため本人側で実行前確認。
+> 証拠はprivate task-11 `incident-20261009/credential-activation/activation-receipt.json`、
+> `OWNER_SAVE_INSTRUCTIONS.md`。保存成功を認証/公開成功としない。以下は当時の履歴。
+
+> 2026-10-09 当時の状態: **認証拒否で停止。保存認証は本人確認前の候補のみ**。
+> 17:53 JSTの写真1枚診断は現行hash `d396fdad…19fab6` と一致。制御TLS完了、
+> USER331→PASS530/curl67。RETR/STOR0、写真読取/送信0byte。前回timeout28とは別段階。
+> 生応答文は保存しておらず、入力誤りやアカウント制限は断定しない。
+> hidden入力/UTF-8/quote/backslash/STDINは群馬・小川の成功版と同じ。小川との全体期限差だけ。
+> 13種類の合成値が実curl/隔離TLSで同一bytes到達、制御文字は通信前に拒否。
+> 別の保存候補はGit外の固定1ファイルを明示optionだけで読み、本人所有0700/0600、
+> symlink/hardlink/unsafe祖先/欠損/改行を拒否。env/dotenv探索・fallback・retry・自動chmodなし。
+> 全111試験PASS。現行入口・manifest/payload・差分/backup/HTTP検証は不変。
+> 保存先と平文継続利用・OS/cloud backup除外の本人確認まで保存/有効化/実認証はしない。
+> 8/31通知は本サーバーのFTP用も対象という非秘密確認を反映。現在有効の証明ではない。
+> 証拠はprivate task-11 `incident-20261009/local-credential-proposal/review-receipt.json` と
+> `REVIEW_LOCAL_CREDENTIAL.md`。本人の次の操作は案の確認のみ。以下は当時の履歴。
+
+> 2026-10-09 当時の本人入力: **既存写真1枚だけの読取診断。公開は再実行しない**。
+> 13:57 JSTの本人実行は公開前のkondo-01取得で30秒timeout、追加送信0。
+> 最新HTTPSでも7JPEG一致、残14件・記事404、年間一覧/TOP baseline不変。
+> 既存publisherへ `--diagnose-one-photo` を追加。固定kondo-01のFTPS GET1回だけ、
+> 一覧/他写真/HTML/HTTP/STOR/再試行なし。実行時script hash、SIZE等の動詞/応答code、
+> 制御/データTLSの固定段階・方向と順序を安全に記録。パスワード/引数/応答本文/raw stderrは保存しない。
+> 制御SIZE応答待ち、RETR150後のデータTLS待ち、双方の区別不能を分ける。
+> 合成71＋実curl loopback6試験PASS、8/30/600秒と証明書検証を保持。
+> script SHA256 `d396fdad3720c8186b56fa93678caa40b01039ce526f9d779a759cd37c19fab6`。
+> 本人通常端末で `python3 /home/ayumi/Documents/Codex/2026-10-08/task-11/ftps-handoff/publish_gunma_once.py --diagnose-one-photo`
+> を非表示入力で1回だけ実行し、diagnoses/<run>/receipt.jsonを親担当へ返す。
+> SINGLE_PHOTO_FTPS_READ_VERIFIEDは1枚読取成功であり公開完了ではない。本番診断未実行。
+> private証拠は `incident-20261009/single-photo-diagnostic/handoff-receipt.json` と2検証log。
+> 以下の公開再開案内は当時の履歴で、現在の実行指示ではない。
+
+> 2026-10-09 接続復帰後の最新再開点: **本人の非表示入力1回で修正版を手動確認可能**。
+> 最新HTTPSでも群馬7JPEG一致、残り11JPEG＋記事/年間一覧/TOPの14件。公開完了は未確認。
+> task-11の `publish_gunma_once.py --publish` は合成59＋実curl loopback3試験済み修正版
+> （SHA256 `c7937e6225360bcd89372634920a8bb7c42cd749dcb7713404dc53e1c8d2bd78`）へ直接進む。
+> 一致済み7枚を飛ばし、再取得した9原本backup/ナビ差分を検証後に残対象だけを送信する。
+> 接続数50→39、安全な通信履歴を追加。8/30/600秒の期限・TLS検証・直前guardは保持。
+> 本番timeoutの細かな機序とcandidateの効果は未確定だが、その点だけで無期限保留にしない。
+> 今回は本人の手動1回で確認し、再停止なら新receiptを返して繰り返さない。
+> 根拠はprivate `incident-20261009/recurrence-124855/resume-readiness-20261009.json`、
+> `ftps-handoff/readbacks/20261009T044948Z.json`。以下の保留記録は当時の履歴。
+
+> 2026-10-09 12:48 JST再発の最新状態: **BLOCKED / 公開再開保留**。
+> 読取診断成功後の公開もtimeout。kondo-06/07を追加し合計7枚は独立HTTP SHA256一致、
+> 残り写真11枚と記事は404、年間一覧/TOPはbaseline不変。既存7backup・全21stageを照合。
+> 8枚目送信前の親directory NLSTが8.002577秒で失敗。control TCP/TLS約0.08秒、
+> 新規接続2本・転送開始0であり、30秒転送期限/600秒全体期限の超過ではない。
+> データTLS停止と同じ計測形を実curlのloopback FTPSで再現したが本番原因は未確定。
+> 候補修正は確認済み画像directoryを直接検査し、残14件工程のFTPS接続50→39へ削減。
+> 直前対象出現/未知写真/一覧失敗の停止・backup・TLS検証を保持。timeout延長/再試行なし。
+> 合成59＋実curl loopback3試験PASS、candidateの本番効果は未受入。再公開コマンドは再案内しない。
+> private証拠はtask-11 `incident-20261009/recurrence-124855/incident-report.json` と
+> `ftps-handoff/readbacks/20261009T035240Z.json`。以下は初回停止時点と10/8の履歴。
+
+> 2026-10-09 最新状態: **BLOCKED / 写真5枚のみ送信済み、記事未公開**。本人実行は
+> `FTPS_STOP_EXIT_28`で停止。独立HTTPでkondo-01〜05が期待SHA256一致、残り13枚と記事は404、
+> 年間一覧/TOPはbaseline一致。6枚目の送信開始なし。認証は成立しておりパスワード誤りとは判定しない。
+> 自動再送・削除・復元なし。失敗は次の送信前のdirectory LIST確認中だが、元receiptに詳細がなく
+> 通信段階は未確定。本人の次の操作は `publish_gunma_once.py --diagnose-ftps` の読取診断のみ。
+> 診断receipt確認後に再開する場合、既存一致5枚を再送せず残り16ファイルへ限定する。
+> 秘密を出さない操作/数値timing記録と診断モードを追加し、合成52試験PASS。本番FTPSでの修正効果は未検証。
+> 根拠はtask-11の `incident-20261009/incident-report.json` と
+> `ftps-handoff/readbacks/20261009T030834Z.json`。以下の10/8記録は当時の履歴。
+
+# GT030 群馬の森観察会記事の公開checkpoint（2026-10-08）
+
+状態: **WAITING_OWNER_INPUT / 未公開**。原稿・18JPEGの準備と承認訂正は完了。
+旧さくらの群馬個別記事と新Cloudflareの群馬記事はいずれもHTTP 404。
+Git納品・build・ローカル表示成功を公開完了とは扱わない。
+
+## 承認と訂正
+
+本人は2026年9月13日群馬の森観察会の「開会の様子」「同定結果の講評」
+「同定作業」の掲載と、「ドクカラカサタケ→オオシロカラカサタケ」の写真説明への
+適用を承認した。新旧記事の写真説明・altを訂正済み。本文9段落・観察目録87行・
+開催情報12項目は原稿を保持。表記ゆれ・疑問符・仮称や種名を独自補完していない。
+原メール・原稿原本・提供者メールアドレス・認証情報はGitに含めない。
+
+## 検証結果
+
+- 前回準備の40ファイルを全パス・SHA256・byte数で再照合。
+- 原稿原本1本＋原写真18枚のSHA256不変。掲載写真18枚の画素不変、私的metadata除去。
+- 新旧本文と原稿96段落・開催情報24セルの欠落0。新旧の写真説明訂正を照合。
+- 標準Astro build: 305ページ、成功。既存lockfileと同じ依存を隔離repoで使用。
+- 既存WAM経由の127.0.0.1限定表示: 新旧×desktop/390px、各18画像、破損0、横はみ出し0、画像HTTP SHA256一致。
+- 新HOME→一覧→群馬、旧TOP→入口→年間一覧→群馬の導線と年間一覧の小川リンク保持を確認。
+- 群馬専用FTPS手順の合成transport検証40件成功。backup前の送信なし、想定外差分・TLS/認証失敗・別ownerで停止、既存一致対象の再送0、小川個別記事/写真保持。
+
+## 既存公開原本と対象
+
+2026-10-08のHTTPS読戻しで、TOPと年間一覧は小川の公開済み完成形にSHA256一致。
+取得した公開原本から群馬のみの差分を再作成した。TOPは更新案内1行の差替、
+年間一覧は群馬リンク1件の追加。小川個別記事・写真の再公開はしない。
+
+公開対象は群馬18JPEG＋個別記事＋年間一覧＋TOPの**21ファイル**のみ。
+`docs/plans/gunma2026/` の旧サイト成果物はそのための準備であり、直接上書きしない。
+公開直前にFTPS原本とHTTPS原本が今回baselineまたは今回完成形に完全一致することを再確認する。
+別の更新が入っていれば停止し、その更新を保持して差分を作り直す。
+
+既存の小川公開は20ファイルの独立HTTP読戻しが成立している。
+今回の群馬21ファイルのHTTP読戻しは期待完成形一致0件で、18写真と個別記事は404、
+TOP/年間一覧は200の公開原本。新サイト群馬記事も404。FTPS login/uploadは今回0件。
+
+## 次の一手
+
+利用可能な承認済みFTPS接続は確認できず、前回パスワードは本人のhidden入力だけで未保存。
+本人の通常端末で以下を1回実行し、非表示欄へ直接入力する。
+
+```bash
+python3 /home/ayumi/Documents/Codex/2026-10-08/task-11/ftps-handoff/publish_gunma_once.py --publish
+```
+
+同フォルダの `HOW_TO_RUN.txt` と `manifest.json` に全対象・停止条件を固定。
+既存小川publisherとの共有排他、GT030のowner/session/process確認、
+暗号化必須FTPS・証明書検証・原本差分/backup・送信後と全体のHTTPS読戻しを維持。
+パスワードはchat/argv/env/fileへ入れず、認証容器を読まず、永続保存しない。
+`runs/*/receipt.json` の `PUBLICATION_VERIFIED`・`verified_count:21` が公開成功条件。
+独立したHTTP確認は同フォルダの `readback_gunma.py` で行う。
+
+この本人実行結果が親担当へ戻ったら、実ページと21ファイルを独立に再読戻しし、
+既存GT030の公開状態を更新する。Discord短報告は公開確認後に親担当が扱う。
+今回Discord・メール送信、main/master merge、Cloudflare deploy、新規認証保存・権限拡大は行っていない。
+新サイトの公開経路は既存PRの採用と別工程であり、FTPS公開成功へ混同しない。
+
+ローカル証拠: task-11の `verification/content-verification.json`、`browser-receipt.json`、
+`ftps-tests.log`、`owner-preflight.json`、`public-preflight.json`、`ftps-handoff/readbacks/`。

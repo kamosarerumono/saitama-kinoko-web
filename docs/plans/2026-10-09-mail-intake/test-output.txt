@@ -1,0 +1,90 @@
+
+> saitama-kinoko-web@0.0.1 test:intake
+> python3 -m unittest discover -s tests -v
+
+test_account_message_key_and_conflicting_source (test_mail_intake.IntakeTests.test_account_message_key_and_conflicting_source) ... ok
+test_attachment_classes_and_disguised_macros (test_mail_intake.IntakeTests.test_attachment_classes_and_disguised_macros) ... ok
+test_auth_conflict_and_explicit_excluded_sender_are_held (test_mail_intake.IntakeTests.test_auth_conflict_and_explicit_excluded_sender_are_held) ... ok
+test_cli_is_offline_and_id_checked (test_mail_intake.IntakeTests.test_cli_is_offline_and_id_checked) ... ok
+test_correction_assignment_cannot_create_cycle (test_mail_intake.IntakeTests.test_correction_assignment_cannot_create_cycle) ... ok
+test_correction_without_target_is_held (test_mail_intake.IntakeTests.test_correction_without_target_is_held) ... ok
+test_dates_name_and_unassigned (test_mail_intake.IntakeTests.test_dates_name_and_unassigned) ... ok
+test_external_instructions_never_execute_or_authorize (test_mail_intake.IntakeTests.test_external_instructions_never_execute_or_authorize) ... ok
+test_forward_outer_sender_separate_from_author (test_mail_intake.IntakeTests.test_forward_outer_sender_separate_from_author) ... ok
+test_jis_mime_body_is_preserved_and_bad_body_held (test_mail_intake.IntakeTests.test_jis_mime_body_is_preserved_and_bad_body_held) ... ok
+test_jis_success_failure_and_snippet_never_fulltext (test_mail_intake.IntakeTests.test_jis_success_failure_and_snippet_never_fulltext) ... ok
+test_metadata_retries_cannot_reassign (test_mail_intake.IntakeTests.test_metadata_retries_cannot_reassign) ... ok
+test_ml_auth_fail_different_from_direct_pass (test_mail_intake.IntakeTests.test_ml_auth_fail_different_from_direct_pass) ... ok
+test_notification_management_and_unknown_are_held (test_mail_intake.IntakeTests.test_notification_management_and_unknown_are_held) ... ok
+test_publication_and_correction_history (test_mail_intake.IntakeTests.test_publication_and_correction_history) ... ok
+test_split_body_photos_authors_and_repeat (test_mail_intake.IntakeTests.test_split_body_photos_authors_and_repeat) ... ok
+test_unassigned_can_be_reviewed_without_granting_publication (test_mail_intake.IntakeTests.test_unassigned_can_be_reviewed_without_granting_publication) ... ok
+test_volatile_attachment_id_hydration_and_hash (test_mail_intake.IntakeTests.test_volatile_attachment_id_hydration_and_hash) ... ok
+test_cli_connector_full_and_raw_entrypoints (test_mail_source_adapter.SourceAdapterTests.test_cli_connector_full_and_raw_entrypoints) ... ok
+test_documented_connector_content_and_binary_fields (test_mail_source_adapter.SourceAdapterTests.test_documented_connector_content_and_binary_fields) ... ok
+test_file_uri_and_extracted_preview_require_prior_download (test_mail_source_adapter.SourceAdapterTests.test_file_uri_and_extracted_preview_require_prior_download) ... ok
+test_hydration_does_not_duplicate_connector_receipt (test_mail_source_adapter.SourceAdapterTests.test_hydration_does_not_duplicate_connector_receipt) ... ok
+test_local_originals_use_part_id_and_are_path_bounded (test_mail_source_adapter.SourceAdapterTests.test_local_originals_use_part_id_and_are_path_bounded) ... ok
+test_mcp_text_structured_and_api_content_envelopes (test_mail_source_adapter.SourceAdapterTests.test_mcp_text_structured_and_api_content_envelopes) ... ok
+test_summary_preview_and_unknown_export_are_not_full_originals (test_mail_source_adapter.SourceAdapterTests.test_summary_preview_and_unknown_export_are_not_full_originals) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.489s
+
+OK
+
+2026-10-10 回帰検証（Windows checkout / WSL Python、合成入力のみ）:
+- 原因分類: Truth Drift。今回の添付だけから作ったholdsが保存済み添付の衝突・危険分類を落としていた。
+- 修正前: 添付A→同part別内容B→添付なし再受付、正常Aだけの再受付、初回同part複数hashで合計4 failureを再現。
+- 修正後: python3 -m unittest discover -s tests -v は28件PASS（2.343秒）。
+- CLIでA→B→添付なし→添付なし→Aを実行し、各再受付のduplicate=true、auto_publish=false、衝突保留の維持を確認。別プロセスsummaryとSQLite読戻しで初回原本、2添付原本、重複しない全source snapshotの一致を確認。
+- Sibling search: assignは既存holdsを保持。receive内の保存済みattachment_held消失と初回batch衝突も同じ修正・回帰テストで解消。別account/messageへの保留混入なし、後取得時のmissing_part_data解除も既存テストで確認。
+- Knowledge検索: この実行環境に専用Failure Knowledge検索はなく未実施。Gmail取得・scheduler・本番公開は未実施。
+
+2026-10-10 後続入口接続（PR4 merge a8891e1 基点、合成入力のみ）:
+- static wiring: receive(raw/full/local part) -> Intake -> prepare-draft -> private review.json + reikai Markdown/JPEG -> 隔離コピーの既存Astro collection/template。既存PR2/PR3/scriptsも照合し、Intakeのconsumerは未実装だった。
+- runtime: python3 -m unittest discover -s tests -v は36件PASS (3.322秒)。CLIでraw本文/full＋part_id添付を受入れ、summaryのsource_hashから選択、bundle 2件、verify、再実行冪等性を独立読戻し。
+- expected/actual: Markdown 1 + JPEG 1 = 2/2。保留・未確認/危険添付・訂正旧版は公開用0件とstatus=held。target hash変更、誤account/source/event/path、symlink、bundle改変、訂正枝分かれ、新着後のstale判定も確認。
+- consumer検証: 既存package-lockを隔離コピーでnpm ci --ignore-scripts --no-audit --no-fund。Astro build 305ページ成功 (3.56秒)。新合成記事HTML、画像bytes/SHA、TOP/一覧2導線を別parserで読戻し。
+- 実consumerで最初の数値文字参照案がsmart quotes/autolinksの影響を受けることを検出。固定HTMLブロック＋html.escapeへ修正し、原稿文字列一致、mail script/image/link不活性を確認。元checkoutの記事・写真・設定は変更なし。
+- freshness: bundle idは選択、対象現状hash、全イベント出典/snapshot/保留/訂正/公開hash、生成file hashから算出。verify-draftは現在台帳/対象/bytesとの一致のみを示し、公開承認ではない。
+- environment: Intake/CLIはWSL Python（POSIX私有DB）、既存consumerはWindows Nodeで実行。scheduler未接続。WSL copytreeのWindows metadata複製はOperation not permittedで停止し再試行せず、既にコピーされた全srcのbytes一致を照合して独立buildを実行。権限・原本・認証変更なし。
+- production evidence: 対象外。実Gmail取得/受信予約/FTPS/再公開/Discordは未実施。全体AC「Gmail原稿受領→HP更新→実ページ確認→本人Discord報告」は未達。今回のPASSはオフライン入口接続のみ。
+
+2026-10-10 PR5独立レビュー修正:
+- 未選択の同イベント未解決訂正が旧本文候補から消える不具合（Truth Drift）と、underscore禁止による既存記事更新拒否（Contract / Schema Drift）を確認。修正前は1 failure＋既存16slugで16 errors。
+- 最小修正: 全イベント受信のcorrection_target_requires_reviewを集約。選択だけでは解除不可。既存assignで訂正元を確認後も旧本文はsupersededで出力0、訂正版選択で1件。他イベントの未解決訂正は混入しない。
+- slugに既存命名のunderscoreを許可。2026年4件を含む既存16記事の正確な更新pathと既存hash確認を合成テストで検証。slash/backslash/dot traversal/colon/percent escapeは拒否維持。
+- 回帰: python3 -m unittest discover -s tests -v は39件PASS（3.196秒）。
+- 隔離consumer: 既存2026-07-20-260720_ogawa.mdのコピーへ、未解決0→正規assign後旧本文0→訂正版1を実測して候補を適用。Astro build305ページ成功（3.92秒）。同underscore routeのHTMLで訂正文あり・旧合成本文なし、候補SHA一致、元repo記事SHA不変。従来の本文escape/JPEG SHA/TOP・一覧2導線readbackもPASS。
+- 本番操作なし。mergeは独立レビューPASS待ち。全体ACは未達のまま。
+
+2026-10-10 転送済み原本から既存受付への接続（PR5 merge c6ccc4d 基点）:
+- 既存Gmail/Library仕様を照合。外部file_uriを取得・解決するAPIは仮定せず、正規転送後ローカルbytesの記録だけを入力とする純粋adapterを既存receive --transferred-filesへ接続。
+- 実経路: full/connector MIME + account/message/attachment識別子 + 転送時SHA -> part_id manifest -> local_part_filesでSHA検証 -> parse_gmail -> Intake.receive。返却attachment_manifestはその呼出しで実消費したもの。
+- 構文: python3 -m py_compile scripts/mail_source_adapter.py scripts/mail_intake.py PASS。型/必須項目はローカル転送契約のruntime validationとnegative testsで確認。
+- 回帰: python3 -m unittest discover -s tests -v は46件PASS（5.106秒）。通常fullとconnector両CLIで成功。再実行後SQLiteのmessages/attachments/source_snapshotsは各1件。part_id、SHA、添付bytes、初回source原本を直接SELECTで照合。ローカル原本も不変。
+- Negative: 同名曖昧、未知/切断attachment ID、欠損/重複part、誤account/message、preview、欠損/不正SHA、inline原本と不一致、パス逸脱、転送後改変、manifest生成後改変、原本欠損、競合CLI入力を拒否。既存DBの全messages/attachments/snapshotsが不変。
+- full復号本文の原本確認保留を維持。rawへの形式変更は既存different sourceエラーで拒否。新転送オプションをraw/EMLへ流用せず原本同一性を弱めない。
+- Goal health（今回の限定範囲）: 転送済み合成原本→既存受付と冪等readbackはPASS。production evidenceは範囲外。実Gmail取得/実転送/FTPS/通知/認証/秘密操作なし。
+- Remaining: file_uriから正規Library参照を解決する実入力・実転送成功は未確認。元AC「Gmail原稿受領→HP更新→実ページ確認→本人Discord報告」は未達であり、純粋adapterのテストを代替完了にしない。
+
+2026-10-10 PR6 independent-review correction (synthetic inputs only):
+- Reproduced 3 CLI failures before fix: missing inline partId (absent/empty/whitespace), duplicate inline partId with equal bytes and different filenames, and external real ID 0.2 colliding with inline fallback 0.2 with different bytes. All incorrectly exited 0 (5 failing assertions).
+- Validate the entire attachment set before matching transfer records: every inline/external part must have a nonblank, unique real MIME partId. No parser fallback can replace or collapse an inline original in these cases.
+- New invalid message IDs were used alongside an existing accepted receipt, avoiding false positives from the existing same-source identity guard. Each rejection preserves all rows in messages/attachments/source_snapshots and local original bytes.
+- python3 -m py_compile scripts/mail_source_adapter.py scripts/mail_intake.py: PASS.
+- python3 -m unittest discover -s tests -v: 49 tests PASS (5.398 seconds).
+- Existing retry/idempotency, original-byte/SHA preservation, holds, draft output and negative-path tests remain green. No real acquisition, transfer, publication, notification or authentication action. Original end-to-end AC remains incomplete; independent review pending.
+
+2026-10-10 reviewed Word body connection (after PR6 merge 3f850d4):
+- Existing draft consumed only the short mail cover note. New path: stored DOC bytes -> extract-word/antiword -> immutable source/text/extractor hashes -> review-word explicit approval -> body_source.extraction_id -> existing draft/verify -> Astro article.
+- Public Apache POI Word fixture (pinned upstream commit and SHA, LICENSE/NOTICE included) extracts successfully with antiword 0.37-17. No private manuscript is in Git.
+- Before adoption: 0 candidate files. After exact approval and explicit selection: 1 Word-body article; cover note excluded. Extraction/review/draft replay is idempotent; original message, attachments and snapshots unchanged.
+- Negative paths: unapproved text, wrong receipt/document/part/hash, source mutation/conflicting versions, extraction tamper, failed/empty/invalid converter output, review overwrite. Other held DOC assets and HTML holds remain blocking.
+- Publication regression: existing publication evidence rejects draft approval; already_published association produces 0 candidate files. Later publication invalidates an approved old bundle. No publication/notification operation is performed.
+- WSL Python syntax checks PASS. Pre-restart 58 tests PASS (6.109s). Restart preserved source/fixture; temporary converter was gone and was re-extracted from the same official package. Post-restart all 58 tests PASS (6.724s), including real antiword CLI integration; no skips.
+- Isolated Astro consumer: 306 pages built (4.04s). Final article contains extracted Word text, excludes the cover note, and existing listing links to the route (href has no trailing slash). Source site remains unchanged.
+- Private real-input check before restart: existing isolated DB only, prior-published source association, 0 candidates, HTML hold maintained, original message/8 assets/snapshots unchanged. This is association evidence, not approval to republish. Private temporary evidence was not added to Git.
+- Environment: ordinary sandbox launcher failed after reboot with E: filesystem error 1005; formally approved elevated commands were limited to this workspace and temporary converter. Initial Astro telemetry config write outside workspace was denied; process-local ASTRO_TELEMETRY_DISABLED=1 avoids that optional write. No filesystem/access settings changed.
+- Remaining: independent review; no production DB creation, scheduler, publication, notification or original end-to-end AC completion.
