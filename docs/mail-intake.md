@@ -124,7 +124,7 @@ python3 scripts/mail_intake.py --db data/private/intake.sqlite3 receive \
 通常のGmail full API JSONは `--format gmail` でも使える。既存の `--attachment-data` / `--attachment-files` はそのまま利用可能だが、`--transferred-files` と同時には指定しない。
 
 - accountと親message_idを照合し、各転送記録にも同じmessage_idを要求する。完全なattachment_idがある場合は完全一致で選ぶ。省略・切断されたIDを渡さず、IDを確定できない場合はその項目を省いて正確なfilenameで照合する。同名添付が複数なら曖昧として拒否する。filenameからattachment_idを生成しない。
-- MIME上の実part_idを必須とし、重複を拒否。転送記録に任意の `part_id` があればその値も一致を要求する。添付集合に外部原本の欠損がある場合、誤message、抽出preview、二重指定、不正/欠損SHAを拒否する。inline原本がある場合はそのSHAとも照合する。
+- 転送記録との照合前に、inlineを含む全添付のMIME上の実part_idが空白でなく一意であることを検証する。欠損時のfallback IDは使わず、重複・外部IDとのfallback衝突も受付前に拒否する。転送記録に任意の `part_id` があればその値も一致を要求する。添付集合に外部原本の欠損がある場合、誤message、抽出preview、二重指定、不正/欠損SHAを拒否する。inline原本がある場合はそのSHAとも照合する。
 - relative_pathはasset-root内の正規相対パス（区切りは `/`）。絶対パス、`..`、backslash、colon、root外symlinkを拒否する。ローカル読込み時にSHAを再確認し、転送後やmanifest作成後の改変も拒否する。受信・添付・source snapshotは従来のキーで冪等に保持する。
 - fullの復号済み本文に付く原本確認保留は維持する。raw/EMLは別の原本形式なのでこの新オプションを使わず、fullをrawと同一視して受付済み原本を置換しない。
 

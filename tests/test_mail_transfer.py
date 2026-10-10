@@ -120,7 +120,7 @@ class TransferIntakeTests(unittest.TestCase):
             self.manifest(missing)
         duplicate = copy.deepcopy(self.message)
         duplicate['payload']['parts'].append(copy.deepcopy(duplicate['payload']['parts'][1]))
-        with self.assertRaisesRegex(ValueError, 'ambiguous'):
+        with self.assertRaisesRegex(ValueError, 'duplicate MIME part_id'):
             self.manifest(duplicate)
 
     def test_cli_tamper_missing_file_and_sha_mismatch_preserve_receipt(self):
@@ -179,6 +179,66 @@ class TransferIntakeTests(unittest.TestCase):
         self.assertNotEqual(process.returncode, 0)
         self.assertIn('cannot be combined', process.stderr)
         self.assertEqual(self.snapshot(), snapshot)
+
+    def test_cli_rejects_missing_inline_part_id_without_partial_updates(self):
+        self.assertEqual(self.cli().returncode, 0)
+        before = self.snapshot()
+        original = (self.originals / 'original.bin').read_bytes()
+        message = copy.deepcopy(self.message)
+        message['payload']['parts'].append({
+            'mime_type': 'image/jpeg', 'filename': 'inline.jpg',
+            'body': {'base64_url_content': base64.urlsafe_b64encode(self.jpeg).decode()},
+        })
+        for missing in (None, '', '   '):
+            with self.subTest(part_id=missing):
+                if missing is not None:
+                    message['payload']['parts'][-1]['part_id'] = missing
+                self.command[self.command.index('--message-id') + 1] = message['message_id'] = f'invalid-inline-{missing!r}'
+                transfers = copy.deepcopy(self.transfers)
+                transfers['message_id'] = transfers['files'][0]['message_id'] = message['message_id']
+                process = self.cli(message, transfers)
+                self.assertNotEqual(process.returncode, 0)
+                self.assertIn('MIME part_id required', process.stderr)
+                self.assertEqual(self.snapshot(), before)
+                self.assertEqual((self.originals / 'original.bin').read_bytes(), original)
+
+    def test_cli_rejects_duplicate_inline_part_ids_without_partial_updates(self):
+        accepted = self.cli()
+        self.assertEqual(accepted.returncode, 0, accepted.stderr)
+        before = self.snapshot()
+        original = (self.originals / 'original.bin').read_bytes()
+        message = copy.deepcopy(self.message)
+        for filename in ('inline-one.jpg', 'inline-two.jpg'):
+            message['payload']['parts'].append({
+                'part_id': '2', 'mime_type': 'image/jpeg', 'filename': filename,
+                'body': {'base64_url_content': base64.urlsafe_b64encode(self.jpeg).decode()},
+            })
+        self.command[self.command.index('--message-id') + 1] = message['message_id'] = 'invalid-duplicate-inline'
+        transfers = copy.deepcopy(self.transfers)
+        transfers['message_id'] = transfers['files'][0]['message_id'] = message['message_id']
+        process = self.cli(message, transfers)
+        self.assertNotEqual(process.returncode, 0)
+        self.assertIn('duplicate MIME part_id', process.stderr)
+        self.assertEqual(self.snapshot(), before)
+        self.assertEqual((self.originals / 'original.bin').read_bytes(), original)
+
+    def test_cli_rejects_inline_fallback_collision_without_partial_updates(self):
+        self.assertEqual(self.cli().returncode, 0)
+        before = self.snapshot()
+        message = copy.deepcopy(self.message)
+        transfers = copy.deepcopy(self.transfers)
+        self.command[self.command.index('--message-id') + 1] = message['message_id'] = 'invalid-fallback-collision'
+        transfers['message_id'] = transfers['files'][0]['message_id'] = message['message_id']
+        message['payload']['parts'][1]['part_id'] = transfers['files'][0]['part_id'] = '0.2'
+        message['payload']['parts'].append({
+            'mime_type': 'image/jpeg', 'filename': 'inline.jpg',
+            'body': {'base64_url_content': base64.urlsafe_b64encode(b'\xff\xd8\xffINLINE\xff\xd9').decode()},
+        })
+        process = self.cli(message, transfers)
+        self.assertNotEqual(process.returncode, 0)
+        self.assertIn('MIME part_id required', process.stderr)
+        self.assertEqual(self.snapshot(), before)
+        self.assertEqual((self.originals / 'original.bin').read_bytes(), self.jpeg)
 
 
 if __name__ == '__main__':

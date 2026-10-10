@@ -44,6 +44,16 @@ def transferred_files_manifest(message: dict, transfers: dict, account: str, mes
             parts.append(part)
 
     walk(message['payload'])
+    # Validate inline originals too, before matching any transferred files.
+    # Parser fallback IDs must never alias an attachment's real provider ID.
+    part_ids = set()
+    for part in parts:
+        part_id = part.get('partId')
+        if not isinstance(part_id, str) or not part_id.strip():
+            raise ValueError('original MIME part_id required; cannot infer it')
+        if part_id in part_ids:
+            raise ValueError('duplicate MIME part_id')
+        part_ids.add(part_id)
     result, used_parts, used_paths = [], set(), set()
     for record in records:
         if not isinstance(record, dict) or record.get('message_id') != message_id:
@@ -70,10 +80,6 @@ def transferred_files_manifest(message: dict, transfers: dict, account: str, mes
             raise ValueError('attachment match missing or ambiguous')
         part = matches[0]
         part_id = part.get('partId')
-        if not isinstance(part_id, str) or not part_id:
-            raise ValueError('original MIME part_id required; cannot infer it')
-        if sum(p.get('partId') == part_id for p in parts) != 1:
-            raise ValueError('duplicate MIME part_id')
         if 'part_id' in record and record['part_id'] != part_id:
             raise ValueError('transfer part_id mismatch')
         if filename is not None and filename != part.get('filename'):

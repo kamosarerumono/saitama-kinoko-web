@@ -68,3 +68,11 @@ OK
 - full復号本文の原本確認保留を維持。rawへの形式変更は既存different sourceエラーで拒否。新転送オプションをraw/EMLへ流用せず原本同一性を弱めない。
 - Goal health（今回の限定範囲）: 転送済み合成原本→既存受付と冪等readbackはPASS。production evidenceは範囲外。実Gmail取得/実転送/FTPS/通知/認証/秘密操作なし。
 - Remaining: file_uriから正規Library参照を解決する実入力・実転送成功は未確認。元AC「Gmail原稿受領→HP更新→実ページ確認→本人Discord報告」は未達であり、純粋adapterのテストを代替完了にしない。
+
+2026-10-10 PR6 independent-review correction (synthetic inputs only):
+- Reproduced 3 CLI failures before fix: missing inline partId (absent/empty/whitespace), duplicate inline partId with equal bytes and different filenames, and external real ID 0.2 colliding with inline fallback 0.2 with different bytes. All incorrectly exited 0 (5 failing assertions).
+- Validate the entire attachment set before matching transfer records: every inline/external part must have a nonblank, unique real MIME partId. No parser fallback can replace or collapse an inline original in these cases.
+- New invalid message IDs were used alongside an existing accepted receipt, avoiding false positives from the existing same-source identity guard. Each rejection preserves all rows in messages/attachments/source_snapshots and local original bytes.
+- python3 -m py_compile scripts/mail_source_adapter.py scripts/mail_intake.py: PASS.
+- python3 -m unittest discover -s tests -v: 49 tests PASS (5.398 seconds).
+- Existing retry/idempotency, original-byte/SHA preservation, holds, draft output and negative-path tests remain green. No real acquisition, transfer, publication, notification or authentication action. Original end-to-end AC remains incomplete; independent review pending.
