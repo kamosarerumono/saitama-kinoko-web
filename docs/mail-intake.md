@@ -129,7 +129,7 @@ python3 scripts/mail_intake.py receive --format gmail-connector \
 }
 ```
 
-`slug` は確認済み開催日＋半角英小文字・数字・ハイフン。更新対象は `src/content/reikai/<slug>.md`。既存記事を置き換える候補には、現在のファイルのSHA256を `target.expected_sha256` として指定する。既存ファイルがあるのにhash指定なし、または指定hashと現状が異なる場合は `target_content_changed` として止める。日付・対象path・既存本文をメールから推測しない。
+`slug` は確認済み開催日＋半角英小文字・数字・ハイフン・アンダースコア。`2026-07-20-260720_ogawa` 等の既存命名をそのまま使える。更新対象は `src/content/reikai/<slug>.md`。既存記事を置き換える候補には、現在のファイルのSHA256を `target.expected_sha256` として指定する。既存ファイルがあるのにhash指定なし、または指定hashと現状が異なる場合は `target_content_changed` として止める。日付・対象path・既存本文をメールから推測しない。
 
 ```bash
 python3 scripts/mail_intake.py --db data/private/intake.sqlite3 prepare-draft \
@@ -144,6 +144,7 @@ python3 scripts/mail_intake.py --db data/private/intake.sqlite3 verify-draft \
 - `review.json` に選択、更新対象、新規/更新、各受信のsource hash・初回原本hash・本文hash・source snapshot・保留・訂正関係、既存公開hash、出力ファイルSHA256を保存する。これは私有の確認資料でありサイトへコピーしない。
 - 保留なしの場合のみ、`src/content/reikai/<slug>.md` と `public/reikai/<年>/<添付sha256>.jpg` をbundle内へ出す。本文はMarkdown/HTML構文として実行されないよう文字参照で引用し、メールヘッダーや送信者アドレスは記事へ追加しない。JPEGはbyte一致で保持し、掲載前のmetadata等の確認・加工が必要なら別工程で行う。
 - 受信保留を選択JSONで解除できない。写真にはそのhashに対応する `review_reference` が必要で、Office/PDF、危険分類、衝突添付は候補にしない。訂正に置き換えられた受信の選択や、同一受信への複数訂正も保留する。保留時は `status=held`、`file_count=0`、`review.json` のみを返す。
+- 同イベントに訂正対象未確認の受信があれば、未選択でも `correction_target_requires_review` を引き継ぐ。既存の `assign --metadata` で訂正元を正規に確認するまで、旧本文を選び直しても候補を出さない。確認後も旧本文は `selected_source_superseded` で止め、訂正版を明示選択する必要がある。
 - 保留がなくても `status=review_required` / `auto_publish=false`。候補の作成は公開承認や公開完了を意味しない。
 - 同一入力・台帳状態・対象hashの再実行は同じbundleを検証して再利用する。新しい受付・訂正・公開hash・選択や対象変更は別bundleとなり、旧bundleを上書きしない。`verify-draft` は現在の台帳/対象と保存bundleの内容を再比較し、古い・改変された出力を非zero終了で拒否する。`verified=true` は現在の証拠との一致だけを表す。
 

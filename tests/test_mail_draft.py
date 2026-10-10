@@ -127,6 +127,64 @@ class DraftTests(unittest.TestCase):
             verify_draft(self.store, result['bundle_id'], self.site)
         self.assertEqual(article.read_bytes(), b'concurrent update')
 
+    def test_unselected_unresolved_correction_blocks_until_assigned(self):
+        first, _, _ = self.prepare()
+        raw = eml('Correction awaiting target review', subject='correction')
+        incoming = self.store.receive('one', 'pending-correction', raw, parse_eml(raw), META)
+        self.assertIn('correction_target_requires_review', incoming['holds'])
+        with self.assertRaisesRegex(ValueError, 'stale'):
+            verify_draft(self.store, first['bundle_id'], self.site)
+        for _ in range(2):
+            held, path, manifest = self.prepare()
+            self.assertEqual(held['status'], 'held')
+            self.assertIn('correction_target_requires_review', held['holds'])
+            self.assertEqual(held['file_count'], 0)
+            self.assertEqual(list(path.iterdir()), [path / 'review.json'])
+            self.assertEqual(manifest['selection']['body_source']['message_id'], 'body')
+        self.store.assign('one', 'pending-correction', META)
+        self.assertIn('correction_target_requires_review', self.prepare()[0]['holds'])
+        self.store.assign('one', 'pending-correction', {**META, 'corrects_message_id': 'body'})
+        held, _, _ = self.prepare()
+        self.assertNotIn('correction_target_requires_review', held['holds'])
+        self.assertIn('selected_source_superseded', held['holds'])
+        self.assertEqual(held['file_count'], 0)
+        self.selection['body_source'] = {'account': 'one', 'message_id': 'pending-correction', 'source_hash': digest(raw)}
+        accepted, _, _ = self.prepare()
+        self.assertEqual(accepted['file_count'], 1)
+        self.assertEqual(accepted['holds'], [])
+
+    def test_unresolved_correction_in_another_event_does_not_block(self):
+        raw = eml('Other event correction', subject='correction')
+        self.store.receive('one', 'other-event', raw, parse_eml(raw), {**META, 'event_date': '2026-09-16'})
+        result, _, _ = self.prepare()
+        self.assertEqual(result['file_count'], 1)
+        self.assertEqual(result['holds'], [])
+
+    def test_existing_underscore_article_paths_can_be_updated_exactly(self):
+        repo = Path(__file__).resolve().parents[1]
+        existing = sorted((repo / 'src/content/reikai').glob('*_*.md'))
+        self.assertTrue(existing)
+        self.assertIn('2026-07-20-260720_ogawa.md', [p.name for p in existing])
+        raw = eml('Synthetic update')
+        for index, original in enumerate(existing):
+            with self.subTest(slug=original.stem):
+                receipt = self.store.receive('one', f'update-{index}', raw, parse_eml(raw), {**META, 'event_date': original.stem[:10]})
+                relative = 'src/content/reikai/' + original.name
+                current = self.site / relative
+                current.parent.mkdir(parents=True, exist_ok=True)
+                current.write_bytes(b'existing synthetic report')
+                self.selection = {
+                    'event_id': receipt['event_id'],
+                    'target': {'slug': original.stem, 'title': 'Synthetic update', 'expected_sha256': digest(current.read_bytes())},
+                    'body_source': {'account': 'one', 'message_id': f'update-{index}', 'source_hash': digest(raw)},
+                }
+                result, path, manifest = self.prepare()
+                self.assertEqual(result['file_count'], 1)
+                self.assertEqual(manifest['target_path'], relative)
+                self.assertEqual(manifest['operation'], 'update')
+                self.assertTrue((path / relative).is_file())
+                self.assertEqual(current.read_bytes(), b'existing synthetic report')
+
     def test_new_input_and_unknown_sender_are_not_silent_success(self):
         result, _, _ = self.prepare()
         raw = eml('Unreviewed contribution', sender='unknown@example.test')
@@ -148,7 +206,9 @@ class DraftTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 self.prepare()
         self.selection = copy.deepcopy(original)
-        for slug in ['../../escape', '2026-09-16-other', '2026-09-15-A', '2026-09-15-x/..']:
+        for slug in ['../../escape', '2026-09-16-other', '2026-09-15-A', '2026-09-15-x/..',
+                     '2026-09-15-x_../escape', '2026-09-15-x_..\\escape',
+                     '2026-09-15-x_:stream', '2026-09-15-x_%2fescape']:
             self.selection['target']['slug'] = slug
             with self.assertRaises(ValueError):
                 self.prepare()

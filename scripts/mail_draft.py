@@ -34,7 +34,7 @@ def draft_files(store, selection: dict, site_root: Path) -> dict[str, bytes]:
     if target.get('collection', 'reikai') != 'reikai':
         raise ValueError('only the existing reikai article format is supported')
     slug, title = target['slug'], target['title']
-    if not isinstance(slug, str) or not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9][a-z0-9-]{0,79}', slug) or not slug.startswith(event[1] + '-'):
+    if not isinstance(slug, str) or not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9][a-z0-9_-]{0,79}', slug) or not slug.startswith(event[1] + '-'):
         raise ValueError('target slug must begin with verified event date and use lowercase ASCII')
     if not isinstance(title, str) or not title.strip() or len(title) > 300 or any(ord(c) < 32 for c in title):
         raise ValueError('single-line title required')
@@ -62,6 +62,10 @@ def draft_files(store, selection: dict, site_root: Path) -> dict[str, bytes]:
         }
     successors = {}
     for key, receipt in receipts.items():
+        # Until the correction target is reviewed, no selected older source in
+        # this event can be assumed unaffected. Selecting around it is not review.
+        if 'correction_target_requires_review' in receipt['holds']:
+            holds.add('correction_target_requires_review')
         for old in receipt['corrects']:
             successors.setdefault((key[0], old), []).append(key[1])
     if any(len(v) > 1 for v in successors.values()):

@@ -50,3 +50,11 @@ OK
 - freshness: bundle idは選択、対象現状hash、全イベント出典/snapshot/保留/訂正/公開hash、生成file hashから算出。verify-draftは現在台帳/対象/bytesとの一致のみを示し、公開承認ではない。
 - environment: Intake/CLIはWSL Python（POSIX私有DB）、既存consumerはWindows Nodeで実行。scheduler未接続。WSL copytreeのWindows metadata複製はOperation not permittedで停止し再試行せず、既にコピーされた全srcのbytes一致を照合して独立buildを実行。権限・原本・認証変更なし。
 - production evidence: 対象外。実Gmail取得/受信予約/FTPS/再公開/Discordは未実施。全体AC「Gmail原稿受領→HP更新→実ページ確認→本人Discord報告」は未達。今回のPASSはオフライン入口接続のみ。
+
+2026-10-10 PR5独立レビュー修正:
+- 未選択の同イベント未解決訂正が旧本文候補から消える不具合（Truth Drift）と、underscore禁止による既存記事更新拒否（Contract / Schema Drift）を確認。修正前は1 failure＋既存16slugで16 errors。
+- 最小修正: 全イベント受信のcorrection_target_requires_reviewを集約。選択だけでは解除不可。既存assignで訂正元を確認後も旧本文はsupersededで出力0、訂正版選択で1件。他イベントの未解決訂正は混入しない。
+- slugに既存命名のunderscoreを許可。2026年4件を含む既存16記事の正確な更新pathと既存hash確認を合成テストで検証。slash/backslash/dot traversal/colon/percent escapeは拒否維持。
+- 回帰: python3 -m unittest discover -s tests -v は39件PASS（3.196秒）。
+- 隔離consumer: 既存2026-07-20-260720_ogawa.mdのコピーへ、未解決0→正規assign後旧本文0→訂正版1を実測して候補を適用。Astro build305ページ成功（3.92秒）。同underscore routeのHTMLで訂正文あり・旧合成本文なし、候補SHA一致、元repo記事SHA不変。従来の本文escape/JPEG SHA/TOP・一覧2導線readbackもPASS。
+- 本番操作なし。mergeは独立レビューPASS待ち。全体ACは未達のまま。
