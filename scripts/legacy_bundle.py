@@ -41,7 +41,6 @@ class SafeBody(HTMLParser):
         self.image_dir = image_dir
         self.images = {}
         self.output = []
-        self.in_figcaption = 0
     def image(self, url):
         if not re.fullmatch(r'/reikai/[0-9]{4}/[a-zA-Z0-9_-]+\.(?:jpg|jpeg|png)', url):
             raise ValueError('only reviewed local JPEG/PNG paths are supported')
@@ -58,8 +57,6 @@ class SafeBody(HTMLParser):
             if key == 'src':
                 if tag != 'img': raise ValueError('unsupported source')
                 value = self.image(value)
-            if tag == 'img' and key == 'alt':
-                value = without_photographer(value)
             if key == 'href':
                 if value.startswith('/reikai/') and value.endswith(('.jpg', '.jpeg', '.png')):
                     value = self.image(value)
@@ -68,25 +65,17 @@ class SafeBody(HTMLParser):
             clean.append((key, value))
         if tag == 'img' and not any(k == 'src' for k, _ in clean): raise ValueError('image source required')
         self.output.append('<' + tag + ''.join(' '+k+'="'+html.escape(v, quote=True)+'"' for k,v in clean) + '>')
-        if tag == 'figcaption': self.in_figcaption += 1
     def handle_startendtag(self, tag, attrs): self.handle_starttag(tag, attrs)
     def handle_endtag(self, tag):
         if tag not in self.tags: raise ValueError('unsupported closing tag')
         self.output.append('</'+tag+'>')
-        if tag == 'figcaption': self.in_figcaption = max(0, self.in_figcaption - 1)
-    def handle_data(self, data):
-        if self.in_figcaption: data = without_photographer(data)
-        self.output.append(html.escape(data, quote=False))
+    def handle_data(self, data): self.output.append(html.escape(data, quote=False))
     def handle_entityref(self, name): self.output.append('&'+name+';')
     def handle_charref(self, name): self.output.append('&#'+name+';')
     def handle_comment(self, data): raise ValueError('review/remove source HTML comments first')
     def handle_decl(self, decl): raise ValueError('document declarations are not article content')
 
 STYLE = 'body{max-width:1100px;margin:auto;padding:20px;font-family:sans-serif;line-height:1.8;background:#f7f6ee;color:#222}table{border-collapse:collapse;width:100%}th,td{border:1px solid #aaa;padding:8px;text-align:left;overflow-wrap:anywhere}img{max-width:100%}'
-
-def without_photographer(value):
-    """Remove image-level photographer credits from newly generated reports."""
-    return re.sub(r'\s*[（(]撮影[^）)]*[）)]\s*$', '', value).strip()
 
 def render_markdown(source, node='node'):
     proc = subprocess.run([node, str(Path(__file__).with_name('render_legacy_source.mjs'))],
@@ -134,7 +123,7 @@ def prepare(spec, source_root, input_root, output, node='node'):
         rows.append({'path':path,'role':'image','before_sha256':None,'sha256':sha(data),'bytes':len(data)})
     if len(rows)>1000: raise ValueError('too many images')
     details=[('開催日',date)]
-    for key,label in [('location','場所'),('meetingPoint','集合場所'),('participants','参加者'),('organizer','世話人'),('reporter','報告者')]:
+    for key,label in [('location','場所'),('meetingPoint','集合場所'),('participants','参加者'),('organizer','世話人'),('reporter','報告者'),('photographer','撮影者')]:
         if key in meta:
             if not isinstance(meta[key],(str,int,float)):raise ValueError('invalid report metadata')
             details.append((label,str(meta[key])))
