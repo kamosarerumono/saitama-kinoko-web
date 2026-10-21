@@ -42,6 +42,12 @@ class SafeBody(HTMLParser):
         self.images = {}
         self.output = []
         self.in_figcaption = 0
+        self.row_buffer = None
+        self.row_headers = []
+        self.cell_kind = None
+        self.cell_text = []
+    def emit(self, fragment):
+        (self.row_buffer if self.row_buffer is not None else self.output).append(fragment)
     def image(self, url):
         if not re.fullmatch(r'/reikai/[0-9]{4}/[a-zA-Z0-9_-]+\.(?:jpg|jpeg|png)', url):
             raise ValueError('only reviewed local JPEG/PNG paths are supported')
@@ -49,6 +55,12 @@ class SafeBody(HTMLParser):
         return self.images[url]
     def handle_starttag(self, tag, attrs):
         if tag not in self.tags: raise ValueError('unsupported active/structural HTML tag')
+        if tag == 'tr' and self.row_buffer is None:
+            self.row_buffer = []
+            self.row_headers = []
+        if tag in ('th', 'td') and self.row_buffer is not None:
+            self.cell_kind = tag
+            self.cell_text = []
         clean = []
         if len({k for k, _ in attrs}) != len(attrs): raise ValueError('duplicate HTML attribute')
         for key, value in attrs:
@@ -67,26 +79,44 @@ class SafeBody(HTMLParser):
                     raise ValueError('unsupported link')
             clean.append((key, value))
         if tag == 'img' and not any(k == 'src' for k, _ in clean): raise ValueError('image source required')
-        self.output.append('<' + tag + ''.join(' '+k+'="'+html.escape(v, quote=True)+'"' for k,v in clean) + '>')
+        self.emit('<' + tag + ''.join(' '+k+'="'+html.escape(v, quote=True)+'"' for k,v in clean) + '>')
         if tag == 'figcaption': self.in_figcaption += 1
     def handle_startendtag(self, tag, attrs): self.handle_starttag(tag, attrs)
     def handle_endtag(self, tag):
         if tag not in self.tags: raise ValueError('unsupported closing tag')
-        self.output.append('</'+tag+'>')
+        if tag in ('th', 'td') and self.cell_kind == tag:
+            if tag == 'th': self.row_headers.append(''.join(self.cell_text))
+            self.cell_kind = None
+            self.cell_text = []
+        self.emit('</'+tag+'>')
+        if tag == 'tr' and self.row_buffer is not None:
+            labels = {re.sub(r'[\s:：()（）【】\[\]]', '', html.unescape(x)) for x in self.row_headers}
+            photographer_labels = {'写真', '撮影', '撮影者', '写真撮影', '写真提供', '撮影者氏名'}
+            if not labels.intersection(photographer_labels): self.output.append(''.join(self.row_buffer))
+            self.row_buffer = None
+            self.row_headers = []
         if tag == 'figcaption': self.in_figcaption = max(0, self.in_figcaption - 1)
     def handle_data(self, data):
-        if self.in_figcaption: data = without_photographer(data)
-        self.output.append(html.escape(data, quote=False))
-    def handle_entityref(self, name): self.output.append('&'+name+';')
-    def handle_charref(self, name): self.output.append('&#'+name+';')
+        data = without_photographer(data)
+        if self.cell_kind is not None: self.cell_text.append(data)
+        self.emit(html.escape(data, quote=False))
+    def handle_entityref(self, name):
+        fragment = '&'+name+';'
+        if self.cell_kind is not None: self.cell_text.append(html.unescape(fragment))
+        self.emit(fragment)
+    def handle_charref(self, name):
+        fragment = '&#'+name+';'
+        if self.cell_kind is not None: self.cell_text.append(html.unescape(fragment))
+        self.emit(fragment)
     def handle_comment(self, data): raise ValueError('review/remove source HTML comments first')
     def handle_decl(self, decl): raise ValueError('document declarations are not article content')
 
 STYLE = 'body{max-width:1100px;margin:auto;padding:20px;font-family:sans-serif;line-height:1.8;background:#f7f6ee;color:#222}table{border-collapse:collapse;width:100%}th,td{border:1px solid #aaa;padding:8px;text-align:left;overflow-wrap:anywhere}img{max-width:100%}'
 
 def without_photographer(value):
-    """Remove image-level photographer credits from newly generated reports."""
-    return re.sub(r'\s*[（(]撮影[^）)]*[）)]\s*$', '', value).strip()
+    """Remove supported parenthetical photographer credits from report text."""
+    value = re.sub(r'[（(]\s*(?:撮影者?|写真提供)\s*[:：]?\s*[^()（）]*[）)]', '', value)
+    return value.strip()
 
 def render_markdown(source, node='node'):
     proc = subprocess.run([node, str(Path(__file__).with_name('render_legacy_source.mjs'))],

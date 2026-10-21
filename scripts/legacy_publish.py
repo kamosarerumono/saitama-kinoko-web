@@ -57,12 +57,12 @@ def load_plan():
    if row.get('role')!='image' or not path.startswith(image_prefix) or not re.fullmatch(r'[a-zA-Z0-9_-]+\.(?:jpg|jpeg|png)',path[len(image_prefix):]):raise Stop('Invalid image scope')
   if not re.fullmatch('[0-9a-f]{64}',row['sha256']):raise Stop('Invalid hash')
   before=row['before_sha256']
+  if correction and row.get('role')!='article' and before!=row.get('sha256'):raise Stop('Correction cannot change images or navigation')
   if row['role'] in ('annual','top'):
    if not isinstance(before,str) or not re.fullmatch('[0-9a-f]{64}',before):raise Stop('Navigation baseline required')
    if digest(bounded(relative_file(ROOT,'baseline/'+path)))!=before:raise Stop('Local baseline changed')
   elif correction:
    if not isinstance(before,str) or not re.fullmatch('[0-9a-f]{64}',before):raise Stop('Correction baseline required')
-   if row['role']!='article' and before!=row['sha256']:raise Stop('Correction cannot change images or navigation')
   elif before is not None:raise Stop('Only new reports are supported')
   data=bounded(relative_file(ROOT,'stage/'+path))
   if len(data)!=row['bytes'] or digest(data)!=row['sha256']:raise Stop('Stage changed')

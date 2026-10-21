@@ -61,6 +61,23 @@ class CorrectionBundleTests(unittest.TestCase):
         with patch.object(correction, 'OLD_ARTICLE_SHA256', correction.digest(article)):
             self.assertRaises(ValueError, correction.corrected_article, article)
 
+    def test_generated_launcher_uses_current_runtime_and_script_paths(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp); stage = root / 'stage'; stage.mkdir(); output = root / 'bundle'
+            original = self.article()
+            with patch.object(correction, 'OLD_ARTICLE_SHA256', correction.digest(original)):
+                for rel in correction.expected_paths():
+                    path = stage.joinpath(*PurePosixPath(rel).parts)
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_bytes(original if rel == correction.ARTICLE else ('fixture:' + rel).encode())
+                correction.prepare(stage, output)
+            launcher = (output / 'PUBLISH_MINOYAMA_CORRECTION.cmd').read_text(encoding='utf-8')
+            expected_python = str(Path(sys.executable).resolve())
+            expected_publisher = str(Path(correction.__file__).resolve().with_name('legacy_publish.py'))
+            self.assertIn('"' + expected_python + '"', launcher)
+            self.assertIn('"' + expected_publisher + '"', launcher)
+            self.assertNotIn('integration-worktree', launcher)
+
     def test_fixed_plan_updates_article_only_and_backs_up_every_existing_target(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -100,6 +117,22 @@ class CorrectionBundleTests(unittest.TestCase):
             self.assertEqual(result['verified_count'], 27)
             for path, original in live.items():
                 self.assertEqual((run / 'backup' / Path(*PurePosixPath(path).parts)).read_bytes(), original)
+            for path in ('reikai/2026reikaihoukoku.html', 'index.htm'):
+                row = next(item for item in rows if item['path'] == path)
+                saved = row.copy()
+                staged = stage.joinpath(*PurePosixPath(path).parts)
+                changed = staged.read_bytes() + b' changed'
+                staged.write_bytes(changed)
+                row['sha256'] = publisher.digest(changed); row['bytes'] = len(changed)
+                raw = json.dumps(manifest, separators=(',', ':')).encode()
+                (root / 'manifest.json').write_bytes(raw)
+                publisher.MANIFEST_SHA = publisher.digest(raw)
+                with self.subTest(path=path), self.assertRaises(publisher.Stop):
+                    publisher.load_plan()
+                row.update(saved); staged.write_bytes(live[path])
+                raw = json.dumps(manifest, separators=(',', ':')).encode()
+                (root / 'manifest.json').write_bytes(raw)
+                publisher.MANIFEST_SHA = publisher.digest(raw)
 
 
 if __name__ == '__main__':

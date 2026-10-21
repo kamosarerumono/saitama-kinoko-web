@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import re
+import sys
 
 from mail_draft import encoded, readback
 
@@ -94,11 +95,13 @@ def prepare(stage_root: Path, output: Path) -> dict:
         all_files['baseline/' + rel] = files[rel]
     manifest_bytes = encoded(manifest)
     all_files['manifest.json'] = manifest_bytes
+    python = str(Path(sys.executable).resolve())
+    publisher = str(Path(__file__).resolve().with_name('legacy_publish.py'))
     all_files['PUBLISH_MINOYAMA_CORRECTION.cmd'] = (
         '@echo off\r\nchcp 65001 >nul\r\n'
         'set "PYTHONIOENCODING=utf-8"\r\n'
-        '"C:\\Users\\kamos\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe" '
-        '"%~dp0..\\..\\..\\integration-worktree\\scripts\\legacy_publish.py" '
+        '"' + python + '" '
+        '"' + publisher + '" '
         '--bundle "%~dp0." --manifest-sha ' + digest(manifest_bytes) + ' --publish\r\n'
         'set "publish_exit=%ERRORLEVEL%"\r\necho.\r\necho Exit code: %publish_exit%\r\npause\r\nexit /b %publish_exit%\r\n'
     ).encode('utf-8')

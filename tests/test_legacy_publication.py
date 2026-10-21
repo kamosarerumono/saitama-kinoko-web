@@ -93,6 +93,18 @@ class LegacyTests(unittest.TestCase):
  def test_active_html_and_external_images_rejected(self):
   for code in ['<script>bad</script>','<img src="https://example.test/x.jpg">','<img src="'+self.photo+'" onerror="bad">']:
    self.rendered['html']=code;self.assertRaises(ValueError,self.prepare)
+ def test_new_report_omits_photographer_table_rows_and_supported_credits(self):
+  self.rendered['html']=(
+   '<table><tbody><tr><th>写真</th><td>栗原晴夫、松村、近藤</td></tr>'
+   '<tr><th>場所</th><td>県民&amp;森</td></tr></tbody></table>'
+   '<figure><img src="'+self.photo+'" alt="観察写真（撮影 栗原）">'
+   '<figcaption>観察写真（写真提供 栗原晴夫）</figcaption></figure>'
+   '<p>記録（撮影：近藤）</p>')
+  self.prepare()
+  article=(self.output/'stage/reikai/2026/261103_synthetic.html').read_text(encoding='utf-8')
+  self.assertNotIn('栗原',article);self.assertNotIn('松村',article);self.assertNotIn('近藤',article)
+  self.assertNotIn('<th>写真</th>',article);self.assertIn('<th>場所</th>',article)
+  self.assertIn('観察写真',article);self.assertIn('県民&amp;森',article);self.assertIn('記録',article)
  def test_path_escape_rejected(self):
   self.spec['navigation']['top']['file']='../other';self.assertRaises(ValueError,self.prepare)
  def test_stale_bundle_not_overwritten(self):
