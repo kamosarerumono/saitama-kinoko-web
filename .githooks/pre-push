@@ -1,0 +1,60 @@
+#!/bin/sh
+set -eu
+
+deny() {
+  printf 'push blocked: %s\n' "$1" >&2
+  exit 1
+}
+
+remote_name=${1-}
+remote_url=${2-}
+[ "$remote_name" = origin ] || deny 'only the reviewed origin remote is allowed'
+
+expected_url=$(git config --local --get codex.pushGuard.expectedRemote 2>/dev/null || true)
+[ -n "$expected_url" ] || deny 'codex.pushGuard.expectedRemote is not configured'
+[ "$remote_url" = "$expected_url" ] || deny 'push remote does not match the configured repository'
+configured_url=$(git remote get-url --push "$remote_name" 2>/dev/null || true)
+[ "$configured_url" = "$expected_url" ] || deny 'origin push URL does not match the configured repository'
+
+current_ref=$(git symbolic-ref --quiet HEAD 2>/dev/null || true)
+case "$current_ref" in
+  refs/heads/*) ;;
+  *) deny 'detached HEAD pushes are not allowed';;
+esac
+
+seen=0
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -n "${local_ref:-}" ] || continue
+  seen=1
+  case "$local_ref" in refs/heads/*) ;; *) deny 'source must be one full local branch ref';; esac
+  case "$remote_ref" in refs/heads/*) ;; *) deny 'destination must be one full remote branch ref';; esac
+  [ "$local_ref" = "$current_ref" ] || deny 'source ref must be the checked out branch'
+
+  case "$local_sha" in *[!0123456789abcdef]*|'') deny 'source SHA must be a full object ID';; esac
+  case "${#local_sha}" in 40|64) ;; *) deny 'source SHA must be a full object ID';; esac
+  resolved_sha=$(git rev-parse --verify "$local_ref^{commit}" 2>/dev/null || true)
+  [ "$resolved_sha" = "$local_sha" ] || deny 'source ref changed or its expected SHA does not match'
+
+  source_branch=${local_ref#refs/heads/}
+  destination_branch=${remote_ref#refs/heads/}
+  [ -n "$source_branch" ] && [ -n "$destination_branch" ] || deny 'branch ref is empty'
+  case "$destination_branch" in
+    master|main)
+      [ "$source_branch" = "$destination_branch" ] || deny 'feature branch cannot be pushed to master or main';;
+    *)
+      [ "$source_branch" = "$destination_branch" ] || deny 'feature push must preserve the exact branch name';;
+  esac
+
+  upstream_remote=$(git config --local --get "branch.$source_branch.remote" 2>/dev/null || true)
+  upstream_merge=$(git config --local --get "branch.$source_branch.merge" 2>/dev/null || true)
+  if [ -n "$upstream_remote$upstream_merge" ]; then
+    [ "$upstream_remote" = "$remote_name" ] || deny 'branch upstream remote differs from the push remote'
+    [ "$upstream_merge" = "$remote_ref" ] || deny 'branch upstream ref differs from the exact push destination'
+  fi
+
+  case "${remote_sha:-}" in *[!0123456789abcdef]*|'') deny 'remote SHA must be a full object ID';; esac
+  case "${#remote_sha}" in 40|64) ;; *) deny 'remote SHA must be a full object ID';; esac
+  printf 'push scope verified: %s %s -> %s\n' "$local_sha" "$local_ref" "$remote_ref"
+done
+
+[ "$seen" -eq 1 ] || deny 'push contained no branch ref update'
