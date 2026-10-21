@@ -35,8 +35,17 @@ def load_plan():
  if m.get('legacy_year')!=int(year):raise Stop('Fiscal year mismatch')
  if not re.fullmatch(date.strftime('%y%m%d')+r'_[a-z0-9_-]{1,60}',slug):raise Stop('Invalid report slug')
  rows=m['files']
+ correction=m.get('operation')=='correction'
  if not isinstance(rows,list) or not 3<=len(rows)<=1003:raise Stop('Invalid file count')
- image_prefix=f'reikai/{year}/images_{slug}/'
+ if correction:
+  expected=[f'reikai/2026/images_261004/261004_minoyama-{n:02d}.{"jpg" if n==1 else "png"}' for n in range(1,25)]
+  expected += ['reikai/2026/261004_minoyama.html','reikai/2026reikaihoukoku.html','index.htm']
+  if m.get('legacy_slug')!='261004_minoyama' or m.get('date')!='2026-10-04' or [x.get('path') for x in rows]!=expected:
+   raise Stop('Correction scope is not the reviewed Minoyama report')
+  if sum(x.get('role')=='article' and x.get('before_sha256')!=x.get('sha256') for x in rows)!=1:
+   raise Stop('Correction must change only the reviewed article')
+ image_name='images_261004' if correction else 'images_'+slug
+ image_prefix=f'reikai/{year}/{image_name}/'
  if [x.get('role') for x in rows[-3:]]!=['article','annual','top']:raise Stop('Invalid publication order')
  if [x['path'] for x in rows[-3:]]!=[f'reikai/{year}/{slug}.html',f'reikai/{year}reikaihoukoku.html','index.htm']:raise Stop('Unexpected targets')
  paths=set()
@@ -51,6 +60,9 @@ def load_plan():
   if row['role'] in ('annual','top'):
    if not isinstance(before,str) or not re.fullmatch('[0-9a-f]{64}',before):raise Stop('Navigation baseline required')
    if digest(bounded(relative_file(ROOT,'baseline/'+path)))!=before:raise Stop('Local baseline changed')
+  elif correction:
+   if not isinstance(before,str) or not re.fullmatch('[0-9a-f]{64}',before):raise Stop('Correction baseline required')
+   if row['role']!='article' and before!=row['sha256']:raise Stop('Correction cannot change images or navigation')
   elif before is not None:raise Stop('Only new reports are supported')
   data=bounded(relative_file(ROOT,'stage/'+path))
   if len(data)!=row['bytes'] or digest(data)!=row['sha256']:raise Stop('Stage changed')
@@ -94,7 +106,7 @@ def listing(ftp,directory):
  return entries
 
 def remote_state(ftp,plan):
- year=str(plan['legacy_year']);slug=plan['legacy_slug'];year_dir='reikai/'+year;image_name='images_'+slug
+ year=str(plan['legacy_year']);slug=plan['legacy_slug'];year_dir='reikai/'+year;image_name='images_261004' if plan.get('operation')=='correction' else 'images_'+slug
  dirs={'.':listing(ftp,'.')}
  if dirs['.'].get('reikai')!='dir':raise Stop('Ancestor is not a directory')
  dirs['reikai']=listing(ftp,'reikai')

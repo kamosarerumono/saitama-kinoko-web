@@ -46,7 +46,7 @@ class LegacyTests(unittest.TestCase):
     'legacy_slug':'261103_synthetic','assets':{self.photo:b.sha(self.image)},'navigation':{
     'annual':{'file':'annual.html','sha256':b.sha(self.annual),'encoding':'utf-8','anchor':'<!-- add -->'},
     'top':{'file':'top.htm','sha256':b.sha(self.top),'encoding':'cp932','anchor':'<!-- add -->'}}}
-  self.rendered={'metadata':{'title':'合成報告','date':'2026-11-03','reporter':'合成担当'},'html':'<p>確認済み本文</p><img src="'+self.photo+'" alt="合成写真">'}
+  self.rendered={'metadata':{'title':'合成報告','date':'2026-11-03','reporter':'合成担当','photographer':'撮影者'},'html':'<p>確認済み本文</p><img src="'+self.photo+'" alt="合成写真（撮影 人物）"><figcaption>合成写真（撮影 人物）</figcaption>'}
   self.output=self.root/'bundle'
   self.mock=patch.object(b,'render_markdown',return_value=self.rendered);self.mock.start();self.addCleanup(self.mock.stop)
  def prepare(self):
@@ -59,7 +59,7 @@ class LegacyTests(unittest.TestCase):
  def test_generate_three_pages_and_images_preserves_original_bytes(self):
   result=self.prepare();self.assertEqual(result['file_count'],4)
   article=(self.output/'stage/reikai/2026/261103_synthetic.html').read_text(encoding='utf-8')
-  self.assertIn('images_261103_synthetic/synthetic.jpg',article);self.assertIn('確認済み本文',article)
+  self.assertIn('images_261103_synthetic/synthetic.jpg',article);self.assertNotIn('撮影 人物',article);self.assertNotIn('撮影者',article);self.assertIn('確認済み本文',article)
   top=(self.output/'stage/index.htm').read_bytes();self.assertTrue(top.startswith(self.top.split(b'<!--')[0]))
   self.assertEqual((self.output/'baseline/index.htm').read_bytes(),self.top)
   self.assertEqual((self.source/self.name).read_bytes(),self.md)
