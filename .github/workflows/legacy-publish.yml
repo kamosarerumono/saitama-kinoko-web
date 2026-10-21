@@ -1,0 +1,103 @@
+name: Legacy site publication
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'legacy-publication/bundles/**'
+  workflow_dispatch:
+    inputs:
+      bundle:
+        description: Repository-relative reviewed bundle directory
+        required: true
+        type: string
+      manifest_sha:
+        description: SHA-256 of the reviewed manifest.json
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: legacy-publication
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    outputs:
+      bundle: ${{ steps.scope.outputs.bundle }}
+      manifest_sha: ${{ steps.scope.outputs.manifest_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - id: scope
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_BUNDLE: ${{ inputs.bundle }}
+          INPUT_SHA: ${{ inputs.manifest_sha }}
+          GIT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            bundle="$INPUT_BUNDLE"
+            expected="$INPUT_SHA"
+          else
+            mapfile -t dirs < <(git diff --name-only "$GIT_SHA^" "$GIT_SHA" | awk -F/ '/^legacy-publication\/bundles\/[^/]+\// {print $1 "/" $2 "/" $3}' | sort -u)
+            if [[ "${#dirs[@]}" -ne 1 ]]; then echo 'Expected changes in exactly one reviewed bundle directory.' >&2; exit 2; fi
+            bundle="${dirs[0]}"
+            expected=''
+          fi
+          if [[ ! "$bundle" =~ ^legacy-publication/bundles/[a-zA-Z0-9][a-zA-Z0-9._-]*$ ]]; then echo 'Bundle path is outside the allowlisted directory.' >&2; exit 2; fi
+          if [[ ! -f "$bundle/manifest.json" ]]; then echo 'Bundle manifest is missing.' >&2; exit 2; fi
+          if [[ -n "$(find "$bundle" -type l -print -quit)" ]]; then echo 'Symlinks are not permitted in a publication bundle.' >&2; exit 2; fi
+          while IFS= read -r -d '' path; do
+            case "$path" in
+              "$bundle/manifest.json"|"$bundle/stage/"*|"$bundle/baseline/"*) ;;
+              *) echo 'Unexpected file outside manifest, stage, and baseline.' >&2; exit 2 ;;
+            esac
+          done < <(find "$bundle" -type f -print0)
+          actual="$(sha256sum "$bundle/manifest.json" | cut -d' ' -f1)"
+          if [[ -n "$expected" && "$expected" != "$actual" ]]; then echo 'Manifest SHA does not match the reviewed input.' >&2; exit 2; fi
+          echo "bundle=$bundle" >> "$GITHUB_OUTPUT"
+          echo "manifest_sha=$actual" >> "$GITHUB_OUTPUT"
+      - name: Verify fixed scope and current public baselines
+        env:
+          BUNDLE: ${{ steps.scope.outputs.bundle }}
+          MANIFEST_SHA: ${{ steps.scope.outputs.manifest_sha }}
+        run: python3 scripts/legacy_publish.py --bundle "$BUNDLE" --manifest-sha "$MANIFEST_SHA"
+
+  publish:
+    if: github.ref == 'refs/heads/master'
+    needs: preflight
+    runs-on: ubuntu-latest
+    environment:
+      name: legacy-publish
+    env:
+      GT030_PUBLISH_ENVIRONMENT: legacy-publish
+      SAKURA_FTPS_PASSWORD: ${{ secrets.SAKURA_FTPS_PASSWORD }}
+      BUNDLE: ${{ needs.preflight.outputs.bundle }}
+      MANIFEST_SHA: ${{ needs.preflight.outputs.manifest_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Publish the reviewed manifest and verify HTTPS readback
+        env:
+          GITHUB_ACTIONS: 'true'
+          GITHUB_REF: ${{ github.ref }}
+        run: python3 scripts/legacy_publish.py --bundle "$BUNDLE" --manifest-sha "$MANIFEST_SHA" --publish-actions
+      - name: Retain the manifest-bound backup and receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: legacy-publication-${{ github.run_id }}
+          path: data/legacy-publication/runs/${{ needs.preflight.outputs.manifest_sha }}/
+          if-no-files-found: ignore
+          retention-days: 7

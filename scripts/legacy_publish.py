@@ -202,12 +202,19 @@ def previous_verified(plan, runs):
     verified.update(paths)
  return sorted(verified)
 
-def main():
+def actions_credential(env):
+ if env.get('GITHUB_ACTIONS')!='true' or env.get('GITHUB_REF')!='refs/heads/master' or env.get('GT030_PUBLISH_ENVIRONMENT')!='legacy-publish':
+  raise Stop('Actions publication requires legacy-publish environment on master')
+ password=env.get('SAKURA_FTPS_PASSWORD')
+ if not password:raise Stop('SAKURA_FTPS_PASSWORD is required from the protected environment')
+ return password
+
+def main(argv=None):
  global ROOT,MANIFEST_SHA
  parser=argparse.ArgumentParser(description='確認済み新規例会報告をさくらへ公開。既定は認証なし事前確認。')
  parser.add_argument('--bundle',required=True);parser.add_argument('--manifest-sha',required=True)
- mode=parser.add_mutually_exclusive_group();mode.add_argument('--publish',action='store_true');mode.add_argument('--readback',action='store_true')
- args=parser.parse_args();ROOT=Path(args.bundle).resolve(strict=True);MANIFEST_SHA=args.manifest_sha
+ mode=parser.add_mutually_exclusive_group();mode.add_argument('--publish',action='store_true');mode.add_argument('--readback',action='store_true');mode.add_argument('--publish-actions',action='store_true')
+ args=parser.parse_args(argv);ROOT=Path(args.bundle).resolve(strict=True);MANIFEST_SHA=args.manifest_sha
  plan=load_plan()
  print('対象: '+plan['title']+' / https://'+HOST+'/'+plan['files'][-3]['path'])
  print('ファイル数: '+str(len(plan['files']))+' / 年間一覧・TOPは最後に更新します。')
@@ -216,10 +223,13 @@ def main():
   for row in plan['files']:
    data=https_get(row['path']);matches.append(data is not None and digest(data)==row['sha256'])
   print(json.dumps({'matched':sum(matches),'expected':len(matches)}));return 0 if all(matches) else 2
- if not args.publish:
+ actions_password=None
+ if args.publish_actions:
+  actions_password=actions_credential(os.environ)
+ if not args.publish and not args.publish_actions:
   public_preflight(plan);print('DRY_RUN_PASS: 公開側と手元の内容を確認。認証・送信なし。');return 0
- if not sys.stdin.isatty():raise Stop('本人のWindows端末から起動してください')
- if not confirm_publication(plan):print('キャンセルしました。認証・送信なし。');return 0
+ if args.publish and not sys.stdin.isatty():raise Stop('本人のWindows端末から起動してください')
+ if args.publish and not confirm_publication(plan):print('キャンセルしました。認証・送信なし。');return 0
  # One lock shared across all bundles handled by this installed publisher.
  state=Path(__file__).resolve().parents[1]/'data'/'legacy-publication'
  state.mkdir(parents=True,exist_ok=True)
@@ -235,10 +245,14 @@ def main():
   journal(run,'public_preflight');public_preflight(plan)
   context=ssl.create_default_context();context.minimum_version=ssl.TLSVersion.TLSv1_2
   journal(run,'tls_connect');ftp=AuditedFTP_TLS(context=context,timeout=30);ftp.set_debuglevel(0);ftp.connect(HOST,21);ftp.auth()
-  journal(run,'local_credential_input');password=password_for_publish()
+  if args.publish_actions:
+   journal(run,'actions_credential_input');password=actions_password
+  else:
+   journal(run,'local_credential_input');password=password_for_publish()
   try:
    journal(run,'ftp_login');ftp.login(USER,password)
   finally:del password
+  if args.publish_actions:actions_password=None
   ftp.prot_p();ftp.set_pasv(True);ftp.cwd(REMOTE_ROOT)
   result=apply(ftp,plan,run)
   (run/'receipt.json').write_text(json.dumps(result,indent=2))
