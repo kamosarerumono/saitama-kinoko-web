@@ -71,7 +71,7 @@ class SafeBody(HTMLParser):
                 if tag != 'img': raise ValueError('unsupported source')
                 value = self.image(value)
             if tag == 'img' and key == 'alt':
-                value = without_photographer(value)
+                value = without_photographer(value).strip()
             if key == 'href':
                 if value.startswith('/reikai/') and value.endswith(('.jpg', '.jpeg', '.png')):
                     value = self.image(value)
@@ -114,9 +114,9 @@ class SafeBody(HTMLParser):
 STYLE = 'body{max-width:1100px;margin:auto;padding:20px;font-family:sans-serif;line-height:1.8;background:#f7f6ee;color:#222}table{border-collapse:collapse;width:100%}th,td{border:1px solid #aaa;padding:8px;text-align:left;overflow-wrap:anywhere}img{max-width:100%}'
 
 def without_photographer(value):
-    """Remove supported parenthetical photographer credits from report text."""
+    """Remove supported photographer credits without trimming body whitespace."""
     value = re.sub(r'[（(]\s*(?:撮影者?|写真提供)\s*[:：]?\s*[^()（）]*[）)]', '', value)
-    return value.strip()
+    return value
 
 def render_markdown(source, node='node'):
     proc = subprocess.run([node, str(Path(__file__).with_name('render_legacy_source.mjs'))],

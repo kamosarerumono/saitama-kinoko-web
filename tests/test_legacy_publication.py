@@ -1,4 +1,5 @@
 import copy
+import html
 import io
 import json
 import os
@@ -30,6 +31,30 @@ class FakeFTP:
   assert (self.run/'backup/index.htm').exists()
   if self.fail_write:raise EOFError()
   path=cmd[5:];self.files[path]=b'corrupt' if self.corrupt else stream.read();self.writes.append(path)
+
+class BodyTextTests(unittest.TestCase):
+ def render(self, source):
+  parser=b.SafeBody('images_synthetic');parser.feed(source);parser.close()
+  return ''.join(parser.output)
+ def test_inline_and_entity_spacing_preserved(self):
+  for source in ('<p>A <strong>B</strong> C</p>',
+                 '<p>A &amp; B &#32; C</p>',
+                 '<p>本文 <a href="https://example.test/reference">参照</a> 続き</p>'):
+   with self.subTest(source=source):self.assertEqual(self.render(source),source)
+ def test_preformatted_indentation_preserved(self):
+  source='<pre><code>  first\n    second\n</code></pre>'
+  self.assertEqual(self.render(source),source)
+ def test_credit_removal_preserves_surrounding_text_spacing(self):
+  source='<p>A （撮影 合成人物）<strong>B</strong> C</p>'
+  self.assertEqual(self.render(source),'<p>A <strong>B</strong> C</p>')
+ def test_photographer_row_omission_keeps_other_row_spacing(self):
+  source=('<table><tbody><tr><th> 写真 </th><td>合成人物</td></tr>'
+          '<tr><th> 場所 </th><td> A <em>B</em> C </td></tr></tbody></table>')
+  expected='<table><tbody><tr><th> 場所 </th><td> A <em>B</em> C </td></tr></tbody></table>'
+  self.assertEqual(self.render(source),expected)
+ def test_image_alt_remains_trimmed_after_credit_removal(self):
+  source='<img src="/reikai/2026/fixture.jpg" alt="  合成写真（撮影 合成人物）  ">'
+  self.assertEqual(self.render(source),'<img src="images_synthetic/fixture.jpg" alt="合成写真">')
 
 class LegacyTests(unittest.TestCase):
  def setUp(self):
@@ -64,6 +89,15 @@ class LegacyTests(unittest.TestCase):
   self.assertEqual((self.output/'baseline/index.htm').read_bytes(),self.top)
   self.assertEqual((self.source/self.name).read_bytes(),self.md)
   self.assertEqual(b.prepare(self.spec,self.source,self.inputs,self.output),result)
+ def test_generated_report_keeps_body_whitespace_and_source_bytes(self):
+  body='<p>A <strong>B</strong> C &amp; D</p>\n<pre><code>  first\n    second\n</code></pre>\n'
+  self.rendered['html']=body+self.rendered['html']
+  self.prepare()
+  article=(self.output/'stage/reikai/2026/261103_synthetic.html').read_text(encoding='utf-8')
+  self.assertIn(body,article)
+  self.assertEqual((self.source/self.name).read_bytes(),self.md)
+  self.assertEqual((self.source/('public'+self.photo)).read_bytes(),self.image)
+  self.assertEqual((self.output/'baseline/index.htm').read_bytes(),self.top)
  def test_changed_reviewed_source_rejected(self):
   (self.source/self.name).write_bytes(self.md+b'edit');self.assertRaises(ValueError,self.prepare)
  def test_text_only_report_creates_no_image_directory(self):
@@ -181,9 +215,13 @@ class LegacyTests(unittest.TestCase):
  def test_real_astro_renderer(self):
   self.mock.stop()
   node=os.environ.get('LEGACY_TEST_NODE','node')
-  source=self.md+b'\n![caption]('+self.photo.encode()+b')\n'
+  source=self.md+b'\nA **B** C & D\n\n```\n  first\n    second\n```\n\n![caption]('+self.photo.encode()+b')\n'
   (self.source/self.name).write_bytes(source);self.spec['source']['sha256']=b.sha(source)
   result=b.prepare(self.spec,self.source,self.inputs,self.output,node)
   self.assertEqual(result['file_count'],4)
+  article=(self.output/'stage/reikai/2026/261103_synthetic.html').read_text(encoding='utf-8')
+  self.assertIn('<p>A <strong>B</strong> C & D</p>',html.unescape(article))
+  self.assertIn('  first\n    second\n',article)
+  self.assertEqual((self.source/self.name).read_bytes(),source)
 
 if __name__=='__main__':unittest.main(verbosity=2)
