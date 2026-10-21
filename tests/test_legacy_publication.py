@@ -143,6 +143,25 @@ class LegacyTests(unittest.TestCase):
   self.prepare()
   with patch.object(ui.sys,'platform','win32'),patch.object(ui.sys.stdin,'isatty',return_value=True):
    for result in [0,2,7]:self.assertFalse(ui.confirm_publication(self.plan,Mock(return_value=result)))
+ def test_correction_confirmation_names_single_article_and_keeps_no_as_default(self):
+  plan={'operation':'correction','title':'Minoyama photographer correction',
+        'files':[{'path':f'reikai/2026/images_261004/{n:02d}.jpg'} for n in range(24)] +
+                [{'path':'reikai/2026/261004_minoyama.html'},
+                 {'path':'reikai/2026/annual.html'},{'path':'index.htm'}]}
+  show=Mock(side_effect=[6,7,2])
+  with patch.object(ui.sys,'platform','win32'),patch.object(ui.sys.stdin,'isatty',return_value=True):
+   self.assertTrue(ui.confirm_publication(plan,show))
+   self.assertFalse(ui.confirm_publication(plan,show))
+   self.assertFalse(ui.confirm_publication(plan,show))
+  self.assertEqual(show.call_count,3)
+  _,message,title,flags=show.call_args_list[0].args
+  self.assertIn('https://ippon.sakura.ne.jp/reikai/2026/261004_minoyama.html',message)
+  self.assertIn('27 files checked; only the article HTML may change.',message)
+  self.assertIn('Existing image and navigation files must already match.',message)
+  self.assertIn('All existing files are backed up before the article update.',message)
+  self.assertIn('No cancels without authentication or upload.',message)
+  self.assertEqual(title,'Reviewed article correction')
+  self.assertEqual(flags,0x4|0x20|0x100|0x10000)
  def test_actual_cmd_rejects_pipe_before_credentials(self):
   if sys.platform!='win32':self.skipTest('Windows launcher')
   self.prepare();proc=subprocess.run(['cmd.exe','/d','/c',str(self.output/'PUBLISH_REPORT.cmd')],input='\n',capture_output=True,text=True,encoding='utf-8',timeout=20)

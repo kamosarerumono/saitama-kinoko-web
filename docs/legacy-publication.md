@@ -1,5 +1,20 @@
 # 新しい例会報告を、現在のさくらサイトへ掲載する
 
+## 通常の Git 保存と送信先確認
+
+通常の feature 保存では、現在の branch 名と push 先 branch 名を一致させます。たとえば `feature/topic` の upstream が誤って `origin/master` なら、push を止めて upstream を確認し、送信先を直してから続けます。feature branch を `master` / `main` へ直接送る操作は拒否します。承認済みの merge は既存 PR 経由で行い、revert は意図した branch と完全 ref を確認して既存の finalize 手順に従います。
+
+この repository の pre-push guard を有効にする設定は一度だけ行います。remote URL は対象 repository と完全一致させ、認証値を含む URL は使いません。
+
+```text
+git config --local codex.pushGuard.expectedRemote https://github.com/kamosarerumono/saitama-kinoko-web.git
+git config --local core.hooksPath .githooks
+```
+
+通常の finalize 直前に、branch、remote、source/destination の完全 ref、source SHA を確認します。hook は実際の Git push から remote 名・URL・source ref/SHA・destination ref を受け取り、設定済み repository と照合します。`origin/master` を upstream にした feature branch は、どちらの refspec を指定しても fail closed します。初回 push で upstream がまだない branch は、同名 branch への完全 refspec のみ通ります。hook は push を実行せず、PR merge や同名 master/main の更新を禁止しません。remote が不明、ref が省略・不一致、SHA が変化した場合は停止して最新状態を読み直します。
+
+回帰テスト `python -m unittest tests.test_git_push_guard` は一時 bare repository に実際の pre-push hook を設定し、feature→master の拒否と remote ref 不変、origin/master upstream の拒否、正しい同名 feature push、同名 master maintenance push、remote identity 不一致を確認します。本番 remote には接続しません。
+
 対象は**新規の例会報告1件**。既存URL・過去記事・さくらホストを保持する。全件移行、CMS、Gmail取得、無人公開、サーバー整理の実行は含まない。
 
 ## 本人の操作
@@ -59,6 +74,12 @@ python scripts/legacy_publish.py --bundle data/review/bundle --manifest-sha <表
 記録は `data/legacy-publication/runs/<manifest SHA>/<実行日時>/`。各実行のバックアップは別フォルダへ排他的に作成し、上書きしない。共通lockで同じpublisherの二重実行を防ぐ。既存の別公開ツールも同時起動しない。
 
 途中失敗は工程・対象path・FTP動詞だけを記録し、秘密・応答本文・例外本文を記録しない。自動再接続/無限再試行/自動巻戻しはしない。再開時は同一manifestの過去完了記録と現状を照合し、一致分を省略する。確認済みファイルの消失/変更や途中書込による未知hashは停止し、本人へ報告する。
+
+既存記事の訂正は新規記事の公開と区別し、訂正bundleが示す対象HTML 1件だけを更新する。画像24件と年間一覧/TOPの2件はhash一致を検査し、変更も再送もしない。bundleを再生成して訂正対象やhashを変えない。実行前にremoteとHTTPSの現状を読み、既に訂正済みなら送信しない。全対象のバックアップ、対象HTMLのreceipt、完了後の全27件HTTPS読戻しを確認する。receiptがない/結果が不明なら再送せず、まず実行状態・progress・HTTPSの現状を照合する。
+
+Windowsでは、生成済みの `PUBLISH_<記事>_CORRECTION.cmd` をログイン中の通常デスクトップでエクスプローラーから開く。CodexのPTY、非対話サービス、隠し起動からは開かない。表示された確認には対象HTMLの完全URL、更新1件・27件検査、画像/導線の一致条件、バックアップの説明がある。初期選択は No のままなので、内容が一致すると本人が確認した場合だけ Yes を押す。ダイアログが見えない、対象が違う、確認の前提が変わった場合は No/閉じるで終了し、別経路で起動・認証・再送しない。既存のTLSとホスト名検証、資格情報の内部利用を保ち、確認機構を省略するモードは設けない。
+
+一番手数の少ない正規操作は、この生成済みCMDをエクスプローラーで一度開き、記事内容を確認して Yes を押す方法。Windowsの対話デスクトップを操作できる正式なUI接続が使えない場合、ツールからダイアログを読んだり操作できると仮定せず、本人がその画面で操作する。
 
 ## GT030との関係
 
