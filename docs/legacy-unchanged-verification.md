@@ -1,0 +1,15 @@
+# 内容を変えない本番経路の確認
+
+本人の「本番でも内容を変えずに上げ直せるか確認」の依頼に対し、既存の変更なしskipを維持する。実転送を強制しない。固定27件を検査する `legacy-verify-unchanged.yml` をmasterへ通常採用した後、master refで手動1回だけ実行する。登録前のdispatch・設定変更・未検証merge・結果不明の再送は行わない。
+
+固定manifestは既存承認済み美の山bundleとbyte一致し、SHA-256は `cc1a623611a30f6bad31c374b4f194785e7c1af35fbf65258917282b389fadd6`。Gitに追加するのは既存公開27対象のpath/hash/size等のmanifestだけで、画像・HTMLの原本・私有保存runや資格情報は追加しない。既存の訂正後本文hashを維持し、古いGit記事は候補に使わない。
+
+入口は対象checkout SHA、Actions/master、既存 `legacy-publish` Environmentを検査する。最初のHTTPS27件がすべて固定stage hash/sizeと一致した場合だけ既存の資格情報内部利用とTLS検証付きFTPSに進む。Secret値を出力せず、既存設定を変更しない。HTTPSで取得した一致bytesから一時bundleを作り、既存load_planとpublisher.applyを使用する。
+
+FTPSは読取り専用ラッパーを通し、固定dirと27パスのみを許可する。各RETRでsize/hash一致を強制し、STOR・MKD・削除・rename等を拒否する。未知の変更や競合があれば送信へ切り替えず停止する。既存applyのバックアップとskip後の全件HTTPS読戻しも通すが、バックアップ・stage・HTTP本文は一時領域だけでartifactに含めない。既存の通常公開workflowとガードを変更しない。
+
+上限は1実行、HTTPS81 read、FTPS54 RETR・112 MLSD、処理内の期限7分（各要求timeout30秒）、job10分。期限は要求開始前だけでなく応答後・ストリーム読取り中・成功確定前・close後にも照合し、期限を越えて戻った応答を成功にしない。自動retry/reconnectはしない。共通のpublication concurrencyを使い、同じ本番経路の実行を直列化する。標準Ubuntu runnerと既存Secretを使い、有料runner・新サービス・権限拡大は導入しない。
+
+成功は `UNCHANGED_VERIFIED`、27 verified・27 skipped・0 uploaded・remote_writes_permitted=false。これは本番HTTPS/FTPS認証・読取り・変更なしskipの成功であり、同一内容の実STOR送信成功とは扱わない。例外時は `STOPPED_UNCONFIRMED` と工程・型・件数だけを残し、値や例外本文は記録しない。artifactは固定SHAと件数を含むJSON1個・保存1日。runの実HEAD/ref/event、job完了、receiptのSHA/件数を読戻して結論を出す。
+
+元のWindows全体失敗やGmail/定時接続、全サイト管理、通常Git編集から公開bundleへの自動配置は別の未受入事項として残す。今回の確認をそれらの完了や新記事公開の承認へ読み替えない。

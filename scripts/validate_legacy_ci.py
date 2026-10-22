@@ -17,8 +17,9 @@ TEST_NAMES = (
     'tests.test_legacy_static_bundle.StaticBundleTests',
     'tests.test_legacy_git_candidate.GitCandidateTests',
     'tests.test_legacy_git_candidate.GitReadContractTests',
+    'tests.test_legacy_live_verification.LiveVerificationTests',
 )
-EXPECTED_TEST_COUNT = 27
+EXPECTED_TEST_COUNT = 38
 
 
 def checked_head(expected: str) -> str:

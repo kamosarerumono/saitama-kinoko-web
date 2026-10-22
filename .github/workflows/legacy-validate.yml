@@ -6,6 +6,8 @@
       "branches": ["master"],
       "paths": [
         ".github/workflows/legacy-validate.yml",
+        ".github/workflows/legacy-verify-unchanged.yml",
+        "legacy-publication/verification/minoyama-manifest.json",
         "scripts/validate_legacy_ci.py",
         "scripts/legacy_*.py",
         "tests/test_legacy_*.py"
