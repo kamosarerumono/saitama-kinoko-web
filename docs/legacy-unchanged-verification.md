@@ -10,6 +10,8 @@ FTPSは読取り専用ラッパーを通し、固定dirと27パスのみを許�
 
 上限は1実行、HTTPS81 read、FTPS54 RETR・112 MLSD、処理内の期限7分（各要求timeout30秒）、job10分。期限は要求開始前だけでなく応答後・ストリーム読取り中・成功確定前・close後にも照合し、期限を越えて戻った応答を成功にしない。自動retry/reconnectはしない。共通のpublication concurrencyを使い、同じ本番経路の実行を直列化する。標準Ubuntu runnerと既存Secretを使い、有料runner・新サービス・権限拡大は導入しない。
 
-成功は `UNCHANGED_VERIFIED`、27 verified・27 skipped・0 uploaded・remote_writes_permitted=false。これは本番HTTPS/FTPS認証・読取り・変更なしskipの成功であり、同一内容の実STOR送信成功とは扱わない。例外時は `STOPPED_UNCONFIRMED` と工程・型・件数だけを残し、値や例外本文は記録しない。artifactは固定SHAと件数を含むJSON1個・保存1日。runの実HEAD/ref/event、job完了、receiptのSHA/件数を読戻して結論を出す。
+成功は `UNCHANGED_VERIFIED`、27 verified・27 skipped・0 uploaded・remote_writes_permitted=false。これは本番HTTPS/FTPS認証・読取り・変更なしskipの成功であり、同一内容の実STOR送信成功とは扱わない。例外時は `STOPPED_UNCONFIRMED` と工程・型・件数・許可した動詞だけを残し、引数・応答・秘密値や例外本文は記録しない。artifactは固定SHAと件数を含むJSON1個・保存1日。runの実HEAD/ref/event、job完了、receiptのSHA/件数を読戻して結論を出す。
+
+接続診断の工程名は、TLS/client準備 `ftps_setup`、TCP接続とbanner待ち `ftps_connect_banner`、`ftps_auth_tls`、`ftps_login`、PBSZ/PROT Pの `ftps_prot_p`、ローカルのpassive設定 `ftps_passive_setting`、`ftps_cwd` に分ける。接続呼出しの順序・方式は変えず、工程は試みた呼出しを表す。失敗receiptには監査clientが既に保持する最終動詞を `last_ftp_command` として追加するが、AUTH/USER/PASS/ACCT/PBSZ/PROT/CWDだけを許可し、未観測・未知値・引数付き値はnullにする。引数・応答・秘密値・例外本文は保存しない。以前の `ftps_connect` / EOFErrorだけの記録から、過去の成功段階や切断コマンドを補完しない。
 
 元のWindows全体失敗やGmail/定時接続、全サイト管理、通常Git編集から公開bundleへの自動配置は別の未受入事項として残す。今回の確認をそれらの完了や新記事公開の承認へ読み替えない。

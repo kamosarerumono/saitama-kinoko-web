@@ -20,6 +20,12 @@ MANIFEST = ROOT / 'legacy-publication/verification/minoyama-manifest.json'
 MANIFEST_SHA = 'cc1a623611a30f6bad31c374b4f194785e7c1af35fbf65258917282b389fadd6'
 
 
+def connection_verb(client):
+    value = getattr(client, 'last_command', None)
+    return value if isinstance(value, str) and value in (
+        'AUTH', 'USER', 'PASS', 'ACCT', 'PBSZ', 'PROT', 'CWD') else None
+
+
 class ReadOnlyFTP:
     def __init__(self, client, plan, check_deadline, counts):
         self.client = client
@@ -137,18 +143,24 @@ def verify(expected_head: str, report: Path, *, get=None, ftp_factory=None) -> d
             password = publisher.actions_credential(os.environ)
             try:
                 check_deadline()
-                phase = 'ftps_connect'
+                phase = 'ftps_setup'
                 context = ssl.create_default_context()
                 context.minimum_version = ssl.TLSVersion.TLSv1_2
                 client = ftp_factory(context=context, timeout=30)
                 client.set_debuglevel(0)
+                phase = 'ftps_connect_banner'
                 client.connect(publisher.HOST, 21)
+                phase = 'ftps_auth_tls'
                 client.auth()
+                phase = 'ftps_login'
                 client.login(publisher.USER, password)
             finally:
                 del password
+            phase = 'ftps_prot_p'
             client.prot_p()
+            phase = 'ftps_passive_setting'
             client.set_pasv(True)
+            phase = 'ftps_cwd'
             client.cwd(publisher.REMOTE_ROOT)
             phase = 'unchanged_noop'
             run = Path(scratch) / 'run'
@@ -161,7 +173,8 @@ def verify(expected_head: str, report: Path, *, get=None, ftp_factory=None) -> d
             summary.update(status='UNCHANGED_VERIFIED', skipped_count=27, verified_count=27,
                            target_count=27)
     except (Exception, KeyboardInterrupt) as error:
-        summary.update(status='STOPPED_UNCONFIRMED', phase=phase, error_type=type(error).__name__)
+        summary.update(status='STOPPED_UNCONFIRMED', phase=phase, error_type=type(error).__name__,
+                       last_ftp_command=connection_verb(client))
     finally:
         if client is not None:
             try:
@@ -169,7 +182,7 @@ def verify(expected_head: str, report: Path, *, get=None, ftp_factory=None) -> d
                 check_deadline()
             except Exception as error:
                 summary.update(status='STOPPED_UNCONFIRMED', phase='ftps_close',
-                               error_type=type(error).__name__)
+                               error_type=type(error).__name__, last_ftp_command=connection_verb(client))
     summary.update(counts)
     report.parent.mkdir(parents=True, exist_ok=True)
     with report.open('x', encoding='utf-8') as stream:
