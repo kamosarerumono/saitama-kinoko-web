@@ -1,0 +1,53 @@
+{
+  "name": "Legacy offline synthetic validation",
+  "on": {
+    "pull_request": {
+      "types": ["opened", "synchronize", "reopened"],
+      "branches": ["master"],
+      "paths": [
+        ".github/workflows/legacy-validate.yml",
+        "scripts/validate_legacy_ci.py",
+        "scripts/legacy_*.py",
+        "tests/test_legacy_*.py"
+      ]
+    }
+  },
+  "permissions": {"contents": "read"},
+  "jobs": {
+    "synthetic": {
+      "if": "github.event.pull_request.number == 12 && github.event.pull_request.head.repo.full_name == github.repository",
+      "runs-on": "ubuntu-24.04",
+      "timeout-minutes": 5,
+      "steps": [
+        {
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "ref": "${{ github.event.pull_request.head.sha }}",
+            "persist-credentials": false,
+            "fetch-depth": 1
+          }
+        },
+        {
+          "name": "Validate fixed head with synthetic inputs only",
+          "env": {
+            "EXPECTED_HEAD": "${{ github.event.pull_request.head.sha }}",
+            "PYTHONDONTWRITEBYTECODE": "1"
+          },
+          "run": "python3 -B scripts/validate_legacy_ci.py --expected-head \"$EXPECTED_HEAD\" --report \"$RUNNER_TEMP/legacy-validation/report.json\""
+        },
+        {
+          "name": "Retain synthetic counts and source identity only",
+          "if": "always()",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "legacy-offline-validation-${{ github.run_id }}",
+            "path": "${{ runner.temp }}/legacy-validation/report.json",
+            "if-no-files-found": "error",
+            "retention-days": 1,
+            "compression-level": 9
+          }
+        }
+      ]
+    }
+  }
+}
