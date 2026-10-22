@@ -1,5 +1,7 @@
 # 新しい例会報告を、現在のさくらサイトへ掲載する
 
+本人が依頼した通常の記事追加・訂正は、担当が内容と検証結果を確認して進め、記事ごとの本人への追加確認を必須とはしない。Actions経路の対象範囲、検証、Environment設定との関係は[GitHub Actionsからの旧サイト公開](gha-ftps-publication.md)に従う。以下の本人操作・確認画面の説明は、Windowsの手動 `--publish` 経路の仕様であり、Actions経路にも毎回の本人操作を要求するものではない。認証設定・保護設定・アクセス範囲の変更は別途扱う。
+
 ## 通常の Git 保存と送信先確認
 
 通常の feature 保存では、現在の branch 名と push 先 branch 名を一致させます。たとえば `feature/topic` の upstream が誤って `origin/master` なら、push を止めて upstream を確認し、送信先を直してから続けます。feature branch を `master` / `main` へ直接送る操作は拒否します。承認済みの merge は既存 PR 経由で行い、revert は意図した branch と完全 ref を確認して既存の finalize 手順に従います。
@@ -15,7 +17,7 @@ git config --local core.hooksPath .githooks
 
 回帰テスト `python -m unittest tests.test_git_push_guard` は一時 bare repository に実際の pre-push hook を設定し、feature→master の拒否と remote ref 不変、origin/master upstream の拒否、正しい同名 feature push、同名 master maintenance push、remote identity 不一致を確認します。本番 remote には接続しません。
 
-対象は**新規の例会報告1件**。既存URL・過去記事・さくらホストを保持する。全件移行、CMS、Gmail取得、無人公開、サーバー整理の実行は含まない。
+このWindows手動経路の新規記事入口は**新規の例会報告1件**を対象とする。既存URL・過去記事・さくらホストを保持する。全件移行、CMS、Gmail取得、無人公開、サーバー整理の実行は含まない。
 
 ## 本人の操作
 
@@ -77,7 +79,7 @@ python scripts/legacy_publish.py --bundle data/review/bundle --manifest-sha <表
 
 既存記事の訂正は新規記事の公開と区別し、訂正bundleが示す対象HTML 1件だけを更新する。画像24件と年間一覧/TOPの2件はhash一致を検査し、変更も再送もしない。bundleを再生成して訂正対象やhashを変えない。実行前にremoteとHTTPSの現状を読み、既に訂正済みなら送信しない。全対象のバックアップ、対象HTMLのreceipt、完了後の全27件HTTPS読戻しを確認する。receiptがない/結果が不明なら再送せず、まず実行状態・progress・HTTPSの現状を照合する。
 
-Windowsでは、生成済みの `PUBLISH_<記事>_CORRECTION.cmd` をログイン中の通常デスクトップでエクスプローラーから開く。CodexのPTY、非対話サービス、隠し起動からは開かない。表示された確認には対象HTMLの完全URL、更新1件・27件検査、画像/導線の一致条件、バックアップの説明がある。初期選択は No のままなので、内容が一致すると本人が確認した場合だけ Yes を押す。ダイアログが見えない、対象が違う、確認の前提が変わった場合は No/閉じるで終了し、別経路で起動・認証・再送しない。既存のTLSとホスト名検証、資格情報の内部利用を保ち、確認機構を省略するモードは設けない。
+Windowsでは、生成済みの `PUBLISH_<記事>_CORRECTION.cmd` をログイン中の通常デスクトップでエクスプローラーから開く。CodexのPTY、非対話サービス、隠し起動からは開かない。表示された確認には対象HTMLの完全URL、更新1件・27件検査、画像/導線の一致条件、バックアップの説明がある。初期選択は No のままなので、内容が一致すると本人が確認した場合だけ Yes を押す。ダイアログが見えない、対象が違う、確認の前提が変わった場合は No/閉じるで終了し、別経路で起動・認証・再送しない。既存のTLSとホスト名検証、資格情報の内部利用を保ち、このWindows手動経路に確認機構を省略するモードは設けない。
 
 一番手数の少ない正規操作は、この生成済みCMDをエクスプローラーで一度開き、記事内容を確認して Yes を押す方法。Windowsの対話デスクトップを操作できる正式なUI接続が使えない場合、ツールからダイアログを読んだり操作できると仮定せず、本人がその画面で操作する。
 

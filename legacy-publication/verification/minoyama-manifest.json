@@ -1,0 +1,202 @@
+{
+  "auto_publish": false,
+  "date": "2026-10-04",
+  "files": [
+    {
+      "before_sha256": "c206510d73c3a893b95967a310600688b391439a378a51ea16ca9071957b846a",
+      "bytes": 154379,
+      "path": "reikai/2026/images_261004/261004_minoyama-01.jpg",
+      "role": "image",
+      "sha256": "c206510d73c3a893b95967a310600688b391439a378a51ea16ca9071957b846a"
+    },
+    {
+      "before_sha256": "e69c289eee9b430020b66c31753099e7a423eeeba6fbe5ac35ff8abc641b854c",
+      "bytes": 243080,
+      "path": "reikai/2026/images_261004/261004_minoyama-02.png",
+      "role": "image",
+      "sha256": "e69c289eee9b430020b66c31753099e7a423eeeba6fbe5ac35ff8abc641b854c"
+    },
+    {
+      "before_sha256": "f051d4a699a29a175e555bed3537e710266882df130f90e647f35ac50af31852",
+      "bytes": 176904,
+      "path": "reikai/2026/images_261004/261004_minoyama-03.png",
+      "role": "image",
+      "sha256": "f051d4a699a29a175e555bed3537e710266882df130f90e647f35ac50af31852"
+    },
+    {
+      "before_sha256": "027f006b59da188ad354be2a0f27d59d6441a8edacfa8a50a9666458f8597ce8",
+      "bytes": 201224,
+      "path": "reikai/2026/images_261004/261004_minoyama-04.png",
+      "role": "image",
+      "sha256": "027f006b59da188ad354be2a0f27d59d6441a8edacfa8a50a9666458f8597ce8"
+    },
+    {
+      "before_sha256": "8d1c269c54a50bba9199bdad412f0252d56e534c4a4f1e83b9c8cd596167acc9",
+      "bytes": 531562,
+      "path": "reikai/2026/images_261004/261004_minoyama-05.png",
+      "role": "image",
+      "sha256": "8d1c269c54a50bba9199bdad412f0252d56e534c4a4f1e83b9c8cd596167acc9"
+    },
+    {
+      "before_sha256": "cd30d0e8945d7a7b684aaefd5a0bbb463356a2d9d2e030be851191892839fb0a",
+      "bytes": 208599,
+      "path": "reikai/2026/images_261004/261004_minoyama-06.png",
+      "role": "image",
+      "sha256": "cd30d0e8945d7a7b684aaefd5a0bbb463356a2d9d2e030be851191892839fb0a"
+    },
+    {
+      "before_sha256": "e1c2b082ccc85e5988db1b01ea9f580f8403257fbc0c4b5d77f37da69140615d",
+      "bytes": 376665,
+      "path": "reikai/2026/images_261004/261004_minoyama-07.png",
+      "role": "image",
+      "sha256": "e1c2b082ccc85e5988db1b01ea9f580f8403257fbc0c4b5d77f37da69140615d"
+    },
+    {
+      "before_sha256": "5d2d86a0fe4c556a3550fdacd83af5d37b553bd90f1e71335ade1fa0b80609a3",
+      "bytes": 595578,
+      "path": "reikai/2026/images_261004/261004_minoyama-08.png",
+      "role": "image",
+      "sha256": "5d2d86a0fe4c556a3550fdacd83af5d37b553bd90f1e71335ade1fa0b80609a3"
+    },
+    {
+      "before_sha256": "c9e2afdffa66e573ccfc14d7781656d73fec27eb173714fa66d4fd359e336476",
+      "bytes": 588226,
+      "path": "reikai/2026/images_261004/261004_minoyama-09.png",
+      "role": "image",
+      "sha256": "c9e2afdffa66e573ccfc14d7781656d73fec27eb173714fa66d4fd359e336476"
+    },
+    {
+      "before_sha256": "da4105b6a6f7d0f68a2a50bc1c38761cccd6686e56432ee6d40fddf6e1eadf84",
+      "bytes": 818398,
+      "path": "reikai/2026/images_261004/261004_minoyama-10.png",
+      "role": "image",
+      "sha256": "da4105b6a6f7d0f68a2a50bc1c38761cccd6686e56432ee6d40fddf6e1eadf84"
+    },
+    {
+      "before_sha256": "8052de993360a01c9336aa47619c503366168cb1326edb61b373f8a43c49f204",
+      "bytes": 690937,
+      "path": "reikai/2026/images_261004/261004_minoyama-11.png",
+      "role": "image",
+      "sha256": "8052de993360a01c9336aa47619c503366168cb1326edb61b373f8a43c49f204"
+    },
+    {
+      "before_sha256": "806c6d084e075d6736105c8beaf03dd7241164fd0b0b1d34e415743b447bc31f",
+      "bytes": 460438,
+      "path": "reikai/2026/images_261004/261004_minoyama-12.png",
+      "role": "image",
+      "sha256": "806c6d084e075d6736105c8beaf03dd7241164fd0b0b1d34e415743b447bc31f"
+    },
+    {
+      "before_sha256": "f4cbedf1d924b207bbae759c21a1153a65e097d66d2232b130cc4886bfac005b",
+      "bytes": 548210,
+      "path": "reikai/2026/images_261004/261004_minoyama-13.png",
+      "role": "image",
+      "sha256": "f4cbedf1d924b207bbae759c21a1153a65e097d66d2232b130cc4886bfac005b"
+    },
+    {
+      "before_sha256": "50c11adc950f2696242b7ee6126c64f1ad0a18ab875f79c2e356ae713d5ee518",
+      "bytes": 335176,
+      "path": "reikai/2026/images_261004/261004_minoyama-14.png",
+      "role": "image",
+      "sha256": "50c11adc950f2696242b7ee6126c64f1ad0a18ab875f79c2e356ae713d5ee518"
+    },
+    {
+      "before_sha256": "b26b6201342d40c8faddcdc4ca0f529389b88b943d67a2d49f071732671004c0",
+      "bytes": 487086,
+      "path": "reikai/2026/images_261004/261004_minoyama-15.png",
+      "role": "image",
+      "sha256": "b26b6201342d40c8faddcdc4ca0f529389b88b943d67a2d49f071732671004c0"
+    },
+    {
+      "before_sha256": "7c39dc154b3f23a086be3dcc7031b1fbf9af9baba0b85399b2603837e7fd18d7",
+      "bytes": 466705,
+      "path": "reikai/2026/images_261004/261004_minoyama-16.png",
+      "role": "image",
+      "sha256": "7c39dc154b3f23a086be3dcc7031b1fbf9af9baba0b85399b2603837e7fd18d7"
+    },
+    {
+      "before_sha256": "0d60ed577f03ea06c8eb35065f3055e058688ff60f85208ce63d868ba99cb4f6",
+      "bytes": 437561,
+      "path": "reikai/2026/images_261004/261004_minoyama-17.png",
+      "role": "image",
+      "sha256": "0d60ed577f03ea06c8eb35065f3055e058688ff60f85208ce63d868ba99cb4f6"
+    },
+    {
+      "before_sha256": "d307d6c8e2f16c841ea92ec6dda0494af8873f0e65dd144fec161c6a010e60d1",
+      "bytes": 311447,
+      "path": "reikai/2026/images_261004/261004_minoyama-18.png",
+      "role": "image",
+      "sha256": "d307d6c8e2f16c841ea92ec6dda0494af8873f0e65dd144fec161c6a010e60d1"
+    },
+    {
+      "before_sha256": "d154c13babb47aea576251e2c32b6f762f1134a2064e5f72bdfabcd731d4b6ca",
+      "bytes": 315444,
+      "path": "reikai/2026/images_261004/261004_minoyama-19.png",
+      "role": "image",
+      "sha256": "d154c13babb47aea576251e2c32b6f762f1134a2064e5f72bdfabcd731d4b6ca"
+    },
+    {
+      "before_sha256": "664765979912fca3fe97e92960b66cbbc8241e8610a741463e78ad4081ac3c45",
+      "bytes": 309743,
+      "path": "reikai/2026/images_261004/261004_minoyama-20.png",
+      "role": "image",
+      "sha256": "664765979912fca3fe97e92960b66cbbc8241e8610a741463e78ad4081ac3c45"
+    },
+    {
+      "before_sha256": "ee0cbd46d68562502655bd7491374246b01e3650ba66b1d535e9f2a522532562",
+      "bytes": 238349,
+      "path": "reikai/2026/images_261004/261004_minoyama-21.png",
+      "role": "image",
+      "sha256": "ee0cbd46d68562502655bd7491374246b01e3650ba66b1d535e9f2a522532562"
+    },
+    {
+      "before_sha256": "5ed6e0d8c92374e8f4fe5272a542e2cb9ac8c2227827855941d230fb8b10a348",
+      "bytes": 462742,
+      "path": "reikai/2026/images_261004/261004_minoyama-22.png",
+      "role": "image",
+      "sha256": "5ed6e0d8c92374e8f4fe5272a542e2cb9ac8c2227827855941d230fb8b10a348"
+    },
+    {
+      "before_sha256": "46ac68cb9d574369f9d7c52c0d4c23a4bc4ea35c5d3044198b837f3804155a9f",
+      "bytes": 487378,
+      "path": "reikai/2026/images_261004/261004_minoyama-23.png",
+      "role": "image",
+      "sha256": "46ac68cb9d574369f9d7c52c0d4c23a4bc4ea35c5d3044198b837f3804155a9f"
+    },
+    {
+      "before_sha256": "e8ebc5b2f93be86b6b96c82055523fdaf4ad0319c9f4c5b00e41ef9db98fcedd",
+      "bytes": 465197,
+      "path": "reikai/2026/images_261004/261004_minoyama-24.png",
+      "role": "image",
+      "sha256": "e8ebc5b2f93be86b6b96c82055523fdaf4ad0319c9f4c5b00e41ef9db98fcedd"
+    },
+    {
+      "before_sha256": "f0b2c26c10ef2bbe9e709abfea9920bfe19f99b8ad7e4ba0a59c297ca5851a1a",
+      "bytes": 18804,
+      "path": "reikai/2026/261004_minoyama.html",
+      "role": "article",
+      "sha256": "5820e9c9ed68b7e77a4f35c62a93785baed70c48aa21f481a289095abded6995"
+    },
+    {
+      "before_sha256": "7a4f04c47b02a06f5405876039c7f30c6062bc17351a5a35d317cf98a1435ea0",
+      "bytes": 1631,
+      "path": "reikai/2026reikaihoukoku.html",
+      "role": "annual",
+      "sha256": "7a4f04c47b02a06f5405876039c7f30c6062bc17351a5a35d317cf98a1435ea0"
+    },
+    {
+      "before_sha256": "590b5df6021cff5c56f4f922d11c67c4218a1d18b3bfbdaac6961639696c0b5c",
+      "bytes": 3951,
+      "path": "index.htm",
+      "role": "top",
+      "sha256": "590b5df6021cff5c56f4f922d11c67c4218a1d18b3bfbdaac6961639696c0b5c"
+    }
+  ],
+  "host": "ippon.sakura.ne.jp",
+  "legacy_slug": "261004_minoyama",
+  "legacy_year": 2026,
+  "operation": "correction",
+  "remote_root": "/home/ippon/www",
+  "schema_version": 1,
+  "title": "美の山キノコ観察会（2026年10月4日）報告"
+}
