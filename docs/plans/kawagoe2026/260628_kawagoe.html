@@ -3,6 +3,7 @@
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <TITLE>川越・狭山平地林観察会（2026年6月28日）報告</TITLE>
 <LINK href="../../hpbsite.css" rel="stylesheet" type="text/css">
 <STYLE>
@@ -34,13 +35,83 @@
     font-size: 12px;
     color: #666;
 }
+
+/* Representative report only; preserve the existing colors and source URLs. */
+.report-sample {
+    margin: 0;
+    padding: 1rem;
+    line-height: 1.7;
+}
+.report-sample > center {
+    max-width: 52rem;
+    margin: 0 auto;
+}
+.report-sample > center > table {
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+}
+.report-sample h2,
+.report-sample td {
+    overflow-wrap: break-word;
+}
+.report-sample .gallery-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.report-sample .gallery-item {
+    display: block;
+    box-sizing: border-box;
+    flex: 0 1 33.333%;
+    width: auto;
+    min-width: 0;
+}
+.report-sample .gallery-item img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.report-sample .gallery-item p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+.report-sample .report-species-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+}
+.report-sample .report-species-scroll table {
+    min-width: 22rem;
+}
+.report-sample > center > b > a {
+    display: inline-block;
+    padding: 0.5em 0.25em;
+}
+@media (max-width: 40rem) {
+    .report-sample {
+        padding: 0.75rem;
+    }
+    .report-sample .gallery-row {
+        display: block;
+    }
+    .report-sample .gallery-item {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+    .report-sample .report-metadata {
+        table-layout: fixed;
+    }
+    .report-sample .report-metadata > tbody > tr > td:first-child {
+        width: 28%;
+    }
+}
 </STYLE>
 </HEAD>
-<BODY bgcolor="#dfdaca">
+<BODY bgcolor="#dfdaca" class="report-sample">
 
 <CENTER>
 <H2>川越・狭山平地林観察会（2026年6月28日）報告</H2>
-<TABLE width="80%" border="0" cellpadding="5" cellspacing="0">
+<TABLE width="80%" border="0" cellpadding="5" cellspacing="0" class="report-metadata">
   <TBODY>
     <TR>
       <TD align="right" valign="top" width="20%"><b>開催日</b></TD>
@@ -84,10 +155,10 @@
       <TD width="10"></TD>
       <TD valign="top">
         <p>
-          前日は雨、当日も雨が残ると予報されているなか集合場所に向かいました。今年は昨年と比べ雨もよく降り菌類の発生に期待が高まりました。開会時には雨も上がり会長からの説明を聞き、赤坂の森と川越森のさんぽ道コースへと移動しました。<br>
+          前日は雨、当日も雨が残ると予報されているなか集合場所に向かいました。今年は昨年と比べて雨もよく降り菌類の発生に期待が高まりました。開会時には雨も上がり会長からの説明を聞き、赤坂の森と川越森のさんぽ道コースへと移動しました。<br>
           川越のさんぽ道コースを基点によく歩かれている参加者が、近年このあたりの菌類の種類と量が減ってきていて環境の変化を感じると話されていました。<br>
           午後は赤坂の森にあるセンターの会議室で<b>同定会</b>が開催され、会長と近藤氏により持ち込まれた菌類が同定されました。<br>
-          里山にも良く発生しているタマゴタケと高い山に発生するタマゴタケの違いについて説明があり、里山に発生するタマゴタケは正式には<b>サトタマゴタケ</b>となることの説明をして下さいました。近年の分類についていく頭が欲しいとつくづく思いました。
+          里山にも良く発生しているタマゴタケと高い山に発生するタマゴタケの違いについて説明があり、里山に発生するタマゴタケは正式には<b>サトタマゴタケ</b>となることの説明をしてくださいました。近年の分類についていく頭が欲しいとつくづく思いました。
         </p>
 
         <p><b>《フォトギャラリー》</b></p>
@@ -187,7 +258,8 @@
 
         <p><b>《確認種一覧（66種）》</b></p>
 
-        <TABLE border="1" cellpadding="3" cellspacing="0" width="100%">
+        <div class="report-species-scroll">
+<TABLE border="1" cellpadding="3" cellspacing="0" width="100%">
           <TBODY>
             <TR bgcolor="#e0f2f1">
               <TD align="center" width="40%"><b>科</b></TD>
@@ -261,6 +333,7 @@
             <TR><TD>ボタンタケ科</TD><TD>オオボタンタケ</TD></TR>
           </TBODY>
         </TABLE>
+</div>
 
         <p>
           この時期は梅雨の真っ最中ですので雨の中での観察会には慣れていますが、成長段階や環境条件により七変化をするきのこの姿を見て同定をする難しさは至難の業です。増して濡れたキノコの同定は困難を極めます。記録したきのこ以外にも沢山の種類が見られましたが、不明なものが多くありました。<br>
