@@ -1,0 +1,395 @@
+{
+  "additional_review_5632233290": {
+    "input_commit": "455df726154f460a0d54b50ddf971c250d46f109",
+    "review_id": 5632233290,
+    "comments": [
+      {
+        "id": 4362527682,
+        "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362527682",
+        "reproduced": "Synthetic Git 120000 asset and selected-source entries materialized via command-local core.symlinks=false checkout-index were regular worktree files, not filesystem symlinks, and the old checker accepted them.",
+        "fix": "Parse NUL-terminated index stage metadata and baseline tree modes. Accept only 100644/100755 regular blobs, index stage 0; apply the same requirement to current and baseline selected sources. Keep existing within-root/is_file/no-symlink worktree probes.",
+        "positive": "100644/100755 assets, filename with space, baseline/current ordinary sources.",
+        "negative": "Materialized 120000 asset in current index and baseline tree stays missing; materialized 120000 current/baseline selected source raises; stage 1 ordinary-mode asset stays missing.",
+        "environment": "Only new guarded temporary synthetic repositories and command-local -c core.symlinks=false; no host/canonical repository config, OS privilege or security change."
+      },
+      {
+        "id": 4362527691,
+        "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362527691",
+        "reproduced": "At the input commit, meta after textarea/iframe/xmp/noscript was accepted even when following a reopened head tag.",
+        "fix": "Body-only raw-content start tags permanently end charset-head state while still suppressing declarations in their content. TITLE/STYLE/SCRIPT retain their existing head behavior.",
+        "positive": "Active UTF-8 meta after TITLE/STYLE/SCRIPT remains accepted; fake CP932 meta within those elements is ignored.",
+        "negative": "Meta within and after TEXTAREA/IFRAME/XMP/NOSCRIPT, with/without reopened head, cannot supply missing head charset.",
+        "limit": "Scoped charset preflight, not a complete HTML4 head/content-model parser."
+      }
+    ],
+    "verification": {
+      "before_added_test_methods": 6,
+      "before_assertion_failures": 11,
+      "before_log_sha256": "82914937d3e4a28c8d032b7dacd1a3d7930889eaf43a59440c9e45c2c311f6aa",
+      "targeted_modules": [
+        "tests.test_legacy_html_checks",
+        "tests.test_legacy_html_review_regressions"
+      ],
+      "tests": 45,
+      "failures_errors_skips": 0,
+      "log_sha256": "c69ddaa7a40a994e93799463dd6f6e32042d9c5b46247f3502cf7f565647ac60",
+      "three_page_result_sha256": "036415213188d96f6b260ea60a58d4b304a9cda2f6eec8eafbef1ce326580470",
+      "issues_new_missing_unverified": 0,
+      "known_missing_occurrences": 43,
+      "distinct_missing_paths": 34,
+      "distribution": "INCOMPLETE",
+      "html_changes": 0,
+      "network_requests_in_checker": 0,
+      "sgml_browser_full_site_rerun": false,
+      "independent_review": "Pending on this fixed pre-review input record; final result is recorded in PR save/readback evidence."
+    },
+    "checker_sha256": "e1f570e4b9a3af44cfc1fa948e51f6aff0d44466b3a525fb6d7cdb8db1dadace",
+    "regression_tests_sha256": "505a40af134fa13f0f630cde0a45ba67db9b4beda9e34371f6a320606db244db",
+    "primary_sources": [
+      "https://git-scm.com/docs/git-ls-files#Documentation/git-ls-files.txt---stage",
+      "https://www.w3.org/TR/html401/sgml/loosedtd.html"
+    ],
+    "preserved": "HTML3, previous CSS escape/historical recipes and original audit values, 34+55 inclusion decisions, factual questions2 and browser gates. No material add/move/delete, production/master/merge/permanent ref/auth/TLS/security/OS permission change."
+  },
+  "additional_review_5631727676": {
+    "input_commit": "f6add78d06e57df35196e5572dfb34b3a5d12640",
+    "review_id": 5631727676,
+    "comments": [
+      {
+        "id": 4362130972,
+        "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362130972",
+        "current_graph": "Observed f6add78 parent=1e6f35f, 1e6f35f parent=0de5630. Selected historical inputs are current ancestors; not sole-parent dd4b4b as the review asserts.",
+        "future_risk": "A hypothetical squash/ref removal can lose PR-only commit lookups; current ancestry does not disprove this risk.",
+        "change": "Five selected historical Git HTML inputs reconstruct from three unchanged current HTMLs and 44 ordered reverse edits containing 69 replacement bytes. No snapshot/image/full HTML copies or new permanent refs.",
+        "manifest": "legacy-historical-inputs-20261024.json",
+        "manifest_sha256": "a2ff383a2102e973a331f18a1516c9e54a6af881f2315b084da99b8de761beb4",
+        "verification": "All five reconstructed byte lengths/SHA256/Git blobs match original records, without old object queries in the reconstruction tests. Stale base and invalid/tampered edit negatives fail.",
+        "limit": "Byte reproduction only, not preserved commit graph/signatures or repeated historical diagnostics/rollback; fresh clone/squash/ref removal/GC not executed."
+      },
+      {
+        "id": 4362130987,
+        "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362130987",
+        "before": "Current input checker rejected .foo\\{bar { color: red; }; three added test methods produced six assertion failures before the implementation fix.",
+        "before_log_sha256": "ecb73cba49d937ef97cebcb6c288e73639a34e1cf483f13eebae0b337faa24f1",
+        "change": "Skip a backslash and its following character outside quotes/comments before structural counting; quote/comment handling and real unbalanced delimiter rejection remain.",
+        "positive_scope": "Escaped braces/brackets/parentheses/quote/slash, hex escape, paired backslashes, STYLE and inline style.",
+        "negative_scope": "Real missing/extra closer, paired backslash before real unclosed opener, escaped closing brace, unmatched parenthesis, unclosed structure after comment.",
+        "limit": "Lexical delimiter triage, not complete CSS escape/token/grammar/cascade/rendering acceptance."
+      }
+    ],
+    "verification": {
+      "targeted_modules": [
+        "tests.test_legacy_html_checks",
+        "tests.test_legacy_html_review_regressions"
+      ],
+      "tests": 39,
+      "failures_errors_skips": 0,
+      "log_sha256": "6a16745cfe7f98c272954d86307f41525172a3e9081deeaefe45b31df6ac9089",
+      "three_page_result_sha256": "cee02c522a0dcec72c5f518f30167faf004d35267bdf6ee63626f6ed69303f39",
+      "issues": 0,
+      "new_missing": 0,
+      "unverified_references": 0,
+      "known_missing_occurrences": 43,
+      "distinct_missing_paths": 34,
+      "distribution": "INCOMPLETE",
+      "html_changes": 0,
+      "sgml_rerun": false,
+      "browser_rendering": "NOT_RUN",
+      "independent_review": "Pending on this exact pre-review record; final outcome belongs to PR save/readback evidence."
+    },
+    "preserved": "34path and additional55 inclusion decisions pending; two factual questions held; no snapshot/material import/relocation, permanent refs, production/master/merge/auth/TLS/security changes.",
+    "primary_sources": [
+      "https://www.w3.org/TR/css-syntax-3/#escaping",
+      "https://git-scm.com/docs/git-merge#Documentation/git-merge.txt---squash"
+    ]
+  },
+  "durable_selected_byte_inputs": {"recipe_record": "legacy-historical-inputs-20261024.json", "selected_bindings": "H01-H03 historical_after_bindings; H04/H01/H05/H02 historical_rollback_source_identity_checks. Current HTML uses unchanged base_inputs paths/bytes, not a guaranteed future lookup by 0de5630 commit.", "history_limit": "PR-only commit lookup after hypothetical squash/ref removal is not guaranteed. Recipes plus unchanged base HTMLs reproduce selected bytes only, not historical commit provenance or execution."},
+  "date_jst": "2026-10-24",
+  "base_commit": "0de563026b5a332ffb4d1b7b079ba54a236fc95f",
+  "reviewed_commit": "8236aa781d616f4deb99b4f485ee48c1bdc9d802",
+  "external_review": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#pullrequestreview-5631148385",
+  "external_acceptance": "NOT_ASSERTED; threads not marked resolved",
+  "scope": "Existing HP writer/claim/branch; checker/tests/docs only, three HTML files unchanged",
+  "findings": [
+    {
+      "comment_id": 4361674422,
+      "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4361674422",
+      "topic": "Git compatibility",
+      "base_applicability": "Present in base; no minimum version guard",
+      "implementation": "Git >=2.48 enforced before object/HTML reads; retain --no-lazy-fetch plus child-process GIT_NO_LAZY_FETCH=1, GIT_ALLOW_PROTOCOL empty and protocol.allow=never; no fallback",
+      "positive_negative_validation": [
+        "Mock 2.43 rejected before object command",
+        "Mock 2.48 preserves no-fetch/transport guards",
+        "Actual 2.53.0.windows.3 reads work; missing synthetic promisor blob fails without fetch"
+      ],
+      "remaining_limits": [
+        "Actual Git 2.43/2.48 binaries not executed; no upgrade/install performed"
+      ]
+    },
+    {
+      "comment_id": 4361674438,
+      "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4361674438",
+      "topic": "Active charset meta",
+      "base_applicability": "Present in base raw 8192-byte regex",
+      "implementation": "ASCII-compatible markup tokenization admits active HTML4 Content-Type text/html meta only; strictly decode supported UTF-8/CP932 aliases after valid declaration; reject invalid/duplicate/conflicting declarations",
+      "positive_negative_validation": [
+        "UTF-8/UTF8/Shift_JIS/windows-31j/CP932 and BOM positives",
+        "Comment/CSS/script/TITLE/body lookalikes rejected",
+        "Missing/valueless/unsupported/duplicate/conflicting meta rejected",
+        "UTF-8 BOM versus CP932 declaration rejected explicitly; formerly strict CP932 decode already rejected this input"
+      ],
+      "remaining_limits": [
+        "HTML5 meta charset syntax is outside this HTML4 entry; no guessed decoding"
+      ]
+    },
+    {
+      "comment_id": 4361674449,
+      "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4361674449",
+      "topic": "Valueless required attributes",
+      "base_applicability": "Present in base membership-only checks",
+      "implementation": "IMG src/alt and STYLE/SCRIPT type must have an actual value; valueless is distinct from missing",
+      "positive_negative_validation": [
+        "Valueless img src/alt and style/script type rejected",
+        "alt empty string and boolean ismap accepted"
+      ],
+      "remaining_limits": [
+        "Complete attribute value semantics still require the separate SGML/specification checks"
+      ]
+    },
+    {
+      "comment_id": 4361674465,
+      "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4361674465",
+      "topic": "Active prolog doctype",
+      "base_applicability": "Present in base raw text regex",
+      "implementation": "Use parser declaration events, require exactly one supported declaration before elements/content; comments/raw script/style text do not supply it; only declaration keywords are case-insensitive, the quoted public identifier is exact",
+      "positive_negative_validation": [
+        "Missing/commented/wrong/multiple/late declarations rejected",
+        "Supported Transitional with/without optional system identifier accepted",
+        "Visible pre-header text is rejected by charset preflight first",
+        "Wrong-case public identifier rejected; lowercase declaration keywords accepted"
+      ],
+      "remaining_limits": [
+        "This is not a complete SGML tokenizer or replacement for onsgmls"
+      ]
+    },
+    {
+      "comment_id": 4361674482,
+      "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4361674482",
+      "topic": "Other URI attributes and BASE",
+      "base_applicability": "Present in base src/a.href/link.href-only collection",
+      "implementation": "Enumerate ordinary HTML4 URI attributes; mark BASE, codebase/archive/classid/applet/PARAM ref/reserved/data/refresh semantics UNVERIFIED and avoid guessed local probes; resolution label explicitly limited to checked local paths",
+      "positive_negative_validation": [
+        "object.data/form.action/body.background/img.longdesc/blockquote.cite/input.src missing targets counted",
+        "Exact relative/root Git targets resolved",
+        "Relative/root/external BASE cases make no wrong local probes and aggregate UNVERIFIED",
+        "Complex object/applet/PARAM refs held explicitly; external URLs not fetched"
+      ],
+      "remaining_limits": [
+        "BASE/codebase/list/dynamic URI resolution is deliberately unimplemented; fragments and CSS dependency graph unchecked"
+      ]
+    },
+    {
+      "comment_id": 4361674495,
+      "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4361674495",
+      "topic": "Executable URLs",
+      "base_applicability": "Present in base scheme-only skip",
+      "implementation": "Normalize URI whitespace/character references without executing; javascript/vbscript emit executable_url and require related JS check; data/refresh active content remains unverified",
+      "positive_negative_validation": [
+        "JavaScript mixed-case and character-reference/tab forms detected",
+        "vbscript detected",
+        "Normal http/https/mailto/fragment meanings retained",
+        "Embedded data/refresh never claim no-script scope"
+      ],
+      "remaining_limits": [
+        "No URI execution or JS type/runtime acceptance"
+      ]
+    },
+    {
+      "comment_id": 4361674501,
+      "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4361674501",
+      "topic": "Audit hash version binding",
+      "base_applicability": "Historical after values differ from current HTML; prior 0de record already contains later SGML hashes but old records lacked explicit result binding",
+      "implementation": "Bind historical responsive/2019/2020 records to exact result commits, preserve old proof values, and record current three HTML blobs/bytes/SHA separately",
+      "positive_negative_validation": [
+        "Three historical after hash/bytes equal their fixed Git blobs",
+        "Four rollback source blobs and two recorded restored-baseline identities checked",
+        "Current 0de three HTML bytes equal working files and prior SGML input hashes"
+      ],
+      "remaining_limits": [
+        "Historical two-file restore is not evidence of current-version or production rollback"
+      ]
+    }
+  ],
+  "validation": {
+    "final_targeted_modules": [
+      "tests.test_legacy_html_checks",
+      "tests.test_legacy_html_review_regressions"
+    ],
+    "final_tests_run": 33,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "final_log_sha256": "3313bed7af33eba784b6916020306ced6fcd1408263559d17650dbb8b27e6b49",
+    "base_reproduction": {
+      "new_methods_run": 16,
+      "assertion_failures_including_subtests": 25,
+      "errors": 5,
+      "missing_result_field_contract_errors": 4,
+      "fixture_errors": 1,
+      "fixture_error_reason": "Windows read-only loose Git object could not be unlinked; no permission change/retry. Fixture replaced with mktree --missing reference; this is not a product regression.",
+      "log_sha256": "2250ea5556abe10bf78e2c0f317141dda2530379c8a2c1b9adc67992f5097511",
+      "git243_environment": "Mock/specification evidence only; original unknown-option exit129 was reported by external reviewer, not rerun here"
+    },
+    "intermediate_runs": {
+      "first_29_methods": "PASS; final 31 run also covers later changes",
+      "additional_negative_fixture_expectation": "A visible-text-before-header case fails strict charset preflight before DOCTYPE checking. Initial test expectation of a DOCTYPE result was corrected; no product relaxation.",
+      "affected_failed_log_sha256": "884fdaac68c2d857f91991e6a87ddaaec6d7b7810dbf50566dcac4079f775b5d",
+      "initial_31_methods_final_log_sha256": "875695b819f645690ec1808fde5b150a4a568b080b3c8af972e1fadb401da7dd"
+    },
+    "actual_three_pages": {
+      "exit_code": 0,
+      "selected_pages": 3,
+      "issues": 0,
+      "new_missing_occurrences": 0,
+      "known_missing_occurrences": 43,
+      "known_distinct_missing_target_paths": 34,
+      "unverified_reference_occurrences": 0,
+      "distribution": "INCOMPLETE",
+      "receipt_sha256": "c21c3054fad29a6293bd8074db95141e7d1c7620462003880242f507b59bfe45",
+      "sgml_status": "NOT_RERUN; unchanged HTML equals the previously validated fixed inputs"
+    },
+    "actual_git_version": "git version 2.53.0.windows.3",
+    "git_243_and_248_actual_execution": false,
+    "no_full_repo_or_snapshot_scan": true
+  },
+  "checker_sha256": "1a1f04cb11cc2105a43af686f8a625b39e3132f6ba24c29c9eef78cef8e688f9",
+  "regression_tests_sha256": "a4716c74981fa23fc421f5ac6194310a2f408e2263f11ad8c2023bce4261e917",
+  "current_html": [
+    {
+      "path": "public/reikai/2019reikaihoukoku.html",
+      "content_commit": "0de563026b5a332ffb4d1b7b079ba54a236fc95f",
+      "blob": "c7ecffba0079cbe8afbb334a9e0abc4f0ab0bc35",
+      "bytes": 2237,
+      "sha256": "fb7e26de486c346b4950c4a04118a646060e48dbe68dafe70e3f0fa0bd0434a1",
+      "working_bytes_equal_fixed_git_blob": true
+    },
+    {
+      "path": "public/reikai/2020reikaihoukoku.html",
+      "content_commit": "0de563026b5a332ffb4d1b7b079ba54a236fc95f",
+      "blob": "fdcad5fa339a3817e6081bcb7e404443e7392329",
+      "bytes": 1875,
+      "sha256": "c7902f43eb3e3e58ba836675150661fa5dce5c406fbe580dff4a91a76f751475",
+      "working_bytes_equal_fixed_git_blob": true
+    },
+    {
+      "path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "content_commit": "0de563026b5a332ffb4d1b7b079ba54a236fc95f",
+      "blob": "118a270f423e42e02135112631831449d4f55161",
+      "bytes": 16657,
+      "sha256": "b03fe08f27d358fb500a65596a931f0f7529811e8c32759c550f7f845e667534",
+      "working_bytes_equal_fixed_git_blob": true
+    }
+  ],
+  "historical_after_bindings": [
+    {
+      "record": "docs/plans/responsive-report-20261023.json",
+      "historical_content_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+      "html_path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "historical_blob": "053e66bd87904142a3320a163b52b84745bdbea5",
+      "bytes": 16603,
+      "sha256": "b288abfcceb55c7b29f22c4e9e27831d8596f8f28fac13c8a19565c8069c942f",
+      "matches_recorded_after": true,
+      "is_current_html": false,
+      "original_hash_values_unchanged": true
+    },
+    {
+      "record": "docs/plans/legacy-html-cleanup-20261023.json",
+      "historical_content_commit": "ab30f0c33616d9413480369d71dc71ce751e5afe",
+      "html_path": "public/reikai/2019reikaihoukoku.html",
+      "historical_blob": "a6c8837943f29a861d4c2c321a956378ce18a3e5",
+      "bytes": 2200,
+      "sha256": "674506cdb5f8e90a578aa9f6aae90c9321fd859c6fc0862664f498575f4d6871",
+      "matches_recorded_after": true,
+      "is_current_html": false,
+      "original_hash_values_unchanged": true
+    },
+    {
+      "record": "docs/plans/server-inventory-20261023.json",
+      "historical_content_commit": "69b918d549d7b17f27e04d1655ef830befd5d7d1",
+      "html_path": "public/reikai/2020reikaihoukoku.html",
+      "historical_blob": "c319827ce2dc044c1302e067269090ef766d8a05",
+      "bytes": 1830,
+      "sha256": "721b937d39ce99ff9397c77bfd825bd618e8ebb46dea08575a345b773f4bf9ca",
+      "matches_recorded_after": true,
+      "is_current_html": false,
+      "original_hash_values_unchanged": true
+    }
+  ],
+  "historical_rollback_source_identity_checks": [
+    {
+      "html_path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "role": "baseline",
+      "content_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+      "blob": "1761c0fe900504fc0eac98e665aedacbeeb52f13",
+      "bytes": 14983,
+      "sha256": "7793817f6328549df8bc66c38235d040e1299689923b7990a827fc5b9aaeca4c"
+    },
+    {
+      "html_path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "role": "candidate",
+      "content_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+      "blob": "053e66bd87904142a3320a163b52b84745bdbea5",
+      "bytes": 16603,
+      "sha256": "b288abfcceb55c7b29f22c4e9e27831d8596f8f28fac13c8a19565c8069c942f"
+    },
+    {
+      "html_path": "public/reikai/2019reikaihoukoku.html",
+      "role": "baseline",
+      "content_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+      "blob": "4562b92afd9d6550580239edb569cdcebf5c16fa",
+      "bytes": 2146,
+      "sha256": "8157109ec7f2dbc426034637ac0d6241c77a565d1580b3926aab4eb41ef33a5d"
+    },
+    {
+      "html_path": "public/reikai/2019reikaihoukoku.html",
+      "role": "candidate",
+      "content_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+      "blob": "a6c8837943f29a861d4c2c321a956378ce18a3e5",
+      "bytes": 2200,
+      "sha256": "674506cdb5f8e90a578aa9f6aae90c9321fd859c6fc0862664f498575f4d6871"
+    }
+  ],
+  "historical_rollback_reexecuted": false,
+  "primary_sources": [
+    "https://git-scm.com/docs/git/2.48.0",
+    "https://raw.githubusercontent.com/git/git/v2.43.0/Documentation/git.txt",
+    "https://www.w3.org/TR/html401/struct/global.html#h-7.4.4",
+    "https://www.w3.org/TR/html401/sgml/loosedtd.html",
+    "https://www.w3.org/TR/html401/struct/links.html#h-12.4"
+  ],
+  "preserved_boundaries": [
+    "Original backups/recovery ZIPs/private evidence preserved; no snapshot payload imported",
+    "Astro remains retired; no HTML/URL/photo/body/factual change",
+    "Two held name/date inconsistencies still need original-report evidence",
+    "Rejected imports/relocations and file URL policy refusal not retried or bypassed",
+    "No production publish/restore/delete, master/auth/TLS/security/cost change",
+    "No new writer/clone/Goal/automation; temporary synthetic Git fixtures are tests only"
+  ],
+  "remaining": [
+    "External re-review/acceptance",
+    "43 Git-distribution reference occurrences across 34 exact paths and scoped material permission",
+    "Unimplemented URI semantics explicitly UNVERIFIED; full CSS/fragment/runtime/browser acceptance remains separate",
+    "Original-report facts and production switch/rollback acceptance"
+  ],
+  "independent_review_iteration": {
+    "initial_required_findings": 1,
+    "finding": "P2: case-insensitive PUBLIC identifier could falsely report Transitional",
+    "fix": "Confine case-insensitivity to DOCTYPE/HTML/PUBLIC keywords; match the FPI exactly",
+    "additional_diagnostic": "UTF-8 BOM/CP932 conflict diagnosed directly; earlier strict decode already rejected it, not an earlier false success",
+    "before_fix_two_negative_methods_failed": 2,
+    "before_fix_log_sha256": "5303e559bc2b94d3a99720838caaf99112fcf975d09be92f247f9565d0337c89",
+    "post_fix_targeted_tests": 33,
+    "post_fix_failures_errors_skips": 0,
+    "final_independent_rereview": "Not encoded in this pre-review input record; see PR14 save/readback evidence for the reviewed exact diff. No external acceptance implied."
+  }
+}
