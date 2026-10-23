@@ -1,5 +1,15 @@
 # さくらサーバー整理計画（実行前）
 
+## 2026-10-23追補: 既存Gitの2ファイルでローカル復元・rollback実証（最新）
+
+既存Gitだけを入力に、川越観察会のレスポンシブ見本（CSS内包）`docs/plans/kawagoe2026/260628_kawagoe.html`と`public/reikai/2019reikaihoukoku.html`を限定実証した。候補版は`007fd42fe72217acf832e36c9830f2ae6b00627e`、旧版は`7f32b01d5ece96cfd5ae32a22d98e3865598a56a`。川越見本の直前commit `ab30f0c`も旧版と同じblobであることを確認した。各blob/bytes/SHAと結果は[限定復元記録](git-local-rollback-20261023.json)に保存する。
+
+正規checkout外の新規私有領域に6つのGit blobを固定保存し、4ファイルだけのモデルを作った。通常の`Copy-Item -LiteralPath ... -Destination ... -Force`で対象2件を候補へ変更→旧版へ復元し、読み戻した。旧版bytes/サイズ/SHAへの復帰2/2、差分0、欠落/余分0。対象外の2020年度HTMLと既存写真1件は配置前後・復元後とも同一、固定source fixture6件と元作業版4ファイルも不変。実証直後の元作業ツリーはclean/HEAD据え置きだった。成功後の同操作再実行はしていない。
+
+新規領域の実絶対pathと親、相対destinationがモデル内に収まること、通常ファイルであることを確認してからコピーした。既存folderの上書き・再帰削除・移動は0。既存作業版、原本ZIP/復元ZIP/名前表/検証済み展開物/既存私有証拠を変更せず、新snapshot内容をGitへ追加していない。コピーしたpayload・私有モデルはGit外に保持し、非機密の検証記録だけを今回保存する。
+
+合格範囲は「選んだ既存Git 2ファイルのローカルraw bytes復元」だけ。全サイトの配布root/不足素材・現在URL・権限/ACL/時刻/runtime・サーバー切替/復旧/本番rollback・厳格HTML規格・実表示の合格ではない。従来の復元条件に対する限定した進展として扱い、新たな採用条件を増やさない。Astro退役/現行HTMLのGit正本方針と、拒否された素材同梱/2HTML移動を未実行とする記録、条件未達の本番置換停止を保持する。外部接続・認証/security/料金・master変更・本番操作は0。以下は時点別履歴。
+
 ## 2026-10-23追補: 既存Gitの川越報告でレスポンシブ見本・校正（最新）
 
 既存Gitの`docs/plans/kawagoe2026/260628_kawagoe.html`を代表資料とし、viewport、ページ幅/文字折返し、狭幅の写真1列・縦横比維持、種一覧の横スクロール、ナビの余白を小さく追加した。背景色・写真枠の既存テイストを保持。HTML4.01 Transitional/UTF-8を維持し、写真19件の属性・全URLと本文の意味を保持した。元資料は既存Git commit `ab30f0c33616d9413480369d71dc71ce751e5afe` の同pathに保存され、`.gitattributes`はこの見本のLFだけ固定する。
