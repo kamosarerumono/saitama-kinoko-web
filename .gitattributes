@@ -3,3 +3,4 @@
 *.sh  text eol=lf
 *.py  text eol=lf
 /public/reikai/2020reikaihoukoku.html text eol=lf
+/public/reikai/2019reikaihoukoku.html text eol=lf
