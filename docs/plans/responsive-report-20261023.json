@@ -1,6 +1,9 @@
 {
   "date_jst": "2026-10-23",
   "parent_commit": "ab30f0c33616d9413480369d71dc71ce751e5afe",
+  "result_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+  "record_scope": "Historical responsive candidate at result_commit only. The after hash/bytes are not the current HTML; later STYLE/box-sizing and lang edits are recorded separately.",
+  "current_html_record": "legacy-checker-review-20261024.json",
   "representative_git_path": "docs/plans/kawagoe2026/260628_kawagoe.html",
   "intended_existing_url_path": "/reikai/2026/260628_kawagoe.html",
   "source_role": "Existing Git planning sample; not asserted to be the current production byte baseline and not adopted into the distribution root",

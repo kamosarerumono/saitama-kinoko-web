@@ -1,5 +1,19 @@
 # さくらサーバー整理計画（実行前）
 
+## 2026-10-24追補: 外部レビュー7点に対する検査器の回帰修正（最新）
+
+review `5631148385`の7点を現HEAD `0de563026b5a332ffb4d1b7b079ba54a236fc95f`と公式原文で照合した。既存担当/claim/branchと旧担当idle/HOLDを再確認し、検査器に残る6点と記録の版拘束1点を修正した。[指摘別適用・正例/負例・入力hash・残件](legacy-checker-review-20261024.json)を保存する。内部レビューや既存SGML成功を検査器自体の正しさの代用にはしない。
+
+Gitは公式仕様で機能を確認できる2.48以上を明示要件にした。旧版ではHTMLを読む前に説明して失敗し、lazy fetch禁止を外すfallbackはない。子プロセスのlazy fetch/transport禁止を保持し、実機2.53.0.windows.3の正常読取りと欠落promisor objectの無取得失敗を確認した。2.43拒否・2.48正常経路はmockで、実機2.43/2.48の動作保証とは区別する。
+
+charsetの任意bytes検索を有効なHTML4 Content-Type metaの構造判定へ、DOCTYPEの任意本文検索をprologの実宣言判定へ変更した。コメント/CSS/script/TITLE/本文だけのcharset、無効/競合宣言、コメント化DOCTYPEを拒否する。必須属性は値なしを検出し、空altは許容。object.data/form.action/body.background等のHTML4 URL属性を列挙し、未対応BASE/codebase/archive等はUNVERIFIEDとする。BASEがある相対参照は推測して読まない。実行可能URLは実行せず診断とJS確認対象へ反映する。完全SGML/URL意味/CSSを実装したという主張はしない。
+
+現3HTMLは変更していない。過去のresponsive/2019 cleanup/2020初回採用のafter hashが、それぞれ007fd42/ab30f0c/69b918dのHTMLに一致することをGit blobのbytes/SHAで確認し、適用commitを記録へ追記した。現行0de5630の3HTMLのblob/bytes/SHAを別欄に固定し、歴史的rollback証拠の2入力版と混同しない。古い成功値は上書きせず、元の入力版に対する証拠として保持する。
+
+元検査器で負例を保存後、独立レビューの必須指摘1件（DOCTYPEのPUBLIC識別子まで大小文字を無視）を修正した。宣言キーワードだけ大小文字を許容し、FPIは完全一致とする。UTF-8 BOMとCP932宣言の矛盾も、従来の厳格復号エラーから明示的な競合診断にした。追加前の負例も保存し、修正後の限定2moduleは33テストすべて成功。最初の負例実行にはWindowsの読取り専用Git fixture削除による失敗1件もあり、製品の失敗と分け、削除せず欠落object参照treeを作るfixtureへ変更した。権限変更なし。途中の追加負例でも、前段charsetエラーで拒否する入力にDOCTYPE診断を期待していたfixture期待値を訂正した。いずれも隠さず記録する。修正後の実3ページは指摘0・新規不足0・未対応参照0・既知43参照/34pathはINCOMPLETE。成功済みSGML検証・全snapshot・全repo試験は反復していない。
+
+原稿根拠待ちのきのこ名/日付、実表示・完全配布・本番rollback、素材同梱許可は継続。原本/ZIP/私有証拠・既存URL/本文/写真・Astro退役を保持し、拒否操作/表示迂回・本番/公開/削除/master/認証security/費用・新writer/Goal/予約は0。外部7点への実装修正/検証を記録するが、外部再承認やreview thread解決は主張しない。
+
 ## 2026-10-24追補: 43参照の分類・文書メタデータ校正・SGML DTD検証（最新）
 
 基準HEAD `8236aa781d616f4deb99b4f485ee48c1bdc9d802`の既存担当・claimを継続し、同branchのclean/remote一致、旧担当idle/HOLDを照合して着手した。別writer/cloneは作らない。[今回の入力版・集計・修正根拠・検証結果](legacy-html-followup-20261024.json)を保存する。以下の過去時点のNOT_RUN等は履歴で、今回の限定結果へ読み替えない。

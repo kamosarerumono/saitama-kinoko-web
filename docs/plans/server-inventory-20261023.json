@@ -78,6 +78,9 @@
     "public_no_incoming_reference": 1251
   },
   "local_one_page_fix": {
+    "result_commit": "69b918d549d7b17f27e04d1655ef830befd5d7d1",
+    "record_scope": "Historical 2020 first-adoption hash/bytes at result_commit only; not the later normalized/final HTML.",
+    "current_html_record": "legacy-checker-review-20261024.json",
     "scope": "one first-adopted local static source; no deployment bundle",
     "source_path": "reikai/2020reikaihoukoku.html",
     "git_path": "public/reikai/2020reikaihoukoku.html",

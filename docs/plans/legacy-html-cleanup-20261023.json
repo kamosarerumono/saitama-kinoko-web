@@ -1,6 +1,9 @@
 {
   "date_jst": "2026-10-23",
   "parent_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+  "implemented_result_commit": "ab30f0c33616d9413480369d71dc71ce751e5afe",
+  "record_scope": "Historical 2019 implemented after hash/bytes at implemented_result_commit only. The 2017/2018 after values are explicitly hypothetical, unadopted candidates; none of these is a current final-HTML hash.",
+  "current_html_record": "legacy-checker-review-20261024.json",
   "cleanup": {
     "tracked_files": 5341,
     "tracked_duplicate_members": 492,

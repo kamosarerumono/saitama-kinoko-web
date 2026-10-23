@@ -2,6 +2,8 @@
   "date_jst": "2026-10-23",
   "status": "PASS_SELECTED_GIT_BYTES_LOCAL_ONLY",
   "source_candidate_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+  "record_scope": "Historical two-file local rollback at the exact source_candidate_commit/source_baseline_commit only. This proof and its unchanged hashes do not verify restoration of the later current HTML.",
+  "current_html_record": "legacy-checker-review-20261024.json",
   "source_baseline_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
   "baseline_note": "Common pre-change Git version. Responsive immediate parent ab30f0c has the same source blob; the annual page last prior content is 7f32b01.",
   "scope": "Two existing Git HTML files including inline CSS, plus two unchanged Git sentinels; no full site or dependency tree",

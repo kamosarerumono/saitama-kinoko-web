@@ -141,14 +141,16 @@ Astroのコード・依存/lockfile・設定は保持する。復元参照はmas
 
 ## 2. 更新前の限定ローカル検査
 
-正規worktreeのrootで、利用中のPython 3.10以上の実体を指定する。
+正規worktreeのrootで、利用中のPython 3.10以上の実体を指定する。Gitは2.48以上を明示要件とし、旧版/版判定不能ではHTML検査前に説明付きで停止する。`--no-lazy-fetch`を外す互換fallbackはしない。子プロセスにlazy fetch禁止と全transport禁止を指定し、欠落objectを取得しない。実機2.53.0.windows.3で確認し、2.43拒否/2.48対応経路はmockによる検証で、両版の実機試験ではない。[Git 2.48公式仕様](https://git-scm.com/docs/git/2.48.0)。
 
 ```text
 python scripts/check_legacy_html.py --baseline HEAD
-python -m unittest discover -s tests -p test_legacy_html_checks.py -v
+python -m unittest tests.test_legacy_html_checks tests.test_legacy_html_review_regressions -v
 ```
 
 入口は既存Gitの2019/2020年度一覧と川越見本だけを読み、ファイルを書き換えず外部接続もしない。文字コードを宣言どおり厳格復号し、HTML4要素名・重複属性・TABLE/IMG等の限定属性・必須終了タグの一部とCSSの字句区切りを調べる。任意終了タグやTransitionalのFONT/CENTERをHTML5基準で一律改変しない。Git配布rootの既知の不足と新しい参照回帰を、ローカルの基準Git版と比較して別に出す。
+
+charsetは有効なhead/prolog内のHTML4 Content-Type metaだけを採用し、コメント・CSS・script・TITLE・本文の文字列で代用しない。未宣言/無効/競合やUTF-8 BOMとの矛盾は推測復号せず停止。DOCTYPEも実際のprolog宣言を判定し、宣言キーワードの大小文字とPUBLIC識別子の完全一致を分ける。IMGのsrc/altとSTYLE/SCRIPTのtypeは値なしを検出するが、意図的な`alt=""`まで禁止しない。列挙したHTML4 URL属性は正確な配布pathで調べ、BASE・object/appletのcodebase/archive/classid・PARAM ref・refresh・data等の未対応意味はUNVERIFIEDにする。BASEがある相対参照を文書path基準で推測してprobeしない。`javascript:`等は実行せず診断とJS確認対象へ反映する。全参照解決の宣言ではなく、fragment・CSS依存・実表示等の範囲外も残る。[指摘別の正例/負例と記録の適用版](plans/legacy-checker-review-20261024.json)。
 
 終了コード0は限定検査で新規回帰がないことだけを示す。既知の配布不足はINCOMPLETEで、この入口自体はSGML検証・実表示を実行しない。別途行った3ページのSGML DTD検証は[2026-10-24の限定記録](plans/legacy-html-followup-20261024.json)を参照し、実表示は未確認として残す。私有snapshotでの解決をGit配布成立へ流用しない。JS/TSがない範囲の型検査は対象外で、型PASSとはしない。
 
