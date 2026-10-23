@@ -1,4 +1,56 @@
 {
+  "additional_review_5632233290": {
+    "input_commit": "455df726154f460a0d54b50ddf971c250d46f109",
+    "review_id": 5632233290,
+    "comments": [
+      {
+        "id": 4362527682,
+        "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362527682",
+        "reproduced": "Synthetic Git 120000 asset and selected-source entries materialized via command-local core.symlinks=false checkout-index were regular worktree files, not filesystem symlinks, and the old checker accepted them.",
+        "fix": "Parse NUL-terminated index stage metadata and baseline tree modes. Accept only 100644/100755 regular blobs, index stage 0; apply the same requirement to current and baseline selected sources. Keep existing within-root/is_file/no-symlink worktree probes.",
+        "positive": "100644/100755 assets, filename with space, baseline/current ordinary sources.",
+        "negative": "Materialized 120000 asset in current index and baseline tree stays missing; materialized 120000 current/baseline selected source raises; stage 1 ordinary-mode asset stays missing.",
+        "environment": "Only new guarded temporary synthetic repositories and command-local -c core.symlinks=false; no host/canonical repository config, OS privilege or security change."
+      },
+      {
+        "id": 4362527691,
+        "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362527691",
+        "reproduced": "At the input commit, meta after textarea/iframe/xmp/noscript was accepted even when following a reopened head tag.",
+        "fix": "Body-only raw-content start tags permanently end charset-head state while still suppressing declarations in their content. TITLE/STYLE/SCRIPT retain their existing head behavior.",
+        "positive": "Active UTF-8 meta after TITLE/STYLE/SCRIPT remains accepted; fake CP932 meta within those elements is ignored.",
+        "negative": "Meta within and after TEXTAREA/IFRAME/XMP/NOSCRIPT, with/without reopened head, cannot supply missing head charset.",
+        "limit": "Scoped charset preflight, not a complete HTML4 head/content-model parser."
+      }
+    ],
+    "verification": {
+      "before_added_test_methods": 6,
+      "before_assertion_failures": 11,
+      "before_log_sha256": "82914937d3e4a28c8d032b7dacd1a3d7930889eaf43a59440c9e45c2c311f6aa",
+      "targeted_modules": [
+        "tests.test_legacy_html_checks",
+        "tests.test_legacy_html_review_regressions"
+      ],
+      "tests": 45,
+      "failures_errors_skips": 0,
+      "log_sha256": "c69ddaa7a40a994e93799463dd6f6e32042d9c5b46247f3502cf7f565647ac60",
+      "three_page_result_sha256": "036415213188d96f6b260ea60a58d4b304a9cda2f6eec8eafbef1ce326580470",
+      "issues_new_missing_unverified": 0,
+      "known_missing_occurrences": 43,
+      "distinct_missing_paths": 34,
+      "distribution": "INCOMPLETE",
+      "html_changes": 0,
+      "network_requests_in_checker": 0,
+      "sgml_browser_full_site_rerun": false,
+      "independent_review": "Pending on this fixed pre-review input record; final result is recorded in PR save/readback evidence."
+    },
+    "checker_sha256": "e1f570e4b9a3af44cfc1fa948e51f6aff0d44466b3a525fb6d7cdb8db1dadace",
+    "regression_tests_sha256": "505a40af134fa13f0f630cde0a45ba67db9b4beda9e34371f6a320606db244db",
+    "primary_sources": [
+      "https://git-scm.com/docs/git-ls-files#Documentation/git-ls-files.txt---stage",
+      "https://www.w3.org/TR/html401/sgml/loosedtd.html"
+    ],
+    "preserved": "HTML3, previous CSS escape/historical recipes and original audit values, 34+55 inclusion decisions, factual questions2 and browser gates. No material add/move/delete, production/master/merge/permanent ref/auth/TLS/security/OS permission change."
+  },
   "additional_review_5631727676": {
     "input_commit": "f6add78d06e57df35196e5572dfb34b3a5d12640",
     "review_id": 5631727676,

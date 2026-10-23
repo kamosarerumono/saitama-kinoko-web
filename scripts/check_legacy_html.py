@@ -63,6 +63,11 @@ class CharsetDeclarations(HTMLParser):
         if self.raw:
             return
         if tag in {'title', 'style', 'script', 'noscript', 'textarea', 'xmp', 'iframe'}:
+            # Only TITLE/STYLE/SCRIPT in this raw-content set can be in an
+            # HTML4 head. Body-only raw elements end charset preflight even
+            # though their contents must still be ignored as declarations.
+            if tag not in {'title', 'style', 'script'}:
+                self.head = False
             self.raw.append(tag)
             return
         if tag not in {'html', 'head', 'meta', 'link', 'base'}:
@@ -313,20 +318,38 @@ def git(root: Path, *args: str) -> bytes:
                                     '-c', 'protocol.allow=never', '-C', str(root), *args], stderr=subprocess.PIPE, env=env)
 
 
+def regular_file_paths(records: bytes, *, index: bool) -> set[str]:
+    """Read NUL-delimited ls-files --stage / ls-tree metadata, never payloads."""
+    paths = set()
+    for record in records.split(b'\0'):
+        if not record:
+            continue
+        metadata, path = record.split(b'\t', 1)
+        mode, kind_or_oid, oid_or_stage = metadata.split()
+        if (mode in {b'100644', b'100755'}
+                and (oid_or_stage == b'0' if index else kind_or_oid == b'blob')):
+            paths.add(path.decode('utf-8', errors='surrogateescape'))
+    return paths
+
+
 def run(root: Path, baseline: str) -> dict:
     root = root.resolve(strict=True)
     revision = git(root, 'rev-parse', '--verify', '--end-of-options', baseline + '^{commit}').decode().strip()
-    baseline_paths = set(git(root, 'ls-tree', '-r', '--name-only', '-z', revision).decode('utf-8', errors='surrogateescape').split('\0'))
-    tracked = set(git(root, 'ls-files', '-z').decode('utf-8', errors='surrogateescape').split('\0'))
+    baseline_paths = regular_file_paths(git(root, 'ls-tree', '-r', '-z', revision), index=False)
+    tracked = regular_file_paths(git(root, 'ls-files', '--stage', '-z'), index=True)
     def available(path: str) -> bool:
         # Probe only references encountered in the three selected pages, not
-        # every public file. Git tree/index name lists remain metadata only.
+        # every public file. Only regular tree/index modes (index stage 0)
+        # qualify, even when a 120000 entry materializes as a normal file.
         target = root / path
         return path in tracked and target.resolve().is_relative_to(root) and target.is_file() and not target.is_symlink()
     pages, issues, regressions = [], 0, 0
     for source, logical in SCOPES.items():
         path = root / source
-        if source not in tracked or not path.resolve().is_relative_to(root) or path.is_symlink():
+        if source not in baseline_paths:
+            raise ValueError('Baseline selected source is not a regular tracked file: ' + source)
+        if (source not in tracked or not path.resolve().is_relative_to(root)
+                or not path.is_file() or path.is_symlink()):
             raise ValueError('Selected source is not a regular tracked file within the checkout: ' + source)
         current = analyze(path.read_bytes(), logical, available)
         old = analyze(git(root, 'show', revision + ':' + source), logical, baseline_paths)

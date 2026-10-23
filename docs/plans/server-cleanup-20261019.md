@@ -1,3 +1,13 @@
+## 2026-10-24追補: index modeとcharset head状態の限定修正（最新）
+
+PR14追加review5632233290の[4362527682](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362527682)・[4362527691](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362527691)を公式原文と現HEAD455df726の実挙動へ照合した。同じ共通開発担当/claimで、[詳細記録](legacy-checker-review-20261024.json)のadditional_review_5632233290へ追記する。
+
+pathのみのindex参照判定をmode/stage付きにし、現indexはstage0・100644/100755、基準treeは通常blobの100644/100755のみ受理する。120000が通常ファイルとしてmaterializeされても解決扱いにしない。選択元HTMLにも現/基準両方の通常ファイル条件を適用。新規の隔離された合成Git fixture内でprocess指定core.symlinks=falseの実展開、非symlinkの通常ファイルになること、誤受理を再現した。mode100644/100755は正例、120000の参照先/選択元と未解決stage1は負例。ホストや正規repoの設定・OS権限は変更していない。
+
+charsetではraw内容を抑制する要素のうちTITLE/STYLE/SCRIPTはheadを維持し、TEXTAREA/IFRAME/XMP/NOSCRIPTの開始でheadを終了する。内容内/後続metaやhead再開でcharsetが復活する誤受理を防いだ。追加6methodの旧実装でassertion失敗11を保存後、局所正負例と関連2moduleは45テスト成功。実3HTMLは指摘/新規不足/未対応0、既知不足43参照/34pathはINCOMPLETE。完全head文法/SGML・画像decode・CSS全体・表示・全siteの受入へ広げない。
+
+HTML3、前回のCSS escape/選択監査5版の逆差分、過去監査値、素材同梱34+55判断待ち、原稿2件保留を保持。素材追加/移動削除・本番/master/merge/新恒久ref・認証TLS/OSsecurity/権限設定・file URL拒否の迂回なし。旧指摘の無条件やり直しや外部再承認/解決の主張はしない。
+
 ## 2026-10-24追補: CSS escapeと選択監査入力の再照合（最新）
 
 PR14の追加指摘[4362130972](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362130972)と[4362130987](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362130987)を公式原文で確認し、基準f6add78の同じ担当/claimで限定対応した。[詳細](legacy-checker-review-20261024.json)のadditional_review_5631727676に入力版・検証・限界を追記する。

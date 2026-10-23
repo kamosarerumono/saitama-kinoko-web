@@ -14,6 +14,22 @@ from tests.test_legacy_html_checks import document
 
 
 class DeclarationRegressions(unittest.TestCase):
+    def test_body_only_raw_elements_end_charset_head_state(self):
+        meta = b'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'
+        for tag in ('textarea', 'iframe', 'xmp', 'noscript'):
+            for reopened in (b'', b'<head>'):
+                raw = (b'<html><head><' + tag.encode() + b'>' + meta + b'</' + tag.encode()
+                       + b'>' + reopened + meta + b'</head><body></body></html>')
+                with self.subTest(tag=tag, reopened=reopened), self.assertRaisesRegex(ValueError, 'charset declaration missing'):
+                    check.decode_document(raw)
+
+    def test_head_raw_elements_preserve_later_active_charset(self):
+        fake = b'<meta http-equiv="Content-Type" content="text/html; charset=CP932">'
+        for tag in ('title', 'style', 'script'):
+            raw = document().replace(b'<head>', b'<head><' + tag.encode() + b'>' + fake + b'</' + tag.encode() + b'>')
+            with self.subTest(tag=tag):
+                self.assertEqual(check.decode_document(raw)[1], 'utf-8')
+
     def test_charset_lookalikes_are_not_declarations(self):
         for marker in ('<!-- charset=UTF-8 -->', '<style>p{content:"charset=UTF-8"}</style>',
                        '<script>var x="charset=UTF-8";</script>', '<title>charset=UTF-8</title>'):
@@ -262,6 +278,62 @@ class DistributionRegressions(unittest.TestCase):
     setUp = fixtures.GitReferenceTests.setUp
     git = fixtures.GitReferenceTests.git
     write = fixtures.GitReferenceTests.write
+
+    def stage_asset_reference(self, path='public/reikai/mode fixture.bin'):
+        first = next(iter(check.SCOPES))
+        self.write(first, document('<a href="mode%20fixture.bin">Fixture</a>'))
+        self.git('add', '--', first)
+        blob = subprocess.check_output(['git', '-C', str(self.root), 'hash-object', '-w', '--stdin'],
+                                       input=b'synthetic target bytes').decode().strip()
+        return path, blob
+
+    def test_materialized_symlink_index_and_baseline_are_not_regular_assets(self):
+        path, blob = self.stage_asset_reference()
+        self.git('update-index', '--add', '--cacheinfo', '120000', blob, path)
+        self.git('-c', 'user.name=Synthetic', '-c', 'user.email=synthetic@example.invalid',
+                 'commit', '-qm', 'Synthetic symlink entry')
+        self.git('-c', 'core.symlinks=false', 'checkout-index', '-f', '--', path)
+        self.assertTrue((self.root / path).is_file())
+        self.assertFalse((self.root / path).is_symlink())
+        result = check.run(self.root, 'HEAD')
+        self.assertEqual(result['distribution'], 'INCOMPLETE')
+        self.assertEqual(result['missing_occurrences'], 1)
+        self.assertEqual(result['new_missing_occurrences'], 0)
+
+    def test_regular_index_modes_are_accepted(self):
+        path, blob = self.stage_asset_reference()
+        self.write(path, b'synthetic target bytes')
+        for mode in ('100644', '100755'):
+            self.git('update-index', '--add', '--cacheinfo', mode, blob, path)
+            with self.subTest(mode=mode):
+                result = check.run(self.root, 'HEAD')
+                self.assertEqual(result['missing_occurrences'], 0)
+                self.assertEqual(result['distribution'], 'CHECKED_LOCAL_REFERENCE_PATHS_RESOLVED')
+
+    def test_selected_source_materialized_from_symlink_mode_is_rejected(self):
+        source = next(iter(check.SCOPES))
+        blob = subprocess.check_output(['git', '-C', str(self.root), 'hash-object', '-w', '--stdin'],
+                                       input=document()).decode().strip()
+        self.git('update-index', '--cacheinfo', '120000', blob, source)
+        self.git('-c', 'core.symlinks=false', 'checkout-index', '-f', '--', source)
+        self.assertTrue((self.root / source).is_file())
+        self.assertFalse((self.root / source).is_symlink())
+        with self.assertRaisesRegex(ValueError, 'regular tracked file'):
+            check.run(self.root, 'HEAD')
+        self.git('-c', 'user.name=Synthetic', '-c', 'user.email=synthetic@example.invalid',
+                 'commit', '-qm', 'Synthetic source symlink mode')
+        self.git('update-index', '--cacheinfo', '100644', blob, source)
+        with self.assertRaisesRegex(ValueError, 'Baseline selected source'):
+            check.run(self.root, 'HEAD')
+
+    def test_nonzero_index_stage_does_not_resolve_an_asset(self):
+        path, blob = self.stage_asset_reference()
+        self.write(path, b'synthetic target bytes')
+        subprocess.check_output(['git', '-C', str(self.root), 'update-index', '--index-info'],
+                                input=('100644 ' + blob + ' 1\t' + path + '\n').encode())
+        result = check.run(self.root, 'HEAD')
+        self.assertEqual(result['missing_occurrences'], 1)
+        self.assertEqual(result['distribution'], 'INCOMPLETE')
 
     def test_unverified_base_cannot_report_all_references_resolved(self):
         for path in check.SCOPES:

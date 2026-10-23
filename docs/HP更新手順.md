@@ -154,6 +154,10 @@ charsetは有効なhead/prolog内のHTML4 Content-Type metaだけを採用し、
 
 CSSの字句区切り検査は、文字列内だけでなく通常token中のbackslashに続く文字も区切りとして数えない。例えば`.foo\{bar { color: red; }`を誤って不均衡としない。完全CSS tokenizer/escape文法・値・cascade・表示は引き続き範囲外。[W3Cのescape説明](https://www.w3.org/TR/css-syntax-3/#escaping)を参照。
 
+Git参照はpathだけでなくmodeも確認する。現indexは`ls-files --stage -z`のstage 0・100644/100755、基準treeはblobの100644/100755だけを通常ファイルとする。120000のsymlink entryはWindows等で通常ファイルに展開されていても解決済みにせず、未解決stageも除外する。選択元HTMLも現index・基準treeの双方で通常ファイルであることが必要。[Gitのstage出力](https://git-scm.com/docs/git-ls-files#Documentation/git-ls-files.txt---stage)。これは画像decodeや配布完結の保証ではない。
+
+charset preflightで内容を無視する要素のうち、TITLE/STYLE/SCRIPTだけはhead状態を維持する。TEXTAREA/IFRAME/NOSCRIPT/XMPの開始後はheadを終了した状態にし、後続のmetaや再度のheadタグでcharset宣言を復活させない。[HTML4 Transitional DTDのhead内容](https://www.w3.org/TR/html401/sgml/loosedtd.html)に基づく限定診断で、完全なhead文法検証はSGMLの範囲として分ける。
+
 過去監査のPR内commitは現在の履歴では祖先だが、将来のsquashとPR ref削除後の新規cloneで取得可能とは限らない。[選択した監査入力5版の逆差分](plans/legacy-historical-inputs-20261024.json)は、同じtree内の変更していない3HTMLから原bytesをメモリ内で再構成する。サイズ/SHA256/Git blobを前後で照合し、入力変更時は失敗する。再照合は上記unittestの`HistoricalAuditRegressions`に含まれ、旧commit objectの取得・新ref・ファイル書出しは不要。元のcommit ID・古いhash・当時の実証結果は履歴として保持する。逆差分は当時のcommit graph/署名の復元や診断/rollbackの再実行を意味せず、snapshot/画像/全履歴の保存でもない。
 
 終了コード0は限定検査で新規回帰がないことだけを示す。既知の配布不足はINCOMPLETEで、この入口自体はSGML検証・実表示を実行しない。別途行った3ページのSGML DTD検証は[2026-10-24の限定記録](plans/legacy-html-followup-20261024.json)を参照し、実表示は未確認として残す。私有snapshotでの解決をGit配布成立へ流用しない。JS/TSがない範囲の型検査は対象外で、型PASSとはしない。
