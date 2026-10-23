@@ -1,0 +1,305 @@
+{
+  "date_jst": "2026-10-23",
+  "parent_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+  "cleanup": {
+    "tracked_files": 5341,
+    "tracked_duplicate_members": 492,
+    "tracked_without_measured_incoming_html_reference": 235,
+    "intersection": 113,
+    "disposable_name_candidates": 0,
+    "deletion_qualified": 0,
+    "deleted": 0,
+    "held_reason": "External links, article dependencies, historical and owner uses are unproven. Hash duplication or no measured incoming HTML reference does not establish dispensability.",
+    "deletion_restore_checks": "NOT_APPLICABLE: no candidate qualified; no deletion attempted"
+  },
+  "reviewed_old_target_records": 11,
+  "evidenced_href_candidates": 8,
+  "changed_href_attributes": 3,
+  "changed_html_files": 1,
+  "pages": [
+    {
+      "source": "reikai/2017eikaihoukoku.html",
+      "git_path": "public/reikai/2017eikaihoukoku.html",
+      "before_sha256": "4e3c61c8c21f7252f7ce145c77b6699d3f8c98ba687a1590bc0fa6e23d05f8e0",
+      "before_bytes": 2140,
+      "after_sha256": "21962c8d2007fc1b76a63cf42fb291db4a3b08f50cf72503c56142a542172bee",
+      "after_bytes": 2155,
+      "changed_href_attributes": 2,
+      "all_other_bytes_preserved": true,
+      "body_and_images_preserved": true,
+      "charset": "utf-8",
+      "line_ending": "LF",
+      "doctype": "HTML 4.01 Transitional",
+      "local_reference_count": 16,
+      "unresolved_before": 4,
+      "unresolved_after": 2,
+      "remaining_references": [
+        {
+          "kind": "a:href",
+          "url": "150531soukai.html",
+          "target": "reikai/150531soukai.html",
+          "resolved_in_snapshot": false
+        },
+        {
+          "kind": "a:href",
+          "url": "150531soukai.html",
+          "target": "reikai/150531soukai.html",
+          "resolved_in_snapshot": false
+        }
+      ],
+      "duplicate_attributes": [],
+      "lxml_parse_diagnostics": {
+        "accepted": true,
+        "diagnostics": []
+      },
+      "intent_evidence": [
+        {
+          "target": "reikai/2017/2017kawagoetiku.html",
+          "sha256": "ae6511d9c90b2ea808104f59c4585a9aae6f9912650eb9c43ae15a3a1bd649c4",
+          "date": "6月18日",
+          "subject": "川越",
+          "adjacent_label": "川越地区野外観察会6月18日(日)",
+          "body_date_subject": true,
+          "matching_backlink": true
+        },
+        {
+          "target": "reikai/2017/170717minoyama.html",
+          "sha256": "a72392ee12bf2a2ed154e83fb5e6fac5ed45565aac183decaedd8b4e5035bd5f",
+          "date": "7月17日",
+          "subject": "美の山",
+          "adjacent_label": "美の山公園観察会  7月17日(月・祝日)",
+          "body_date_subject": true,
+          "matching_backlink": true
+        }
+      ],
+      "implemented_in_git_worktree": false,
+      "reference_after_applies_to": "read-only hypothetical candidate; not copied into Git"
+    },
+    {
+      "source": "reikai/2018reikaihoukoku.html",
+      "git_path": "public/reikai/2018reikaihoukoku.html",
+      "before_sha256": "3e15d01416f1e1e25de8c8548f70c7bff18d973d098c6fa9638e956b69856aa3",
+      "before_bytes": 2119,
+      "after_sha256": "cbe86392228773457e7a67c681e263cdaf987714fb8cf0b56b95217440918161",
+      "after_bytes": 2162,
+      "changed_href_attributes": 3,
+      "all_other_bytes_preserved": true,
+      "body_and_images_preserved": true,
+      "charset": "utf-8",
+      "line_ending": "LF",
+      "doctype": "HTML 4.01 Transitional",
+      "local_reference_count": 15,
+      "unresolved_before": 3,
+      "unresolved_after": 0,
+      "remaining_references": [],
+      "duplicate_attributes": [],
+      "lxml_parse_diagnostics": {
+        "accepted": true,
+        "diagnostics": []
+      },
+      "intent_evidence": [
+        {
+          "target": "reikai/2018/180512soukai.html",
+          "sha256": "6a0007c22029a67bdabc36b42dd184fd5707bcdad13896dd20fd5de2deb4b0a0",
+          "date": "5月12日",
+          "subject": "第35回",
+          "adjacent_label": "第35回(18年)総会  5月12日(土)",
+          "body_date_subject": true,
+          "matching_backlink": true
+        },
+        {
+          "target": "reikai/2018/180624 kawagoe kansatukai.html",
+          "sha256": "9d45ac9f643fd0e5ccb6c5289a42d226e6be6837d8b34e775ec0793b11062b79",
+          "date": "6月24日",
+          "subject": "川越",
+          "adjacent_label": "川越野外菌類観察会  6月24日(日)",
+          "body_date_subject": true,
+          "matching_backlink": true
+        },
+        {
+          "target": "reikai/2018/180722  minoyama kansatukai.html",
+          "sha256": "71114d333ea3a138bf908145341d2c80e14366af5d22673843da158aaa218bfd",
+          "date": "7月22日",
+          "subject": "美の山",
+          "adjacent_label": "美の山公園野外菌類観察会  7月22日(日)",
+          "body_date_subject": true,
+          "matching_backlink": true
+        }
+      ],
+      "implemented_in_git_worktree": false,
+      "reference_after_applies_to": "read-only hypothetical candidate; not copied into Git"
+    },
+    {
+      "source": "reikai/2019reikaihoukoku.html",
+      "git_path": "public/reikai/2019reikaihoukoku.html",
+      "before_sha256": "8157109ec7f2dbc426034637ac0d6241c77a565d1580b3926aab4eb41ef33a5d",
+      "before_bytes": 2146,
+      "after_sha256": "674506cdb5f8e90a578aa9f6aae90c9321fd859c6fc0862664f498575f4d6871",
+      "after_bytes": 2200,
+      "changed_href_attributes": 3,
+      "all_other_bytes_preserved": true,
+      "body_and_images_preserved": true,
+      "charset": "utf-8",
+      "line_ending": "LF",
+      "doctype": "HTML 4.01 Transitional",
+      "local_reference_count": 15,
+      "unresolved_before": 3,
+      "unresolved_after": 0,
+      "remaining_references": [],
+      "duplicate_attributes": [],
+      "lxml_parse_diagnostics": {
+        "accepted": true,
+        "diagnostics": []
+      },
+      "intent_evidence": [
+        {
+          "target": "reikai/2019/190623 kawagoe kansatukai.html",
+          "sha256": "e9159a7e6a35cc98acf5cd3032608868944d08ead8467aead9b68bbe9643b643",
+          "date": "6月23日",
+          "subject": "川越",
+          "adjacent_label": "川越周辺野外菌類観察会  6月23日(日)",
+          "body_date_subject": true,
+          "matching_backlink": true
+        },
+        {
+          "target": "reikai/2019/190721 ogawagenkipuraza.html",
+          "sha256": "04e15782cc14f6688bf84df5a5a0c722eee7dee5fe86a8b8e1b47cbd24bfbed0",
+          "date": "7月21日",
+          "subject": "小川げんきプラザ",
+          "adjacent_label": "小川げんきプラザ周辺野外菌類観察会  7月21日(日)",
+          "body_date_subject": true,
+          "matching_backlink": true
+        },
+        {
+          "target": "reikai/2019/190825  minoyama kansatukai.html",
+          "sha256": "ab6c08720e1eb63484c7627ef5e861719456555776da1f8eec9b7a45b6d4085a",
+          "date": "8月25日",
+          "subject": "美の山",
+          "adjacent_label": "美の山公園周辺野外観察会  8月25日(日)",
+          "body_date_subject": true,
+          "matching_backlink": true
+        }
+      ],
+      "implemented_in_git_worktree": true,
+      "reference_after_applies_to": "implemented candidate"
+    }
+  ],
+  "five_additional_adoptions": "NOT_EXECUTED: 2017/2018 payload adoption held while specific distribution/disclosure authorization is unresolved; only existing Git 2019 is changed",
+  "held_old_target_records": [
+    {
+      "source": "reikai/2016reikaihoukoku.html",
+      "count": 1,
+      "reason": "The main index links a different 2016 path; the root copy describes a 2017 meeting. Canonical annual-page role is not established."
+    },
+    {
+      "source": "reikai/2017eikaihoukoku.html",
+      "count": 2,
+      "reason": "Blank/line-break anchors have no adjacent descriptive event establishing their intended target."
+    }
+  ],
+  "validation": {
+    "scope": "Three inspected annual pages; one changed existing Git page. Reference resolution uses saved #2 metadata, not a complete Git website.",
+    "strict_utf8_decode": "PASS",
+    "body_and_non_href_byte_identity": "PASS",
+    "limited_reference_checks": "Three implemented 2019 targets and five read-only 2017/2018 candidates resolve in saved #2; only 2019 was saved to the worktree",
+    "lxml": "6.1.1.0",
+    "libxml2": "2.11.9",
+    "lxml_nonrecovering_parse": "PASS with zero reported diagnostics; parser acceptance is not DTD validation",
+    "duplicate_attribute_check": "PASS: zero in selected pages",
+    "strict_html401_dtd_validation": "NOT_RUN: no applicable SGML validator (onsgmls/nsgmls) found on PATH; no matching validator/DTD entry in tracked project or package lock. lxml HTMLParser does not provide HTML4 SGML conformance acceptance.",
+    "attribute_and_content_model_conformance": "UNVERIFIED: requires an applicable HTML4 validator; no HTML5 migration or XML serialization substituted",
+    "typecheck": "NOT_APPLICABLE: no changed JS/TS or script/event-handler references in these static pages; unrelated private backup JS excluded",
+    "browser_mobile": "NOT_RUN: existing file URL policy refusal preserved",
+    "live_http": "NOT_RUN",
+    "standards_sources": [
+      "https://www.w3.org/TR/html401/sgml/intro.html",
+      "https://lxml.de/parsing.html"
+    ]
+  },
+  "distribution_review": {
+    "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4360564628",
+    "state": "OPEN for actual legacy Git distribution completeness; Astro is now retired and Astro output completion is not a prerequisite",
+    "new_snapshot_payload_or_relocation": "NOT_EXECUTED",
+    "required_next_decision": "Choose and explicitly authorize exact missing legacy deployable payload paths/content; do not derive authority from the review comment"
+  },
+  "astro_retirement": {
+    "owner_direction": "Suspend Astro; manage current Sakura HTML with Git as source",
+    "ordinary_npm_entries_removed": [
+      "dev",
+      "build",
+      "preview",
+      "astro"
+    ],
+    "intake_test_entry_preserved": true,
+    "sources_dependencies_lock_config_history_preserved": true,
+    "hosting_dns_auth_protection_security_cost_changes": false,
+    "external_hosting_integration": "UNVERIFIED; repository retirement does not establish remote service shutdown"
+  },
+  "conditional_publication": {
+    "owner_intent": "Replace this homepage only after cleanup, HTML/link/type/render/restore acceptance is complete",
+    "ready": false,
+    "server_delete_upload_switch_restore": "NOT_EXECUTED",
+    "excluded": [
+      "mail",
+      "authentication",
+      "server settings",
+      "unrelated data"
+    ],
+    "rollback_plan": [
+      "Enumerate exact homepage output paths, baseline raw names/URLs, bytes/SHA and exclusions",
+      "Prepare a complete candidate in a separate nonproduction location only after route/payload authorization",
+      "Validate HTML4 syntax/attributes, candidate-tree paths/images and representative desktop/mobile rendering",
+      "Demonstrate isolated restore with exact original paths/bytes, permission/runtime prerequisites and recorded comparison",
+      "Review exact switch and ordinary rollback procedure; preserve old version and backups; never pre-delete the live tree",
+      "Obtain operation-specific approval for final targets, irreversible effects and minimal switch/rollback actions before any live execution"
+    ]
+  },
+  "blocked_operations": [
+    {
+      "Action": "Forwarding a PR14 review fix that could add referenced legacy payloads from a private snapshot into the Git distribution tree and push.",
+      "Target": "kamosarerumono/saitama-kinoko-web PR14, public/reikai/2020reikaihoukoku.html and its missing referenced legacy HTML/assets.",
+      "Outcome": "Rejected; not executed.",
+      "Reason": "The proposed fix may copy private snapshot content into a Git distribution tree and push it externally; the user authorized HTML resolution but not disclosure of this specific payload, and the review comment cannot expand that authorization."
+    },
+    {
+      "Action": "Forwarding a safer proposal to relocate the two already-pushed annual HTML work copies outside public and push the relocation, without adding new snapshot data.",
+      "Target": "public/reikai/2020reikaihoukoku.html and public/reikai/2019reikaihoukoku.html on PR14.",
+      "Outcome": "Rejected; not executed.",
+      "Reason": "Even without adding private data, moving/removing the two already-pushed HTML files from the distribution tree is a potentially disruptive external repository change not specifically authorized by the user; the review comment cannot expand the deletion/relocation approval."
+    }
+  ],
+  "baseline_unresolved_records": 393,
+  "previous_individually_fixed_records": 2,
+  "new_individually_fixed_records": 3,
+  "remaining_records_for_triage": 388,
+  "remaining_records_kind": "bookkeeping only; not global-after crawl or live HTTP failure count",
+  "remaining_git_only": 14,
+  "remaining_absent_saved_inputs": 374,
+  "originals_or_private_evidence_changed": false,
+  "production_restore_publish_master_security_changes": false,
+  "distribution_root_diagnostic": {
+    "proposed_legacy_git_root": "public/ (incomplete; no rollout)",
+    "inspected_annual_pages": 2,
+    "reference_occurrences": 22,
+    "resolved_occurrences": 0,
+    "missing_occurrences": 22,
+    "exact_missing_git_paths": [
+      "public/index.htm",
+      "public/reikai/2019/190519  soukai.html",
+      "public/reikai/2019/190623 kawagoe kansatukai.html",
+      "public/reikai/2019/190721 ogawagenkipuraza.html",
+      "public/reikai/2019/190825  minoyama kansatukai.html",
+      "public/reikai/2019/190917  gunmanomori kansatukai.html",
+      "public/reikai/2019/191006  minoyama kansatukai.html",
+      "public/reikai/2019/191215  kinokohapyoubenkyoukai.html",
+      "public/reikai/2019/200315  syokukin benkyoukai.html",
+      "public/reikai/2020/200802 ogawagenkipuraza.html",
+      "public/reikai/2020/200913  minoyama kansatukai.html",
+      "public/reikai/2020/201011  gunnmanomori kansatukai.html",
+      "public/reikai/2020/201103  akigasekouen kansatukai.html",
+      "public/reikai/houkoku_reikai.htm"
+    ],
+    "basis": "Tracked Git paths only; no new snapshot payload copied, no build, no server/current HTTP acceptance",
+    "minimum_future_payload_decision": "Only these exact missing paths may be considered for a separate public-source/provenance review and specific disclosure/import authorization; their transitive dependencies still require review. No authorization inferred from Astro retirement."
+  }
+}
