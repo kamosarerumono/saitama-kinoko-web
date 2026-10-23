@@ -37,6 +37,8 @@
 
 現行URLに対応する静的HTMLをGitで管理する。保存物の内容一致だけで配布rootの完成や公開可能性とは扱わず、参照先・構文・実表示・復元/rollbackを別に確認する。[今回の整理・検証と未達](docs/plans/legacy-html-cleanup-20261023.json)を参照。
 
-Astroの開発・build・preview用npm scriptsは退役済みで、通常手順として実行しない。旧案のpackage/設定/ソースはGit履歴（退役前 `7f32b01d5ece96cfd5ae32a22d98e3865598a56a`）から明示的に戻せる。依存追加・再install・build・旧案のhosting再開は今回行わない。
+Astroの開発・build・preview用npm scriptsは退役済みで、通常手順として実行しない。旧案の復元参照はmasterの基準commit `dd4b4bba6dbc44299577292b848f26e58288cecc` とする。この版にpackage/lockfile・src/・Astro/TS設定があり、現在保持中のソース/lockfile/設定と同一である。PRだけの中間commitの取得を復元の前提にしない。新規cloneの実行はしていない。依存追加・再install・build・旧案のhosting再開は今回行わない。
+
+通常のローカル診断は正規worktreeのrootで `python scripts/check_legacy_html.py --baseline HEAD` を使う。Python 3.10以上の利用可能な実体を指定する。対象は既存Gitの年次一覧2件と川越見本だけで、変更を書き込まない。既知のGit配布参照不足と新規回帰、限定構文診断と未実施のSGML規格検証を別々に出力する。終了コード0でも規格/配布/表示の受入完了ではない。
 
 本番置換は、整理・HTML構文/参照・実表示・復元/rollbackの検証完了後という条件付き。全削除先行はせず、正確な対象と手順を確認するまで本番操作・master更新を行わない。

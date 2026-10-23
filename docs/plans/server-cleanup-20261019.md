@@ -1,5 +1,21 @@
 # さくらサーバー整理計画（実行前）
 
+## 2026-10-24追補: 再利用できる限定HTML検査と外部レビュー対応（最新）
+
+`scripts/check_legacy_html.py --baseline HEAD`を通常のローカル入口に追加した。標準Pythonだけで既存Gitの2019/2020年度一覧と川越見本の3件を読み、書込み・通信・snapshot読取りをしない。宣言charset厳格復号、HTML4要素名、重複属性、TABLE/IMGの許可属性・IMG/STYLE/SCRIPTの必須属性、任意終了タグを尊重した限定バランス、CSS字句区切りとGit配布rootの参照を調べる。完全SGML文法/全属性/内容モデル・完全CSS構文/カスケード・fragment・CSS内依存・実表示は検証しない。関連JS/TSがない今回の型検査は対象外。
+
+今回の限定属性エラー3件を修正: 年次2件の非標準`table height="176"`を意図する高さを保つ`style="height:176px"`へ、川越見本のSTYLEに`type="text/css"`を追加。さらに写真の最大幅に既存2px枠が加算されるのを防ぐため、scoped imgへ`box-sizing:border-box`を追加した。W3Cの[HTML4 Transitional DTD](https://www.w3.org/TR/html401/sgml/loosedtd.html)と[CSS box sizing](https://www.w3.org/TR/css-sizing-3/#box-sizing)を根拠とし、本文・日時/人名/学名/和名・写真19件の属性・全URLは不変。表示結果を静的修正だけで合格にしない。
+
+新入口の合成13項目成功。テスト用一時Git領域の親pathガードと、存在確認を3ページの参照先だけに絞る変更後、影響するGit参照4項目だけ再確認して成功。private全目録や過去成功suiteは再実行していない。実3ページの限定属性エラー3→0、新しい不足参照0。既知の不足は年次22参照/14pathと見本21参照、計43参照でINCOMPLETE。固定ローカルGit基準版と種類/path/発生回数で比較するため、不足総数が同じでも新しい参照先への回帰を見逃さない。終了コード0は限定回帰検査の結果で、配布成立/規格適合/公開可能の証明ではない。実行receipt SHA-256 `a1e0f9943788d4949dc72eeab33bed6d9563f8d4f4db6d2268bd4ca7e92322c7`、私有保存。
+
+[外部指摘4360887219](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4360887219)へ、HP更新手順§2/3/261付近を実行可能な限定診断と通常Git保存へ更新し、旧Astro§0/1を参考保管として明示した。.claude/launch.jsonのastro-dev1件を外し、schema versionを保持した。代替サーバー/成功stubや権限/approval/security設定は作らない。残るnpm build言及は旧復元案と過去worklogの記録で、現行callerではない。
+
+[外部指摘4360887226](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4360887226)へ、README/更新手順のAstro復元元をmaster基準`dd4b4bba6dbc44299577292b848f26e58288cecc`にした。origin/masterと現HEADの祖先であり、src tree・lockfile・Astro/TS設定が保持中のものと同一、元npm4入口も基準版にあることを確認。現在の7f32b01は現HEADの祖先だが、PRだけの中間objectはsquash後fresh cloneの取得を保証しない。指摘文のf680151はローカルでobject/refが見つからず、その親関係を現HEADの事実としては採用しない。fresh clone自体は未実行。前回の2file隔離復元はその入力版の成功として保持し、永続到達性の証明へ流用しない。
+
+SGML規格適合はNOT_RUN。OpenSP onsgmls、HTML4.decl/loose.dtd/HTML4.cat、3entityファイルと入力encoding設定が必要で、現在の適用可能な入口はない。公式コマンドの計画と必要componentを[更新手順](../HP更新手順.md)に記録した。install/外部validatorへの本文送信はせず、他の独立診断は継続した。外部2指摘への実装修正と内部レビュー/外部再レビューの状態は区別し、根拠なく外部受入済みにしない。
+
+原本backup/復元ZIP/名前表/展開物/私有証拠、Astroコード/依存/設定/履歴は保持。拒否された新snapshot素材同梱と2HTML移動を行わず、file表示拒否も迂回しない。本番/実接続/削除/master/認証・アクセス・security/費用の変更0。規格・実配布依存・実表示・本番rollback等が未達のため、条件付き本番置換は現在実行不可。以下の実証記録は時点別に保持する。
+
 ## 2026-10-23追補: 既存Gitの2ファイルでローカル復元・rollback実証（最新）
 
 既存Gitだけを入力に、川越観察会のレスポンシブ見本（CSS内包）`docs/plans/kawagoe2026/260628_kawagoe.html`と`public/reikai/2019reikaihoukoku.html`を限定実証した。候補版は`007fd42fe72217acf832e36c9830f2ae6b00627e`、旧版は`7f32b01d5ece96cfd5ae32a22d98e3865598a56a`。川越見本の直前commit `ab30f0c`も旧版と同じblobであることを確認した。各blob/bytes/SHAと結果は[限定復元記録](git-local-rollback-20261023.json)に保存する。
