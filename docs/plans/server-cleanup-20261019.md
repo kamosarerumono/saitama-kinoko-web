@@ -1,3 +1,13 @@
+## 2026-10-24追補: CSS escapeと選択監査入力の再照合（最新）
+
+PR14の追加指摘[4362130972](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362130972)と[4362130987](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362130987)を公式原文で確認し、基準f6add78の同じ担当/claimで限定対応した。[詳細](legacy-checker-review-20261024.json)のadditional_review_5631727676に入力版・検証・限界を追記する。
+
+現在の履歴はf6add78←1e6f35f←0de5630で、選択した中間入力は祖先。指摘の「現review commitの唯一parentはdd4b4b」は現履歴の事実として採用しない。ただし将来のsquashとPR ref削除後の取得保証はない。そこで[逆差分の監査資料](legacy-historical-inputs-20261024.json)を、既存Git3HTMLを変更せず追加した。選択5版を原bytes/SHA256/Git blobへ再構成し、旧objectを参照しないテストで照合。差分44個のreplacement計69 bytesだけで、全文HTML/画像/snapshotを複製していない。既存の古いhash・commit ID・当時の実証値は変更せず、適用資料5件から対応先を明記した。commit graph/署名の保存、当時の診断/rollback再実行、fresh clone/squashの成功とはしない。恒久refや設定変更なし。
+
+CSSは文字列外のescaped braceを不均衡とする誤検出を現基準で再現（追加3methodでassertion失敗6）。通常tokenでもbackslashと次の文字を読み飛ばし、実際の未閉じ区切りを残す最小修正を入れた。局所正例/負例と既存の関連2moduleは39テスト成功。実3HTMLは指摘0/新規不足0/未対応0、既知不足43参照/34pathはINCOMPLETE継続。HTML bytes不変、SGML/表示/全snapshot/全repo試験は反復していない。
+
+34pathと追加55pathの同梱判断、原稿確認2件は保留。素材追加/配置移動/本番/master/merge/認証TLS/security/費用変更なし。外部review threadの解決・外部再承認は主張しない。
+
 ## 2026-10-24追補: 配布不足34pathの同梱判断案（未採用）
 
 [対象一覧・必要素材・公開範囲](legacy-distribution-inclusion-20261024.md)と[正確な34path/bytes/hash/URL一覧](legacy-distribution-inclusion-20261024.json)を整理した。HTML14・JPEG19・CSS1、全件の原素材は#2目録にあるが、公開Git同梱は全件判断待ち。HTML14/CSS1だけの原バイトを限定読取り・照合し、一次参照に追加55path（画像22/CSS1/リンク先HTML32）があると判明。追加のpayloadは未読、再帰走査なし。34件だけの配布完結とはしない。

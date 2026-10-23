@@ -1,4 +1,57 @@
 {
+  "additional_review_5631727676": {
+    "input_commit": "f6add78d06e57df35196e5572dfb34b3a5d12640",
+    "review_id": 5631727676,
+    "comments": [
+      {
+        "id": 4362130972,
+        "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362130972",
+        "current_graph": "Observed f6add78 parent=1e6f35f, 1e6f35f parent=0de5630. Selected historical inputs are current ancestors; not sole-parent dd4b4b as the review asserts.",
+        "future_risk": "A hypothetical squash/ref removal can lose PR-only commit lookups; current ancestry does not disprove this risk.",
+        "change": "Five selected historical Git HTML inputs reconstruct from three unchanged current HTMLs and 44 ordered reverse edits containing 69 replacement bytes. No snapshot/image/full HTML copies or new permanent refs.",
+        "manifest": "legacy-historical-inputs-20261024.json",
+        "manifest_sha256": "a2ff383a2102e973a331f18a1516c9e54a6af881f2315b084da99b8de761beb4",
+        "verification": "All five reconstructed byte lengths/SHA256/Git blobs match original records, without old object queries in the reconstruction tests. Stale base and invalid/tampered edit negatives fail.",
+        "limit": "Byte reproduction only, not preserved commit graph/signatures or repeated historical diagnostics/rollback; fresh clone/squash/ref removal/GC not executed."
+      },
+      {
+        "id": 4362130987,
+        "url": "https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362130987",
+        "before": "Current input checker rejected .foo\\{bar { color: red; }; three added test methods produced six assertion failures before the implementation fix.",
+        "before_log_sha256": "ecb73cba49d937ef97cebcb6c288e73639a34e1cf483f13eebae0b337faa24f1",
+        "change": "Skip a backslash and its following character outside quotes/comments before structural counting; quote/comment handling and real unbalanced delimiter rejection remain.",
+        "positive_scope": "Escaped braces/brackets/parentheses/quote/slash, hex escape, paired backslashes, STYLE and inline style.",
+        "negative_scope": "Real missing/extra closer, paired backslash before real unclosed opener, escaped closing brace, unmatched parenthesis, unclosed structure after comment.",
+        "limit": "Lexical delimiter triage, not complete CSS escape/token/grammar/cascade/rendering acceptance."
+      }
+    ],
+    "verification": {
+      "targeted_modules": [
+        "tests.test_legacy_html_checks",
+        "tests.test_legacy_html_review_regressions"
+      ],
+      "tests": 39,
+      "failures_errors_skips": 0,
+      "log_sha256": "6a16745cfe7f98c272954d86307f41525172a3e9081deeaefe45b31df6ac9089",
+      "three_page_result_sha256": "cee02c522a0dcec72c5f518f30167faf004d35267bdf6ee63626f6ed69303f39",
+      "issues": 0,
+      "new_missing": 0,
+      "unverified_references": 0,
+      "known_missing_occurrences": 43,
+      "distinct_missing_paths": 34,
+      "distribution": "INCOMPLETE",
+      "html_changes": 0,
+      "sgml_rerun": false,
+      "browser_rendering": "NOT_RUN",
+      "independent_review": "Pending on this exact pre-review record; final outcome belongs to PR save/readback evidence."
+    },
+    "preserved": "34path and additional55 inclusion decisions pending; two factual questions held; no snapshot/material import/relocation, permanent refs, production/master/merge/auth/TLS/security changes.",
+    "primary_sources": [
+      "https://www.w3.org/TR/css-syntax-3/#escaping",
+      "https://git-scm.com/docs/git-merge#Documentation/git-merge.txt---squash"
+    ]
+  },
+  "durable_selected_byte_inputs": {"recipe_record": "legacy-historical-inputs-20261024.json", "selected_bindings": "H01-H03 historical_after_bindings; H04/H01/H05/H02 historical_rollback_source_identity_checks. Current HTML uses unchanged base_inputs paths/bytes, not a guaranteed future lookup by 0de5630 commit.", "history_limit": "PR-only commit lookup after hypothetical squash/ref removal is not guaranteed. Recipes plus unchanged base HTMLs reproduce selected bytes only, not historical commit provenance or execution."},
   "date_jst": "2026-10-24",
   "base_commit": "0de563026b5a332ffb4d1b7b079ba54a236fc95f",
   "reviewed_commit": "8236aa781d616f4deb99b4f485ee48c1bdc9d802",

@@ -1,4 +1,5 @@
 {
+  "durable_selected_byte_inputs": {"recipe_record": "legacy-historical-inputs-20261024.json", "selected_bindings": "H03 2020 first adopted after. Private snapshot inventory/target payloads excluded.", "history_limit": "PR-only commit lookup after hypothetical squash/ref removal is not guaranteed. Recipes plus unchanged base HTMLs reproduce selected bytes only, not historical commit provenance or execution."},
   "schema_version": 1,
   "snapshot_id": "120530759",
   "input_inventory_sha256": "22ec38c95931faeb37496cb7a4d4507b746c87ca273873cf79fb4c4375243d1f",

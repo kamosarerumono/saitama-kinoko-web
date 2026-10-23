@@ -1,4 +1,5 @@
 {
+  "durable_selected_byte_inputs": {"recipe_record": "legacy-historical-inputs-20261024.json", "selected_bindings": "H02 implemented 2019 after; H05 2019 baseline. Unadopted 2017/2018 candidates excluded.", "history_limit": "PR-only commit lookup after hypothetical squash/ref removal is not guaranteed. Recipes plus unchanged base HTMLs reproduce selected bytes only, not historical commit provenance or execution."},
   "date_jst": "2026-10-23",
   "parent_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
   "implemented_result_commit": "ab30f0c33616d9413480369d71dc71ce751e5afe",

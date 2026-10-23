@@ -1,4 +1,5 @@
 {
+  "durable_selected_byte_inputs": {"recipe_record": "legacy-historical-inputs-20261024.json", "selected_bindings": "H04/H01 Kawagoe baseline/candidate; H05/H02 2019 baseline/candidate; H03 unchanged 2020 sentinel. Existing photo sentinel remains at its current tracked path, not copied.", "history_limit": "PR-only commit lookup after hypothetical squash/ref removal is not guaranteed. Recipes plus unchanged base HTMLs reproduce selected bytes only, not historical commit provenance or execution."},
   "date_jst": "2026-10-23",
   "status": "PASS_SELECTED_GIT_BYTES_LOCAL_ONLY",
   "source_candidate_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",

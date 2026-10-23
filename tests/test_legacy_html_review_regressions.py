@@ -1,5 +1,6 @@
-"""Bounded regressions for PR14 review 5631148385; synthetic inputs only."""
+"""Bounded PR14 regressions; synthetic CSS/Git and selected tracked audit bytes."""
 import contextlib
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -137,6 +138,99 @@ class AttributeURLRegressions(unittest.TestCase):
                               '<meta http-equiv="refresh" content="0; url=javascript:alert(1)">')
         self.assertTrue(result['unverified_references'])
         self.assertEqual(result['js_scope'], 'REQUIRES_RELATED_JS_CHECK')
+
+
+class CssEscapeRegressions(unittest.TestCase):
+    def test_escaped_delimiters_and_quotes_outside_strings_are_not_structural(self):
+        for css in (r'.foo\{bar { color: red; }', r'.foo\}bar { color: red; }',
+                    r'.foo\(bar\)\[baz\] { color: red; }',
+                    r'.foo\"bar { color: red; }', r'.foo\/*bar { color: red; }',
+                    r'.foo\7b bar { color: red; }', r'.foo\\ { color: red; }'):
+            with self.subTest(css=css):
+                self.assertTrue(check.css_delimiters(css))
+
+    def test_escaping_does_not_hide_real_unbalanced_delimiters(self):
+        for css in (r'.foo\{bar { color: red;', r'.foo\}bar }',
+                    r'.foo\\{ color: red;', r'p{color:red;\}',
+                    r'p{width:calc(1px + 2px;}', r'/* still unclosed \*/ {'):
+            with self.subTest(css=css):
+                self.assertFalse(check.css_delimiters(css))
+
+    def test_style_and_inline_style_use_the_escape_aware_scan(self):
+        result = check.analyze(document('<p style="--marker:\\};color:red">X</p>',
+                               r'<style type="text/css">.foo\{bar { color: red; }</style>'),
+                               'reikai/fixture.html', set())
+        self.assertEqual(result['issues'], [])
+        bad = check.analyze(document(style=r'<style type="text/css">.foo\{bar { color: red;</style>'),
+                            'reikai/fixture.html', set())
+        self.assertIn('unbalanced_style_css', {x['kind'] for x in bad['issues']})
+
+
+def reconstruct_audit_bytes(source, base, row):
+    """Apply a fixed byte recipe in memory; never resolve an old commit/ref."""
+    def identity(data):
+        return {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(),
+                'blob': hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()}
+
+    if identity(source) != base:
+        raise ValueError('audit base identity mismatch')
+    offset, pieces = 0, []
+    for edit in row['reverse_edits']:
+        start, end = edit['start'], edit['end']
+        if not (isinstance(start, int) and isinstance(end, int)
+                and offset <= start <= end <= len(source)):
+            raise ValueError('audit edit range or order invalid')
+        pieces.extend((source[offset:start], bytes.fromhex(edit['replacement_hex'])))
+        offset = end
+    pieces.append(source[offset:])
+    target = b''.join(pieces)
+    if identity(target) != {key: row[key] for key in ('bytes', 'sha256', 'blob')}:
+        raise ValueError('audit target identity mismatch')
+    return target
+
+
+class HistoricalAuditRegressions(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+        cls.plan = cls.root / 'docs/plans'
+        cls.manifest = json.loads((cls.plan / 'legacy-historical-inputs-20261024.json').read_text(encoding='utf-8'))
+        if set(cls.manifest['base_inputs']) != set(check.SCOPES):
+            raise AssertionError('Audit bases must stay within the exact existing three HTML paths')
+        # Only HEAD:path is queried. Old PR commit/blob availability is irrelevant.
+        cls.sources = {path: check.git(cls.root, 'show', 'HEAD:' + path)
+                       for path in cls.manifest['base_inputs']}
+
+    def test_five_historical_bytes_reproduce_without_historical_objects(self):
+        rows = self.manifest['historical_inputs']
+        self.assertEqual(len(rows), 5)
+        self.assertEqual(len({r['blob'] for r in rows}), 5)
+        reconstructed = {}
+        for row in rows:
+            with self.subTest(id=row['id']):
+                data = reconstruct_audit_bytes(self.sources[row['path']],
+                                              self.manifest['base_inputs'][row['path']], row)
+                reconstructed[row['blob']] = data
+        audit = json.loads((self.plan / 'legacy-checker-review-20261024.json').read_text(encoding='utf-8'))
+        for row in audit['historical_after_bindings'] + audit['historical_rollback_source_identity_checks']:
+            data = reconstructed[row.get('historical_blob', row.get('blob'))]
+            self.assertEqual(len(data), row['bytes'])
+            self.assertEqual(hashlib.sha256(data).hexdigest(), row['sha256'])
+
+    def test_changed_audit_base_is_rejected_before_reconstruction(self):
+        row = self.manifest['historical_inputs'][0]
+        with self.assertRaisesRegex(ValueError, 'base identity'):
+            reconstruct_audit_bytes(self.sources[row['path']] + b'changed',
+                                    self.manifest['base_inputs'][row['path']], row)
+
+    def test_out_of_range_and_tampered_recipe_are_rejected(self):
+        row = self.manifest['historical_inputs'][0]
+        source, base = self.sources[row['path']], self.manifest['base_inputs'][row['path']]
+        bad_range = dict(row, reverse_edits=[{'start': 0, 'end': len(source) + 1, 'replacement_hex': ''}])
+        with self.assertRaisesRegex(ValueError, 'range or order'):
+            reconstruct_audit_bytes(source, base, bad_range)
+        with self.assertRaisesRegex(ValueError, 'target identity'):
+            reconstruct_audit_bytes(source, base, dict(row, reverse_edits=[]))
 
 
 class GitCompatibilityRegressions(unittest.TestCase):

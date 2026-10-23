@@ -152,6 +152,10 @@ python -m unittest tests.test_legacy_html_checks tests.test_legacy_html_review_r
 
 charsetは有効なhead/prolog内のHTML4 Content-Type metaだけを採用し、コメント・CSS・script・TITLE・本文の文字列で代用しない。未宣言/無効/競合やUTF-8 BOMとの矛盾は推測復号せず停止。DOCTYPEも実際のprolog宣言を判定し、宣言キーワードの大小文字とPUBLIC識別子の完全一致を分ける。IMGのsrc/altとSTYLE/SCRIPTのtypeは値なしを検出するが、意図的な`alt=""`まで禁止しない。列挙したHTML4 URL属性は正確な配布pathで調べ、BASE・object/appletのcodebase/archive/classid・PARAM ref・refresh・data等の未対応意味はUNVERIFIEDにする。BASEがある相対参照を文書path基準で推測してprobeしない。`javascript:`等は実行せず診断とJS確認対象へ反映する。全参照解決の宣言ではなく、fragment・CSS依存・実表示等の範囲外も残る。[指摘別の正例/負例と記録の適用版](plans/legacy-checker-review-20261024.json)。
 
+CSSの字句区切り検査は、文字列内だけでなく通常token中のbackslashに続く文字も区切りとして数えない。例えば`.foo\{bar { color: red; }`を誤って不均衡としない。完全CSS tokenizer/escape文法・値・cascade・表示は引き続き範囲外。[W3Cのescape説明](https://www.w3.org/TR/css-syntax-3/#escaping)を参照。
+
+過去監査のPR内commitは現在の履歴では祖先だが、将来のsquashとPR ref削除後の新規cloneで取得可能とは限らない。[選択した監査入力5版の逆差分](plans/legacy-historical-inputs-20261024.json)は、同じtree内の変更していない3HTMLから原bytesをメモリ内で再構成する。サイズ/SHA256/Git blobを前後で照合し、入力変更時は失敗する。再照合は上記unittestの`HistoricalAuditRegressions`に含まれ、旧commit objectの取得・新ref・ファイル書出しは不要。元のcommit ID・古いhash・当時の実証結果は履歴として保持する。逆差分は当時のcommit graph/署名の復元や診断/rollbackの再実行を意味せず、snapshot/画像/全履歴の保存でもない。
+
 終了コード0は限定検査で新規回帰がないことだけを示す。既知の配布不足はINCOMPLETEで、この入口自体はSGML検証・実表示を実行しない。別途行った3ページのSGML DTD検証は[2026-10-24の限定記録](plans/legacy-html-followup-20261024.json)を参照し、実表示は未確認として残す。私有snapshotでの解決をGit配布成立へ流用しない。JS/TSがない範囲の型検査は対象外で、型PASSとはしない。
 
 HTML4のSGML DTD検証はOpenSP 1.5.2公式Windows版のonsgmlsと同梱DLLをtask専用領域に配置し、W3C公式HTML4.decl・loose.dtd・HTML4.cat・HTMLlat1.ent/HTMLsymbol.ent/HTMLspecial.entをローカル入力にして実施した。OS全体へのinstall・PATH・恒久環境変数の変更はしていない。出典・取得物hash・実入力hash・結果は[限定記録](plans/legacy-html-followup-20261024.json)に固定する。未確認の別配布バイナリで置き換えない。

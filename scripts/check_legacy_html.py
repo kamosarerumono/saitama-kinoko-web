@@ -129,6 +129,13 @@ def css_delimiters(text: str) -> bool:
                 escaped = True
             elif char == quote:
                 quote = ''
+        elif char == '\\':
+            # Outside strings too, an escaped quote/slash/delimiter is token
+            # data. Skip the escaped character; paired backslashes still leave
+            # a following unescaped delimiter structural. This is not a full
+            # CSS escape/token grammar check.
+            index += 2
+            continue
         elif text[index:index + 2] == '/*':
             comment = True
             index += 2

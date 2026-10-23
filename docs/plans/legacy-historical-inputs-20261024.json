@@ -1,0 +1,309 @@
+{
+  "schema": 1,
+  "date_jst": "2026-10-24",
+  "scope": "Five selected historical HTML byte inputs already published in Git. Reverse edits from three unchanged current HTML blobs; no snapshot, photos or full HTML copy.",
+  "observation_commit": "f6add78d06e57df35196e5572dfb34b3a5d12640",
+  "observed_parent_lists": {
+    "f6add78d06e57df35196e5572dfb34b3a5d12640": [
+      "1e6f35fdbd2cc5ff695334ed403c2d12a823318d"
+    ],
+    "1e6f35fdbd2cc5ff695334ed403c2d12a823318d": [
+      "0de563026b5a332ffb4d1b7b079ba54a236fc95f"
+    ]
+  },
+  "current_history": "All selected content commits are ancestors of observation_commit. The review claim that current reviewed commit has sole parent dd4b4b is not the observed local graph.",
+  "hypothetical_squash": "A future squash tree may retain these recipes and three base HTMLs without retaining PR-only commits. No squash, clone, ref change or GC was performed. SHA strings in JSON do not retain Git objects.",
+  "verification": "Read only the three HEAD:path base blobs and this JSON; require exact base bytes/SHA/blob, apply ordered nonoverlapping edits against original byte offsets, require target bytes/SHA/blob. No historical object lookup is needed for this byte reproduction.",
+  "provenance_limit": "Recipes preserve selected byte reproducibility, not historical commit ancestry/signatures or a rerun of historical diagnostics/rollback. Original observed commits/hashes remain unchanged in their records.",
+  "maintenance": "Fail closed if a base HTML changes. Refresh recipes and bindings under the same reviewed scope before changing bases; do not silently substitute current HTML or fetch old objects.",
+  "base_inputs": {
+    "docs/plans/kawagoe2026/260628_kawagoe.html": {
+      "bytes": 16657,
+      "sha256": "b03fe08f27d358fb500a65596a931f0f7529811e8c32759c550f7f845e667534",
+      "blob": "118a270f423e42e02135112631831449d4f55161"
+    },
+    "public/reikai/2019reikaihoukoku.html": {
+      "bytes": 2237,
+      "sha256": "fb7e26de486c346b4950c4a04118a646060e48dbe68dafe70e3f0fa0bd0434a1",
+      "blob": "c7ecffba0079cbe8afbb334a9e0abc4f0ab0bc35"
+    },
+    "public/reikai/2020reikaihoukoku.html": {
+      "bytes": 1875,
+      "sha256": "c7902f43eb3e3e58ba836675150661fa5dce5c406fbe580dff4a91a76f751475",
+      "blob": "fdcad5fa339a3817e6081bcb7e404443e7392329"
+    }
+  },
+  "historical_inputs": [
+    {
+      "id": "H01",
+      "path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "observed_content_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+      "blob": "053e66bd87904142a3320a163b52b84745bdbea5",
+      "bytes": 16603,
+      "sha256": "b288abfcceb55c7b29f22c4e9e27831d8596f8f28fac13c8a19565c8069c942f",
+      "reverse_edits": [
+        {
+          "start": 69,
+          "end": 79,
+          "replacement_hex": ""
+        },
+        {
+          "start": 431,
+          "end": 447,
+          "replacement_hex": ""
+        },
+        {
+          "start": 1573,
+          "end": 1601,
+          "replacement_hex": ""
+        }
+      ]
+    },
+    {
+      "id": "H02",
+      "path": "public/reikai/2019reikaihoukoku.html",
+      "observed_content_commit": "ab30f0c33616d9413480369d71dc71ce751e5afe",
+      "blob": "a6c8837943f29a861d4c2c321a956378ce18a3e5",
+      "bytes": 2200,
+      "sha256": "674506cdb5f8e90a578aa9f6aae90c9321fd859c6fc0862664f498575f4d6871",
+      "reverse_edits": [
+        {
+          "start": 69,
+          "end": 79,
+          "replacement_hex": ""
+        },
+        {
+          "start": 314,
+          "end": 316,
+          "replacement_hex": ""
+        },
+        {
+          "start": 317,
+          "end": 348,
+          "replacement_hex": "347265696b6169686f756b6f6b75"
+        },
+        {
+          "start": 672,
+          "end": 679,
+          "replacement_hex": ""
+        },
+        {
+          "start": 685,
+          "end": 686,
+          "replacement_hex": "3d22"
+        },
+        {
+          "start": 689,
+          "end": 691,
+          "replacement_hex": ""
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "path": "public/reikai/2020reikaihoukoku.html",
+      "observed_content_commit": "69b918d549d7b17f27e04d1655ef830befd5d7d1",
+      "blob": "c319827ce2dc044c1302e067269090ef766d8a05",
+      "bytes": 1830,
+      "sha256": "721b937d39ce99ff9397c77bfd825bd618e8ebb46dea08575a345b773f4bf9ca",
+      "reverse_edits": [
+        {
+          "start": 69,
+          "end": 79,
+          "replacement_hex": ""
+        },
+        {
+          "start": 314,
+          "end": 356,
+          "replacement_hex": "31347265696b6169686f756b6f6b75"
+        },
+        {
+          "start": 705,
+          "end": 712,
+          "replacement_hex": ""
+        },
+        {
+          "start": 718,
+          "end": 719,
+          "replacement_hex": "3d22"
+        },
+        {
+          "start": 722,
+          "end": 724,
+          "replacement_hex": ""
+        }
+      ]
+    },
+    {
+      "id": "H04",
+      "path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "observed_content_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+      "blob": "1761c0fe900504fc0eac98e665aedacbeeb52f13",
+      "bytes": 14983,
+      "sha256": "7793817f6328549df8bc66c38235d040e1299689923b7990a827fc5b9aaeca4c",
+      "reverse_edits": [
+        {
+          "start": 69,
+          "end": 79,
+          "replacement_hex": ""
+        },
+        {
+          "start": 211,
+          "end": 280,
+          "replacement_hex": ""
+        },
+        {
+          "start": 431,
+          "end": 447,
+          "replacement_hex": ""
+        },
+        {
+          "start": 931,
+          "end": 2415,
+          "replacement_hex": ""
+        },
+        {
+          "start": 2454,
+          "end": 2476,
+          "replacement_hex": ""
+        },
+        {
+          "start": 2620,
+          "end": 2644,
+          "replacement_hex": ""
+        },
+        {
+          "start": 4079,
+          "end": 4082,
+          "replacement_hex": ""
+        },
+        {
+          "start": 4951,
+          "end": 4957,
+          "replacement_hex": "e4b88b"
+        },
+        {
+          "start": 9206,
+          "end": 9242,
+          "replacement_hex": ""
+        },
+        {
+          "start": 14341,
+          "end": 14348,
+          "replacement_hex": ""
+        }
+      ]
+    },
+    {
+      "id": "H05",
+      "path": "public/reikai/2019reikaihoukoku.html",
+      "observed_content_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+      "blob": "4562b92afd9d6550580239edb569cdcebf5c16fa",
+      "bytes": 2146,
+      "sha256": "8157109ec7f2dbc426034637ac0d6241c77a565d1580b3926aab4eb41ef33a5d",
+      "reverse_edits": [
+        {
+          "start": 69,
+          "end": 79,
+          "replacement_hex": ""
+        },
+        {
+          "start": 314,
+          "end": 316,
+          "replacement_hex": ""
+        },
+        {
+          "start": 317,
+          "end": 348,
+          "replacement_hex": "347265696b6169686f756b6f6b75"
+        },
+        {
+          "start": 672,
+          "end": 679,
+          "replacement_hex": ""
+        },
+        {
+          "start": 685,
+          "end": 686,
+          "replacement_hex": "3d22"
+        },
+        {
+          "start": 689,
+          "end": 691,
+          "replacement_hex": ""
+        },
+        {
+          "start": 1021,
+          "end": 1022,
+          "replacement_hex": "3135"
+        },
+        {
+          "start": 1023,
+          "end": 1023,
+          "replacement_hex": "3533"
+        },
+        {
+          "start": 1024,
+          "end": 1038,
+          "replacement_hex": "73"
+        },
+        {
+          "start": 1039,
+          "end": 1047,
+          "replacement_hex": ""
+        },
+        {
+          "start": 1197,
+          "end": 1198,
+          "replacement_hex": "3135"
+        },
+        {
+          "start": 1199,
+          "end": 1199,
+          "replacement_hex": "3533"
+        },
+        {
+          "start": 1200,
+          "end": 1209,
+          "replacement_hex": "73"
+        },
+        {
+          "start": 1210,
+          "end": 1211,
+          "replacement_hex": "756b"
+        },
+        {
+          "start": 1212,
+          "end": 1218,
+          "replacement_hex": ""
+        },
+        {
+          "start": 1219,
+          "end": 1225,
+          "replacement_hex": ""
+        },
+        {
+          "start": 1387,
+          "end": 1388,
+          "replacement_hex": "3135"
+        },
+        {
+          "start": 1389,
+          "end": 1389,
+          "replacement_hex": "3533"
+        },
+        {
+          "start": 1390,
+          "end": 1403,
+          "replacement_hex": "73"
+        },
+        {
+          "start": 1404,
+          "end": 1415,
+          "replacement_hex": ""
+        }
+      ]
+    }
+  ],
+  "not_included": "Other historical/private receipts, unadopted 2017/2018 candidates, snapshot dependency content and images; not a full-site or full-history archive."
+}
