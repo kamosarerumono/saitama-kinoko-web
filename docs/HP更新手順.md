@@ -150,9 +150,13 @@ python -m unittest discover -s tests -p test_legacy_html_checks.py -v
 
 入口は既存Gitの2019/2020年度一覧と川越見本だけを読み、ファイルを書き換えず外部接続もしない。文字コードを宣言どおり厳格復号し、HTML4要素名・重複属性・TABLE/IMG等の限定属性・必須終了タグの一部とCSSの字句区切りを調べる。任意終了タグやTransitionalのFONT/CENTERをHTML5基準で一律改変しない。Git配布rootの既知の不足と新しい参照回帰を、ローカルの基準Git版と比較して別に出す。
 
-終了コード0は限定検査で新規回帰がないことだけを示す。既知の配布不足はINCOMPLETE、SGML規格適合と実表示は未実施として残る。私有snapshotでの解決をGit配布成立へ流用しない。JS/TSがない範囲の型検査は対象外で、型PASSとはしない。
+終了コード0は限定検査で新規回帰がないことだけを示す。既知の配布不足はINCOMPLETEで、この入口自体はSGML検証・実表示を実行しない。別途行った3ページのSGML DTD検証は[2026-10-24の限定記録](plans/legacy-html-followup-20261024.json)を参照し、実表示は未確認として残す。私有snapshotでの解決をGit配布成立へ流用しない。JS/TSがない範囲の型検査は対象外で、型PASSとはしない。
 
-厳格HTML4規格検証にはOpenSPのonsgmlsと、HTML4.decl・loose.dtd・HTML4.cat・HTMLlat1.ent/HTMLsymbol.ent/HTMLspecial.entが必要。入力文字コードとローカルcatalog設定を確認した隔離コピーに対し、公式の `onsgmls -s -c <local-catalog> <HTML4.decl> <local-document>` 形式を使う計画とする。現在は必要な入口がなく実行・installしていない。公開validatorへの本文送信やHTML5/XMLへの代替変換はしない。[OpenSP](https://openjade.sourceforge.net/doc/nsgmls.htm)、[HTML4の検証とcatalog](https://www.w3.org/TR/html401/sgml/intro.html)。
+HTML4のSGML DTD検証はOpenSP 1.5.2公式Windows版のonsgmlsと同梱DLLをtask専用領域に配置し、W3C公式HTML4.decl・loose.dtd・HTML4.cat・HTMLlat1.ent/HTMLsymbol.ent/HTMLspecial.entをローカル入力にして実施した。OS全体へのinstall・PATH・恒久環境変数の変更はしていない。出典・取得物hash・実入力hash・結果は[限定記録](plans/legacy-html-followup-20261024.json)に固定する。未確認の別配布バイナリで置き換えない。
+
+再実行が必要な変更時は、隔離した対象HTMLの宣言charsetを厳格に確認する。今回のUTF-8入力では子プロセス内だけ`SP_CHARSET_FIXED=YES`、`SP_ENCODING=utf-8`と明示したローカルcatalog/search pathを使い、絶対pathの `onsgmls -s -c <local-HTML4.cat> <HTML4.decl> <local-document>` を実行した。catalogは`OVERRIDE YES`とTransitional/3種のentityのローカル対応を使う。今回取得していないStrict/Frameset文書へ検証範囲を広げない。日本語の正常入力と、不正属性・不正構造を拒否する合成入力で入口を確認済み。成功済み入力を理由なく反復しない。
+
+変更後の既存3ページは終了コード0・診断なし。ただしDTDが表せない値制約、完全CSS規則、リンク先の実在、アクセシビリティ全体、スマホ表示・runtimeは別途確認する。これは全サイトやHTML4仕様全文への適合宣言ではない。公開validatorへの本文送信やHTML5/XMLへの代替変換は行わない。[公式Windows配布](https://sourceforge.net/projects/openjade/files/opensp/1.5.2/)、[OpenSP](https://openjade.sourceforge.net/doc/nsgmls.htm)、[入力encoding](https://openjade.sourceforge.net/doc/charset.htm)、[HTML4の検証とcatalogおよび限界](https://www.w3.org/TR/html401/sgml/intro.html)。
 
 ## 3. 通常Git保存と公開判断を分ける
 

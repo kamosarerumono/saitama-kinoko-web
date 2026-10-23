@@ -1,0 +1,559 @@
+{
+  "date_jst": "2026-10-24",
+  "base_commit": "8236aa781d616f4deb99b4f485ee48c1bdc9d802",
+  "writer_scope": "Existing common-development HP writer/claim/branch; prior HP thread idle/HOLD; no competing writer identified",
+  "reference_classification": {
+    "snapshot_id": "120530759",
+    "saved_reference_report_sha256": "a1e0f9943788d4949dc72eeab33bed6d9563f8d4f4db6d2268bd4ca7e92322c7",
+    "saved_reference_report_baseline_commit": "22217afb219a35b610a1e8b853eccf37cbb6ed37",
+    "inventory_metadata_sha256": "216424a74f780c4f5e2c4cc1fb9919d61cd15230f193cf3575976165ebd40894",
+    "input_report_reused_not_recrawled": true,
+    "occurrences": 43,
+    "distinct_target_paths": 34,
+    "saved_present_git_distribution_absent_occurrences": 43,
+    "absent_from_saved_inventory_occurrences": 0,
+    "ambiguous_name_match_occurrences": 0,
+    "scoped_existing_extraction_regular_files_and_sizes_checked": 34,
+    "snapshot_payload_reads_or_rehashes": 0,
+    "full_snapshot_or_site_scan": false,
+    "pages": [
+      {
+        "source": "public/reikai/2019reikaihoukoku.html",
+        "occurrences": 15,
+        "distinct_paths_in_page": 10,
+        "references": [
+          {
+            "kind": "a:href",
+            "required_git_path": "public/index.htm",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2019/190519  soukai.html",
+            "occurrences": 2,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2019/190623 kawagoe kansatukai.html",
+            "occurrences": 2,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2019/190721 ogawagenkipuraza.html",
+            "occurrences": 2,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2019/190825  minoyama kansatukai.html",
+            "occurrences": 2,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2019/190917  gunmanomori kansatukai.html",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2019/191006  minoyama kansatukai.html",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2019/191215  kinokohapyoubenkyoukai.html",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2019/200315  syokukin benkyoukai.html",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/houkoku_reikai.htm",
+            "occurrences": 2,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          }
+        ]
+      },
+      {
+        "source": "public/reikai/2020reikaihoukoku.html",
+        "occurrences": 7,
+        "distinct_paths_in_page": 6,
+        "references": [
+          {
+            "kind": "a:href",
+            "required_git_path": "public/index.htm",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2020/200802 ogawagenkipuraza.html",
+            "occurrences": 2,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2020/200913  minoyama kansatukai.html",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2020/201011  gunnmanomori kansatukai.html",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/2020/201103  akigasekouen kansatukai.html",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "a:href",
+            "required_git_path": "public/reikai/houkoku_reikai.htm",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          }
+        ]
+      },
+      {
+        "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+        "occurrences": 21,
+        "distinct_paths_in_page": 21,
+        "references": [
+          {
+            "kind": "a:href",
+            "required_git_path": "public/index.htm",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/akayamadori.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/doutei_fuukei.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/fukukaichou_kouhyou.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/fukukaichou_setsumei.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/hebikinokomodoki.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/himekatashouro.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/kagotake.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/kaichou_aisatsu1.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/kaichou_aisatsu2.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/kaichou_kouhyou.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/kareedatakemodoki.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/kotengutakemodoki.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/murasakiyamadoritake.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/naratakemodoki.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/satoyamatamagotake.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/tsunomatatake.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/uchiwatake.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/yamadoritakemodoki.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "img:src",
+            "required_git_path": "public/reikai/2026/images_260628/zaraenoharatake.jpg",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          },
+          {
+            "kind": "link:href",
+            "required_git_path": "public/hpbsite.css",
+            "occurrences": 1,
+            "classification": "SAVED_BACKUP_PRESENT_GIT_DISTRIBUTION_PATH_ABSENT",
+            "name_match": "exact canonical historical raw relative path; no basename/content alias inference",
+            "saved_regular_file_size_matches_inventory": true
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Metadata and scoped file/size presence only; prior full content verification reused, not repeated",
+      "Current HTTP URLs/source namespace are not accepted by this lookup",
+      "No import/disclosure/move authorization; no alias/copy inference from other Git paths",
+      "The 43 occurrences remain missing from the exact current Git distribution root"
+    ]
+  },
+  "metadata_changes": [
+    {
+      "path": "public/reikai/2019reikaihoukoku.html",
+      "base_blob": "8a3cd56e8cae88d1fe3551be8971d510a24ca155",
+      "before_sha256": "c176399ad725bb9fbb43cac22759e4fad61172b55d2f83a07c6a626eedf2e84a",
+      "after_sha256": "fb7e26de486c346b4950c4a04118a646060e48dbe68dafe70e3f0fa0bd0434a1",
+      "title_before": "14reikaihoukoku",
+      "title_after": "2019年度例会（行事）報告",
+      "language_added": "ja",
+      "body_bytes_unchanged": true,
+      "reference_attributes_unchanged": true,
+      "image_attribute_count": 0,
+      "image_attributes_unchanged": true,
+      "inline_css_unchanged": true,
+      "newline_state_preserved": true
+    },
+    {
+      "path": "public/reikai/2020reikaihoukoku.html",
+      "base_blob": "c673dc512abdc8b98c75b29638bc8b6ed334faf1",
+      "before_sha256": "4db17bc1f034f44c779c2514763dfe338baba3447ad7aae2189a8abff4d6e0de",
+      "after_sha256": "c7902f43eb3e3e58ba836675150661fa5dce5c406fbe580dff4a91a76f751475",
+      "title_before": "14reikaihoukoku",
+      "title_after": "２０２０年度例会（行事）報告",
+      "language_added": "ja",
+      "body_bytes_unchanged": true,
+      "reference_attributes_unchanged": true,
+      "image_attribute_count": 0,
+      "image_attributes_unchanged": true,
+      "inline_css_unchanged": true,
+      "newline_state_preserved": true
+    },
+    {
+      "path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "base_blob": "b2af47ce3cc2cbfc08f8e7fb5fdd1e0335298e35",
+      "before_sha256": "30be50f1727071d874136e0099e61d6cc2bbf355ad585a29b3d770adb4a27cce",
+      "after_sha256": "b03fe08f27d358fb500a65596a931f0f7529811e8c32759c550f7f845e667534",
+      "title_before": "川越・狭山平地林観察会（2026年6月28日）報告",
+      "title_after": "川越・狭山平地林観察会（2026年6月28日）報告",
+      "language_added": "ja",
+      "body_bytes_unchanged": true,
+      "reference_attributes_unchanged": true,
+      "image_attribute_count": 19,
+      "image_attributes_unchanged": true,
+      "inline_css_unchanged": true,
+      "newline_state_preserved": true
+    }
+  ],
+  "sgml_dtd_validation": {
+    "status": "PASS_FOR_THREE_SELECTED_HTML401_TRANSITIONAL_INPUTS",
+    "tool_version": "OpenSP 1.5.2",
+    "tool_source": "https://sourceforge.net/projects/openjade/files/opensp/1.5.2/",
+    "archive_sha256": "51901dbf8021c73eb286e5fa7d9af2a586bdb06bacdffbd591fab476b00ab26b",
+    "executable_sha256": "adb676f8804addab030663044d37ec2f76f900bdf2bbfd7c0f1ca1ed2cfccbb1",
+    "dll_sha256": "92fa66d65e95623c2afb08db7b83e40a04e80e9ff0ed71a888abf821ed4af2a4",
+    "resources": [
+      {
+        "name": "HTML4.decl",
+        "source": "https://www.w3.org/TR/html401/HTML4.decl",
+        "bytes": 2553,
+        "sha256": "19ed295b8e2ab2e0b54a0f09d338d9b2f41b359664ab132ed50d8161ff9d68cf"
+      },
+      {
+        "name": "HTML4.cat",
+        "source": "https://www.w3.org/TR/html401/HTML4.cat",
+        "bytes": 350,
+        "sha256": "2c92cac64aa67ebf142bd19facb2a5eb25dcb42b15d698c8a19ee276285b4370"
+      },
+      {
+        "name": "loose.dtd",
+        "source": "https://www.w3.org/TR/html401/loose.dtd",
+        "bytes": 45434,
+        "sha256": "1b46c62c9586e9519ed6e5357e56b32f7e1cc7d797b053cff0784b17eac5c008"
+      },
+      {
+        "name": "HTMLlat1.ent",
+        "source": "https://www.w3.org/TR/html401/HTMLlat1.ent",
+        "bytes": 11956,
+        "sha256": "bfb513fc45ce86e68361f3a11893bcbd1063c585ef693939a5a70014ef89fe4a"
+      },
+      {
+        "name": "HTMLsymbol.ent",
+        "source": "https://www.w3.org/TR/html401/HTMLsymbol.ent",
+        "bytes": 14447,
+        "sha256": "b0d99924bd738f4dee504e1f640a5cec163e66ea2a87b180159ae71c0ab2551d"
+      },
+      {
+        "name": "HTMLspecial.ent",
+        "source": "https://www.w3.org/TR/html401/HTMLspecial.ent",
+        "bytes": 4114,
+        "sha256": "85e168c5057a0db368d36df1841c87132a5eaca89663cbd86f63b1c192d283d3"
+      }
+    ],
+    "command_template": [
+      "onsgmls",
+      "-s",
+      "-c",
+      "<absolute local HTML4.cat>",
+      "<absolute local HTML4.decl>",
+      "<absolute isolated HTML input>"
+    ],
+    "child_process_encoding": {
+      "SP_CHARSET_FIXED": "YES",
+      "SP_ENCODING": "utf-8"
+    },
+    "catalog": "W3C OVERRIDE YES; Transitional and Latin1/Special/Symbols public IDs map to the local files",
+    "input_preflight": "Existing selected Git HTML only; strict UTF-8; public-only Transitional DOCTYPE; no internal subset or external entity declaration",
+    "baseline_pages": [
+      {
+        "source": "public/reikai/2019reikaihoukoku.html",
+        "sha256": "c176399ad725bb9fbb43cac22759e4fad61172b55d2f83a07c6a626eedf2e84a",
+        "returncode": 0,
+        "diagnostics": ""
+      },
+      {
+        "source": "public/reikai/2020reikaihoukoku.html",
+        "sha256": "4db17bc1f034f44c779c2514763dfe338baba3447ad7aae2189a8abff4d6e0de",
+        "returncode": 0,
+        "diagnostics": ""
+      },
+      {
+        "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+        "sha256": "30be50f1727071d874136e0099e61d6cc2bbf355ad585a29b3d770adb4a27cce",
+        "returncode": 0,
+        "diagnostics": ""
+      }
+    ],
+    "candidate_pages": [
+      {
+        "source": "public/reikai/2019reikaihoukoku.html",
+        "sha256": "fb7e26de486c346b4950c4a04118a646060e48dbe68dafe70e3f0fa0bd0434a1",
+        "returncode": 0,
+        "diagnostics": ""
+      },
+      {
+        "source": "public/reikai/2020reikaihoukoku.html",
+        "sha256": "c7902f43eb3e3e58ba836675150661fa5dce5c406fbe580dff4a91a76f751475",
+        "returncode": 0,
+        "diagnostics": ""
+      },
+      {
+        "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+        "sha256": "b03fe08f27d358fb500a65596a931f0f7529811e8c32759c550f7f845e667534",
+        "returncode": 0,
+        "diagnostics": ""
+      }
+    ],
+    "controls": {
+      "valid_japanese_preserved": true,
+      "undefined_attribute_rejected": true,
+      "invalid_content_model_rejected": true,
+      "initial_helper_argv_error": "Stopped on synthetic controls before real pages; corrected command argument construction, then valid/invalid controls accepted/rejected as expected"
+    },
+    "candidate_private_receipt_sha256": "5fb2f9d6b00d183be2147ce3f5f69af8ded03d4f72b1dd38615903c0b3908df5",
+    "scope_limit": "DTD syntax/structure/elements/attributes only; not every HTML4 prose/value constraint, CSS grammar, accessibility, visual/runtime, URLs or whole site",
+    "all_sgml_external_entities_local": true,
+    "public_validator_submission": false,
+    "global_install_path_or_environment_change": false
+  },
+  "limited_check": {
+    "selected_pages": 3,
+    "blocking_subset_issues": 0,
+    "new_missing_occurrences": 0,
+    "known_missing_occurrences": 43,
+    "distribution": "INCOMPLETE",
+    "receipt_sha256": "77b06170565b76f78a5ce22f7696b0f8a9535242baea259b3a49295b959cd989",
+    "separate_sgml_result": "The stdlib checker itself still reports NOT_RUN; the independent SGML invocation above is recorded separately",
+    "prior_13_synthetic_tests_repeated": false
+  },
+  "responsive_review": {
+    "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+    "inline_css_unchanged": true,
+    "existing_rules_reviewed": [
+      "viewport and scoped fluid table width",
+      "narrow single-column gallery",
+      "image border-box/max-width/automatic height",
+      "scroll wrapper for the species table"
+    ],
+    "additional_demonstrated_css_defect": null,
+    "browser_mobile_runtime_status": "NOT_RUN_POLICY_BOUNDARY_PRESERVED",
+    "no_rendering_acceptance_inferred": true
+  },
+  "proofreading_held": [
+    {
+      "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "observed": [
+        "Body/species list: サトタマゴタケ",
+        "Photo alt/caption: サトヤマタマゴタケ"
+      ],
+      "reason": "The intended photo identification cannot be chosen from the inconsistent labels alone",
+      "recommended_next_action": "Obtain the original caption/report-author identification for this one photo before changing its name",
+      "changed": false
+    },
+    {
+      "source": "public/reikai/2019reikaihoukoku.html",
+      "observed": "9月17日（日） in the 2019 annual page; 2019-09-17 is Tuesday",
+      "reason": "Calendar mismatch does not establish whether date, weekday or event link is wrong",
+      "recommended_next_action": "Check the original event report/author for this one meeting date before correction",
+      "changed": false
+    }
+  ],
+  "remaining": [
+    "Exact scoped permission for any private snapshot payload import; rejected import/relocation not retried",
+    "Authorized browser rendering route and complete selected-page assets; previous file URL refusal not bypassed",
+    "Original report evidence for the two held content inconsistencies",
+    "Existing production switch/rollback acceptance remains untested"
+  ],
+  "unchanged_boundaries": {
+    "original_backup_recovery_zip_maps_and_extractions": true,
+    "body_urls_photo_attributes_and_inline_css": true,
+    "astro_retired": true,
+    "no_production_restore_publish_delete_master_change": true,
+    "no_auth_tls_security_cost_change": true,
+    "no_new_writer_clone_goal_or_automation": true
+  }
+}
