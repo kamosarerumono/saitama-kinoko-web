@@ -1,0 +1,1054 @@
+{
+  "date_jst": "2026-10-24",
+  "status": "DECISION_PROPOSAL_ONLY_NO_PAYLOAD_IMPORT",
+  "input_git_commit": "1e6f35fdbd2cc5ff695334ed403c2d12a823318d",
+  "scope": "Existing common-development HP claim, same branch. Only exact 34 previously tracked reference targets; no site-wide import.",
+  "repository_visibility_verified": "public",
+  "saved_source": {
+    "snapshot_id": "120530759",
+    "inventory_metadata_sha256": "216424a74f780c4f5e2c4cc1fb9919d61cd15230f193cf3575976165ebd40894",
+    "html_metadata_sha256": "b7cf3d0e9c6e2ef45914061ff0424937c8e2eca56fae149503f4989420db94fd",
+    "historical_public_scope_date": "2026-10-21",
+    "historical_scope_is_current_consent_or_live_availability": false,
+    "private_direct_edge_annex_sha256": "d502b924657830354346fe3bfefde7c17e2ca53aa70231b8a32049de64f03e35"
+  },
+  "summary": {
+    "candidates": 34,
+    "candidate_by_kind": {
+      "css": 1,
+      "html_document": 14,
+      "image": 19
+    },
+    "candidate_bytes": 7485936,
+    "incoming_occurrences": 43,
+    "saved_text_payload_files_read_and_hash_verified": 15,
+    "image_payload_reads": 0,
+    "direct_reference_occurrences": 173,
+    "direct_reference_by_status": {
+      "SELECTED_34": 3,
+      "ADDITIONAL_SAVED_ONLY": 65,
+      "EXTERNAL_OR_NON_HTTP_NOT_FETCHED": 2,
+      "TRACKED_GIT": 103
+    },
+    "additional_saved_only_distinct_paths": 55,
+    "additional_saved_only_by_kind": {
+      "html_document": 32,
+      "image": 22,
+      "css": 1
+    },
+    "additional_saved_only_historical_public": 55,
+    "all_recursive_dependency_closure": "NOT_CHECKED",
+    "public_git_payload_additions": 0,
+    "network_or_production_operations": 0
+  },
+  "additional_direct_dependencies": {
+    "occurrences": 65,
+    "distinct_paths": 55,
+    "embedded_images": 22,
+    "linked_stylesheets": 1,
+    "linked_html_documents": 32,
+    "original_34_scope_expanded": false,
+    "details_stay_private": true,
+    "target_payload_files_read": 0,
+    "recursive_dependency_closure": "NOT_CHECKED"
+  },
+  "limits": [
+    "Git presence is path presence only; dependency bytes/rendering were not verified.",
+    "Only selected HTML14 and CSS1 were strictly decoded and matched against inventory size/SHA; 19 image hashes are inventory metadata, not fresh image reads.",
+    "Enumerated ordinary HTML4 URI attributes only; CSS literal token triage, fragments, JS/dynamic refs, browser layout and recursive closure are not acceptance.",
+    "All selected and additional saved-only paths have historical public metadata; neither grants public Git disclosure or production publication permission.",
+    "Additional 55 paths were resolved in metadata only, not imported/read as payload and not proposed as automatically approved scope."
+  ],
+  "held_content_questions": [
+    "Kawagoe mushroom name discrepancy: held, no factual correction.",
+    "2019 annual list date/day discrepancy: held, no factual correction."
+  ],
+  "candidates": [
+    {
+      "id": "P01",
+      "git_destination": "public/hpbsite.css",
+      "intended_site_url_path": "/hpbsite.css",
+      "kind": "css",
+      "bytes": 319,
+      "sha256": "38407419fe611bff20c23f7ca77f306f311b7c7f43e4328ad8c986d8e2719a71",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "link:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "ascii",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 0,
+        "by_status": {},
+        "additional_saved_only_distinct_paths": 0,
+        "additional_saved_only_by_kind": {},
+        "additional_saved_only_historical_public": 0,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該CSS原バイト",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "319 bytesを限定確認、literal url()/@importなし。完全CSS構文・escape参照は未検証。原バイト同梱の開示判断待ち。"
+    },
+    {
+      "id": "P02",
+      "git_destination": "public/index.htm",
+      "intended_site_url_path": "/index.htm",
+      "kind": "html_document",
+      "bytes": 3951,
+      "sha256": "590b5df6021cff5c56f4f922d11c67c4218a1d18b3bfbdaac6961639696c0b5c",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        },
+        {
+          "source": "public/reikai/2020reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        },
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "cp932",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 16,
+        "by_status": {
+          "SELECTED_34": 2,
+          "ADDITIONAL_SAVED_ONLY": 12,
+          "EXTERNAL_OR_NON_HTTP_NOT_FETCHED": 2
+        },
+        "additional_saved_only_distinct_paths": 12,
+        "additional_saved_only_by_kind": {
+          "image": 5,
+          "html_document": 7
+        },
+        "additional_saved_only_historical_public": 12,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加12pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P03",
+      "git_destination": "public/reikai/2019/190519  soukai.html",
+      "intended_site_url_path": "/reikai/2019/190519%20%20soukai.html",
+      "kind": "html_document",
+      "bytes": 13539,
+      "sha256": "5fadff9cdaa49c2d8af22ae47c9f2cefa5f1cd5e6b579668cef4e6716de76425",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 2
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 4,
+        "by_status": {
+          "TRACKED_GIT": 2,
+          "ADDITIONAL_SAVED_ONLY": 2
+        },
+        "additional_saved_only_distinct_paths": 2,
+        "additional_saved_only_by_kind": {
+          "html_document": 1,
+          "image": 1
+        },
+        "additional_saved_only_historical_public": 2,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加2pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P04",
+      "git_destination": "public/reikai/2019/190623 kawagoe kansatukai.html",
+      "intended_site_url_path": "/reikai/2019/190623%20kawagoe%20kansatukai.html",
+      "kind": "html_document",
+      "bytes": 97263,
+      "sha256": "e9159a7e6a35cc98acf5cd3032608868944d08ead8467aead9b68bbe9643b643",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 2
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 11,
+        "by_status": {
+          "TRACKED_GIT": 10,
+          "ADDITIONAL_SAVED_ONLY": 1
+        },
+        "additional_saved_only_distinct_paths": 1,
+        "additional_saved_only_by_kind": {
+          "html_document": 1
+        },
+        "additional_saved_only_historical_public": 1,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加1pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P05",
+      "git_destination": "public/reikai/2019/190721 ogawagenkipuraza.html",
+      "intended_site_url_path": "/reikai/2019/190721%20ogawagenkipuraza.html",
+      "kind": "html_document",
+      "bytes": 132243,
+      "sha256": "04e15782cc14f6688bf84df5a5a0c722eee7dee5fe86a8b8e1b47cbd24bfbed0",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 2
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 10,
+        "by_status": {
+          "TRACKED_GIT": 9,
+          "ADDITIONAL_SAVED_ONLY": 1
+        },
+        "additional_saved_only_distinct_paths": 1,
+        "additional_saved_only_by_kind": {
+          "html_document": 1
+        },
+        "additional_saved_only_historical_public": 1,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加1pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P06",
+      "git_destination": "public/reikai/2019/190825  minoyama kansatukai.html",
+      "intended_site_url_path": "/reikai/2019/190825%20%20minoyama%20kansatukai.html",
+      "kind": "html_document",
+      "bytes": 147623,
+      "sha256": "ab6c08720e1eb63484c7627ef5e861719456555776da1f8eec9b7a45b6d4085a",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 2
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 9,
+        "by_status": {
+          "TRACKED_GIT": 8,
+          "ADDITIONAL_SAVED_ONLY": 1
+        },
+        "additional_saved_only_distinct_paths": 1,
+        "additional_saved_only_by_kind": {
+          "html_document": 1
+        },
+        "additional_saved_only_historical_public": 1,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加1pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P07",
+      "git_destination": "public/reikai/2019/190917  gunmanomori kansatukai.html",
+      "intended_site_url_path": "/reikai/2019/190917%20%20gunmanomori%20kansatukai.html",
+      "kind": "html_document",
+      "bytes": 13969,
+      "sha256": "ca07cf74eabd782d90d1671d7412294dc241b46fc0a749f430ab0447dc4cd849",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 10,
+        "by_status": {
+          "TRACKED_GIT": 7,
+          "ADDITIONAL_SAVED_ONLY": 3
+        },
+        "additional_saved_only_distinct_paths": 3,
+        "additional_saved_only_by_kind": {
+          "html_document": 1,
+          "image": 2
+        },
+        "additional_saved_only_historical_public": 3,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加3pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。",
+      "held_content_question": "年度一覧の9月17日（日）と暦の不整合。実開催日不明、保留。"
+    },
+    {
+      "id": "P08",
+      "git_destination": "public/reikai/2019/191006  minoyama kansatukai.html",
+      "intended_site_url_path": "/reikai/2019/191006%20%20minoyama%20kansatukai.html",
+      "kind": "html_document",
+      "bytes": 22031,
+      "sha256": "28bb7e9b0540b3e0d1843d907d6c586b750067136fbe7ced35fef71dee62c2cf",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 14,
+        "by_status": {
+          "TRACKED_GIT": 13,
+          "ADDITIONAL_SAVED_ONLY": 1
+        },
+        "additional_saved_only_distinct_paths": 1,
+        "additional_saved_only_by_kind": {
+          "html_document": 1
+        },
+        "additional_saved_only_historical_public": 1,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加1pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P09",
+      "git_destination": "public/reikai/2019/191215  kinokohapyoubenkyoukai.html",
+      "intended_site_url_path": "/reikai/2019/191215%20%20kinokohapyoubenkyoukai.html",
+      "kind": "html_document",
+      "bytes": 29200,
+      "sha256": "87bf95c0877bce1c2586b0127f1819cbbcfcf1ca3f0335db645d291628f33972",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 5,
+        "by_status": {
+          "TRACKED_GIT": 4,
+          "ADDITIONAL_SAVED_ONLY": 1
+        },
+        "additional_saved_only_distinct_paths": 1,
+        "additional_saved_only_by_kind": {
+          "html_document": 1
+        },
+        "additional_saved_only_historical_public": 1,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加1pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P10",
+      "git_destination": "public/reikai/2019/200315  syokukin benkyoukai.html",
+      "intended_site_url_path": "/reikai/2019/200315%20%20syokukin%20benkyoukai.html",
+      "kind": "html_document",
+      "bytes": 51036,
+      "sha256": "982bd61749862c8a198c409e212478f96b0748cb31fa68aa5056ba99ee262466",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 10,
+        "by_status": {
+          "TRACKED_GIT": 10
+        },
+        "additional_saved_only_distinct_paths": 0,
+        "additional_saved_only_by_kind": {},
+        "additional_saved_only_historical_public": 0,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "一次参照は既存Git内にあるが再帰的配布・実表示は未確認。開示判断待ち。"
+    },
+    {
+      "id": "P11",
+      "git_destination": "public/reikai/2020/200802 ogawagenkipuraza.html",
+      "intended_site_url_path": "/reikai/2020/200802%20ogawagenkipuraza.html",
+      "kind": "html_document",
+      "bytes": 117868,
+      "sha256": "a8a3f6a6275189d31dfba0a4f143a51a7a8d52874906ca6d86db614988cdacd4",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2020reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 2
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 18,
+        "by_status": {
+          "TRACKED_GIT": 17,
+          "ADDITIONAL_SAVED_ONLY": 1
+        },
+        "additional_saved_only_distinct_paths": 1,
+        "additional_saved_only_by_kind": {
+          "html_document": 1
+        },
+        "additional_saved_only_historical_public": 1,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加1pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P12",
+      "git_destination": "public/reikai/2020/200913  minoyama kansatukai.html",
+      "intended_site_url_path": "/reikai/2020/200913%20%20minoyama%20kansatukai.html",
+      "kind": "html_document",
+      "bytes": 23636,
+      "sha256": "03d2a4503c16d3ff2ba40243186e4d2eb07cceb589ec11145bc923589203d857",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2020reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 16,
+        "by_status": {
+          "TRACKED_GIT": 5,
+          "ADDITIONAL_SAVED_ONLY": 11
+        },
+        "additional_saved_only_distinct_paths": 11,
+        "additional_saved_only_by_kind": {
+          "html_document": 1,
+          "image": 10
+        },
+        "additional_saved_only_historical_public": 11,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加11pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P13",
+      "git_destination": "public/reikai/2020/201011  gunnmanomori kansatukai.html",
+      "intended_site_url_path": "/reikai/2020/201011%20%20gunnmanomori%20kansatukai.html",
+      "kind": "html_document",
+      "bytes": 21146,
+      "sha256": "98bf872a3b2eebb7daace3b9fa9f23d6ae20337ded999d81255186bb18aaf2f3",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2020reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 11,
+        "by_status": {
+          "TRACKED_GIT": 10,
+          "ADDITIONAL_SAVED_ONLY": 1
+        },
+        "additional_saved_only_distinct_paths": 1,
+        "additional_saved_only_by_kind": {
+          "html_document": 1
+        },
+        "additional_saved_only_historical_public": 1,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加1pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P14",
+      "git_destination": "public/reikai/2020/201103  akigasekouen kansatukai.html",
+      "intended_site_url_path": "/reikai/2020/201103%20%20akigasekouen%20kansatukai.html",
+      "kind": "html_document",
+      "bytes": 14901,
+      "sha256": "a4c6a14e61a4822644a331c87fbac67d92b06ba8d31cf2ca51cbef8efada6aeb",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2020reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "utf-8",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 11,
+        "by_status": {
+          "ADDITIONAL_SAVED_ONLY": 5,
+          "TRACKED_GIT": 6
+        },
+        "additional_saved_only_distinct_paths": 5,
+        "additional_saved_only_by_kind": {
+          "image": 4,
+          "html_document": 1
+        },
+        "additional_saved_only_historical_public": 5,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加5pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    },
+    {
+      "id": "P15",
+      "git_destination": "public/reikai/2026/images_260628/akayamadori.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/akayamadori.jpg",
+      "kind": "image",
+      "bytes": 205668,
+      "sha256": "1e41d56ed25000678d1675b5f3cafd7782039fbecacb41747f92900de307c057",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P16",
+      "git_destination": "public/reikai/2026/images_260628/doutei_fuukei.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/doutei_fuukei.jpg",
+      "kind": "image",
+      "bytes": 227158,
+      "sha256": "4f83c4ecd8ff86b0a0953d4bd512c70c3e8882681d5179e15fc7642fe38cd524",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P17",
+      "git_destination": "public/reikai/2026/images_260628/fukukaichou_kouhyou.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/fukukaichou_kouhyou.jpg",
+      "kind": "image",
+      "bytes": 233263,
+      "sha256": "b4bb4cb1b54ecddddf1be53413f7a79102b313437009bbf5fe9cf41732ccaf49",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P18",
+      "git_destination": "public/reikai/2026/images_260628/fukukaichou_setsumei.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/fukukaichou_setsumei.jpg",
+      "kind": "image",
+      "bytes": 245468,
+      "sha256": "9356848f4e789c859ba443d48639eb3e397c3976f6b2cc40a1f7d5402c9539b7",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P19",
+      "git_destination": "public/reikai/2026/images_260628/hebikinokomodoki.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/hebikinokomodoki.jpg",
+      "kind": "image",
+      "bytes": 281593,
+      "sha256": "5b15da69b1487974d3d1f328551d05749238e639816bc5f8e13091ecd256ca67",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P20",
+      "git_destination": "public/reikai/2026/images_260628/himekatashouro.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/himekatashouro.jpg",
+      "kind": "image",
+      "bytes": 386168,
+      "sha256": "10cba36aade019dce39ad500f688aa922455733b8cc211bbe0bfcd7813f26c30",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P21",
+      "git_destination": "public/reikai/2026/images_260628/kagotake.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/kagotake.jpg",
+      "kind": "image",
+      "bytes": 528260,
+      "sha256": "f4668918b08987dd0e8b8467e2ef84bcf22e9624c776e84a18031b51b2f11c7f",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P22",
+      "git_destination": "public/reikai/2026/images_260628/kaichou_aisatsu1.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/kaichou_aisatsu1.jpg",
+      "kind": "image",
+      "bytes": 275393,
+      "sha256": "6e900e121d402921aed5f6122f9efaebb4212b736052b333610add1103723f49",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P23",
+      "git_destination": "public/reikai/2026/images_260628/kaichou_aisatsu2.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/kaichou_aisatsu2.jpg",
+      "kind": "image",
+      "bytes": 231026,
+      "sha256": "be9544250a567dd9a1c39137d43e277fcbaea044810c438ae8e3f623e92899c4",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P24",
+      "git_destination": "public/reikai/2026/images_260628/kaichou_kouhyou.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/kaichou_kouhyou.jpg",
+      "kind": "image",
+      "bytes": 217939,
+      "sha256": "3c338b50c48d45f1bce563fcf48f7d6546997a324e55163e62883ca877518d85",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P25",
+      "git_destination": "public/reikai/2026/images_260628/kareedatakemodoki.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/kareedatakemodoki.jpg",
+      "kind": "image",
+      "bytes": 337845,
+      "sha256": "1a25bfa204f7a938b86af8c87489bcfbef61a218e3b5b4077264803873f05f49",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P26",
+      "git_destination": "public/reikai/2026/images_260628/kotengutakemodoki.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/kotengutakemodoki.jpg",
+      "kind": "image",
+      "bytes": 446225,
+      "sha256": "19548734d9747eaa13850a2481829319d235a732484f6faf34f4a7d823d5919b",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P27",
+      "git_destination": "public/reikai/2026/images_260628/murasakiyamadoritake.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/murasakiyamadoritake.jpg",
+      "kind": "image",
+      "bytes": 431990,
+      "sha256": "dc573bda547783e76b383b32215029fcafb99aa1d9a16ef1a51fd5b8f78dda9b",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P28",
+      "git_destination": "public/reikai/2026/images_260628/naratakemodoki.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/naratakemodoki.jpg",
+      "kind": "image",
+      "bytes": 474083,
+      "sha256": "02cbd0ece119adac270e338a9e55b69aaacc93567079896e226a4363920412f1",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P29",
+      "git_destination": "public/reikai/2026/images_260628/satoyamatamagotake.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/satoyamatamagotake.jpg",
+      "kind": "image",
+      "bytes": 467091,
+      "sha256": "1cd19fa3a28328a622ce91365cc636b4ce41641ca3094c898be45ecd448acf4e",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。",
+      "held_content_question": "本文/一覧サトタマゴタケと写真alt/説明サトヤマタマゴタケの差。保留。"
+    },
+    {
+      "id": "P30",
+      "git_destination": "public/reikai/2026/images_260628/tsunomatatake.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/tsunomatatake.jpg",
+      "kind": "image",
+      "bytes": 371515,
+      "sha256": "f45cad1ec21768b799d703f55d769247f9fb1f5004c59b9a2c22cb626e35dbbd",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P31",
+      "git_destination": "public/reikai/2026/images_260628/uchiwatake.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/uchiwatake.jpg",
+      "kind": "image",
+      "bytes": 466505,
+      "sha256": "750cd8d1794fb9cb31ba730bb69087f82130bbb64abcb8cfbc799bd604ae3ba0",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P32",
+      "git_destination": "public/reikai/2026/images_260628/yamadoritakemodoki.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/yamadoritakemodoki.jpg",
+      "kind": "image",
+      "bytes": 462970,
+      "sha256": "5a3bae77aede21fe28f5c51f4524ebe8afce0a4662b55da46aa3207bda334d58",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P33",
+      "git_destination": "public/reikai/2026/images_260628/zaraenoharatake.jpg",
+      "intended_site_url_path": "/reikai/2026/images_260628/zaraenoharatake.jpg",
+      "kind": "image",
+      "bytes": 504291,
+      "sha256": "884e576c64eb6c947f5ca45a3600c3dd77cce266ae6a7ef99a822b4864a48bf1",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "docs/plans/kawagoe2026/260628_kawagoe.html",
+          "kind": "img:src",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+    },
+    {
+      "id": "P34",
+      "git_destination": "public/reikai/houkoku_reikai.htm",
+      "intended_site_url_path": "/reikai/houkoku_reikai.htm",
+      "kind": "html_document",
+      "bytes": 2760,
+      "sha256": "5109b985d347ca93c73d8b2c0b9c3c9e4118dcca6d5b4d30819c2499181c99e7",
+      "historical_public_scope_evidence": true,
+      "incoming": [
+        {
+          "source": "public/reikai/2019reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 2
+        },
+        {
+          "source": "public/reikai/2020reikaihoukoku.html",
+          "kind": "a:href",
+          "occurrences": 1
+        }
+      ],
+      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "charset": "cp932",
+      "bounded_direct_reference_audit": {
+        "reference_occurrences": 28,
+        "by_status": {
+          "ADDITIONAL_SAVED_ONLY": 25,
+          "TRACKED_GIT": 2,
+          "SELECTED_34": 1
+        },
+        "additional_saved_only_distinct_paths": 25,
+        "additional_saved_only_by_kind": {
+          "html_document": 24,
+          "css": 1
+        },
+        "additional_saved_only_historical_public": 25,
+        "special_semantics": {},
+        "literal_css_url_import_tokens": 0,
+        "recursive_dependency_closure": "NOT_CHECKED",
+        "css_grammar_and_escaped_urls": "NOT_CHECKED"
+      },
+      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
+      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
+      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加25pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+    }
+  ]
+}
