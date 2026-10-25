@@ -1,6 +1,17 @@
 {
+  "existing_git_photo_followup_20261025": {
+    "date_jst": "2026-10-25",
+    "record": "kawagoe-existing-git-assets-20261025.json",
+    "scope": "P15-P33 restored from identical existing public Git JPEGs after full byte identity and decode checks. No private snapshot payload import.",
+    "source_commit": "6ce3f4e62832b8509d672d9d784552ce4f7bf8b7",
+    "selected_paths_restored": 19,
+    "remaining_occurrences": 24,
+    "remaining_paths": 15,
+    "status_scope": "The original 34/43 summary below is historical input metadata. Image-candidate statuses now reflect the selected restoration; HTML14/CSS1 and additional55 remain undecided.",
+    "production_browser_factual_acceptance": "NOT_ESTABLISHED"
+  },
   "date_jst": "2026-10-24",
-  "status": "DECISION_PROPOSAL_ONLY_NO_PAYLOAD_IMPORT",
+  "status": "PARTIAL_RESTORATION_19_EXISTING_GIT_PHOTOS_NO_PRIVATE_IMPORT",
   "input_git_commit": "1e6f35fdbd2cc5ff695334ed403c2d12a823318d",
   "scope": "Existing common-development HP claim, same branch. Only exact 34 previously tracked reference targets; no site-wide import.",
   "repository_visibility_verified": "public",
@@ -620,11 +631,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_akayamadori.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_akayamadori.jpg"
     },
     {
       "id": "P16",
@@ -641,11 +653,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_doutei_fuukei.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_doutei_fuukei.jpg"
     },
     {
       "id": "P17",
@@ -662,11 +675,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_fukukaichou_kouhyou.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_fukukaichou_kouhyou.jpg"
     },
     {
       "id": "P18",
@@ -683,11 +697,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_fukukaichou_setsumei.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_fukukaichou_setsumei.jpg"
     },
     {
       "id": "P19",
@@ -704,11 +719,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_hebikinokomodoki.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_hebikinokomodoki.jpg"
     },
     {
       "id": "P20",
@@ -725,11 +741,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_himekatashouro.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_himekatashouro.jpg"
     },
     {
       "id": "P21",
@@ -746,11 +763,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_kagotake.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_kagotake.jpg"
     },
     {
       "id": "P22",
@@ -767,11 +785,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_kaichou_aisatsu1.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_kaichou_aisatsu1.jpg"
     },
     {
       "id": "P23",
@@ -788,11 +807,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_kaichou_aisatsu2.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_kaichou_aisatsu2.jpg"
     },
     {
       "id": "P24",
@@ -809,11 +829,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_kaichou_kouhyou.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_kaichou_kouhyou.jpg"
     },
     {
       "id": "P25",
@@ -830,11 +851,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_kareedatakemodoki.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_kareedatakemodoki.jpg"
     },
     {
       "id": "P26",
@@ -851,11 +873,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_kotengutakemodoki.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_kotengutakemodoki.jpg"
     },
     {
       "id": "P27",
@@ -872,11 +895,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_murasakiyamadoritake.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_murasakiyamadoritake.jpg"
     },
     {
       "id": "P28",
@@ -893,11 +917,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_naratakemodoki.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_naratakemodoki.jpg"
     },
     {
       "id": "P29",
@@ -914,12 +939,13 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_satoyamatamagotake.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。",
-      "held_content_question": "本文/一覧サトタマゴタケと写真alt/説明サトヤマタマゴタケの差。保留。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "held_content_question": "本文/一覧サトタマゴタケと写真alt/説明サトヤマタマゴタケの差。保留。",
+      "existing_git_source": "public/reikai/2026/260628_satoyamatamagotake.jpg"
     },
     {
       "id": "P30",
@@ -936,11 +962,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_tsunomatatake.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_tsunomatatake.jpg"
     },
     {
       "id": "P31",
@@ -957,11 +984,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_uchiwatake.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_uchiwatake.jpg"
     },
     {
       "id": "P32",
@@ -978,11 +1006,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_yamadoritakemodoki.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_yamadoritakemodoki.jpg"
     },
     {
       "id": "P33",
@@ -999,11 +1028,12 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
-      "material_required": "保存済み#2の当該JPEG原バイト（画像自体・埋込metadataは今回未確認）",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
+      "material_required": "既存の公開Git原本 public/reikai/2026/260628_zaraenoharatake.jpg と同一bytesを必要pathへ復元済み。私有snapshot素材の追加なし。",
+      "public_git_disclosure": "同一bytesは既存Git source pathで既に公開されている。元HTMLが必要とする19pathへ原バイトを復元した。新たな私有素材の公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原素材の目録対応は特定済み。写真原バイトの公開Git再配布・掲載範囲と必要な埋込metadata確認が判断待ち。"
+      "inclusion_assessment": "サイズ/SHA256一致・JPEG全画素decode成功後、必要Git pathへ復元済み。原稿2件、人物/種同定、実ブラウザ、本番反映の受入を意味しない。",
+      "existing_git_source": "public/reikai/2026/260628_zaraenoharatake.jpg"
     },
     {
       "id": "P34",
@@ -1050,5 +1080,6 @@
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
       "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加25pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
     }
-  ]
+  ],
+  "last_updated_jst": "2026-10-25"
 }

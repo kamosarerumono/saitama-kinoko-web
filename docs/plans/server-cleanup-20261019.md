@@ -1,3 +1,19 @@
+## 2026-10-25追補: 既存Git19写真の対応・decode・参照先復元（最新）
+
+同じ共通開発HP writer/claim、HEAD6ce3f4e/remote一致・cleanから着手し、適用AGENTS・旧担当idle/HOLD・競合writer未特定を照合した。修正済みnpm caller/復元参照・45testは重複実行せず、独立して進む既存Git素材復元を実施。[19件の対応表/結果](kawagoe-existing-git-assets-20261025.json)と[同梱判断案の追補](legacy-distribution-inclusion-20261024.md)を参照。
+
+| 元ACの項目 | 今回達成したこと | 残る範囲・具体的判断 |
+|---|---|---|
+| sourceの保存・同定 | P15–P33と既存Git JPEG19件の原bytes/サイズ/SHAが全件一致 | HTML14/CSS1/追加55のsource・依存closureは今回未検証 |
+| 素材の利用可能性・参照先 | JPEG verify/全画素loadが19/19成功（800×533/RGB、計6,794,451 bytes）。同一bytesを必要images_260628配下19pathへ排他作成・全件読戻し | 残り24参照/15path（HTML14/CSS1）。見本HTML自体のpublic配置・追加55は別判断 |
+| render | decoderによる全画素読取りを達成 | ブラウザHTML/CSS/狭幅表示は未確認。以前のfile URL拒否は維持し、別browser/HTTP/権限変更で迂回しない |
+| 復元 | 前回のGit2file rollbackと監査5版recipeは保持。Astro参照dd4b4bbのmaster祖先性とsrc/lock/config同一objectを読戻し済み | 実fresh clone旧案復元/build・本番restoreは未実施。source読戻しを実clone/runtime成功に広げない |
+| 内容・受入 | HTML/写真/説明の原bytesを保持し、既存45test/SGML成功記録を再利用 | きのこ名表記差と2019実開催日は原稿根拠が必要。CIはPR12限定skipped、外部review未解決・本番受入も残る |
+
+本人の包括再開承認と元URL/写真保持方針を、既存公開Git素材の参照先復元へ適用した。過去の拒否記録は私有snapshotの新規公開と年次HTML2件の移動/削除で、この復元は別のsource/対象/効果。新たな私有情報を公開せず、元のGit写真を残して必要な19pathだけを追加した。一般承認を私有素材importや原稿訂正・本番へ広げない。
+
+限定3ページの検査は指摘/新規不足/未対応0、解消19参照/19path、残り24参照/15pathでINCOMPLETE。原稿2件は未確認。素材の移動/上書き/削除、本番/master/merge、依存install、認証TLS/security/OS権限、file URL拒否の迂回は0。SAC警告の別manga部品には触れていない。
+
 ## 2026-10-24追補: index modeとcharset head状態の限定修正（最新）
 
 PR14追加review5632233290の[4362527682](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362527682)・[4362527691](https://github.com/kamosarerumono/saitama-kinoko-web/pull/14#discussion_r4362527691)を公式原文と現HEAD455df726の実挙動へ照合した。同じ共通開発担当/claimで、[詳細記録](legacy-checker-review-20261024.json)のadditional_review_5632233290へ追記する。
