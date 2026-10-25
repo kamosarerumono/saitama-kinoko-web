@@ -2,3 +2,8 @@
 # `./script` が「そのようなファイルは無い」で落ちていたため、改行を LF に固定する。
 *.sh  text eol=lf
 *.py  text eol=lf
+/public/reikai/2020reikaihoukoku.html text eol=lf
+/public/reikai/2019reikaihoukoku.html text eol=lf
+/docs/plans/kawagoe2026/260628_kawagoe.html text eol=lf
+/public/index.htm text eol=lf
+/public/reikai/houkoku_reikai.htm text eol=lf

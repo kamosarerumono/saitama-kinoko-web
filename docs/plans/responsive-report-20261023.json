@@ -1,0 +1,228 @@
+{
+  "durable_selected_byte_inputs": {"recipe_record": "legacy-historical-inputs-20261024.json", "selected_bindings": "H01 after; H04 before", "history_limit": "PR-only commit lookup after hypothetical squash/ref removal is not guaranteed. Recipes plus unchanged base HTMLs reproduce selected bytes only, not historical commit provenance or execution."},
+  "date_jst": "2026-10-23",
+  "parent_commit": "ab30f0c33616d9413480369d71dc71ce751e5afe",
+  "result_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+  "record_scope": "Historical responsive candidate at result_commit only. The after hash/bytes are not the current HTML; later STYLE/box-sizing and lang edits are recorded separately.",
+  "current_html_record": "legacy-checker-review-20261024.json",
+  "representative_git_path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+  "intended_existing_url_path": "/reikai/2026/260628_kawagoe.html",
+  "source_role": "Existing Git planning sample; not asserted to be the current production byte baseline and not adopted into the distribution root",
+  "before_sha256": "7793817f6328549df8bc66c38235d040e1299689923b7990a827fc5b9aaeca4c",
+  "before_bytes": 14983,
+  "after_sha256": "b288abfcceb55c7b29f22c4e9e27831d8596f8f28fac13c8a19565c8069c942f",
+  "after_bytes": 16603,
+  "changes": [
+    "viewport meta",
+    "scoped fluid report width and text wrapping",
+    "narrow-screen single-column gallery with uncropped aspect-preserving images",
+    "horizontal-overflow wrapper for the existing species table",
+    "navigation padding",
+    "two evidenced wording/orthography corrections",
+    "explicit metadata table class scopes the narrow-screen label column rule"
+  ],
+  "proofreading": [
+    {
+      "before": "比べ雨",
+      "after": "比べて雨",
+      "basis": "Grammar/orthography only; no date, person, taxonomy, identification or photo-caption change"
+    },
+    {
+      "before": "説明をして下さいました",
+      "after": "説明をしてくださいました",
+      "basis": "Grammar/orthography only; no date, person, taxonomy, identification or photo-caption change"
+    }
+  ],
+  "facts": {
+    "dates_people_taxa_identification_and_captions_changed": false,
+    "scientific_claim_correction": "HELD: requires original report/author or authoritative subject source; no inferred correction",
+    "current_production_equivalence": "UNVERIFIED; current sample is not promoted as live baseline"
+  },
+  "validation": {
+    "strict_utf8": "PASS",
+    "doctype": "HTML 4.01 Transitional unchanged",
+    "images": 19,
+    "all_image_attributes_and_urls_equal": true,
+    "all_reference_attributes_equal": true,
+    "body_text_equal_except_two_listed_edits": true,
+    "duplicate_attributes": 0,
+    "lxml_nonrecovering_diagnostics": [
+      {
+        "version": "before",
+        "accepted": true,
+        "diagnostics": []
+      },
+      {
+        "version": "candidate",
+        "accepted": true,
+        "diagnostics": []
+      }
+    ],
+    "css_limited_check": "PASS: balanced braces and scoped declarations; no new url/import/active content. Not complete CSS standards validation.",
+    "strict_html401_dtd": "NOT_RUN: applicable SGML validator unavailable in inspected local entries",
+    "typecheck": "NOT_APPLICABLE: HTML/CSS only, no JS/TS/script/event-handler changes",
+    "browser_desktop_mobile_and_image_decoding": "NOT_RUN: previous file URL policy refusal preserved; no workaround",
+    "responsive_acceptance": "UNVERIFIED until rendered at representative widths and keyboard navigation tested",
+    "references": [
+      {
+        "kind": "link:href",
+        "url": "../../hpbsite.css",
+        "intended_legacy_target": "hpbsite.css",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/kaichou_aisatsu1.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/kaichou_aisatsu1.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/kaichou_aisatsu2.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/kaichou_aisatsu2.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/fukukaichou_setsumei.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/fukukaichou_setsumei.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/doutei_fuukei.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/doutei_fuukei.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/kaichou_kouhyou.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/kaichou_kouhyou.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/fukukaichou_kouhyou.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/fukukaichou_kouhyou.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/satoyamatamagotake.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/satoyamatamagotake.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/murasakiyamadoritake.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/murasakiyamadoritake.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/yamadoritakemodoki.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/yamadoritakemodoki.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/akayamadori.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/akayamadori.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/kagotake.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/kagotake.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/naratakemodoki.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/naratakemodoki.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/hebikinokomodoki.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/hebikinokomodoki.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/kotengutakemodoki.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/kotengutakemodoki.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/zaraenoharatake.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/zaraenoharatake.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/kareedatakemodoki.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/kareedatakemodoki.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/uchiwatake.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/uchiwatake.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/tsunomatatake.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/tsunomatatake.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "img:src",
+        "url": "images_260628/himekatashouro.jpg",
+        "intended_legacy_target": "reikai/2026/images_260628/himekatashouro.jpg",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      },
+      {
+        "kind": "a:href",
+        "url": "../../index.htm",
+        "intended_legacy_target": "index.htm",
+        "in_saved_snapshot": true,
+        "in_git_legacy_root": false
+      }
+    ],
+    "reference_missing_before_after_equal": true,
+    "reference_resolution_is": "Saved snapshot and prospective Git public/ root are separate; this planning path is not a deployable URL guarantee",
+    "metadata_column_scope": "PASS: explicit report-metadata class; eight direct label cells, no body/spacer/nested species cells"
+  },
+  "restore": {
+    "original_git_commit": "ab30f0c33616d9413480369d71dc71ce751e5afe",
+    "original_git_path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+    "exact_original_blob": "1761c0fe900504fc0eac98e665aedacbeeb52f13",
+    "application_to_production": "NOT_EXECUTED; needs verified current baseline, complete route/assets and separate acceptance"
+  },
+  "new_snapshot_payload_or_relocation": false,
+  "images_modified": false,
+  "server_publish_restore_master_settings_changes": false
+}

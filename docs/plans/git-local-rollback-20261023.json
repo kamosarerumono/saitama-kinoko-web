@@ -1,0 +1,121 @@
+{
+  "durable_selected_byte_inputs": {"recipe_record": "legacy-historical-inputs-20261024.json", "selected_bindings": "H04/H01 Kawagoe baseline/candidate; H05/H02 2019 baseline/candidate; H03 unchanged 2020 sentinel. Existing photo sentinel remains at its current tracked path, not copied.", "history_limit": "PR-only commit lookup after hypothetical squash/ref removal is not guaranteed. Recipes plus unchanged base HTMLs reproduce selected bytes only, not historical commit provenance or execution."},
+  "date_jst": "2026-10-23",
+  "status": "PASS_SELECTED_GIT_BYTES_LOCAL_ONLY",
+  "source_candidate_commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+  "record_scope": "Historical two-file local rollback at the exact source_candidate_commit/source_baseline_commit only. This proof and its unchanged hashes do not verify restoration of the later current HTML.",
+  "current_html_record": "legacy-checker-review-20261024.json",
+  "source_baseline_commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+  "baseline_note": "Common pre-change Git version. Responsive immediate parent ab30f0c has the same source blob; the annual page last prior content is 7f32b01.",
+  "scope": "Two existing Git HTML files including inline CSS, plus two unchanged Git sentinels; no full site or dependency tree",
+  "target_count": 2,
+  "sentinel_count": 2,
+  "targets": [
+    {
+      "git_path": "docs/plans/kawagoe2026/260628_kawagoe.html",
+      "baseline": {
+        "commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+        "blob": "1761c0fe900504fc0eac98e665aedacbeeb52f13",
+        "sha256": "7793817f6328549df8bc66c38235d040e1299689923b7990a827fc5b9aaeca4c",
+        "bytes": 14983
+      },
+      "candidate": {
+        "commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+        "blob": "053e66bd87904142a3320a163b52b84745bdbea5",
+        "sha256": "b288abfcceb55c7b29f22c4e9e27831d8596f8f28fac13c8a19565c8069c942f",
+        "bytes": 16603
+      },
+      "restored": {
+        "bytes": 14983,
+        "sha256": "7793817f6328549df8bc66c38235d040e1299689923b7990a827fc5b9aaeca4c"
+      }
+    },
+    {
+      "git_path": "public/reikai/2019reikaihoukoku.html",
+      "baseline": {
+        "commit": "7f32b01d5ece96cfd5ae32a22d98e3865598a56a",
+        "blob": "4562b92afd9d6550580239edb569cdcebf5c16fa",
+        "sha256": "8157109ec7f2dbc426034637ac0d6241c77a565d1580b3926aab4eb41ef33a5d",
+        "bytes": 2146
+      },
+      "candidate": {
+        "commit": "007fd42fe72217acf832e36c9830f2ae6b00627e",
+        "blob": "a6c8837943f29a861d4c2c321a956378ce18a3e5",
+        "sha256": "674506cdb5f8e90a578aa9f6aae90c9321fd859c6fc0862664f498575f4d6871",
+        "bytes": 2200
+      },
+      "restored": {
+        "bytes": 2146,
+        "sha256": "8157109ec7f2dbc426034637ac0d6241c77a565d1580b3926aab4eb41ef33a5d"
+      }
+    }
+  ],
+  "sentinels": [
+    {
+      "git_path": "public/reikai/2020reikaihoukoku.html",
+      "blob": "c319827ce2dc044c1302e067269090ef766d8a05",
+      "sha256": "721b937d39ce99ff9397c77bfd825bd618e8ebb46dea08575a345b773f4bf9ca",
+      "bytes": 1830,
+      "unchanged_during_candidate_and_restore": true
+    },
+    {
+      "git_path": "public/reikai/2026/260628_akayamadori.jpg",
+      "blob": "4627b5b0fda15b8cd475b697b0844e5f7e989231",
+      "sha256": "1e41d56ed25000678d1675b5f3cafd7782039fbecacb41747f92900de307c057",
+      "bytes": 205668,
+      "unchanged_during_candidate_and_restore": true
+    }
+  ],
+  "procedure": [
+    "Verified canonical HEAD/branch/clean state, local source Git blobs and raw byte hashes; no fetch/lazy fetch",
+    "Created one new private root outside the checkout; exported six existing Git blob fixtures; no snapshot payload",
+    "Created a four-file baseline site-model, then placed the two candidate files using Copy-Item -LiteralPath to exact guarded model paths",
+    "Restored the two baseline fixture files using ordinary Copy-Item -LiteralPath -Force only inside the new model",
+    "Independently reread sizes/SHA and exact model file set, sentinels, retained source fixtures and original working files; no repeat copy/test"
+  ],
+  "results": {
+    "candidate_changed_selected_files": 2,
+    "restored_files_equal_baseline": 2,
+    "restored_mismatches": 0,
+    "model_missing": 0,
+    "model_extra": 0,
+    "sentinel_changes": 0,
+    "retained_source_fixture_changes": 0,
+    "selected_original_working_file_changes": 0,
+    "canonical_worktree_after_proof": "clean; original HEAD unchanged"
+  },
+  "path_safety": {
+    "new_root_outside_checkout": true,
+    "resolved_exact_private_parent": true,
+    "relative_destinations_confined_to_new_model": true,
+    "regular_files_only": true,
+    "existing_folder_overwrite": false,
+    "overwrites": "Only selected files created inside this new model, as required for candidate placement and rollback",
+    "delete_or_move_operations": 0
+  },
+  "method": "Copy-Item -LiteralPath <fixed baseline Git-blob fixture> -Destination <exact private model file> -Force",
+  "byte_scope": "Raw Git-blob bytes including inline CSS; no checkout conversion, archive recovery, POSIX metadata or current-production equivalence accepted",
+  "evidence": {
+    "fixture_plan_sha256": "5355542b122bf7b9cb35c1a4021a05b86b8472186698045392df8e22922c9dd4",
+    "native_copy_result_sha256": "5af56737c3cf30405992617918c456bf9dc7e26eec4a3f3c170802644c9da3d6",
+    "export_helper_sha256": "542d9ceba641516ad0b47a7dd08d71ea45bad800663f88ebc1f0697448282bd8",
+    "copy_procedure_sha256": "dbd8ef27f8c7b9572b3592b9952390dc746f852cbaa20a8c053ed9df617baeff",
+    "private_fixtures_and_receipts_retained": true,
+    "payloads_included_in_git": false
+  },
+  "not_tested": [
+    "complete legacy distribution tree or missing assets",
+    "current production URL/name fidelity",
+    "POSIX permissions/ACL, timestamps and runtime reconstruction",
+    "server or staging switch, restore or production rollback",
+    "strict HTML4 SGML validation",
+    "desktop/mobile rendering, photo decode or keyboard behavior"
+  ],
+  "unchanged_boundaries": {
+    "snapshot_archives_recovery_copies_existing_extractions": true,
+    "blocked_payload_import_or_two_HTML_relocation": "NOT_EXECUTED",
+    "network_auth_security_cost_master_server_operations": 0,
+    "astro": "retired ordinary entrypoints; source/dependencies/config/history retained"
+  },
+  "acceptance": "PASS only for restoring these two existing Git files locally. Other previously recorded gates remain open; this is evidence toward the existing recovery requirement, not whole-site or publication acceptance."
+}

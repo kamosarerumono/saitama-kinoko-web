@@ -1,0 +1,125 @@
+{
+  "durable_selected_byte_inputs": {"recipe_record": "legacy-historical-inputs-20261024.json", "selected_bindings": "H03 2020 first adopted after. Private snapshot inventory/target payloads excluded.", "history_limit": "PR-only commit lookup after hypothetical squash/ref removal is not guaranteed. Recipes plus unchanged base HTMLs reproduce selected bytes only, not historical commit provenance or execution."},
+  "schema_version": 1,
+  "snapshot_id": "120530759",
+  "input_inventory_sha256": "22ec38c95931faeb37496cb7a4d4507b746c87ca273873cf79fb4c4375243d1f",
+  "files": 13301,
+  "bytes": 722876283,
+  "categories": {
+    "html_document": {
+      "files": 842,
+      "bytes": 11462823,
+      "historical_public_files": 760,
+      "historical_public_bytes": 11405246
+    },
+    "image": {
+      "files": 4236,
+      "bytes": 198127304,
+      "historical_public_files": 3736,
+      "historical_public_bytes": 183947253
+    },
+    "css": {
+      "files": 1484,
+      "bytes": 17485761,
+      "historical_public_files": 14,
+      "historical_public_bytes": 12101
+    },
+    "javascript": {
+      "files": 1125,
+      "bytes": 82884832,
+      "historical_public_files": 0,
+      "historical_public_bytes": 0
+    },
+    "old_or_archive_candidate": {
+      "files": 110,
+      "bytes": 3540618,
+      "historical_public_files": 15,
+      "historical_public_bytes": 455576
+    },
+    "other": {
+      "files": 5504,
+      "bytes": 409374945,
+      "historical_public_files": 751,
+      "historical_public_bytes": 281317046
+    }
+  },
+  "historical_public_scope_files": 5276,
+  "outside_confirmed_scope_files": 8025,
+  "same_hash": {
+    "duplicate_groups": 1037,
+    "duplicate_group_files": 2259,
+    "public_duplicate_groups": 658,
+    "public_duplicate_group_files": 1397
+  },
+  "static_html_scope": {
+    "selected": 775,
+    "charsets": {
+      "cp932": 636,
+      "utf-8": 139
+    },
+    "counts": {
+      "parsed_pages": 775,
+      "viewport_absent_pages": 773,
+      "fixed_width_table_pages": 323,
+      "all_reference_attributes": 6252,
+      "checked_local_references": 5901,
+      "resolved_in_full_snapshot": 5508,
+      "resolved_in_public_scope": 5508,
+      "missing_in_saved_inputs": 379,
+      "unresolved_local_references": 393,
+      "external_non_http_or_dynamic": 351,
+      "git_only": 14
+    },
+    "pages_with_unresolved": 64,
+    "unresolved_by_kind": {
+      "img:src": 112,
+      "a:href": 266,
+      "link:href": 15
+    },
+    "public_no_incoming_reference": 1251
+  },
+  "local_one_page_fix": {
+    "result_commit": "69b918d549d7b17f27e04d1655ef830befd5d7d1",
+    "record_scope": "Historical 2020 first-adoption hash/bytes at result_commit only; not the later normalized/final HTML.",
+    "current_html_record": "legacy-checker-review-20261024.json",
+    "scope": "one first-adopted local static source; no deployment bundle",
+    "source_path": "reikai/2020reikaihoukoku.html",
+    "git_path": "public/reikai/2020reikaihoukoku.html",
+    "source_snapshot": "120530759",
+    "before_sha256": "c925e322af89b1a0ee9575937014a801fc8b18fdc18a1cbf1cbe9a3904bfc09f",
+    "after_sha256": "721b937d39ce99ff9397c77bfd825bd618e8ebb46dea08575a345b773f4bf9ca",
+    "before_bytes": 1814,
+    "after_bytes": 1830,
+    "charset": "utf-8",
+    "strict_decode": "PASS",
+    "html_parser": "PASS; not strict standards validation",
+    "changed_start_tags": 1,
+    "only_changed_attribute": "bullet anchor href",
+    "body_text_identical": true,
+    "image_references_identical": true,
+    "all_other_bytes_preserved": true,
+    "local_reference_count": 7,
+    "unresolved_before": 1,
+    "unresolved_after": 0,
+    "correct_target": "reikai/2020/200802 ogawagenkipuraza.html",
+    "target_sha256": "a8a3f6a6275189d31dfba0a4f143a51a7a8d52874906ca6d86db614988cdacd4",
+    "evidence": "adjacent descriptive anchor, report body/date and backlink agree; main index links to source",
+    "browser_display": "NOT_RUN: prior file URL policy refusal preserved",
+    "strict_html_validation": "NOT_RUN: dedicated validator unavailable",
+    "publication": "outside existing Minoyama-only selector; no publisher execution",
+    "other_stale_2015_bullet_references_in_snapshot": 12
+  },
+  "not_checked": [
+    "current HTTP reachability",
+    "fragments",
+    "JS/dynamic references",
+    "CSS url/import dependency graph",
+    "strict HTML standard validation",
+    "browser/mobile rendering",
+    "external incoming links",
+    "usage of private/unconfirmed-scope payloads"
+  ],
+  "deletable_files_confirmed": 0,
+  "private_records_included": false,
+  "archive_or_source_data_included": false
+}
