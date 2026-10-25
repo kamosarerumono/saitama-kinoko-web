@@ -1,0 +1,189 @@
+{
+  "date_jst": "2026-10-25",
+  "input_commit": "fcc82fa9ad64e5480bc6e19598fc9007bbf2b384",
+  "retired_astro_source_restoration": {
+    "source_commit": "dd4b4bba6dbc44299577292b848f26e58288cecc",
+    "selected_roots": [
+      "package.json",
+      "package-lock.json",
+      "src",
+      "astro.config.mjs",
+      "tsconfig.json"
+    ],
+    "files": 321,
+    "bytes": 2097023,
+    "method": "Local Git archive with command-only core.autocrlf=false, guarded exclusive-create extraction and full selected byte/blob/size/filesystem readback. No clone/new Git refs/network.",
+    "archive_sha256": "3cb16b08e5d9c87031aea9d15a0152eeea692838f9fb4bab5b72b403b04cdb52",
+    "initial_attempt": {
+      "archive_sha256": "a62c036efca7081abba61182bfececf7f6a80e83025edad3aecb70e146bb9acc",
+      "files": 321,
+      "raw_byte_mismatches": 320,
+      "all_mismatches_explained_by_crlf_to_lf_identity": true,
+      "partial_extracted_files": 0,
+      "original_artifact_preserved": true
+    },
+    "corrected_attempt": {
+      "missing_extra_mismatch_files": 0,
+      "persistent_core_autocrlf_unchanged": true
+    },
+    "dependency_manifest_matches_lock_root_and_current": true,
+    "runtime": {
+      "restored_node_modules_present": false,
+      "canonical_astro_dependency_present": false,
+      "npm_install_or_ci": "NOT_RUN",
+      "astro_build_or_typecheck": "NOT_RUN_DEPENDENCIES_ABSENT_ARCHIVED_APP_NOT_REACTIVATED"
+    },
+    "acceptance": {
+      "selected_source_bytes_restored": "PASS",
+      "fresh_clone": "NOT_RUN_SCOPED_ARCHIVE_IS_DISTINCT",
+      "full_application_public_assets": "NOT_INCLUDED",
+      "runtime_and_build": "NOT_RUN",
+      "production_restore": "NOT_RUN"
+    },
+    "archive_command_template": [
+      "git",
+      "--no-lazy-fetch",
+      "-c",
+      "core.autocrlf=false",
+      "archive",
+      "--format=tar",
+      "dd4b4bba6dbc44299577292b848f26e58288cecc",
+      "package.json",
+      "package-lock.json",
+      "src",
+      "astro.config.mjs",
+      "tsconfig.json"
+    ]
+  },
+  "astro_private_receipt_sha256": "9086608b8d26dd524b64a89feda4863ed03bc6eeef5e468905e4258c7fdb0220",
+  "navigation_source_restoration": {
+    "rows": [
+      {
+        "candidate_id": "P02",
+        "target": "public/index.htm",
+        "source": "docs/plans/minoyama2026/index.htm",
+        "blob": "7cf13bc40e04dfe17f10addf442c3fe3f6a2b142",
+        "bytes": 3951,
+        "sha256": "590b5df6021cff5c56f4f922d11c67c4218a1d18b3bfbdaac6961639696c0b5c",
+        "charset": "cp932",
+        "line_ending": "LF"
+      },
+      {
+        "candidate_id": "P34",
+        "target": "public/reikai/houkoku_reikai.htm",
+        "source": "docs/plans/reikai2026/houkoku_reikai.htm",
+        "blob": "9f39d5c78f0e521fcd0fe3e1e4db4cb4a3f61442",
+        "bytes": 2760,
+        "sha256": "5109b985d347ca93c73d8b2c0b9c3c9e4118dcca6d5b4d30819c2499181c99e7",
+        "charset": "cp932",
+        "line_ending": "LF"
+      }
+    ],
+    "private_receipt_sha256": "8731935d9c49cae09833433679f53b5cc264e4681d87a8bb0876c165b0ebc731",
+    "isolated_index_checkout": {
+      "files": 2,
+      "command_core_autocrlf": true,
+      "bytes_sha_matches": 2,
+      "versioned_eol_lf_target_rules": 2
+    },
+    "source_provenance": "Existing public Git planning copies, exact bytes/SHA matching the previously fixed target metadata. No private snapshot HTML was copied. Original sources and all existing HTML remain unchanged.",
+    "scope": "P02/P34 within the original 34-path set. Owner-approved existing source restoration, no annual HTML relocation or new production release.",
+    "sgml": {
+      "tool": "OpenSP 1.5.2",
+      "resources_reused_hash_verified": true,
+      "input_encoding": "CP932 strict source decode; child SP_ENCODING=sjis/SP_CHARSET_FIXED=YES, no source transcode",
+      "controls": {
+        "valid_japanese_preserved": true,
+        "invalid_attribute_rejected": true
+      },
+      "results": [
+        {
+          "source": "docs/plans/minoyama2026/index.htm",
+          "bytes": 3951,
+          "sha256": "590b5df6021cff5c56f4f922d11c67c4218a1d18b3bfbdaac6961639696c0b5c",
+          "returncode": 0,
+          "diagnostics": ""
+        },
+        {
+          "source": "docs/plans/reikai2026/houkoku_reikai.htm",
+          "bytes": 2760,
+          "sha256": "5109b985d347ca93c73d8b2c0b9c3c9e4118dcca6d5b4d30819c2499181c99e7",
+          "returncode": 0,
+          "diagnostics": ""
+        }
+      ],
+      "receipt_sha256": "48b08ee6b13179fed99d1f9ecbae1df09657f26ebab5939f62c172dfd11a3679",
+      "entities_local": true
+    }
+  },
+  "reference_checks": {
+    "original_three_pages": {
+      "missing_before_occurrences": 24,
+      "missing_before_paths": 15,
+      "resolved_occurrences": 6,
+      "resolved_paths": 2,
+      "missing_after_occurrences": 18,
+      "missing_after_paths": 13,
+      "issues_new_missing_unverified": 0
+    },
+    "restored_two_navigation_pages": {
+      "limited_issues": 0,
+      "sgml_dtd_issues": 0,
+      "missing_reference_occurrences": 38
+    },
+    "five_page_subset": {
+      "missing_occurrences": 56,
+      "distinct_missing_paths": 50,
+      "scope": "Not a whole-site crawl. Includes dependencies exposed by the restored navigation pages; do not replace this with the smaller original-three-page count."
+    },
+    "receipt_sha256": "13bd97ba121db7f7b58cf71333e8bd1bf6db5a4a55f5e28ab35235b7864a2dae",
+    "distribution": "INCOMPLETE"
+  },
+  "additional55_source_availability": {
+    "input_commit": "fcc82fa9ad64e5480bc6e19598fc9007bbf2b384",
+    "summary": {
+      "additional_targets": 55,
+      "target_by_category": {
+        "image": 22,
+        "html_document": 32,
+        "css": 1
+      },
+      "metadata_size_candidate_paths": 23,
+      "unique_existing_git_blobs_read": 23,
+      "payload_bytes_read": 353571,
+      "matching_targets": 21,
+      "matching_target_by_category": {
+        "image": 19,
+        "html_document": 2
+      },
+      "not_matched_in_current_public_docs": 34,
+      "private_snapshot_payload_reads": 0,
+      "copies_or_scope_adoption": 0
+    },
+    "private_receipt_sha256": "be4fd2581ada8195b9fda16647c1848b7fe3a14de654fda46d6f50fb3bf07f97",
+    "scope_decision": "Read-only source availability only. The additional55 are outside the initial34 adoption set. Matching21 (images19/HTML2) have current public Git byte sources; unmatched34 have no match in the scoped current public/docs check. No additional55 path was copied or silently selected.",
+    "private_target_names_or_payloads_published": false
+  },
+  "remaining_original_set": {
+    "targets": 13,
+    "types": {
+      "html": 12,
+      "css": 1
+    },
+    "source_check": "No exact current public/docs byte source found for the other13; locally reachable history query of the exact original15 target paths returned no commits. No unreachable-object/alias history or live-source crawl.",
+    "known_saved_source": "The pinned private SnapUp #2 inventory contains these target payload records, so this is not a claim that source data is lost. Specific private-payload disclosure/import authority remains separate.",
+    "needed_decision": "Exact remaining target paths/bytes/hash are in legacy-distribution-inclusion-20261024.json. Establish an authorized public source or explicit scoped permission for those private saved payloads and required dependencies before import.",
+    "other_current_git_directories_check": {
+      "same_size_html_css_or_archive_candidates": 0,
+      "receipt_sha256": "9979349961db2561ef22075cb43b133d3f5979f4538996e3e4a00675ec2f1021",
+      "scope": "Other current tracked directories outside public/docs, regular HTML/CSS and .html_/.htm_/.bak/.orig candidates only; not all historical aliases."
+    }
+  },
+  "unchanged_boundaries": [
+    "No private snapshot payload import/read in these steps; only its saved metadata reused for source matching.",
+    "No new clone/ref/writer, browser/file-policy workaround, dependency install, production/master/merge/auth/TLS/security changes.",
+    "Existing45 tests, prior three-page SGML and 19-photo decode were reused, not rerun. Changed content has no new JS/TS; archived app build/typecheck remain NOT_RUN.",
+    "Two factual questions remain unresolved. Matching bytes or SGML do not establish species/date, CSS/mobile display or production recovery acceptance."
+  ],
+  "independent_review": "Pending on this fixed pre-review record; final result in PR save/readback evidence."
+}

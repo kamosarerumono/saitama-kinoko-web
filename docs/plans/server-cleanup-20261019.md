@@ -1,3 +1,18 @@
+## 2026-10-25追補: 隔離source復元と既存ナビ2件の参照先復元（最新）
+
+同じclaim/唯一writer、基準fcc82fa/remote一致・clean・AGENTSを再照合し、[選択source321件・ナビ2件の復元記録](legacy-source-restoration-20261025.json)を追加した。写真19/45testなど成功済み検査を反復せず、新しい復元対象とsource切分けだけを実行した。
+
+| 項目 | 今回達成したこと | 未達・次に必要なもの |
+|---|---|---|
+| 旧案source復元 | dd4b4bbのpackage/lock/src/設定を隔離領域へ321ファイル/2,097,023 bytes復元、Git blob/bytes/path集合の不一致0 | 新clone・public全素材・Astro build/型検査は未実施。node_modules/astroがない。旧案は退役のまま |
+| 改行の環境差 | 初回archive320不一致は全件CRLF→LFで元blobと一致。初回を保存し、次のarchiveコマンドだけcore.autocrlf=falseとして原bytes復元 | OS/恒久Git設定を変更せず、初回失敗をPASSへ書き換えない |
+| ナビ2件 | P02/P34は既存Git docs sourceと同bytes。必要pathへ復元し元source不変。CP932/LF、2pathのeol=lfと隔離checkoutの原bytes一致、SJIS入力SGML DTD診断0 | 実表示/CSS/全参照/HTTP・本番受入は未達 |
+| 元3ページの参照 | 6参照/2pathを解消、残り18参照/13path（HTML12/CSS1）。新規不足/指摘/未対応0 | 復元ナビ2件には38不足。5ページ部分集合では56参照/50path不足でINCOMPLETE |
+| 残るsource | 初期15件のcurrent public/docsのサイズ・SHA照合で2件一致し復元。exact15pathのlocal reachable履歴queryは0 | 残り13件の私有保存目録はあるが、既存current public/docsでは同bytes source未確認。公開sourceまたは個別private import権限が必要 |
+| 追加55の切分け | 23既存Git blob/353,571 bytesだけを照合し21件（画像19/HTML2）の一致を確認、詳細は私有保存 | 未一致34はcurrent public/docsの調査限界内。55件は初期34とは別の配置範囲であり、自動採用せず対象範囲を決める |
+
+既存Gitの原bytesを元の既定参照先へ戻す通常工程だけを進めた。新たな私有snapshot payloadの読取り/import、年次HTMLの移動/削除、別案統合、表示拒否の迂回、依存install、本番/master/merge、認証TLS/security/OS権限変更は0。原稿2件の正しい種名/実開催日は原稿・担当根拠が必要で、source一致やDTD合格では決めない。SACの別manga部品には触れていない。
+
 ## 2026-10-25追補: 既存Git19写真の対応・decode・参照先復元（最新）
 
 同じ共通開発HP writer/claim、HEAD6ce3f4e/remote一致・cleanから着手し、適用AGENTS・旧担当idle/HOLD・競合writer未特定を照合した。修正済みnpm caller/復元参照・45testは重複実行せず、独立して進む既存Git素材復元を実施。[19件の対応表/結果](kawagoe-existing-git-assets-20261025.json)と[同梱判断案の追補](legacy-distribution-inclusion-20261024.md)を参照。

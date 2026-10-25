@@ -1,3 +1,19 @@
+# 2026-10-25追補: 既存Gitのナビ2件を復元、sourceと依存範囲を分離
+
+P02 `public/index.htm` とP34 `public/reikai/houkoku_reikai.htm` は、それぞれ既存公開Gitの`docs/plans/minoyama2026/index.htm`・`docs/plans/reikai2026/houkoku_reikai.htm`と原bytes/サイズ/SHAが一致した。私有snapshotから追加せず、その既存sourceを必要pathへ復元し、元sourceは残した。[復元・検証・残件](legacy-source-restoration-20261025.json)を保存する。
+
+両方CP932/LFを保持し、新規2pathだけに既存と同じ`text eol=lf`を指定。隔離index checkoutをprocess指定`core.autocrlf=true`で実行し、2件とも原bytes一致を確認した。既存OpenSP/ローカルDTDを再利用し、SJISの日本語保持/不正属性拒否control後、2件のSGML DTD診断は0。JS実行やブラウザ表示はしていない。
+
+元の3ページでは、前回の24参照/15pathから6参照/2pathを解消し、**残り18参照/13path（HTML12/CSS1）**。一方、復元ナビ2件自体の参照不足は38件で、5ページ部分集合では**56参照/50path不足**。小さい3ページ集計をサイト全体の解決に流用しない。19写真の前回復元と合わせて初期34path中21pathが既存Gitから復元済みだが、配布全体はINCOMPLETE。
+
+追加55はsource可用性だけを別途照合した。既存Gitに同bytesがあるのは21件（画像19/HTML2）、今回のcurrent public/docs照合で一致がないのは34件。55件の新しい詳細対応は私有記録へ残し、初期34を越える配置範囲として自動採用していない。未一致はsource消失の意味ではなく、私有保存目録には対象がある。残る初期13件の公開source/個別import権限と、追加55の採用範囲を分けて決める。
+
+旧Astro案の選択sourceもmaster祖先`dd4b4bb`から新しい隔離領域へ321ファイル/2,097,023 bytesを復元し、Git blob/bytes/全path集合一致。最初の通常archiveは環境の改行変換で320件不一致だったため成果物を保持し、次のarchiveコマンド内だけ`core.autocrlf=false`として0不一致を確認した。新clone/full app/build/型検査/本番restoreの成功ではない。
+
+以下は写真19件復元時点と10/24以前の時点別記録。現在の集計と範囲は本追補を参照。原稿2件・実ブラウザ・追加素材・本番の受入は引き続き別条件である。
+
+---
+
 # 2026-10-25追補: 川越19写真を既存Git原本から必要pathへ復元
 
 **P15–P33は19件すべて、元HTMLが必要とするGit pathへ復元済み。** [対応表・画像decode・配置読戻し結果](kawagoe-existing-git-assets-20261025.json)を保存した。入力HEADは`6ce3f4e62832b8509d672d9d784552ce4f7bf8b7`。既存`public/reikai/2026/260628_<name>.jpg`の原bytesは、固定目録の19候補とサイズ/SHAが全件一致した。名前だけの推定ではない。

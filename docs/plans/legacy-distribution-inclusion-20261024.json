@@ -11,7 +11,7 @@
     "production_browser_factual_acceptance": "NOT_ESTABLISHED"
   },
   "date_jst": "2026-10-24",
-  "status": "PARTIAL_RESTORATION_19_EXISTING_GIT_PHOTOS_NO_PRIVATE_IMPORT",
+  "status": "PARTIAL_RESTORATION_19_PHOTOS_2_NAVIGATION_PAGES_FROM_EXISTING_GIT_NO_PRIVATE_IMPORT",
   "input_git_commit": "1e6f35fdbd2cc5ff695334ed403c2d12a823318d",
   "scope": "Existing common-development HP claim, same branch. Only exact 34 previously tracked reference targets; no site-wide import.",
   "repository_visibility_verified": "public",
@@ -133,7 +133,7 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
       "charset": "cp932",
       "bounded_direct_reference_audit": {
         "reference_occurrences": 16,
@@ -153,10 +153,11 @@
         "recursive_dependency_closure": "NOT_CHECKED",
         "css_grammar_and_escaped_urls": "NOT_CHECKED"
       },
-      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "material_required": "既存公開Git docs/plans/minoyama2026/index.htm の原bytesを必要pathへ復元済み。CP932/LFを保持。",
+      "public_git_disclosure": "同じ原bytesは既存Gitのplanning sourceに存在。元参照先へ復元し、元sourceは保持した。私有snapshotからの新規公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加12pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+      "inclusion_assessment": "原bytes/SHA一致、Shift_JIS入力SGML DTD診断0、隔離index checkoutで原bytes一致。ただし新たに参照を確認したナビ2件だけでも38不足があり、配布全体は未完。",
+      "existing_git_source": "docs/plans/minoyama2026/index.htm"
     },
     {
       "id": "P03",
@@ -1055,7 +1056,7 @@
           "occurrences": 1
         }
       ],
-      "status": "DECISION_PENDING_NO_PAYLOAD_ADDED",
+      "status": "RESTORED_FROM_EXISTING_GIT_BYTES_NO_PRODUCTION",
       "charset": "cp932",
       "bounded_direct_reference_audit": {
         "reference_occurrences": 28,
@@ -1075,11 +1076,25 @@
         "recursive_dependency_closure": "NOT_CHECKED",
         "css_grammar_and_escaped_urls": "NOT_CHECKED"
       },
-      "material_required": "保存済み#2の当該HTML原バイトと下記の直接参照先",
-      "public_git_disclosure": "将来の同梱pushで原バイト・写真/本文・埋込metadataが公開repoから取得可能になる。現時点は判断待ち。",
+      "material_required": "既存公開Git docs/plans/reikai2026/houkoku_reikai.htm の原bytesを必要pathへ復元済み。CP932/LFを保持。",
+      "public_git_disclosure": "同じ原bytesは既存Gitのplanning sourceに存在。元参照先へ復元し、元sourceは保持した。私有snapshotからの新規公開ではない。",
       "production_disclosure": "intended_site_url_pathは本番で維持する候補path。現在到達性未確認・本番反映は別判断。",
-      "inclusion_assessment": "原バイト同梱候補は特定済み。一次参照先に追加25pathがあり、34pathだけで配布完結とは判断できない。開示・追加範囲判断待ち。"
+      "inclusion_assessment": "原bytes/SHA一致、Shift_JIS入力SGML DTD診断0、隔離index checkoutで原bytes一致。ただし新たに参照を確認したナビ2件だけでも38不足があり、配布全体は未完。",
+      "existing_git_source": "docs/plans/reikai2026/houkoku_reikai.htm"
     }
   ],
-  "last_updated_jst": "2026-10-25"
+  "last_updated_jst": "2026-10-25",
+  "existing_git_navigation_followup_20261025": {
+    "record": "legacy-source-restoration-20261025.json",
+    "input_commit": "fcc82fa9ad64e5480bc6e19598fc9007bbf2b384",
+    "restored_candidates": [
+      "P02",
+      "P34"
+    ],
+    "current_original_three_page_missing_occurrences": 18,
+    "current_original_three_page_missing_paths": 13,
+    "expanded_five_page_subset_missing_occurrences": 56,
+    "expanded_five_page_subset_missing_paths": 50,
+    "no_additional55_adoption": true
+  }
 }
